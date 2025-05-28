@@ -2,11 +2,15 @@ import React from "react";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { IoMdMail } from "react-icons/io";
 import { FaMapMarkerAlt } from "react-icons/fa";
-
+import contact from "../../assets/img/contact_title_section.png";
 const ContactWrapper = () => {
   return (
     <div className="contact-wrapper">
-      <img src="" alt="Contact Page Banner" className="contact-page-image" />
+      <img
+        src={contact}
+        alt="Contact Page Banner"
+        className="contact-page-image"
+      />
       <div className="main-wrapper">
         <span>Contact</span>
         <div className="contact-details">

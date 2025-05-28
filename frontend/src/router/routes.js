@@ -3,6 +3,7 @@ import HomeWrapper from "../components/Home/HomeWrapper";
 import ContactWrapper from "../components/Contact/ContactWrapper";
 import AboutWrapper from "../components/About/AboutWrapper";
 import ProjectWrapper from "../components/Projects/ProjectWrapper";
+import ProductWrapper from "../components/Products/ProductWrapper";
 const masterRoutes = [
   {
     path: "/",
@@ -28,6 +29,11 @@ const masterRoutes = [
     path: "/project",
     name: "Project",
     element: <ProjectWrapper />,
+  },
+  {
+    path: "/product",
+    name: "Product",
+    element: <ProductWrapper />,
   },
 ];
 
