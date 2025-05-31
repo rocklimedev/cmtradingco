@@ -52,7 +52,7 @@ const HomeWrapper = () => {
   };
 
   return (
-    <div className="main-content">
+    <>
       <MainSlider />
       <section className="home-about-section">
         <h2 className="home-about-span">About</h2>
@@ -83,28 +83,25 @@ const HomeWrapper = () => {
               </p>
             </div>
           </div>
-          <div className="home-products">
+          <div className="home-products-2">
             <img src={product_2} alt="Tiles Product" />
             <div className="details">
               <span>TILES</span>
               <p>High-quality tiles for elegant and durable surfaces</p>
             </div>
-          </div>
-          <div className="home-products">
             <img src={product_3} alt="Granite Product" />
             <div className="details">
               <span>GRANITE</span>
               <p>Premium granite for timeless strength and beauty</p>
             </div>
           </div>
-          <div className="home-products">
+
+          <div className="home-products-3">
             <img src={product_4} alt="Kota Stone Product" />
             <div className="details">
               <span>KOTA STONE</span>
               <p>Natural kota stone for rustic and durable flooring</p>
             </div>
-          </div>
-          <div className="home-products">
             <img src={product_5} alt="Marble Product" />
             <div className="details">
               <span>MARBLE</span>
@@ -114,7 +111,10 @@ const HomeWrapper = () => {
         </div>
       </section>
       <section className="brands-we-offer">
-        <h2 className="section-title">Brands We Offer</h2>
+        <h2 className="section-title" style={{ color: "white" }}>
+          Brands We Offer
+          <span className="line" style={{ color: "white" }} />
+        </h2>
         <div className="brands-grid">
           {[
             { src: company_1, alt: "American Standard Logo" },
@@ -254,7 +254,7 @@ const HomeWrapper = () => {
           </div>
         </div>
       </section>
-    </div>
+    </>
   );
 };
 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import project_title from "../../assets/img/projects/projects_title.png";
-
+import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
 const ProjectWrapper = () => {
   const [selectedImage, setSelectedImage] = useState(null);
 
@@ -47,7 +47,7 @@ const ProjectWrapper = () => {
         {projects.map((project) => (
           <div key={project.id} className="project-image-container">
             <img
-              src={project.imgSrc}
+              src={comingsoon}
               alt={project.alt}
               className="project-image"
               onClick={() => openLightbox(project)}

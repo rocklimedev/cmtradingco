@@ -4,6 +4,7 @@ import ContactWrapper from "../components/Contact/ContactWrapper";
 import AboutWrapper from "../components/About/AboutWrapper";
 import ProjectWrapper from "../components/Projects/ProjectWrapper";
 import ProductWrapper from "../components/Products/ProductWrapper";
+import CategoryProducts from "../components/Products/CategoriesProducts";
 const masterRoutes = [
   {
     path: "/",
@@ -34,6 +35,11 @@ const masterRoutes = [
     path: "/product",
     name: "Product",
     element: <ProductWrapper />,
+  },
+  {
+    path: "/store/cat/:categoryId",
+    element: <CategoryProducts />,
+    name: "Category Products",
   },
 ];
 

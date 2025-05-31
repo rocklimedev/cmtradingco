@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import about_title from "../../assets/img/about/about_title_page.jpg";
-
+import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
+import allinone from "../../assets/img/about/why-us/all-in-one.png";
+import competitive from "../../assets/img/about/why-us/competitive-pricing.png";
+import ressupport from "../../assets/img/about/why-us/res-support.png";
+import widerange from "../../assets/img/about/why-us/wide-range.png";
 const AboutWrapper = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -45,9 +49,15 @@ const AboutWrapper = () => {
         on time and are in their best shape.
       </p>
       <div className="about-page-box-section">
-        <img src="" alt="Vision Image" className="about-page-box-image" />
+        <img
+          src={comingsoon}
+          alt="Vision Image"
+          className="about-page-box-image"
+        />
         <div className="about-page-box-text">
-          <div className="about-page-span">Vision</div>
+          <div className="about-page-span">
+            Vision <span className="line" />
+          </div>
           <div className="about-page-box-content">
             To be the leading provider of premium marble, granite, tiles, and
             sanitary ware, delivering innovative and high-quality solutions that
@@ -57,42 +67,51 @@ const AboutWrapper = () => {
       </div>
       <div className="about-page-box-section">
         <div className="about-page-box-text">
-          <div className="about-page-span">Mission</div>
+          <div className="about-page-span">
+            Mission <span className="line" />
+          </div>
           <div className="about-page-box-content">
             To deliver top-quality materials with exceptional service, fostering
             lasting relationships with our customers through competitive
             pricing, timely delivery, and a commitment to excellence.
           </div>
         </div>
-        <img src="" alt="Mission Image" className="about-page-box-image" />
+        <img
+          src={comingsoon}
+          alt="Mission Image"
+          className="about-page-box-image"
+        />
       </div>
-      <span className="about-page-why-us">Why Us</span>
-      <div className="about-page-boxes">
-        <div className="about-page-box">
-          <div className="about-page-box-icon">
-            <FaCheckCircle />
+      <div className="about-page-box-section">
+        <span className="about-page-why-us">Why Us</span>
+        <div className="about-page-boxes">
+          <div className="about-page-box">
+            <div className="about-page-box-icon">
+              <img src={allinone} />
+            </div>
+            <p className="about-page-box-icon-text">All-in-One Destination</p>
           </div>
-          <p className="about-page-box-icon-text">All-in-One Destination</p>
-        </div>
-        <div className="about-page-box">
-          <div className="about-page-box-icon">
-            <FaCheckCircle />
+          <div className="about-page-box">
+            <div className="about-page-box-icon">
+              <img src={competitive} />
+            </div>
+            <p className="about-page-box-icon-text">30+ Years of Experience</p>
           </div>
-          <p className="about-page-box-icon-text">30+ Years of Experience</p>
-        </div>
-        <div className="about-page-box">
-          <div className="about-page-box-icon">
-            <FaCheckCircle />
+          <div className="about-page-box">
+            <div className="about-page-box-icon">
+              <img src={ressupport} />
+            </div>
+            <p className="about-page-box-icon-text">Competitive Pricing</p>
           </div>
-          <p className="about-page-box-icon-text">Competitive Pricing</p>
-        </div>
-        <div className="about-page-box">
-          <div className="about-page-box-icon">
-            <FaCheckCircle />
+          <div className="about-page-box">
+            <div className="about-page-box-icon">
+              <img src={widerange} />
+            </div>
+            <p className="about-page-box-icon-text">Timely Delivery</p>
           </div>
-          <p className="about-page-box-icon-text">Timely Delivery</p>
         </div>
       </div>
+
       <div className="journey">
         <h3 className="journey-title">Chhabra Marble Journey</h3>
         <div className="journey-slider">
@@ -110,7 +129,7 @@ const AboutWrapper = () => {
             {journeyCards.map((card) => (
               <div key={card.id} className="journey-card">
                 <img
-                  src={card.imgSrc}
+                  src={comingsoon}
                   alt={card.alt}
                   className="journey-card-image"
                 />

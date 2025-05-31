@@ -1,6 +1,7 @@
 import React from "react";
 import { FaFacebookF, FaTwitter, FaInstagramSquare } from "react-icons/fa";
 import logo from "../../assets/img/logo.png";
+import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <div className="footer-container">
@@ -11,9 +12,16 @@ const Footer = () => {
         </div>
 
         <ul className="footer-links">
-          <li>About</li>
-          <li>Project</li>
-          <li>Catalogue</li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/project">Project</Link>
+          </li>
+          <li>
+            {" "}
+            <Link to="/product">Catalogue</Link>
+          </li>
         </ul>
         <ul className="footer-links">
           <li>Sanitary</li>
