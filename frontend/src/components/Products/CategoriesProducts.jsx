@@ -16,7 +16,7 @@ const CategoryProducts = () => {
     error,
   } = useGetAllProductsByCategoryQuery(categoryId);
 
-  const ITEMS_PER_PAGE = 6;
+  const ITEMS_PER_PAGE = 30;
   const totalPages = productsData
     ? Math.ceil(productsData.length / ITEMS_PER_PAGE)
     : 1;
@@ -79,34 +79,46 @@ const CategoryProducts = () => {
         </h2>
       </header>
 
-      {isLoading && <p className="loading">Loading products...</p>}
+      {isLoading && (
+        <p className="loading" aria-live="polite">
+          Loading products...
+        </p>
+      )}
       {error && (
-        <p className="error">Error loading products: {error.message}</p>
+        <p className="error" aria-live="assertive">
+          Error loading products: {error.message}
+        </p>
       )}
       {!isLoading && !error && paginatedProducts.length === 0 && (
-        <p className="no-products">No products found in this category.</p>
+        <p className="no-products" aria-live="polite">
+          No products found in this category.
+        </p>
       )}
 
-      <div className="product-gallery">
+      <section className="product-gallery" aria-label="Products in category">
         {paginatedProducts.map((product) => (
-          <div key={product.productId} className="product-card">
+          <article key={product.productId} className="product-card">
             <div className="product-image-container">
               <img
                 src={product.images[0] || comingsoon}
                 alt={product.name}
                 className="product-image"
                 onClick={() => openLightbox(product)}
+                role="button"
+                tabIndex={0}
+                onKeyDown={(e) => e.key === "Enter" && openLightbox(product)}
+                aria-label={`View larger image of ${product.name}`}
               />
             </div>
             <h3 className="product-name">{product.name}</h3>
             <p className="product-price">Price: ₹{product.sellingPrice}</p>
-          </div>
+          </article>
         ))}
-      </div>
+      </section>
 
       {/* Pagination */}
       {totalPages > 1 && (
-        <div className="pagination">
+        <nav className="pagination" aria-label="Pagination">
           <button
             className="page-nav"
             onClick={handlePrevious}
@@ -124,15 +136,20 @@ const CategoryProducts = () => {
               >
                 1
               </button>
-              {startPage > 2 && <span className="ellipsis">...</span>}
+              {startPage > 2 && (
+                <span className="ellipsis" aria-hidden="true">
+                  ...
+                </span>
+              )}
             </>
           )}
           {pageNumbers.map((page) => (
             <button
               key={page}
-              className={currentPage === page ? "page active" : "page"}
+              className={`page ${currentPage === page ? "active" : ""}`}
               onClick={() => handlePageChange(page)}
               aria-label={`Page ${page}`}
+              aria-current={currentPage === page ? "page" : undefined}
             >
               {page}
             </button>
@@ -140,7 +157,9 @@ const CategoryProducts = () => {
           {endPage < totalPages && (
             <>
               {endPage < totalPages - 1 && (
-                <span className="ellipsis">...</span>
+                <span className="ellipsis" aria-hidden="true">
+                  ...
+                </span>
               )}
               <button
                 className="page"
@@ -159,13 +178,21 @@ const CategoryProducts = () => {
           >
             Next
           </button>
-        </div>
+        </nav>
       )}
 
       {/* Lightbox */}
       {selectedImage && (
-        <div className="lightbox" onClick={closeLightbox}>
-          <div className="lightbox-content">
+        <div
+          className="lightbox"
+          onClick={closeLightbox}
+          role="dialog"
+          aria-label="Image lightbox"
+        >
+          <div
+            className="lightbox-content"
+            onClick={(e) => e.stopPropagation()}
+          >
             <img
               src={selectedImage.images?.[0] || comingsoon}
               alt={selectedImage.name}
@@ -175,6 +202,8 @@ const CategoryProducts = () => {
               className="lightbox-close"
               onClick={closeLightbox}
               aria-label="Close lightbox"
+              tabIndex={0}
+              onKeyDown={(e) => e.key === "Enter" && closeLightbox()}
             >
               ×
             </button>

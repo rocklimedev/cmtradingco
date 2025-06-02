@@ -19,7 +19,6 @@ const Footer = () => {
             <Link to="/project">Project</Link>
           </li>
           <li>
-            {" "}
             <Link to="/product">Catalogue</Link>
           </li>
         </ul>
