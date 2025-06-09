@@ -182,48 +182,30 @@ const HomeWrapper = () => {
           Contact
           <span className="line" />
         </h2>
-        <div className="contact-form">
+        <div className="contact-wrapper">
           <form className="contact-form-content" onSubmit={handleSubmit}>
-            <label htmlFor="firstName">First Name</label>
-            <input
-              type="text"
-              id="firstName"
-              name="firstName"
-              placeholder="Enter your first name"
-              required
-            />
-            <label htmlFor="lastName">Last Name</label>
-            <input
-              type="text"
-              id="lastName"
-              name="lastName"
-              placeholder="Enter your last name"
-              required
-            />
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              placeholder="Enter your email"
-              required
-            />
-            <label htmlFor="phone">Phone Number</label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              placeholder="Enter your phone number"
-            />
-            <label htmlFor="message">Message</label>
-            <textarea
-              id="message"
-              name="message"
-              placeholder="Enter your message"
-              required
-            />
+            <div className="form-row">
+              <input
+                type="text"
+                name="firstName"
+                placeholder="First Name"
+                required
+              />
+              <input
+                type="text"
+                name="lastName"
+                placeholder="Last Name"
+                required
+              />
+            </div>
+            <div className="form-row">
+              <input type="email" name="email" placeholder="Email" required />
+              <input type="tel" name="phone" placeholder="Phone Number" />
+            </div>
+            <textarea name="message" placeholder="Your Message" required />
             <button type="submit">Send Message</button>
           </form>
+
           <div className="contact-info">
             <span>Contact Information</span>
             <p>Any question or remarks? Just write us a message!</p>
