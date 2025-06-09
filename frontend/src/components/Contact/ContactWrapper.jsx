@@ -54,7 +54,7 @@ const ContactWrapper = () => {
   };
 
   return (
-    <div className="contact-wrapper">
+    <div className="contact-wrapped">
       <img
         src={contact}
         alt="Contact Page Banner"

@@ -48,69 +48,77 @@ const AboutWrapper = () => {
         also ensure best packaging and delivery so that our products reach well
         on time and are in their best shape.
       </p>
-      <div className="about-page-box-section">
-        <img
-          src={comingsoon}
-          alt="Vision Image"
-          className="about-page-box-image"
-        />
-        <div className="about-page-box-text">
-          <div className="about-page-span">
-            Vision <span className="line" />
+      <section className="about-page-section">
+        <div className="about-page-box-section">
+          <div className="about-page-box-image-container">
+            <img
+              src={comingsoon}
+              alt="Vision Image"
+              className="about-page-box-image"
+            />
           </div>
-          <div className="about-page-box-content">
-            To be the leading provider of premium marble, granite, tiles, and
-            sanitary ware, delivering innovative and high-quality solutions that
-            transform spaces and exceed customer expectations.
-          </div>
-        </div>
-      </div>
-      <div className="about-page-box-section">
-        <div className="about-page-box-text">
-          <div className="about-page-span">
-            Mission <span className="line" />
-          </div>
-          <div className="about-page-box-content">
-            To deliver top-quality materials with exceptional service, fostering
-            lasting relationships with our customers through competitive
-            pricing, timely delivery, and a commitment to excellence.
+          <div className="about-page-box-text">
+            <h3 className="about-page-title">Vision</h3>
+            <p className="about-page-description">
+              To be the leading provider of premium marble, granite, tiles, and
+              sanitary ware, delivering innovative and high-quality solutions
+              that transform spaces and exceed customer expectations.
+            </p>
           </div>
         </div>
-        <img
-          src={comingsoon}
-          alt="Mission Image"
-          className="about-page-box-image"
-        />
-      </div>
-      <div className="about-page-box-section">
-        <span className="about-page-why-us">Why Us</span>
-        <div className="about-page-boxes">
-          <div className="about-page-box">
-            <div className="about-page-box-icon">
-              <img src={allinone} />
-            </div>
-            <p className="about-page-box-icon-text">All-in-One Destination</p>
+
+        <div className="about-page-box-section reverse">
+          <div className="about-page-box-text">
+            <h3 className="about-page-title">Mission</h3>
+            <p className="about-page-description">
+              To deliver top-quality materials with exceptional service,
+              fostering lasting relationships with our customers through
+              competitive pricing, timely delivery, and a commitment to
+              excellence.
+            </p>
           </div>
-          <div className="about-page-box">
-            <div className="about-page-box-icon">
-              <img src={competitive} />
-            </div>
-            <p className="about-page-box-icon-text">30+ Years of Experience</p>
-          </div>
-          <div className="about-page-box">
-            <div className="about-page-box-icon">
-              <img src={ressupport} />
-            </div>
-            <p className="about-page-box-icon-text">Competitive Pricing</p>
-          </div>
-          <div className="about-page-box">
-            <div className="about-page-box-icon">
-              <img src={widerange} />
-            </div>
-            <p className="about-page-box-icon-text">Timely Delivery</p>
+          <div className="about-page-box-image-container">
+            <img
+              src={comingsoon}
+              alt="Mission Image"
+              className="about-page-box-image"
+            />
           </div>
         </div>
-      </div>
+      </section>
+      <section className="about-why-us-section">
+        <h2 className="about-why-us-title">Why Us</h2>
+        <div className="about-why-us-boxes">
+          <div className="about-why-us-box">
+            <img
+              src={allinone}
+              alt="All-in-One"
+              className="about-why-us-icon"
+            />
+            <p className="about-why-us-text">All-in-One Destination</p>
+          </div>
+          <div className="about-why-us-box">
+            <img src={ressupport} alt="Support" className="about-why-us-icon" />
+            <p className="about-why-us-text">Responsive Support</p>
+          </div>
+          <div className="about-why-us-box">
+            <img
+              src={competitive}
+              alt="Pricing"
+              className="about-why-us-icon"
+            />
+            <p className="about-why-us-text">Competitive Pricing</p>
+          </div>
+          <div className="about-why-us-box">
+            <img
+              src={widerange}
+              alt="Materials"
+              className="about-why-us-icon"
+            />
+            <p className="about-why-us-text">Wide Range of Premium Materials</p>
+          </div>
+        </div>
+      </section>
 
       <div className="journey">
         <h3 className="journey-title">Chhabra Marble Journey</h3>
