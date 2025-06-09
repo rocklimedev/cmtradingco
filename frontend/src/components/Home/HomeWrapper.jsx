@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import MainSlider from "./MainSlider";
 import product_1 from "../../assets/img/home/product_1.jpg";
 import product_2 from "../../assets/img/home/product_2.png";
 import product_3 from "../../assets/img/home/product_3.jpg";
@@ -16,7 +15,7 @@ import video from "../../assets/img/video.mp4";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { IoMdMail } from "react-icons/io";
 import { FaMapMarkerAlt } from "react-icons/fa";
-
+import slider from "../../assets/img/home_page_slider.jpg";
 const HomeWrapper = () => {
   const projects = [
     {
@@ -53,7 +52,19 @@ const HomeWrapper = () => {
 
   return (
     <>
-      <MainSlider />
+      <div className="main-slider">
+        <img src={slider} alt="Slider Background" />
+        <div className="slider-info">
+          <a href="#">Chhabra Marble</a>
+          <p>
+            Your trusted one-stop shop for premium marble, granite, tiles, kota
+            stone, and sanitary ware. With 30+ years of experience, we offer
+            top-quality materials, competitive prices, and timely delivery –
+            built on lasting relationships and trust.
+          </p>
+          <button>Connect With Us</button>
+        </div>
+      </div>
       <section className="home-about-section">
         <h2 className="home-about-span">About</h2>
         <p className="home-about-p">
@@ -152,10 +163,6 @@ const HomeWrapper = () => {
         </Link>
       </section>
       <section className="home-showroom-video">
-        <h2 className="section-title">
-          Our Showroom
-          <span className="line" />
-        </h2>
         <video
           src={video}
           poster={comingsoon}
@@ -165,6 +172,10 @@ const HomeWrapper = () => {
           loop
           playsInline
         />
+        <h2 className="section-title">
+          Our Showroom
+          <span className="line" />
+        </h2>
       </section>
       <section className="home-contact-section">
         <h2 className="section-title">
