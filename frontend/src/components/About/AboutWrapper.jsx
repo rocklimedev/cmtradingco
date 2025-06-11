@@ -68,6 +68,13 @@ const AboutWrapper = () => {
         </div>
 
         <div className="about-page-box-section reverse">
+          <div className="about-page-box-image-container">
+            <img
+              src={comingsoon}
+              alt="Mission Image"
+              className="about-page-box-image"
+            />
+          </div>
           <div className="about-page-box-text">
             <h3 className="about-page-title">Mission</h3>
             <p className="about-page-description">
@@ -76,13 +83,6 @@ const AboutWrapper = () => {
               competitive pricing, timely delivery, and a commitment to
               excellence.
             </p>
-          </div>
-          <div className="about-page-box-image-container">
-            <img
-              src={comingsoon}
-              alt="Mission Image"
-              className="about-page-box-image"
-            />
           </div>
         </div>
       </section>

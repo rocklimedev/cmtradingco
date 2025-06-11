@@ -487,95 +487,172 @@
 /* Section Layout */
 .home-contact-section {
   width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-
-  padding: var(--spacing-3xl) var(--spacing-lg);
+  padding: 60px 20px;
+  background: #fff;
   box-sizing: border-box;
+  text-align: center;
+}
+
+.section-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 40px;
 }
 
 .contact-wrapper {
   display: flex;
-  width: 100%;
-  height: 100%;
-  max-width: 1400px;
-  margin: 0 auto;
-  justify-content: space-between;
-  background: var(--bg-secondary) url("../img/contact_home_background.jpg")
-    no-repeat center/cover;
+  justify-content: center;
   align-items: center;
-  gap: var(--spacing-2xl);
+  background: url("../img/contact_home_background.jpg") no-repeat center/cover;
+  padding: 40px;
+  border-radius: 12px;
 }
 
-.contact-form-content {
+.contact-box {
+  background: white;
+  display: flex;
+  flex-direction: row;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  max-width: 1100px;
   width: 100%;
-  max-width: 600px;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Form Styling */
+.contact-form-content {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: 20px;
 }
 
 .form-row {
   display: flex;
-  gap: var(--spacing-lg);
+  gap: 16px;
 }
 
 .form-row input {
   flex: 1;
 }
 
-/* Input Styling */
 .contact-form-content input,
 .contact-form-content textarea {
   border: none;
-  border-bottom: 2px solid var(--border-gray);
+  border-bottom: 1px solid #ccc;
+  padding: 10px 5px;
+  font-size: 14px;
   background: transparent;
-  padding: var(--spacing-sm) 0;
-  font: var(--font-size-base) / var(--line-height-base) var(--font-family);
-  color: var(--text-primary);
-  transition: border-color var(--transition-base);
+  font-family: inherit;
+}
+
+.contact-form-content textarea {
+  resize: none;
+  height: 100px;
 }
 
 .contact-form-content input:focus,
 .contact-form-content textarea:focus {
+  border-color: #e63946;
   outline: none;
-  border-bottom: 2px solid var(--primary-color);
 }
 
-.contact-form-content textarea {
-  resize: vertical;
-  height: 100px;
-}
-
-/* Button */
+/* Button Styling */
 .contact-form-content button {
-  width: 180px;
-  height: 52px;
-  margin-top: var(--spacing-lg);
-  align-self: center;
-  background: var(--primary-color);
+  width: 100%;
+  max-width: 200px;
+  margin-top: 20px;
+  align-self: flex-start;
+  background: #e63946;
+  color: white;
+  padding: 14px 24px;
+  font-weight: 600;
+  font-size: 14px;
   border: none;
-  border-radius: var(--border-radius-sm);
-  font: var(--font-weight-semibold) var(--font-size-base);
-  color: var(--text-light);
+  border-radius: 4px;
   cursor: pointer;
-  transition: background var(--transition-base);
+  transition: background 0.3s ease;
+  text-transform: uppercase;
 }
 
 .contact-form-content button:hover {
-  background: var(--primary-hover);
+  background: #d62839;
 }
 
-/* Contact Info Side */
+/* Contact Info Styling */
 .contact-info {
-  width: 50%;
-  max-width: 570px;
+  flex: 1;
   display: flex;
   flex-direction: column;
+  gap: 20px;
   justify-content: center;
-  text-align: center;
+  color: #333;
+  text-align: left;
+}
+
+.contact-info h3 {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.contact-info p {
+  font-size: 14px;
+  color: #777;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+  color: #444;
+}
+
+.contact-icon {
+  font-size: 20px;
+  color: #e63946;
+}
+
+.contact-info-button {
+  background: #e63946;
   color: white;
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 13px;
+  border: none;
+  border-radius: 4px;
+  text-align: center;
+  max-width: 120px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.contact-info-button:hover {
+  background: #d62839;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .contact-box {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .form-row {
+    flex-direction: column;
+  }
+
+  .contact-form-content button {
+    align-self: center;
+  }
+
+  .contact-info {
+    text-align: center;
+    align-items: center;
+  }
 }
 
 /* Journey Section */
@@ -714,6 +791,97 @@
 
 .project-image:hover {
   transform: scale(1.05);
+}
+
+.banner-overlay {
+  padding: 60px 20px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.project-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+.products-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 40px;
+  max-width: 1200px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.home-products {
+  position: relative;
+  flex: 0 1 350px;
+  max-width: 100%;
+}
+
+.home-products img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+  display: block;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.home-products .details {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #e63946;
+  color: white;
+  padding: 10px 16px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  text-align: center;
+}
+
+.home-products .details span {
+  font-size: 14px;
+  font-weight: 600;
+  display: block;
+}
+
+.home-products .details p {
+  font-size: 12px;
+  margin-top: 4px;
+  line-height: 1.3;
+}
+
+/* Description Content */
+.project-content {
+  flex: 1;
+  max-width: 600px;
+  font-size: 15px;
+  line-height: 1.7;
+  color: #444;
+  text-align: justify;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .products-section {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .project-content {
+    text-align: center;
+    max-width: 90%;
+  }
+
+  .home-products .details p {
+    display: none; /* Optional for smaller screens to keep layout clean */
+  }
 }
 
 .lightbox {
@@ -932,7 +1100,9 @@
 
 .contact-page-image {
   width: 100%;
-  max-height: 260px;
+  max-width: 1920px;
+  height: auto;
+  max-height: 400px;
   object-fit: cover;
   display: block;
 }

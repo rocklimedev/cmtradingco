@@ -4,7 +4,7 @@ import { useGetAllCategoriesQuery } from "../../api/categoryApi";
 import { useGetAllProductsQuery } from "../../api/productApi";
 import project_title from "../../assets/img/projects/projects_title.png";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
-
+import product_1 from "../../assets/img/home/product_1.jpg";
 const ProductWrapper = () => {
   const navigate = useNavigate();
   const [currentPage, setCurrentPage] = useState(1);
@@ -121,16 +121,33 @@ const ProductWrapper = () => {
           className="projects-page-image"
         />
         <div className="banner-overlay">
-          <h2 className="project-title">Our Projects</h2>
-          <p className="project-content">
-            At Chhabra Marble, we take pride in transforming spaces with our
-            premium marble, granite, tiles, and sanitary ware. With over 30
-            years of experience, we have collaborated with architects and
-            interior designers to deliver stunning projects, from luxurious
-            residential interiors to large-scale commercial installations.
-            Explore our portfolio to see how we bring quality, craftsmanship,
-            and innovation to every project.
-          </p>
+          <h2 className="project-title">Products</h2>
+          <div className="products-section">
+            <div className="home-products">
+              <img src={product_1} alt="Sanitary Product" />
+              <div className="details">
+                <span>SANITARY</span>
+                <p>
+                  Premium sanitary ware blending style, comfort, and durability
+                </p>
+              </div>
+            </div>
+            <p className="project-content">
+              Chhabra Marble is built with the vision of proving a one stop shop
+              to its customers for all their tiles, granites and marble needs.
+              Being in the business for more than 30 years, we have enough
+              experience to be able to work with interior designers and
+              architects and provide them with the best quality raw materials
+              that turn the valuable ideas into reality. As far as the stocks
+              are concerned we house the latest variety of marbles, tiles, kota
+              stone, granite etc. We also deal in sanitary ware. We render our
+              services with the desire to establish lifelong relationships with
+              our valuable customers hence we take utmost care to provide them
+              with best pricing when compared to other competitors. We also
+              ensure best packaging and delivery so that our products reach well
+              on time and are in their best shape.
+            </p>
+          </div>
         </div>
       </div>
 

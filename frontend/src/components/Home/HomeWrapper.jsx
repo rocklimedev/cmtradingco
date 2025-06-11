@@ -183,67 +183,69 @@ const HomeWrapper = () => {
           <span className="line" />
         </h2>
         <div className="contact-wrapper">
-          <form className="contact-form-content" onSubmit={handleSubmit}>
-            <div className="form-row">
-              <input
-                type="text"
-                name="firstName"
-                placeholder="First Name"
-                required
-              />
-              <input
-                type="text"
-                name="lastName"
-                placeholder="Last Name"
-                required
-              />
-            </div>
-            <div className="form-row">
-              <input type="email" name="email" placeholder="Email" required />
-              <input type="tel" name="phone" placeholder="Phone Number" />
-            </div>
-            <textarea name="message" placeholder="Your Message" required />
-            <button type="submit">Send Message</button>
-          </form>
-
-          <div className="contact-info">
-            <span>Contact Information</span>
-            <p>Any question or remarks? Just write us a message!</p>
-            <div className="contact-item">
-              <div className="contact-icon">
-                <MdOutlinePhoneInTalk />
+          <div className="contact-box">
+            <form className="contact-form-content" onSubmit={handleSubmit}>
+              <div className="form-row">
+                <input
+                  type="text"
+                  name="firstName"
+                  placeholder="First Name"
+                  required
+                />
+                <input
+                  type="text"
+                  name="lastName"
+                  placeholder="Last Name"
+                  required
+                />
               </div>
-              <a href="tel:+919999500699" className="contact-content">
-                +91 9999500699
-              </a>
-            </div>
-            <div className="contact-item">
-              <div className="contact-icon">
-                <IoMdMail />
+              <div className="form-row">
+                <input type="email" name="email" placeholder="Email" required />
+                <input type="tel" name="phone" placeholder="Phone Number" />
+              </div>
+              <textarea name="message" placeholder="Your Message" required />
+              <button type="submit">SEND MESSAGE</button>
+            </form>
+
+            <div className="contact-info">
+              <h3>Contact Information</h3>
+              <p>Any questions or remarks? Just write us a message!</p>
+              <div className="contact-item">
+                <div className="contact-icon">
+                  <MdOutlinePhoneInTalk />
+                </div>
+                <a href="tel:+919999500699" className="contact-content">
+                  +91 9999500699
+                </a>
+              </div>
+              <div className="contact-item">
+                <div className="contact-icon">
+                  <IoMdMail />
+                </div>
+                <a
+                  href="mailto:info@chhabramarble.com"
+                  className="contact-content"
+                >
+                  info@chhabramarble.com
+                </a>
+              </div>
+              <div className="contact-item">
+                <div className="contact-icon">
+                  <FaMapMarkerAlt />
+                </div>
+                <div className="contact-content">
+                  487/65, National Market, Peeragarhi, Delhi, 110087
+                </div>
               </div>
               <a
-                href="mailto:info@chhabramarble.com"
-                className="contact-content"
+                href="https://maps.google.com/?q=487/65,National+Market,Peeragarhi,Delhi,110087"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="contact-info-button"
               >
-                info@chhabramarble.com
+                FIND US
               </a>
             </div>
-            <div className="contact-item">
-              <div className="contact-icon">
-                <FaMapMarkerAlt />
-              </div>
-              <div className="contact-content">
-                487/65, National Market, Peeragarhi, Delhi, 110087
-              </div>
-            </div>
-            <a
-              href="https://maps.google.com/?q=487/65,National+Market,Peeragarhi,Delhi,110087"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="contact-info-button"
-            >
-              Find Us
-            </a>
           </div>
         </div>
       </section>
