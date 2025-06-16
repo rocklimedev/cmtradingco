@@ -16,6 +16,7 @@ import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { IoMdMail } from "react-icons/io";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import slider from "../../assets/img/home_page_slider.jpg";
+import PhoneImage from "../../assets/img/contact_home_background.jpg"; // Replace with actual path
 const HomeWrapper = () => {
   const projects = [
     {
@@ -58,7 +59,6 @@ const HomeWrapper = () => {
           alt="Slider Background"
           className="slider-background"
         />
-
         <div className="slider-overlay">
           <div className="slider-content">
             <h1>Chhabra Marble</h1>
@@ -89,46 +89,74 @@ const HomeWrapper = () => {
       </section>
       <section className="home-product-section">
         <h2 className="section-title">
-          Our Products
-          <span className="line" />
+          Product
+          <span className="section-underline" />
         </h2>
-        <div className="home-product-image-section">
-          <div className="home-products">
-            <img src={product_1} alt="Sanitary Product" />
-            <div className="details">
-              <span>SANITARY</span>
-              <p>
-                Premium sanitary ware blending style, comfort, and durability
-              </p>
-            </div>
-          </div>
-          <div className="home-products-2">
-            <img src={product_2} alt="Tiles Product" />
-            <div className="details">
-              <span>TILES</span>
-              <p>High-quality tiles for elegant and durable surfaces</p>
-            </div>
-            <img src={product_3} alt="Granite Product" />
-            <div className="details">
-              <span>GRANITE</span>
-              <p>Premium granite for timeless strength and beauty</p>
+
+        <div className="product-grid">
+          {/* First row: Single full-width product */}
+          <div className="row single">
+            <div className="product-card full">
+              <img src={product_1} alt="Sanitary" />
+              <div className="product-info">
+                <h3>SANITARY</h3>
+                <p>
+                  Premium sanitary ware that blends style, comfort, and
+                  durability
+                </p>
+              </div>
             </div>
           </div>
 
-          <div className="home-products-3">
-            <img src={product_4} alt="Kota Stone Product" />
-            <div className="details">
-              <span>KOTA STONE</span>
-              <p>Natural kota stone for rustic and durable flooring</p>
+          {/* Second row: TILE and KOTA */}
+          <div className="row double">
+            <div className="product-card">
+              <img src={product_2} alt="Tile" />
+              <div className="product-info">
+                <h3>TILE</h3>
+                <p>
+                  Stylish tiles for every surface, crafted for beauty and
+                  durability.
+                </p>
+              </div>
             </div>
-            <img src={product_5} alt="Marble Product" />
-            <div className="details">
-              <span>MARBLE</span>
-              <p>Luxurious marble for sophisticated interiors</p>
+            <div className="product-card">
+              <img src={product_4} alt="Kota" />
+              <div className="product-info">
+                <h3>KOTA</h3>
+                <p>
+                  Durable Kota stone for a natural, timeless look with lasting
+                  strength.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Third row: GRANITE and MARBLE */}
+          <div className="row double">
+            <div className="product-card">
+              <img src={product_3} alt="Granite" />
+              <div className="product-info">
+                <h3>GRANITE</h3>
+                <p>
+                  High-quality granite for timeless strength and elegant
+                  finishes
+                </p>
+              </div>
+            </div>
+            <div className="product-card">
+              <img src={product_5} alt="Marble" />
+              <div className="product-info">
+                <h3>MARBLE</h3>
+                <p>
+                  Exquisite marble that adds luxury and elegance to every space
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
+
       <section className="brands-we-offer">
         <h2 className="section-title" style={{ color: "white" }}>
           Brands We Offer
@@ -190,8 +218,10 @@ const HomeWrapper = () => {
           Contact
           <span className="line" />
         </h2>
+
         <div className="contact-wrapper">
           <div className="contact-box">
+            {/* LEFT: Contact Form */}
             <form className="contact-form-content" onSubmit={handleSubmit}>
               <div className="form-row">
                 <input
@@ -215,9 +245,11 @@ const HomeWrapper = () => {
               <button type="submit">SEND MESSAGE</button>
             </form>
 
+            {/* RIGHT: Contact Info */}
             <div className="contact-info">
               <h3>Contact Information</h3>
-              <p>Any questions or remarks? Just write us a message!</p>
+              <p>Any question or remarks? Just write us a message!</p>
+
               <div className="contact-item">
                 <div className="contact-icon">
                   <MdOutlinePhoneInTalk />
@@ -226,6 +258,7 @@ const HomeWrapper = () => {
                   +91 9999500699
                 </a>
               </div>
+
               <div className="contact-item">
                 <div className="contact-icon">
                   <IoMdMail />
@@ -237,6 +270,7 @@ const HomeWrapper = () => {
                   info@chhabramarble.com
                 </a>
               </div>
+
               <div className="contact-item">
                 <div className="contact-icon">
                   <FaMapMarkerAlt />
@@ -245,6 +279,7 @@ const HomeWrapper = () => {
                   487/65, National Market, Peeragarhi, Delhi, 110087
                 </div>
               </div>
+
               <a
                 href="https://maps.google.com/?q=487/65,National+Market,Peeragarhi,Delhi,110087"
                 target="_blank"

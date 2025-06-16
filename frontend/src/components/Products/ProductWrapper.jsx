@@ -120,35 +120,40 @@ const ProductWrapper = () => {
           alt="Projects Page Banner"
           className="projects-page-image"
         />
-        <div className="banner-overlay">
-          <h2 className="project-title">Products</h2>
+        <section className="banner-overlay">
+          <h2 className="project-title">Product</h2>
           <div className="products-section">
-            <div className="home-products">
+            {/* Image Column */}
+            <div className="section-products">
               <img src={product_1} alt="Sanitary Product" />
-              <div className="details">
+              <div className="section-details">
                 <span>SANITARY</span>
                 <p>
                   Premium sanitary ware blending style, comfort, and durability
                 </p>
               </div>
             </div>
-            <p className="project-content">
-              Chhabra Marble is built with the vision of proving a one stop shop
-              to its customers for all their tiles, granites and marble needs.
-              Being in the business for more than 30 years, we have enough
-              experience to be able to work with interior designers and
-              architects and provide them with the best quality raw materials
-              that turn the valuable ideas into reality. As far as the stocks
-              are concerned we house the latest variety of marbles, tiles, kota
-              stone, granite etc. We also deal in sanitary ware. We render our
-              services with the desire to establish lifelong relationships with
-              our valuable customers hence we take utmost care to provide them
-              with best pricing when compared to other competitors. We also
-              ensure best packaging and delivery so that our products reach well
-              on time and are in their best shape.
-            </p>
+
+            {/* Description Column */}
+            <div className="project-content">
+              <p>
+                Chhabra Marble is built with the vision of proving a one stop
+                shop to its customers for all their tiles, granites and marble
+                needs. Being in the business for more than 30 years, we have
+                enough experience to be able to work with interior designers and
+                architects and provide them with the best quality raw materials
+                that turn the valuable ideas into reality. As far as the stocks
+                are concerned we house the latest variety of marbles, tiles,
+                kota stone, granite etc. We also deal in sanitary ware. We
+                render our services with the desire to establish lifelong
+                relationships with our valuable customers hence we take utmost
+                care to provide them with best pricing when compared to other
+                competitors. We also ensure best packaging and delivery so that
+                our products reach well on time and are in their best shape.
+              </p>
+            </div>
           </div>
-        </div>
+        </section>
       </div>
 
       {/* Tabs for Categories and All Products */}
