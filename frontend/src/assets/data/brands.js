@@ -3,6 +3,24 @@ import jk from "../img/brand_logos/jktylo.png";
 import grohe from "../img/brand_logos/grohe.png";
 import jkcemenet from "../img/brand_logos/jk_cement.png";
 import nexion from "../img/brand_logos/nexion.png";
+import gr1 from "../pdf/Grohe/GROHE_Eurocube_Joy_en_CY.pdf";
+import gr2 from "../pdf/Grohe/GROHE_Eurostyle_en_IN.pdf";
+import gr3 from "../pdf/Grohe/GROHE_Flushplates-Brochure_en_MASTER.pdf";
+import gr4 from "../pdf/Grohe/GROHE_Kitchen-Brochure_en_SG.pdf";
+import gr5 from "../pdf/Grohe/GROHE_Magazine_4_EN.pdf";
+import gr6 from "../pdf/Grohe/GROHE_Rapido_Smartbox.pdf";
+import gr7 from "../pdf/Grohe/SmartControlFlyer_EN.pdf";
+import jktylo1 from "../pdf/JK/JKTylo-606-TDS-Mar2024-UPLOAD.pdf";
+import colston1 from "../pdf/Colston/ceramics-2023.pdf";
+import colston2 from "../pdf/Colston/exclusive-bathrooms-2024.pdf";
+import nexion1 from "../pdf/Nexion/NEXION-General-catalogue-1.pdf";
+import am1 from "../pdf/American Standard/Acacia-E-Brochure.pdf";
+import am2 from "../pdf/American Standard/Acacia-SupaSleek-Brochure.pdf";
+import am3 from "../pdf/American Standard/AS-Product-Catalogue-2020.pdf";
+import am4 from "../pdf/American Standard/EasySET-Brochure_LR.pdf";
+import am6 from "../pdf/American Standard/Signature-Collection-Brochure.pdf";
+import colston3 from "../pdf/Colston/wellness-catalogue-2024.pdf";
+import am5 from "../pdf/American Standard/G19183_City_Collection-Brochure_2018_Updated_Low-Res.pdf";
 const brands = [
   {
     name: "American Standard",
@@ -16,39 +34,39 @@ const brands = [
         pdfId: "pdf-american-1",
         title: "Acacia E Brochure",
         description: "Product brochure for American Standard Acacia E series",
-        url: "/assets/pdf/American Standard/Acacia-E-Brochure.pdf",
+        url: am1,
       },
       {
         pdfId: "pdf-american-2",
         title: "Acacia SupaSleek Brochure",
         description:
           "Product brochure for American Standard Acacia SupaSleek series",
-        url: "/assets/pdf/American Standard/Acacia-SupaSleek-Brochure.pdf",
+        url: am2,
       },
       {
         pdfId: "pdf-american-3",
         title: "Product Catalogue 2020",
         description:
           "Comprehensive product catalogue for American Standard 2020",
-        url: "/assets/pdf/American Standard/AS-Product-Catalogue-2020.pdf",
+        url: am3,
       },
       {
         pdfId: "pdf-american-4",
         title: "EasySET Brochure",
         description: "Brochure for American Standard EasySET products",
-        url: "/assets/pdf/American Standard/EasySET-Brochure_LR.pdf",
+        url: am4,
       },
       {
         pdfId: "pdf-american-5",
         title: "City Collection Brochure 2018",
         description: "Brochure for American Standard City Collection 2018",
-        url: "/assets/pdf/American Standard/G19183_City_Collection-Brochure_2018_Updated_Low-Res.pdf",
+        url: am5,
       },
       {
         pdfId: "pdf-american-6",
         title: "Signature Collection Brochure",
         description: "Brochure for American Standard Signature Collection",
-        url: "/assets/pdf/American Standard/Signature-Collection-Brochure.pdf",
+        url: am6,
       },
     ],
   },
@@ -64,43 +82,43 @@ const brands = [
         pdfId: "pdf-grohe-1",
         title: "Eurocube Joy Brochure",
         description: "Product brochure for Grohe Eurocube Joy series",
-        url: "/assets/pdf/Grohe/GROHE_Eurocube_Joy_en_CY.pdf",
+        url: gr1,
       },
       {
         pdfId: "pdf-grohe-2",
         title: "Eurostyle Brochure",
         description: "Product brochure for Grohe Eurostyle series",
-        url: "/assets/pdf/Grohe/GROHE_Eurostyle_en_IN.pdf",
+        url: gr2,
       },
       {
         pdfId: "pdf-grohe-3",
         title: "Flushplates Brochure",
         description: "Brochure for Grohe Flushplates",
-        url: "/assets/pdf/Grohe/GROHE_Flushplates-Brochure_en_MASTER.pdf",
+        url: gr3,
       },
       {
         pdfId: "pdf-grohe-4",
         title: "Kitchen Brochure",
         description: "Brochure for Grohe Kitchen products",
-        url: "/assets/pdf/Grohe/GROHE_Kitchen-Brochure_en_SG.pdf",
+        url: gr4,
       },
       {
         pdfId: "pdf-grohe-5",
         title: "Magazine 4",
         description: "Grohe Magazine issue 4",
-        url: "/assets/pdf/Grohe/GROHE_Magazine_4_EN.pdf",
+        url: gr5,
       },
       {
         pdfId: "pdf-grohe-6",
         title: "Rapido Smartbox Brochure",
         description: "Brochure for Grohe Rapido Smartbox",
-        url: "/assets/pdf/Grohe/GROHE_Rapido_Smartbox.pdf",
+        url: gr6,
       },
       {
         pdfId: "pdf-grohe-7",
         title: "SmartControl Flyer",
         description: "Flyer for Grohe SmartControl products",
-        url: "/assets/pdf/Grohe/SmartControlFlyer_EN.pdf",
+        url: gr7,
       },
     ],
   },
@@ -125,7 +143,7 @@ const brands = [
         pdfId: "pdf-jktylo-1",
         title: "JK Tylo 606 TDS",
         description: "Technical Data Sheet for JK Tylo 606, March 2024",
-        url: "/assets/pdf/JK/JKTylo-606-TDS-Mar2024-UPLOAD.pdf",
+        url: jktylo1,
       },
     ],
   },
@@ -141,7 +159,7 @@ const brands = [
         pdfId: "pdf-nexion-1",
         title: "Nexion General Catalogue",
         description: "General product catalogue for Nexion",
-        url: "/assets/pdf/Nexion/NEXION-General-catalogue-1.pdf",
+        url: nexion1,
       },
     ],
   },
@@ -157,19 +175,19 @@ const brands = [
         pdfId: "pdf-colston-1",
         title: "Ceramics 2023",
         description: "Product catalogue for Colston ceramics 2023",
-        url: "/assets/pdf/Colston/ceramics-2023.pdf",
+        url: colston1,
       },
       {
         pdfId: "pdf-colston-2",
         title: "Exclusive Bathrooms 2024",
         description: "Catalogue for Colston exclusive bathrooms 2024",
-        url: "/assets/pdf/Colston/exclusive-bathrooms-2024.pdf",
+        url: colston2,
       },
       {
         pdfId: "pdf-colston-3",
         title: "Wellness Catalogue 2024",
         description: "Wellness product catalogue for Colston 2024",
-        url: "/assets/pdf/Colston/wellness-catalogue-2024.pdf",
+        url: colston3,
       },
     ],
   },
