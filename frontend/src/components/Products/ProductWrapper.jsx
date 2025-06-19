@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Document, Page, pdfjs } from "react-pdf";
+import brands from "../../assets/data/brands"; // Adjust path based on your structure
 import project_title from "../../assets/img/projects/projects_title.png";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
 import product_1 from "../../assets/img/home/product_1.jpg";
@@ -10,8 +11,6 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 const ProductWrapper = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const { brand } = location.state || {};
   const [showModal, setShowModal] = useState(false);
   const [selectedPdf, setSelectedPdf] = useState(null);
   const [numPages, setNumPages] = useState(null);
@@ -54,91 +53,108 @@ const ProductWrapper = () => {
       <div className="banner-container">
         <img
           src={project_title}
-          alt="Projects Page Banner"
+          alt="Products Page Banner"
           className="projects-page-image"
         />
         <section className="banner-overlay">
-          <h2 className="project-title">{brand ? brand.name : "Product"}</h2>
+          <h2 className="project-title">Our Brands</h2>
           <div className="products-section">
             <div className="section-products">
-              <img src={product_1} alt="Sanitary Product" />
+              <img src={product_1} alt="Product Showcase" />
               <div className="section-details">
-                <span>{brand ? brand.name.toUpperCase() : "SANITARY"}</span>
+                <span>PREMIUM PRODUCTS</span>
                 <p>
-                  {brand
-                    ? brand.subtitle
-                    : "Premium sanitary ware blending style, comfort, and durability"}
+                  Explore our curated selection of top-tier brands offering
+                  premium sanitary ware, tiles, cement, and more.
                 </p>
               </div>
             </div>
             <div className="project-content">
               <p>
-                {brand
-                  ? brand.content
-                  : "Chhabra Marble is built with the vision of proving a one stop shop to its customers for all their tiles, granites and marble needs. Being in the business for more than 30 years, we have enough experience to be able to work with interior designers and architects and provide them with the best quality raw materials that turn the valuable ideas into reality. As far as the stocks are concerned we house the latest variety of marbles, tiles, kota stone, granite etc. We also deal in sanitary ware. We render our services with the desire to establish lifelong relationships with our valuable customers hence we take utmost care to provide them with best pricing when compared to other competitors. We also ensure best packaging and delivery so that our products reach well on time and are in their best shape."}
+                Chhabra Marble is your one-stop shop for high-quality tiles,
+                granites, marbles, and sanitary ware. With over 30 years of
+                experience, we partner with leading brands to provide
+                architects, designers, and homeowners with the finest materials.
+                Browse our brand catalogues below to discover innovative and
+                durable solutions for your projects.
               </p>
             </div>
           </div>
         </section>
       </div>
 
-      <section className="catalogue-gallery" aria-label="Brand Catalogues">
-        {brand ? (
-          <>
-            <h3>{brand.name} Catalogues</h3>
-            {brand.pdfs.length > 0 ? (
-              <div className="catalogue-grid">
-                {brand.pdfs.map((pdf) => (
-                  <article key={pdf.pdfId} className="catalogue-card">
-                    <img
-                      src={comingsoon}
-                      alt={pdf.title}
-                      className="catalogue-image"
-                    />
-                    <h4 className="catalogue-title">{pdf.title}</h4>
-                    <p className="catalogue-description">{pdf.description}</p>
-                    <div className="catalogue-actions">
-                      <a
-                        href={pdf.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="catalogue-link"
-                        aria-label={`Open ${pdf.title} catalogue in new tab`}
-                      >
-                        Open in New Tab
-                      </a>
-                      <button
-                        onClick={() => handleViewPdf(pdf)}
-                        className="catalogue-button view-button"
-                        aria-label={`View ${pdf.title} catalogue in modal`}
-                      >
-                        View
-                      </button>
-                      <a
-                        href={pdf.url}
-                        download={pdf.title}
-                        className="catalogue-button download-button"
-                        aria-label={`Download ${pdf.title} catalogue`}
-                      >
-                        Download
-                      </a>
-                    </div>
-                  </article>
-                ))}
+      {/* Brands and Catalogues Section */}
+      <section className="brands-gallery" aria-label="Brands and Catalogues">
+        {brands.length > 0 ? (
+          brands.map((brand) => (
+            <div key={brand.name} className="brand-section">
+              <div className="brand-header">
+                <img
+                  src={brand.logoSrc}
+                  alt={`${brand.name} Logo`}
+                  className="brand-logo"
+                />
+                <div className="brand-info">
+                  <h3 className="brand-title">{brand.name}</h3>
+                  <p className="brand-subtitle">{brand.subtitle}</p>
+                </div>
               </div>
-            ) : (
-              <p className="no-catalogues" aria-live="polite">
-                No catalogues available for {brand.name}.
-              </p>
-            )}
-          </>
+              <p className="brand-content">{brand.content}</p>
+              {brand.pdfs.length > 0 ? (
+                <div className="catalogue-grid">
+                  {brand.pdfs.map((pdf) => (
+                    <article key={pdf.pdfId} className="catalogue-card">
+                      <img
+                        src={comingsoon} // Replace with pdf.thumbnailUrl if available
+                        alt={pdf.title}
+                        className="catalogue-image"
+                      />
+                      <h4 className="catalogue-title">{pdf.title}</h4>
+                      <p className="catalogue-description">{pdf.description}</p>
+                      <div className="catalogue-actions">
+                        <a
+                          href={pdf.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="catalogue-link"
+                          aria-label={`Open ${pdf.title} catalogue in new tab`}
+                        >
+                          Open in New Tab
+                        </a>
+                        <button
+                          onClick={() => handleViewPdf(pdf)}
+                          className="catalogue-button view-button"
+                          aria-label={`View ${pdf.title} catalogue in modal`}
+                        >
+                          View
+                        </button>
+                        <a
+                          href={pdf.url}
+                          download={pdf.title}
+                          className="catalogue-button download-button"
+                          aria-label={`Download ${pdf.title} catalogue`}
+                        >
+                          Download
+                        </a>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+              ) : (
+                <p className="no-catalogues" aria-live="polite">
+                  No catalogues available for {brand.name}.
+                </p>
+              )}
+            </div>
+          ))
         ) : (
-          <p className="no-brand" aria-live="assertive">
-            No brand selected. Please select a brand from the homepage.
+          <p className="no-brands" aria-live="assertive">
+            No brands available at this time.
           </p>
         )}
       </section>
 
+      {/* PDF Viewer Modal */}
       {showModal && selectedPdf && (
         <div
           className="pdf-modal"

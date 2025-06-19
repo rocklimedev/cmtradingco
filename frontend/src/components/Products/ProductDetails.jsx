@@ -1,462 +1,201 @@
-import React, { useState, useEffect } from "react";
-import { useParams, Link } from "react-router-dom";
-import {
-  useGetProductByIdQuery,
-  useGetAllProductsByCategoryQuery,
-} from "../../api/productApi";
-import { Fancybox } from "@fancyapps/ui";
-import "@fancyapps/ui/dist/fancybox/fancybox.css";
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Document, Page, pdfjs } from "react-pdf";
+import { EyeOutlined, DownloadOutlined, LinkOutlined } from "@ant-design/icons";
+import project_title from "../../assets/img/projects/projects_title.png";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
+import product_1 from "../../assets/img/home/product_1.jpg";
+import "./wrapper.css";
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
 
 const ProductDetails = () => {
-  const { productId } = useParams();
-  const [quantity, setQuantity] = useState(1);
-  const [activeTab, setActiveTab] = useState(0);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const { brand } = location.state || {};
+  const [showModal, setShowModal] = useState(false);
+  const [selectedPdf, setSelectedPdf] = useState(null);
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
 
-  // Fetch product details
-  const { data: product, isLoading, error } = useGetProductByIdQuery(productId);
-
-  // Fetch related products by category
-  const { data: relatedProducts } = useGetAllProductsByCategoryQuery(
-    product?.categoryId,
-    { skip: !product?.categoryId }
-  );
-
-  // Initialize FancyBox
-  useEffect(() => {
-    Fancybox.bind("[data-fancybox='gallery']", {});
-    return () => Fancybox.destroy();
-  }, []);
-
-  // Handle quantity changes
-  const handleQuantityChange = (change) => {
-    setQuantity((prev) => Math.max(1, prev + change));
+  const handleCategoryClick = (categoryId, categoryName) => {
+    navigate(`/store/cat/${categoryId}`, { state: { categoryName } });
   };
 
-  // Handle Add to Cart (placeholder implementation)
-  const handleAddToCart = (e) => {
-    e.preventDefault();
-    console.log(`Added ${quantity} of ${product?.name} to cart`);
+  const handleViewPdf = (pdf) => {
+    setSelectedPdf(pdf);
+    setShowModal(true);
+    setPageNumber(1);
   };
 
-  // Handle image navigation
-  const handlePrevImage = () => {
-    setCurrentImageIndex((prev) =>
-      prev === 0 ? (product?.images?.length || 1) - 1 : prev - 1
-    );
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedPdf(null);
+    setNumPages(null);
   };
 
-  const handleNextImage = () => {
-    setCurrentImageIndex((prev) =>
-      prev === (product?.images?.length || 1) - 1 ? 0 : prev + 1
-    );
+  const onDocumentLoadSuccess = ({ numPages }) => {
+    setNumPages(numPages);
   };
 
-  const handleThumbnailClick = (index) => {
-    setCurrentImageIndex(index);
+  const handlePreviousPage = () => {
+    if (pageNumber > 1) {
+      setPageNumber(pageNumber - 1);
+    }
   };
 
-  if (isLoading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-  if (!product) return <p>Product not found</p>;
+  const handleNextPage = () => {
+    if (pageNumber < numPages) {
+      setPageNumber(pageNumber + 1);
+    }
+  };
 
   return (
-    <>
-      {/* Breadcrumbs */}
-      <div className="main__breadcrumbs breadcrumbs">
-        <div className="container">
-          <ul className="breadcrumbs__list">
-            <li className="breadcrumbs__list-item">
-              <Link className="breadcrumbs__list-link" to="/">
-                Home
-              </Link>
-            </li>
-            <li className="breadcrumbs__list-item">
-              <Link className="breadcrumbs__list-link" to="/product">
-                Shop
-              </Link>
-            </li>
-            <li className="breadcrumbs__list-item">
-              <p className="breadcrumbs__list-text">{product.name}</p>
-            </li>
-          </ul>
-        </div>
+    <main className="projects-wrapper">
+      <div className="banner-container">
+        <img
+          src={project_title}
+          alt="Projects Page Banner"
+          className="projects-page-image"
+        />
+        <section className="banner-overlay">
+          <h2 className="project-title">{brand ? brand.name : "Product"}</h2>
+          <div className="products-section">
+            <div className="section-products">
+              <img src={product_1} alt="Sanitary Product" />
+              <div className="section-details">
+                <span>{brand ? brand.name.toUpperCase() : "SANITARY"}</span>
+                <p>
+                  {brand
+                    ? brand.subtitle
+                    : "Premium sanitary ware blending style, comfort, and durability"}
+                </p>
+              </div>
+            </div>
+            <div className="project-content">
+              <p>
+                {brand
+                  ? brand.content
+                  : "Chhabra Marble is built with the vision of proving a one stop shop to its customers for all their tiles, granites and marble needs. Being in the business for more than 30 years, we have enough experience to be able to work with interior designers and architects and provide them with the best quality raw materials that turn the valuable ideas into reality. As far as the stocks are concerned we house the latest variety of marbles, tiles, kota stone, granite etc. We also deal in sanitary ware. We render our services with the desire to establish lifelong relationships with our valuable customers hence we take utmost care to provide them with best pricing when compared to other competitors. We also ensure best packaging and delivery so that our products reach well on time and are in their best shape."}
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
 
-      {/* Product Section */}
-      <section className="main__product product">
-        <div className="container">
-          <div className="product__inner">
-            <div className="product__wrap">
-              {/* Main Image Carousel */}
-              <div className="product__wrapper">
-                <div className="product__carousel">
-                  <img
-                    className="product__carousel-img"
-                    src={product.images?.[currentImageIndex] || comingsoon}
-                    alt={product.name}
-                  />
-                  <button
-                    className="product__carousel-prev"
-                    onClick={handlePrevImage}
-                    aria-label="Previous image"
-                  >
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 12 12"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M8 9L5 6L8 3"
-                        stroke="white"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
+      <section className="catalogue-gallery" aria-label="Brand Catalogues">
+        {brand ? (
+          <>
+            <h3>{brand.name} Catalogues</h3>
+            {brand.pdfs.length > 0 ? (
+              <div className="catalogue-grid">
+                {brand.pdfs.map((pdf) => (
+                  <article key={pdf.pdfId} className="catalogue-card">
+                    <div className="catalogue-image-wrapper">
+                      <img
+                        src={comingsoon}
+                        alt={pdf.title}
+                        className="catalogue-image"
                       />
-                    </svg>
-                  </button>
-                  <button
-                    className="product__carousel-next"
-                    onClick={handleNextImage}
-                    aria-label="Next image"
-                  >
-                    <svg
-                      width="24"
-                      height="24"
-                      viewBox="0 0 12 12"
-                      fill="none"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M4 9L7 6L4 3"
-                        stroke="white"
-                        strokeWidth="1.5"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </button>
-                </div>
-
-                {/* Thumbnails */}
-                <div className="product__thumbnails">
-                  {product.images?.length ? (
-                    product.images.map((image, index) => (
-                      <div
-                        key={index}
-                        className={`product__thumbnail ${
-                          currentImageIndex === index
-                            ? "product__thumbnail--active"
-                            : ""
-                        }`}
-                        onClick={() => handleThumbnailClick(index)}
-                      >
-                        <a data-fancybox="gallery" href={image || comingsoon}>
-                          <p className="product__thumbnail-text">sale</p>
-                          <button className="product__thumbnail-btn">
-                            <svg
-                              width="24"
-                              height="24"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M21 21L15 15M21 21V16.2M21 21H16.2"
-                                stroke="#0E1218"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                              <path
-                                d="M3 16.2V21M3 21H7.8M3 21L9 15"
-                                stroke="#0E1218"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                              <path
-                                d="M21 7.8V3M21 3H16.2M21 3L15 9"
-                                stroke="#0E1218"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                              <path
-                                d="M3 7.8V3M3 3H7.8M3 3L9 9"
-                                stroke="#0E1218"
-                                strokeWidth="1.5"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                              />
-                            </svg>
-                          </button>
-                          <img
-                            className="product__thumbnail-img"
-                            src={image || comingsoon}
-                            alt={product.name}
-                          />
+                      <div className="catalogue-actions">
+                        <button
+                          onClick={() => handleViewPdf(pdf)}
+                          className="catalogue-action-btn"
+                          aria-label={`View ${pdf.title} catalogue`}
+                          title="View Catalogue"
+                        >
+                          <EyeOutlined />
+                        </button>
+                        <a
+                          href={pdf.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="catalogue-action-btn"
+                          aria-label={`Open ${pdf.title} catalogue in new tab`}
+                          title="Open in New Tab"
+                        >
+                          <LinkOutlined />
+                        </a>
+                        <a
+                          href={pdf.url}
+                          download={pdf.title}
+                          className="catalogue-action-btn"
+                          aria-label={`Download ${pdf.title} catalogue`}
+                          title="Download Catalogue"
+                        >
+                          <DownloadOutlined />
                         </a>
                       </div>
-                    ))
-                  ) : (
-                    <div className="product__thumbnail">
-                      <a data-fancybox="gallery" href={comingsoon}>
-                        <img
-                          className="product__thumbnail-img"
-                          src={comingsoon}
-                          alt="No image"
-                        />
-                      </a>
                     </div>
-                  )}
-                </div>
+                    <h4 className="catalogue-title">{pdf.title}</h4>
+                    <p className="catalogue-description">{pdf.description}</p>
+                  </article>
+                ))}
               </div>
+            ) : (
+              <p className="no-catalogues" aria-live="polite">
+                No catalogues available for {brand.name}.
+              </p>
+            )}
+          </>
+        ) : (
+          <p className="no-brand" aria-live="assertive">
+            No brand selected. Please select a brand from the homepage.
+          </p>
+        )}
+      </section>
 
-              {/* Product Content */}
-              <div className="product__content product-content">
-                <div className="product-content__box product-content-box">
-                  <div className="product-content-box__stars stars">
-                    {[...Array(5)].map((_, i) => (
-                      <div key={i} className="stars__star stars-star">
-                        <svg
-                          width="12"
-                          height="12"
-                          viewBox="0 0 12 12"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M11.9687 4.60317C11.8902 4.36018 11.6746 4.1876 11.4197 4.16462L7.95614 3.85013L6.58656 0.644511C6.48558 0.40958 6.25559 0.257507 6.00006 0.257507C5.74453 0.257507 5.51454 0.40958 5.41356 0.64506L4.04399 3.85013L0.579908 4.16462C0.325385 4.18815 0.110414 4.36018 0.0314019 4.60317C-0.0476102 4.84616 0.0253592 5.11267 0.2179 5.28068L2.83592 7.5767L2.06392 10.9773C2.00744 11.2274 2.10448 11.4858 2.31195 11.6358C2.42346 11.7164 2.55393 11.7574 2.68549 11.7574C2.79893 11.7574 2.91145 11.7268 3.01244 11.6664L6.00006 9.88077L8.98659 11.6664C9.20513 11.7978 9.48062 11.7858 9.68762 11.6358C9.89518 11.4854 9.99214 11.2268 9.93565 10.9773L9.16366 7.5767L11.7817 5.28113C11.9742 5.11267 12.0477 4.84661 11.9687 4.60317Z"
-                            fill={i < 4 ? "#F9D442" : "#E0E0E0"} // Mock rating of 4 stars
-                          />
-                        </svg>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="product-content-box__text">2 reviews</p>
-                </div>
-                <h2 className="product-content__title">{product.name}</h2>
-                <div className="product-content__price">
-                  {product.originalPrice && (
-                    <del className="product-content__price-del">
-                      ₹{product.originalPrice}
-                    </del>
-                  )}
-                  <ins className="product-content__price-current">
-                    ₹{product.sellingPrice}
-                  </ins>
-                </div>
-                <p className="product-content__text">{product.description}</p>
-                <form
-                  className="product-content__quantity product-content-quantity"
-                  onSubmit={handleAddToCart}
+      {showModal && selectedPdf && (
+        <div
+          className="pdf-modal"
+          role="dialog"
+          aria-labelledby="pdf-modal-title"
+        >
+          <div className="pdf-modal-content">
+            <div className="pdf-modal-header">
+              <h3 id="pdf-modal-title">{selectedPdf.title}</h3>
+              <button
+                onClick={handleCloseModal}
+                className="close-button"
+                aria-label="Close PDF viewer"
+              >
+                ×
+              </button>
+            </div>
+            <div className="pdf-modal-body">
+              <Document
+                file={selectedPdf.url}
+                onLoadSuccess={onDocumentLoadSuccess}
+                className="pdf-document"
+                loading={<p>Loading PDF...</p>}
+                error={<p>Error loading PDF. Please try again.</p>}
+              >
+                <Page pageNumber={pageNumber} />
+              </Document>
+              <div className="pdf-controls">
+                <button
+                  onClick={handlePreviousPage}
+                  disabled={pageNumber <= 1}
+                  aria-label="Previous page"
                 >
-                  <div className="product-content-quantity__box product-content-quantity-box">
-                    <p className="product-content-quantity-box__text">
-                      Quantity:
-                    </p>
-                    <div className="product-content-quantity-box__row">
-                      <button
-                        className="product-content-quantity-box__row-btn product-content-quantity-box__row-btn--minus"
-                        type="button"
-                        onClick={() => handleQuantityChange(-1)}
-                      >
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M3.3335 8H12.6668"
-                            stroke="white"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </button>
-                      <input
-                        className="product-content-quantity-box__row-input"
-                        type="text"
-                        value={quantity}
-                        readOnly
-                      />
-                      <button
-                        className="product-content-quantity-box__row-btn product-content-quantity-box__row-btn--plus"
-                        type="button"
-                        onClick={() => handleQuantityChange(1)}
-                      >
-                        <svg
-                          width="16"
-                          height="16"
-                          viewBox="0 0 16 16"
-                          fill="none"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M8 3.3335V12.6668"
-                            stroke="white"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M3.3335 8H12.6668"
-                            stroke="white"
-                            strokeWidth="1.5"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                      </button>
-                    </div>
-                  </div>
-                  <button
-                    className="product-content-quantity__btn"
-                    type="submit"
-                  >
-                    Add to Cart
-                  </button>
-                </form>
-                <ul className="product-content__list">
-                  <li className="product-content__list-item">
-                    SKU: <span>{product.sku || "N/A"}</span>
-                  </li>
-                  <li className="product-content__list-item">
-                    Category: <span>{product.categoryName || "N/A"}</span>
-                  </li>
-                  <li className="product-content__list-item">
-                    Tags: <span>{product.tags?.join(", ") || "N/A"}</span>
-                  </li>
-                </ul>
+                  Previous
+                </button>
+                <p>
+                  Page {pageNumber} of {numPages || "..."}
+                </p>
+                <button
+                  onClick={handleNextPage}
+                  disabled={pageNumber >= numPages}
+                  aria-label="Next page"
+                >
+                  Next
+                </button>
               </div>
             </div>
           </div>
         </div>
-      </section>
-
-      {/* Product Info Tabs */}
-      <section className="main__product-info product-info">
-        <div className="container">
-          <div className="product-info__tabs tabs">
-            {["Description", "Additional Information", "Reviews"].map(
-              (tab, index) => (
-                <button
-                  key={index}
-                  className={`tabs__btn ${
-                    activeTab === index ? "tabs__btn--active" : ""
-                  }`}
-                  type="button"
-                  onClick={() => setActiveTab(index)}
-                >
-                  {tab} {tab === "Reviews" && <span>2</span>}
-                </button>
-              )
-            )}
-          </div>
-          <div className="product-info__inner">
-            {activeTab === 0 && (
-              <div className="product-info__product-info product-info-description blog-section">
-                <div className="blog-section__inner">
-                  <div className="blog-section__box blog-section-box">
-                    <div className="blog-section-box__content blog-section-box-content">
-                      <h2 className="blog-section-box-content__title">
-                        Description
-                      </h2>
-                      <p className="blog-section-box-content__text">
-                        {product.description}
-                      </p>
-                      <ul className="blog-section-box-content__list">
-                        {product.features?.map((feature, index) => (
-                          <li
-                            key={index}
-                            className="blog-section-box-content__list-item"
-                          >
-                            {feature}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            )}
-            {activeTab === 1 && (
-              <div className="product-info__product-info">
-                <h2>Additional Information</h2>
-                <p>Dimensions: {product.dimensions || "N/A"}</p>
-                <p>Material: {product.material || "N/A"}</p>
-              </div>
-            )}
-            {activeTab === 2 && (
-              <div className="product-info__product-info">
-                <h2>Reviews</h2>
-                <p>No reviews available yet.</p>
-              </div>
-            )}
-          </div>
-        </div>
-      </section>
-
-      {/* Related Products */}
-      <section className="main__shop-section shop-section">
-        <div className="container">
-          <div className="shop-section__top shop-section-top">
-            <h2 className="shop-section-top__title">Related Products</h2>
-          </div>
-          <div className="shop-section__grid">
-            {relatedProducts?.slice(0, 4).map((related) => (
-              <div key={related.productId} className="shop__card card">
-                <div className="card__inner">
-                  <Link
-                    className="card-box__poster"
-                    to={`/products/${related.productId}`}
-                  >
-                    <img
-                      className="card-box__poster-img"
-                      src={related.images?.[0] || comingsoon}
-                      alt={related.name}
-                    />
-                    <p className="card-box__poster-suptext">sale</p>
-                  </Link>
-                  <p className="card__subtext">
-                    {related.categoryName || "N/A"}
-                  </p>
-                  <Link
-                    className="card__title"
-                    to={`/products/${related.productId}`}
-                  >
-                    {related.name}
-                  </Link>
-                  <div className="card__price card-price">
-                    {related.originalPrice && (
-                      <del className="card-price__past">
-                        ₹{related.originalPrice}
-                      </del>
-                    )}
-                    <ins className="card-price__current">
-                      ₹{related.sellingPrice}
-                    </ins>
-                  </div>
-                  <button
-                    className="card__link"
-                    onClick={() => console.log(`Add ${related.name} to cart`)}
-                  >
-                    Add to Cart
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-    </>
+      )}
+    </main>
   );
 };
 
