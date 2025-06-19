@@ -1,7 +1,12 @@
 import React, { useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Document, Page, pdfjs } from "react-pdf";
-import { EyeOutlined, DownloadOutlined, LinkOutlined } from "@ant-design/icons";
+import {
+  EyeOutlined,
+  DownloadOutlined,
+  LinkOutlined,
+  LoadingOutlined,
+} from "@ant-design/icons";
 import project_title from "../../assets/img/projects/projects_title.png";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
 import product_1 from "../../assets/img/home/product_1.jpg";
@@ -17,6 +22,7 @@ const ProductDetails = () => {
   const [selectedPdf, setSelectedPdf] = useState(null);
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const [thumbnailErrors, setThumbnailErrors] = useState({});
 
   const handleCategoryClick = (categoryId, categoryName) => {
     navigate(`/store/cat/${categoryId}`, { state: { categoryName } });
@@ -48,6 +54,31 @@ const ProductDetails = () => {
     if (pageNumber < numPages) {
       setPageNumber(pageNumber + 1);
     }
+  };
+
+  const handleDownloadPdf = async (pdf) => {
+    try {
+      const response = await fetch(pdf.url);
+      if (!response.ok) {
+        throw new Error(`Failed to fetch PDF: ${response.statusText}`);
+      }
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${pdf.title}.pdf`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Download error:", error);
+      alert("Failed to download PDF. Please try again or check the PDF URL.");
+    }
+  };
+
+  const handleThumbnailError = (pdfId) => {
+    setThumbnailErrors((prev) => ({ ...prev, [pdfId]: true }));
   };
 
   return (
@@ -92,11 +123,27 @@ const ProductDetails = () => {
                 {brand.pdfs.map((pdf) => (
                   <article key={pdf.pdfId} className="catalogue-card">
                     <div className="catalogue-image-wrapper">
-                      <img
-                        src={comingsoon}
-                        alt={pdf.title}
-                        className="catalogue-image"
-                      />
+                      {thumbnailErrors[pdf.pdfId] ? (
+                        <img
+                          src={comingsoon}
+                          alt={pdf.title}
+                          className="catalogue-image"
+                        />
+                      ) : (
+                        <Document
+                          file={pdf.url}
+                          onLoadError={() => handleThumbnailError(pdf.pdfId)}
+                          loading={
+                            <LoadingOutlined className="thumbnail-loading" />
+                          }
+                        >
+                          <Page
+                            pageNumber={1}
+                            width={250}
+                            className="catalogue-image"
+                          />
+                        </Document>
+                      )}
                       <div className="catalogue-actions">
                         <button
                           onClick={() => handleViewPdf(pdf)}
@@ -116,15 +163,14 @@ const ProductDetails = () => {
                         >
                           <LinkOutlined />
                         </a>
-                        <a
-                          href={pdf.url}
-                          download={pdf.title}
+                        <button
+                          onClick={() => handleDownloadPdf(pdf)}
                           className="catalogue-action-btn"
                           aria-label={`Download ${pdf.title} catalogue`}
                           title="Download Catalogue"
                         >
                           <DownloadOutlined />
-                        </a>
+                        </button>
                       </div>
                     </div>
                     <h4 className="catalogue-title">{pdf.title}</h4>
@@ -166,6 +212,10 @@ const ProductDetails = () => {
               <Document
                 file={selectedPdf.url}
                 onLoadSuccess={onDocumentLoadSuccess}
+                onLoadError={(error) => {
+                  console.error("PDF modal load error:", error);
+                  alert("Failed to load PDF. Please try again.");
+                }}
                 className="pdf-document"
                 loading={<p>Loading PDF...</p>}
                 error={<p>Error loading PDF. Please try again.</p>}
