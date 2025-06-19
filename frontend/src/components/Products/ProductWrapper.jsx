@@ -1,115 +1,52 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { useGetAllCategoriesQuery } from "../../api/categoryApi";
-import { useGetAllProductsQuery } from "../../api/productApi";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Document, Page, pdfjs } from "react-pdf";
 import project_title from "../../assets/img/projects/projects_title.png";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
 import product_1 from "../../assets/img/home/product_1.jpg";
+import "./wrapper.css";
+
+pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+
 const ProductWrapper = () => {
   const navigate = useNavigate();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [selectedTab, setSelectedTab] = useState("categories");
-  const [searchTerm, setSearchTerm] = useState("");
-  const [priceRange, setPriceRange] = useState({ min: "", max: "" });
-  const [sortOption, setSortOption] = useState("");
-  const productsPerPage = 30;
-
-  // Fetch all categories
-  const {
-    data: categoriesData,
-    isLoading: categoriesLoading,
-    error: categoriesError,
-  } = useGetAllCategoriesQuery();
-
-  // Fetch all products for the "All Products" tab
-  const {
-    data: allProductsData,
-    isLoading: productsLoading,
-    error: productsError,
-  } = useGetAllProductsQuery();
-
-  // Filter and sort products
-  const filteredProducts = allProductsData
-    ? allProductsData
-        .filter((product) => {
-          const matchesSearch = product.name
-            .toLowerCase()
-            .includes(searchTerm.toLowerCase());
-          const matchesPrice =
-            (!priceRange.min ||
-              product.sellingPrice >= Number(priceRange.min)) &&
-            (!priceRange.max || product.sellingPrice <= Number(priceRange.max));
-          return matchesSearch && matchesPrice;
-        })
-        .sort((a, b) => {
-          if (sortOption === "price-low-high")
-            return a.sellingPrice - b.sellingPrice;
-          if (sortOption === "price-high-low")
-            return b.sellingPrice - a.sellingPrice;
-          return 0;
-        })
-    : [];
-
-  // Calculate pagination
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = filteredProducts.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
-  const totalPages = Math.ceil(filteredProducts.length / productsPerPage) || 1;
-
-  // Pagination logic for limited page numbers
-  const maxVisiblePages = 5;
-  const halfVisiblePages = Math.floor(maxVisiblePages / 2);
-  let startPage = Math.max(1, currentPage - halfVisiblePages);
-  let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
-
-  if (endPage - startPage + 1 < maxVisiblePages) {
-    startPage = Math.max(1, endPage - maxVisiblePages + 1);
-  }
-
-  const pageNumbers = Array.from(
-    { length: endPage - startPage + 1 },
-    (_, i) => startPage + i
-  );
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  const handlePrevious = () => {
-    if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
-
-  const handleNext = () => {
-    if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    }
-  };
+  const location = useLocation();
+  const { brand } = location.state || {};
+  const [showModal, setShowModal] = useState(false);
+  const [selectedPdf, setSelectedPdf] = useState(null);
+  const [numPages, setNumPages] = useState(null);
+  const [pageNumber, setPageNumber] = useState(1);
 
   const handleCategoryClick = (categoryId, categoryName) => {
     navigate(`/store/cat/${categoryId}`, { state: { categoryName } });
   };
 
-  const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value);
-    setCurrentPage(1); // Reset to first page on search
+  const handleViewPdf = (pdf) => {
+    setSelectedPdf(pdf);
+    setShowModal(true);
+    setPageNumber(1);
   };
 
-  const handlePriceChange = (e) => {
-    setPriceRange({ ...priceRange, [e.target.name]: e.target.value });
-    setCurrentPage(1); // Reset to first page on filter change
+  const handleCloseModal = () => {
+    setShowModal(false);
+    setSelectedPdf(null);
+    setNumPages(null);
   };
 
-  const handleSortChange = (e) => {
-    setSortOption(e.target.value);
-    setCurrentPage(1); // Reset to first page on sort change
+  const onDocumentLoadSuccess = ({ numPages }) => {
+    setNumPages(numPages);
+  };
+
+  const handlePreviousPage = () => {
+    if (pageNumber > 1) {
+      setPageNumber(pageNumber - 1);
+    }
+  };
+
+  const handleNextPage = () => {
+    if (pageNumber < numPages) {
+      setPageNumber(pageNumber + 1);
+    }
   };
 
   return (
@@ -121,268 +58,136 @@ const ProductWrapper = () => {
           className="projects-page-image"
         />
         <section className="banner-overlay">
-          <h2 className="project-title">Product</h2>
+          <h2 className="project-title">{brand ? brand.name : "Product"}</h2>
           <div className="products-section">
-            {/* Image Column */}
             <div className="section-products">
               <img src={product_1} alt="Sanitary Product" />
               <div className="section-details">
-                <span>SANITARY</span>
+                <span>{brand ? brand.name.toUpperCase() : "SANITARY"}</span>
                 <p>
-                  Premium sanitary ware blending style, comfort, and durability
+                  {brand
+                    ? brand.subtitle
+                    : "Premium sanitary ware blending style, comfort, and durability"}
                 </p>
               </div>
             </div>
-
-            {/* Description Column */}
             <div className="project-content">
               <p>
-                Chhabra Marble is built with the vision of proving a one stop
-                shop to its customers for all their tiles, granites and marble
-                needs. Being in the business for more than 30 years, we have
-                enough experience to be able to work with interior designers and
-                architects and provide them with the best quality raw materials
-                that turn the valuable ideas into reality. As far as the stocks
-                are concerned we house the latest variety of marbles, tiles,
-                kota stone, granite etc. We also deal in sanitary ware. We
-                render our services with the desire to establish lifelong
-                relationships with our valuable customers hence we take utmost
-                care to provide them with best pricing when compared to other
-                competitors. We also ensure best packaging and delivery so that
-                our products reach well on time and are in their best shape.
+                {brand
+                  ? brand.content
+                  : "Chhabra Marble is built with the vision of proving a one stop shop to its customers for all their tiles, granites and marble needs. Being in the business for more than 30 years, we have enough experience to be able to work with interior designers and architects and provide them with the best quality raw materials that turn the valuable ideas into reality. As far as the stocks are concerned we house the latest variety of marbles, tiles, kota stone, granite etc. We also deal in sanitary ware. We render our services with the desire to establish lifelong relationships with our valuable customers hence we take utmost care to provide them with best pricing when compared to other competitors. We also ensure best packaging and delivery so that our products reach well on time and are in their best shape."}
               </p>
             </div>
           </div>
         </section>
       </div>
 
-      {/* Tabs for Categories and All Products */}
-      <div className="tabs-container">
-        <button
-          className={`tab ${selectedTab === "categories" ? "active" : ""}`}
-          onClick={() => setSelectedTab("categories")}
-          aria-selected={selectedTab === "categories"}
-        >
-          Categories
-        </button>
-        <button
-          className={`tab ${selectedTab === "allProducts" ? "active" : ""}`}
-          onClick={() => setSelectedTab("allProducts")}
-          aria-selected={selectedTab === "allProducts"}
-        >
-          All Products
-        </button>
-      </div>
-
-      {selectedTab === "categories" ? (
-        <section className="category-gallery" aria-label="Product Categories">
-          {categoriesLoading && (
-            <p className="loading" aria-live="polite">
-              Loading categories...
-            </p>
-          )}
-          {categoriesError && (
-            <p className="error" aria-live="assertive">
-              Error loading categories: {categoriesError.message}
-            </p>
-          )}
-          {categoriesData?.categories?.map((category) => (
-            <article
-              key={category.categoryId}
-              className="category-card"
-              onClick={() =>
-                handleCategoryClick(category.categoryId, category.name)
-              }
-              tabIndex={0}
-              role="button"
-              aria-label={`View ${category.name} category`}
-              onKeyDown={(e) =>
-                e.key === "Enter" &&
-                handleCategoryClick(category.categoryId, category.name)
-              }
-            >
-              <img
-                src={comingsoon}
-                alt={category.name}
-                className="category-image"
-              />
-              <h3 className="category-name">{category.name}</h3>
-            </article>
-          ))}
-        </section>
-      ) : (
-        <>
-          {/* Separate Filter Controls Section */}
-          <section className="filter-section" aria-label="Product Filters">
-            <div className="filter-controls">
-              <div className="search-container">
-                <label htmlFor="search-input" className="sr-only">
-                  Search products
-                </label>
-                <input
-                  id="search-input"
-                  type="text"
-                  placeholder="Search products..."
-                  value={searchTerm}
-                  onChange={handleSearchChange}
-                  className="search-input"
-                  aria-label="Search products by name"
-                />
+      <section className="catalogue-gallery" aria-label="Brand Catalogues">
+        {brand ? (
+          <>
+            <h3>{brand.name} Catalogues</h3>
+            {brand.pdfs.length > 0 ? (
+              <div className="catalogue-grid">
+                {brand.pdfs.map((pdf) => (
+                  <article key={pdf.pdfId} className="catalogue-card">
+                    <img
+                      src={comingsoon}
+                      alt={pdf.title}
+                      className="catalogue-image"
+                    />
+                    <h4 className="catalogue-title">{pdf.title}</h4>
+                    <p className="catalogue-description">{pdf.description}</p>
+                    <div className="catalogue-actions">
+                      <a
+                        href={pdf.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="catalogue-link"
+                        aria-label={`Open ${pdf.title} catalogue in new tab`}
+                      >
+                        Open in New Tab
+                      </a>
+                      <button
+                        onClick={() => handleViewPdf(pdf)}
+                        className="catalogue-button view-button"
+                        aria-label={`View ${pdf.title} catalogue in modal`}
+                      >
+                        View
+                      </button>
+                      <a
+                        href={pdf.url}
+                        download={pdf.title}
+                        className="catalogue-button download-button"
+                        aria-label={`Download ${pdf.title} catalogue`}
+                      >
+                        Download
+                      </a>
+                    </div>
+                  </article>
+                ))}
               </div>
-              <div className="price-filter">
-                <label htmlFor="min-price" className="sr-only">
-                  Minimum price
-                </label>
-                <input
-                  id="min-price"
-                  type="number"
-                  name="min"
-                  placeholder="Min Price"
-                  value={priceRange.min}
-                  onChange={handlePriceChange}
-                  className="price-input"
-                  min="0"
-                  aria-label="Minimum price filter"
-                />
-                <span className="price-divider">-</span>
-                <label htmlFor="max-price" className="sr-only">
-                  Maximum price
-                </label>
-                <input
-                  id="max-price"
-                  type="number"
-                  name="max"
-                  placeholder="Max Price"
-                  value={priceRange.max}
-                  onChange={handlePriceChange}
-                  className="price-input"
-                  min="0"
-                  aria-label="Maximum price filter"
-                />
-              </div>
-              <div className="sort-container">
-                <label htmlFor="sort-select" className="sr-only">
-                  Sort products
-                </label>
-                <select
-                  id="sort-select"
-                  value={sortOption}
-                  onChange={handleSortChange}
-                  className="sort-select"
-                  aria-label="Sort products by price"
-                >
-                  <option value="">Sort by</option>
-                  <option value="price-low-high">Price: Low to High</option>
-                  <option value="price-high-low">Price: High to Low</option>
-                </select>
-              </div>
-            </div>
-          </section>
-
-          {/* Product Gallery Section */}
-          <section className="product-gallery" aria-label="All Products">
-            {productsLoading && (
-              <p className="loading" aria-live="polite">
-                Loading products...
+            ) : (
+              <p className="no-catalogues" aria-live="polite">
+                No catalogues available for {brand.name}.
               </p>
             )}
-            {productsError && (
-              <p className="error" aria-live="assertive">
-                Error loading products: {productsError.message}
-              </p>
-            )}
-            {!productsLoading &&
-              !productsError &&
-              currentProducts.length === 0 && (
-                <p className="no-products" aria-live="polite">
-                  No products found matching your criteria.
-                </p>
-              )}
-            {currentProducts.map((product) => (
-              <Link
-                to={`/product/${product.productId}`}
-                key={product.productId}
+          </>
+        ) : (
+          <p className="no-brand" aria-live="assertive">
+            No brand selected. Please select a brand from the homepage.
+          </p>
+        )}
+      </section>
+
+      {showModal && selectedPdf && (
+        <div
+          className="pdf-modal"
+          role="dialog"
+          aria-labelledby="pdf-modal-title"
+        >
+          <div className="pdf-modal-content">
+            <div className="pdf-modal-header">
+              <h3 id="pdf-modal-title">{selectedPdf.title}</h3>
+              <button
+                onClick={handleCloseModal}
+                className="close-button"
+                aria-label="Close PDF viewer"
               >
-                <article className="product-card">
-                  <img
-                    src={product.images[0] || comingsoon}
-                    alt={product.name}
-                    className="product-image"
-                  />
-                  <h3 className="product-name">{product.name}</h3>
-                  <p className="product-price">
-                    Price: ₹{product.sellingPrice}
-                  </p>
-                </article>
-              </Link>
-            ))}
-
-            {/* Pagination */}
-            {totalPages > 1 && (
-              <nav className="pagination" aria-label="Pagination">
+                ×
+              </button>
+            </div>
+            <div className="pdf-modal-body">
+              <Document
+                file={selectedPdf.url}
+                onLoadSuccess={onDocumentLoadSuccess}
+                className="pdf-document"
+                loading={<p>Loading PDF...</p>}
+                error={<p>Error loading PDF. Please try again.</p>}
+              >
+                <Page pageNumber={pageNumber} />
+              </Document>
+              <div className="pdf-controls">
                 <button
-                  className="page-nav"
-                  onClick={handlePrevious}
-                  disabled={currentPage === 1}
+                  onClick={handlePreviousPage}
+                  disabled={pageNumber <= 1}
                   aria-label="Previous page"
                 >
                   Previous
                 </button>
-                {startPage > 1 && (
-                  <>
-                    <button
-                      className="page"
-                      onClick={() => handlePageChange(1)}
-                      aria-label="Page 1"
-                    >
-                      1
-                    </button>
-                    {startPage > 2 && (
-                      <span className="ellipsis" aria-hidden="true">
-                        ...
-                      </span>
-                    )}
-                  </>
-                )}
-                {pageNumbers.map((page) => (
-                  <button
-                    key={page}
-                    className={`page ${currentPage === page ? "active" : ""}`}
-                    onClick={() => handlePageChange(page)}
-                    aria-label={`Page ${page}`}
-                    aria-current={currentPage === page ? "page" : undefined}
-                  >
-                    {page}
-                  </button>
-                ))}
-                {endPage < totalPages && (
-                  <>
-                    {endPage < totalPages - 1 && (
-                      <span className="ellipsis" aria-hidden="true">
-                        ...
-                      </span>
-                    )}
-                    <button
-                      className="page"
-                      onClick={() => handlePageChange(totalPages)}
-                      aria-label={`Page ${totalPages}`}
-                    >
-                      {totalPages}
-                    </button>
-                  </>
-                )}
+                <p>
+                  Page {pageNumber} of {numPages || "..."}
+                </p>
                 <button
-                  className="page-nav"
-                  onClick={handleNext}
-                  disabled={currentPage === totalPages}
+                  onClick={handleNextPage}
+                  disabled={pageNumber >= numPages}
                   aria-label="Next page"
                 >
                   Next
                 </button>
-              </nav>
-            )}
-          </section>
-        </>
+              </div>
+            </div>
+          </div>
+        </div>
       )}
     </main>
   );

@@ -75,7 +75,7 @@ const ContactWrapper = () => {
             title="Chhabra Marble Location"
             className="contact-map"
           ></iframe>
-          <div className="contact-info">
+          <div className="contact-infos">
             <h3 className="contact-info-title">Contact Information</h3>
             <p className="contact-info-subtitle">
               Any questions or remarks? Just write us a message!
@@ -121,6 +121,7 @@ const ContactWrapper = () => {
                 placeholder="Enter your first name"
                 value={formData.firstName}
                 onChange={handleChange}
+                aria-label="First Name"
               />
               {errors.firstName && (
                 <span className="form-error">{errors.firstName}</span>
@@ -135,6 +136,7 @@ const ContactWrapper = () => {
                 placeholder="Enter your last name"
                 value={formData.lastName}
                 onChange={handleChange}
+                aria-label="Last Name"
               />
             </div>
             <div className="form-group">
@@ -146,6 +148,7 @@ const ContactWrapper = () => {
                 placeholder="Enter your email"
                 value={formData.email}
                 onChange={handleChange}
+                aria-label="Email Address"
               />
               {errors.email && (
                 <span className="form-error">{errors.email}</span>
@@ -160,6 +163,7 @@ const ContactWrapper = () => {
                 placeholder="Enter your phone number"
                 value={formData.phone}
                 onChange={handleChange}
+                aria-label="Phone Number"
               />
             </div>
             <div className="form-group form-group-full">
@@ -170,6 +174,7 @@ const ContactWrapper = () => {
                 placeholder="Enter your message"
                 value={formData.message}
                 onChange={handleChange}
+                aria-label="Message"
               />
               {errors.message && (
                 <span className="form-error">{errors.message}</span>

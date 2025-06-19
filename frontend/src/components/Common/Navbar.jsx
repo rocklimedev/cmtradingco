@@ -10,30 +10,21 @@ const Navbar = () => {
   const navigate = useNavigate();
   const searchRef = useRef(null);
 
-  // Fetch categories
   const { data: categoriesData } = useGetAllCategoriesQuery();
-
-  // Fetch products based on search query
   const { data: searchResults, isLoading: searchLoading } =
-    useSearchProductsQuery(
-      { query: searchQuery },
-      { skip: !searchQuery } // Skip query if searchQuery is empty
-    );
+    useSearchProductsQuery({ query: searchQuery }, { skip: !searchQuery });
 
-  // Toggle search modal visibility
   const toggleSearchModal = () => {
     setIsSearchModalOpen(!isSearchModalOpen);
     if (isSearchModalOpen) {
-      setSearchQuery(""); // Clear search query when closing
+      setSearchQuery("");
     }
   };
 
-  // Handle search input change
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
   };
 
-  // Handle clicking a search result
   const handleResultClick = (type, id, name) => {
     setIsSearchModalOpen(false);
     setSearchQuery("");
@@ -44,7 +35,6 @@ const Navbar = () => {
     }
   };
 
-  // Close modal when clicking outside
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (searchRef.current && !searchRef.current.contains(event.target)) {
@@ -58,7 +48,6 @@ const Navbar = () => {
     };
   }, []);
 
-  // Filter categories based on search query
   const filteredCategories =
     categoriesData?.categories?.filter((category) =>
       category.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -93,7 +82,6 @@ const Navbar = () => {
         </div>
       </nav>
 
-      {/* Search Modal */}
       {isSearchModalOpen && (
         <div className="search-modal">
           <div className="search-modal-content" ref={searchRef}>
