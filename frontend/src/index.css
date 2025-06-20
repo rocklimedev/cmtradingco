@@ -1,9 +1,9 @@
 @import url("./assets/css/style.css");
 /* ProductWrapper.css */
 .projects-wrapper {
-  max-width: 1400px;
+  max-width: 2000px;
   margin: 0 auto;
-  padding: 2rem 1rem;
+  /* padding: 2rem 1rem; */
   font-family: "Arial", sans-serif;
   color: #333;
 }

@@ -49,39 +49,37 @@ const ProductWrapper = () => {
   };
 
   return (
-    <main className="projects-wrapper">
-      <div className="banner-container">
-        <img
-          src={project_title}
-          alt="Products Page Banner"
-          className="projects-page-image"
-        />
-        <section className="banner-overlay">
-          <h2 className="project-title">Our Brands</h2>
-          <div className="products-section">
-            <div className="section-products">
-              <img src={product_1} alt="Product Showcase" />
-              <div className="section-details">
-                <span>PREMIUM PRODUCTS</span>
-                <p>
-                  Explore our curated selection of top-tier brands offering
-                  premium sanitary ware, tiles, cement, and more.
-                </p>
-              </div>
-            </div>
-            <div className="project-content">
+    <div className="product-page-wrapper">
+      <img
+        src={project_title}
+        alt="Products Page Banner"
+        className="product-page-image"
+      />
+      <section className="banner-overlay">
+        <h2 className="project-title">Our Brands</h2>
+        <div className="products-section">
+          <div className="section-products">
+            <img src={product_1} alt="Product Showcase" />
+            <div className="section-details">
+              <span>PREMIUM PRODUCTS</span>
               <p>
-                Chhabra Marble is your one-stop shop for high-quality tiles,
-                granites, marbles, and sanitary ware. With over 30 years of
-                experience, we partner with leading brands to provide
-                architects, designers, and homeowners with the finest materials.
-                Browse our brand catalogues below to discover innovative and
-                durable solutions for your projects.
+                Explore our curated selection of top-tier brands offering
+                premium sanitary ware, tiles, cement, and more.
               </p>
             </div>
           </div>
-        </section>
-      </div>
+          <div className="project-content">
+            <p>
+              Chhabra Marble is your one-stop shop for high-quality tiles,
+              granites, marbles, and sanitary ware. With over 30 years of
+              experience, we partner with leading brands to provide architects,
+              designers, and homeowners with the finest materials. Browse our
+              brand catalogues below to discover innovative and durable
+              solutions for your projects.
+            </p>
+          </div>
+        </div>
+      </section>
 
       {/* Brands and Catalogues Section */}
       <section className="brands-gallery" aria-label="Brands and Catalogues">
@@ -205,7 +203,7 @@ const ProductWrapper = () => {
           </div>
         </div>
       )}
-    </main>
+    </div>
   );
 };
 

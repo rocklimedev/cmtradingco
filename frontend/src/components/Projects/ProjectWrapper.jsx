@@ -28,7 +28,7 @@ const ProjectWrapper = () => {
   };
 
   return (
-    <main className="projects-wrapper">
+    <div className="projects-wrapper">
       <img
         src={project_title}
         alt="Projects Page Banner"
@@ -73,7 +73,7 @@ const ProjectWrapper = () => {
           </div>
         </div>
       )}
-    </main>
+    </div>
   );
 };
 
