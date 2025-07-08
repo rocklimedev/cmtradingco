@@ -60,9 +60,13 @@ const AboutWrapper = () => {
           <div className="about-page-box-text">
             <h3 className="about-page-title">Vision</h3>
             <p className="about-page-description">
-              To be the leading provider of premium marble, granite, tiles, and
-              sanitary ware, delivering innovative and high-quality solutions
-              that transform spaces and exceed customer expectations.
+              We believe in rendering best customer services to our valuable
+              clients wherein we take keen interest and commit to provide them
+              with the products well on time anywhere in the city. Our support
+              does not end here for we also provide design solutions to our
+              customers. We believe in transparency and trustworthy hence we
+              strive to uphold the good will and reputation we have created over
+              the years of hard work.
             </p>
           </div>
         </div>
@@ -120,7 +124,7 @@ const AboutWrapper = () => {
         </div>
       </section>
 
-      <div className="journey">
+      {/* <div className="journey">
         <h3 className="journey-title">Chhabra Marble Journey</h3>
         <div className="journey-slider">
           <button
@@ -152,7 +156,7 @@ const AboutWrapper = () => {
             &rarr;
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

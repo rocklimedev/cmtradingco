@@ -93,8 +93,8 @@ const HomeWrapper = () => {
 
         <div className="product-grid">
           {/* First row: Single full-width product */}
-          <div className="row single">
-            <div className="product-card full">
+          <div className="row double">
+            <div className="product-card">
               <img src={product_1} alt="Sanitary" />
               <div className="product-info">
                 <h3>SANITARY</h3>
@@ -118,16 +118,6 @@ const HomeWrapper = () => {
                 </p>
               </div>
             </div>
-            <div className="product-card">
-              <img src={product_4} alt="Kota" />
-              <div className="product-info">
-                <h3>KOTA</h3>
-                <p>
-                  Durable Kota stone for a natural, timeless look with lasting
-                  strength.
-                </p>
-              </div>
-            </div>
           </div>
 
           {/* Third row: GRANITE and MARBLE */}
@@ -139,15 +129,6 @@ const HomeWrapper = () => {
                 <p>
                   High-quality granite for timeless strength and elegant
                   finishes
-                </p>
-              </div>
-            </div>
-            <div className="product-card">
-              <img src={product_5} alt="Marble" />
-              <div className="product-info">
-                <h3>MARBLE</h3>
-                <p>
-                  Exquisite marble that adds luxury and elegance to every space
                 </p>
               </div>
             </div>
@@ -201,6 +182,10 @@ const HomeWrapper = () => {
         </Link>
       </section>
       <section className="home-showroom-video">
+        <h2 className="section-title">
+          Our Showroom
+          <span className="line" />
+        </h2>
         <video
           src={video}
           poster={comingsoon}
@@ -210,10 +195,6 @@ const HomeWrapper = () => {
           loop
           playsInline
         />
-        <h2 className="section-title">
-          Our Showroom
-          <span className="line" />
-        </h2>
       </section>
       <section className="home-contact-section">
         <h2 className="section-title">

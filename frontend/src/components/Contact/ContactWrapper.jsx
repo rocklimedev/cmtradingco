@@ -84,13 +84,23 @@ const ContactWrapper = () => {
               <div className="contact-icon">
                 <MdOutlinePhoneInTalk />
               </div>
-              <div className="contact-content">+91 9999500699</div>
+              <div
+                className="contact-content"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                +91 9999500699
+              </div>
             </div>
             <div className="contact-item">
               <div className="contact-icon">
                 <IoMdMail />
               </div>
-              <div className="contact-content">info@chhabramarble.com</div>
+              <div
+                className="contact-content"
+                style={{ textDecoration: "none", color: "inherit" }}
+              >
+                info@chhabramarble.com
+              </div>
             </div>
             <div className="contact-item">
               <div className="contact-icon">

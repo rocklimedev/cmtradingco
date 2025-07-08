@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Document, Page, pdfjs } from "react-pdf";
-import brands from "../../assets/data/brands"; // Adjust path based on your structure
+import brands from "../../assets/data/brands"; // Adjust path as needed
 import project_title from "../../assets/img/projects/projects_title.png";
-import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
 import product_1 from "../../assets/img/home/product_1.jpg";
+import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
 import "./wrapper.css";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
@@ -15,15 +15,39 @@ const ProductWrapper = () => {
   const [selectedPdf, setSelectedPdf] = useState(null);
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const modalRef = useRef(null);
 
-  const handleCategoryClick = (categoryId, categoryName) => {
-    navigate(`/store/cat/${categoryId}`, { state: { categoryName } });
-  };
+  // Handle click outside modal to close
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        handleCloseModal();
+      }
+    };
+    if (showModal) {
+      document.addEventListener("mousedown", handleClickOutside);
+      document.body.style.overflow = "hidden"; // Prevent scrolling
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.body.style.overflow = "";
+    };
+  }, [showModal]);
+
+  // Handle ESC key to close modal
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.key === "Escape") handleCloseModal();
+    };
+    if (showModal) document.addEventListener("keydown", handleEsc);
+    return () => document.removeEventListener("keydown", handleEsc);
+  }, [showModal]);
 
   const handleViewPdf = (pdf) => {
     setSelectedPdf(pdf);
     setShowModal(true);
     setPageNumber(1);
+    setNumPages(null);
   };
 
   const handleCloseModal = () => {
@@ -37,31 +61,28 @@ const ProductWrapper = () => {
   };
 
   const handlePreviousPage = () => {
-    if (pageNumber > 1) {
-      setPageNumber(pageNumber - 1);
-    }
+    if (pageNumber > 1) setPageNumber(pageNumber - 1);
   };
 
   const handleNextPage = () => {
-    if (pageNumber < numPages) {
-      setPageNumber(pageNumber + 1);
-    }
+    if (pageNumber < numPages) setPageNumber(pageNumber + 1);
   };
 
   return (
     <div className="product-page-wrapper">
       <img
         src={project_title}
-        alt="Products Page Banner"
+        alt="Products Banner"
         className="product-page-image"
+        loading="lazy"
       />
       <section className="banner-overlay">
         <h2 className="project-title">Our Brands</h2>
         <div className="products-section">
           <div className="section-products">
-            <img src={product_1} alt="Product Showcase" />
+            <img src={product_1} alt="Premium Products" loading="lazy" />
             <div className="section-details">
-              <span>PREMIUM PRODUCTS</span>
+              <span>Premium Products</span>
               <p>
                 Explore our curated selection of top-tier brands offering
                 premium sanitary ware, tiles, cement, and more.
@@ -81,7 +102,6 @@ const ProductWrapper = () => {
         </div>
       </section>
 
-      {/* Brands and Catalogues Section */}
       <section className="brands-gallery" aria-label="Brands and Catalogues">
         {brands.length > 0 ? (
           brands.map((brand) => (
@@ -91,6 +111,7 @@ const ProductWrapper = () => {
                   src={brand.logoSrc}
                   alt={`${brand.name} Logo`}
                   className="brand-logo"
+                  loading="lazy"
                 />
                 <div className="brand-info">
                   <h3 className="brand-title">{brand.name}</h3>
@@ -102,39 +123,45 @@ const ProductWrapper = () => {
                 <div className="catalogue-grid">
                   {brand.pdfs.map((pdf) => (
                     <article key={pdf.pdfId} className="catalogue-card">
-                      <img
-                        src={comingsoon} // Replace with pdf.thumbnailUrl if available
-                        alt={pdf.title}
-                        className="catalogue-image"
-                      />
+                      <div className="catalogue-image-wrapper">
+                        <img
+                          src={pdf.thumbnailUrl || comingsoon}
+                          alt={`${pdf.title} Catalogue`}
+                          className="catalogue-image"
+                          loading="lazy"
+                        />
+                        <div className="catalogue-actions">
+                          <a
+                            href={pdf.url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="catalogue-action-btn"
+                            aria-label={`Open ${pdf.title} catalogue in new tab`}
+                            title="Open in New Tab"
+                          >
+                            <span className="material-icons">open_in_new</span>
+                          </a>
+                          <button
+                            onClick={() => handleViewPdf(pdf)}
+                            className="catalogue-action-btn"
+                            aria-label={`View ${pdf.title} catalogue in modal`}
+                            title="View"
+                          >
+                            <span className="material-icons">visibility</span>
+                          </button>
+                          <a
+                            href={pdf.url}
+                            download={pdf.title}
+                            className="catalogue-action-btn"
+                            aria-label={`Download ${pdf.title} catalogue`}
+                            title="Download"
+                          >
+                            <span className="material-icons">download</span>
+                          </a>
+                        </div>
+                      </div>
                       <h4 className="catalogue-title">{pdf.title}</h4>
                       <p className="catalogue-description">{pdf.description}</p>
-                      <div className="catalogue-actions">
-                        <a
-                          href={pdf.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="catalogue-link"
-                          aria-label={`Open ${pdf.title} catalogue in new tab`}
-                        >
-                          Open in New Tab
-                        </a>
-                        <button
-                          onClick={() => handleViewPdf(pdf)}
-                          className="catalogue-button view-button"
-                          aria-label={`View ${pdf.title} catalogue in modal`}
-                        >
-                          View
-                        </button>
-                        <a
-                          href={pdf.url}
-                          download={pdf.title}
-                          className="catalogue-button download-button"
-                          aria-label={`Download ${pdf.title} catalogue`}
-                        >
-                          Download
-                        </a>
-                      </div>
                     </article>
                   ))}
                 </div>
@@ -152,14 +179,13 @@ const ProductWrapper = () => {
         )}
       </section>
 
-      {/* PDF Viewer Modal */}
       {showModal && selectedPdf && (
         <div
           className="pdf-modal"
           role="dialog"
           aria-labelledby="pdf-modal-title"
         >
-          <div className="pdf-modal-content">
+          <div className="pdf-modal-content" ref={modalRef}>
             <div className="pdf-modal-header">
               <h3 id="pdf-modal-title">{selectedPdf.title}</h3>
               <button
@@ -178,7 +204,7 @@ const ProductWrapper = () => {
                 loading={<p>Loading PDF...</p>}
                 error={<p>Error loading PDF. Please try again.</p>}
               >
-                <Page pageNumber={pageNumber} />
+                <Page pageNumber={pageNumber} scale={1.0} />
               </Document>
               <div className="pdf-controls">
                 <button

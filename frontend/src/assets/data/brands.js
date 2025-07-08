@@ -2,6 +2,7 @@ import ar from "../img/brand_logos/american_standard.png";
 import jk from "../img/brand_logos/jktylo.png";
 import grohe from "../img/brand_logos/grohe.png";
 import jkcemenet from "../img/brand_logos/jk_cement.png";
+import colston from "../img/brand_logos/colston-logo_black.png";
 import nexion from "../img/brand_logos/nexion.png";
 import gr1 from "../pdf/Grohe/GROHE_Eurocube_Joy_en_CY.pdf";
 import gr2 from "../pdf/Grohe/GROHE_Eurostyle_en_IN.pdf";
@@ -166,7 +167,7 @@ const brands = [
   {
     name: "Colston",
     link: "/product/brand/colston",
-    logoSrc: ar,
+    logoSrc: colston,
     subtitle: "Luxury bathroom solutions",
     content:
       "Colston provides premium bathroom products, including ceramics, bathtubs, and wellness solutions, designed to enhance comfort and aesthetics. Their catalogues showcase innovative designs for modern bathrooms.",
