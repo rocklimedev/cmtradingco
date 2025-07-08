@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { IoMdMail } from "react-icons/io";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import contact from "../../assets/img/contact_title_section.png";
+import contact from "../../assets/img/contact_title_section.jpg";
 
 const ContactWrapper = () => {
   const [formData, setFormData] = useState({
