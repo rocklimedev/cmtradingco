@@ -121,7 +121,20 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: "Inter", sans-serif;
+  font-family: "Lato", sans-serif;
+}
+
+.slider-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.5s ease;
+}
+
+.slide {
+  min-width: 100%;
+  height: 100%;
+  position: relative;
 }
 
 .slider-background {
@@ -189,6 +202,37 @@
   background: #f2f2f2;
   color: #a11515;
 }
+
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 3;
+  font-size: 1.5rem;
+}
+
+.slider-nav.prev {
+  left: 20px;
+}
+
+.slider-nav.next {
+  right: 20px;
+}
+
+.slider-nav:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
 @media (max-width: 768px) {
   .slider-content {
     max-width: 100%;
@@ -212,6 +256,20 @@
   .slider-content button {
     width: 100%;
     text-align: center;
+  }
+
+  .slider-nav {
+    width: 30px;
+    height: 30px;
+    font-size: 1.2rem;
+  }
+
+  .slider-nav.prev {
+    left: 10px;
+  }
+
+  .slider-nav.next {
+    right: 10px;
   }
 }
 
@@ -1063,7 +1121,6 @@
   z-index: 100;
   box-sizing: border-box;
 }
-
 .navbar-links-list {
   display: flex;
   align-items: center;
@@ -1092,9 +1149,11 @@
 .navbar-links a:hover,
 .navbar-links:active,
 .navbar-links a:active {
-  color: var(--primary-color, #e63946);
+  color: var(
+    --primary-color,
+    #c90101
+  ); /* Ensure primary color is #c90101 as per your root */
 }
-
 .navbar-search-container {
   display: flex;
   align-items: center;
@@ -1356,7 +1415,7 @@
 /* Contact Page */
 .contact-wrapped {
   background-color: #fff;
-  font-family: "Segoe UI", sans-serif;
+  font-family: "Lato", sans-serif;
   padding-bottom: 80px;
 }
 

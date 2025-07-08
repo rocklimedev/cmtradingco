@@ -1,21 +1,23 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import product_1 from "../../assets/img/home/product_1.jpg";
-import product_2 from "../../assets/img/home/product_2.png";
-import product_3 from "../../assets/img/home/product_3.jpg";
-import product_4 from "../../assets/img/home/product_4.jpg";
-import product_5 from "../../assets/img/home/product_5.png";
-
+import adhesive from "../../assets/img/home/ADHESIVE.png";
+import cp_fittings from "../../assets/img/home/CP FITTING.png";
+import surfaces from "../../assets/img/home/SIURFACE.png";
+import wellness from "../../assets/img/home/WELLNESS.png";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
-import video from "../../assets/img/video.mp4";
+import video from "../../assets/img/video.m4v";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { IoMdMail } from "react-icons/io";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import slider from "../../assets/img/home_page_slider.jpg";
+import slider from "../../assets/img/home_page_slider.png";
 import PhoneImage from "../../assets/img/contact_home_background.jpg"; // Replace with actual path
 import brands from "../../assets/data/brands"; // Import the JSON file
+
 const HomeWrapper = () => {
-  const navigate = useNavigate(); // Add navigate hook
+  const navigate = useNavigate();
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const sliderRef = useRef(null);
+
   const projects = [
     {
       id: 1,
@@ -43,32 +45,92 @@ const HomeWrapper = () => {
     },
   ];
 
+  const slides = [
+    {
+      content: (
+        <>
+          <video
+            src={video}
+            poster={comingsoon}
+            controls
+            muted
+            autoPlay
+            loop
+            playsInline
+          />
+        </>
+      ),
+    },
+    {
+      content: (
+        <>
+          <img
+            src={slider}
+            alt="Slider Background"
+            className="slider-background"
+          />
+          <div className="slider-overlay">
+            <div className="slider-content">
+              <h1>Chhabra Marble</h1>
+              <p>
+                Your trusted one-stop shop for premium marble, granite, tiles,
+                kota stone, and sanitary ware. With 30+ years of experience, we
+                offer top-quality materials, competitive prices, and timely
+                delivery – built on lasting relationships and trust.
+              </p>
+              <button>Connect With Us</button>
+            </div>
+          </div>
+        </>
+      ),
+    },
+  ];
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add form submission logic (e.g., API call)
     console.log("Form submitted");
   };
 
+  const nextSlide = () => {
+    setCurrentSlide((prev) => (prev + 1) % slides.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(nextSlide, 30000); // Auto-slide every 5 seconds
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <>
-      <div className="main-slider">
-        <img
-          src={slider}
-          alt="Slider Background"
-          className="slider-background"
-        />
-        <div className="slider-overlay">
-          <div className="slider-content">
-            <h1>Chhabra Marble</h1>
-            <p>
-              Your trusted one-stop shop for premium marble, granite, tiles,
-              kota stone, and sanitary ware. With 30+ years of experience, we
-              offer top-quality materials, competitive prices, and timely
-              delivery – built on lasting relationships and trust.
-            </p>
-            <button>Connect With Us</button>
-          </div>
+      <div className="main-slider" ref={sliderRef}>
+        <div
+          className="slider-wrapper"
+          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+        >
+          {slides.map((slide, index) => (
+            <div key={index} className="slide">
+              {slide.content}
+            </div>
+          ))}
         </div>
+        <button
+          className="slider-nav prev"
+          onClick={prevSlide}
+          aria-label="Previous slide"
+        >
+          ←
+        </button>
+        <button
+          className="slider-nav next"
+          onClick={nextSlide}
+          aria-label="Next slide"
+        >
+          →
+        </button>
       </div>
 
       <section className="home-about-section">
@@ -92,12 +154,11 @@ const HomeWrapper = () => {
         </h2>
 
         <div className="product-grid">
-          {/* First row: Single full-width product */}
           <div className="row double">
             <div className="product-card">
-              <img src={product_1} alt="Sanitary" />
+              <img src={surfaces} alt="Sanitary" />
               <div className="product-info">
-                <h3>SANITARY</h3>
+                <h3>SURFACES</h3>
                 <p>
                   Premium sanitary ware that blends style, comfort, and
                   durability
@@ -105,13 +166,11 @@ const HomeWrapper = () => {
               </div>
             </div>
           </div>
-
-          {/* Second row: TILE and KOTA */}
           <div className="row double">
             <div className="product-card">
-              <img src={product_2} alt="Tile" />
+              <img src={cp_fittings} alt="Tile" />
               <div className="product-info">
-                <h3>TILE</h3>
+                <h3>CP FITTINGS</h3>
                 <p>
                   Stylish tiles for every surface, crafted for beauty and
                   durability.
@@ -119,13 +178,23 @@ const HomeWrapper = () => {
               </div>
             </div>
           </div>
-
-          {/* Third row: GRANITE and MARBLE */}
           <div className="row double">
             <div className="product-card">
-              <img src={product_3} alt="Granite" />
+              <img src={wellness} alt="Granite" />
               <div className="product-info">
-                <h3>GRANITE</h3>
+                <h3>WELLNESS</h3>
+                <p>
+                  High-quality granite for timeless strength and elegant
+                  finishes
+                </p>
+              </div>
+            </div>
+          </div>
+          <div className="row double">
+            <div className="product-card">
+              <img src={adhesive} alt="Granite" />
+              <div className="product-info">
+                <h3>ADHESIVE</h3>
                 <p>
                   High-quality granite for timeless strength and elegant
                   finishes
@@ -204,7 +273,6 @@ const HomeWrapper = () => {
 
         <div className="contact-wrapper">
           <div className="contact-box">
-            {/* LEFT: Contact Form */}
             <form className="contact-form-content" onSubmit={handleSubmit}>
               <div className="form-row">
                 <input
@@ -227,8 +295,6 @@ const HomeWrapper = () => {
               <textarea name="message" placeholder="Your Message" required />
               <button type="submit">SEND MESSAGE</button>
             </form>
-
-            {/* RIGHT: Contact Info */}
           </div>
           <div className="contact-info">
             <h3>Contact Information</h3>

@@ -505,3 +505,152 @@
     padding: var(--spacing-xs);
   }
 }
+/* Existing styles remain unchanged */
+
+/* Brand Slider */
+.brand-slider {
+  position: relative;
+  max-width: 1200px;
+  margin: 0 auto var(--spacing-xl);
+  padding: var(--spacing-md);
+}
+
+.brand-slider-wrapper {
+  display: flex;
+  overflow: hidden;
+  scroll-behavior: smooth;
+}
+
+.brand-slide {
+  min-width: 150px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity var(--transition), transform var(--transition);
+  margin: 0 var(--spacing-sm);
+}
+
+.brand-slide.active {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.brand-logo {
+  max-width: 100px;
+  height: auto;
+  object-fit: contain;
+  margin-bottom: var(--spacing-sm);
+}
+
+.brand-title {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+.slider-nav {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--primary-color);
+  color: var(--text-light);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: var(--font-size-lg);
+  z-index: 10;
+}
+
+.prev {
+  left: var(--spacing-sm);
+}
+
+.next {
+  right: var(--spacing-sm);
+}
+
+.slider-nav:hover {
+  background: var(--primary-hover);
+}
+
+/* Brand Content Section */
+.brand-content-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: var(--spacing-md);
+}
+
+.brand-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+}
+
+.brand-info {
+  flex: 1;
+}
+
+.brand-subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--text-muted);
+  margin-bottom: var(--spacing-xs);
+}
+
+.brand-content {
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-md);
+}
+
+/* Existing catalogue-grid, catalogue-card, etc. styles remain unchanged */
+
+/* Media Queries */
+@media (max-width: 1024px) {
+  .brand-slide {
+    min-width: 120px;
+    height: 180px;
+  }
+
+  .brand-logo {
+    max-width: 80px;
+  }
+
+  .brand-title {
+    font-size: var(--font-size-base);
+  }
+
+  .slider-nav {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-slide {
+    min-width: 100px;
+    height: 150px;
+  }
+
+  .brand-logo {
+    max-width: 60px;
+  }
+
+  .brand-title {
+    font-size: var(--font-size-sm);
+  }
+
+  .slider-nav {
+    width: 32px;
+    height: 32px;
+  }
+}

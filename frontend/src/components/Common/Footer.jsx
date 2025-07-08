@@ -12,7 +12,6 @@ const Footer = () => {
         {/* Column 1: Logo */}
         <div className="footer-logo">
           <img src={logo} alt="Chhabra Marble Logo" />
-          <p className="footer-copyright">© {year} All Rights Reserved.</p>
         </div>
 
         {/* Column 2: Navigation */}
@@ -82,6 +81,9 @@ const Footer = () => {
           </div>
         </div>
       </div>
+      <p className="footer-copyright" style={{ justifyContent: "center" }}>
+        © {year} All Rights Reserved.
+      </p>
     </footer>
   );
 };

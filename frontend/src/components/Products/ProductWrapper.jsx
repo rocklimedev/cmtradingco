@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Document, Page, pdfjs } from "react-pdf";
+import { FaExternalLinkAlt, FaEye, FaDownload } from "react-icons/fa"; // Import Font Awesome icons
 import brands from "../../assets/data/brands"; // Adjust path as needed
 import project_title from "../../assets/img/projects/projects_title.png";
 import product_1 from "../../assets/img/home/product_1.jpg";
@@ -15,7 +16,9 @@ const ProductWrapper = () => {
   const [selectedPdf, setSelectedPdf] = useState(null);
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const [activeBrandIndex, setActiveBrandIndex] = useState(0);
   const modalRef = useRef(null);
+  const sliderRef = useRef(null);
 
   // Handle click outside modal to close
   useEffect(() => {
@@ -26,7 +29,7 @@ const ProductWrapper = () => {
     };
     if (showModal) {
       document.addEventListener("mousedown", handleClickOutside);
-      document.body.style.overflow = "hidden"; // Prevent scrolling
+      document.body.style.overflow = "hidden";
     }
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
@@ -68,6 +71,18 @@ const ProductWrapper = () => {
     if (pageNumber < numPages) setPageNumber(pageNumber + 1);
   };
 
+  const handleNextBrand = () => {
+    setActiveBrandIndex((prev) => (prev + 1) % brands.length);
+  };
+
+  const handlePrevBrand = () => {
+    setActiveBrandIndex((prev) => (prev - 1 + brands.length) % brands.length);
+  };
+
+  const handleBrandClick = (index) => {
+    setActiveBrandIndex(index);
+  };
+
   return (
     <div className="product-page-wrapper">
       <img
@@ -103,25 +118,57 @@ const ProductWrapper = () => {
       </section>
 
       <section className="brands-gallery" aria-label="Brands and Catalogues">
-        {brands.length > 0 ? (
-          brands.map((brand) => (
-            <div key={brand.name} className="brand-section">
-              <div className="brand-header">
+        <div className="brand-slider">
+          <button
+            className="slider-nav prev"
+            onClick={handlePrevBrand}
+            aria-label="Previous brand"
+          >
+            ←
+          </button>
+          <div className="brand-slider-wrapper" ref={sliderRef}>
+            {brands.map((brand, index) => (
+              <div
+                key={brand.name}
+                className={`brand-slide ${
+                  index === activeBrandIndex ? "active" : ""
+                }`}
+                onClick={() => handleBrandClick(index)}
+              >
                 <img
                   src={brand.logoSrc}
                   alt={`${brand.name} Logo`}
                   className="brand-logo"
                   loading="lazy"
                 />
+                <h3 className="brand-title">{brand.name}</h3>
+              </div>
+            ))}
+          </div>
+          <button
+            className="slider-nav next"
+            onClick={handleNextBrand}
+            aria-label="Next brand"
+          >
+            →
+          </button>
+        </div>
+        <div className="brand-content-section">
+          {brands[activeBrandIndex] && (
+            <div className="brand-section">
+              <div className="brand-header">
                 <div className="brand-info">
-                  <h3 className="brand-title">{brand.name}</h3>
-                  <p className="brand-subtitle">{brand.subtitle}</p>
+                  <p className="brand-subtitle">
+                    {brands[activeBrandIndex].subtitle}
+                  </p>
+                  <p className="brand-content">
+                    {brands[activeBrandIndex].content}
+                  </p>
                 </div>
               </div>
-              <p className="brand-content">{brand.content}</p>
-              {brand.pdfs.length > 0 ? (
+              {brands[activeBrandIndex].pdfs.length > 0 ? (
                 <div className="catalogue-grid">
-                  {brand.pdfs.map((pdf) => (
+                  {brands[activeBrandIndex].pdfs.map((pdf) => (
                     <article key={pdf.pdfId} className="catalogue-card">
                       <div className="catalogue-image-wrapper">
                         <img
@@ -139,7 +186,7 @@ const ProductWrapper = () => {
                             aria-label={`Open ${pdf.title} catalogue in new tab`}
                             title="Open in New Tab"
                           >
-                            <span className="material-icons">open_in_new</span>
+                            <FaExternalLinkAlt />
                           </a>
                           <button
                             onClick={() => handleViewPdf(pdf)}
@@ -147,7 +194,7 @@ const ProductWrapper = () => {
                             aria-label={`View ${pdf.title} catalogue in modal`}
                             title="View"
                           >
-                            <span className="material-icons">visibility</span>
+                            <FaEye />
                           </button>
                           <a
                             href={pdf.url}
@@ -156,7 +203,7 @@ const ProductWrapper = () => {
                             aria-label={`Download ${pdf.title} catalogue`}
                             title="Download"
                           >
-                            <span className="material-icons">download</span>
+                            <FaDownload />
                           </a>
                         </div>
                       </div>
@@ -167,16 +214,12 @@ const ProductWrapper = () => {
                 </div>
               ) : (
                 <p className="no-catalogues" aria-live="polite">
-                  No catalogues available for {brand.name}.
+                  No catalogues available for {brands[activeBrandIndex].name}.
                 </p>
               )}
             </div>
-          ))
-        ) : (
-          <p className="no-brands" aria-live="assertive">
-            No brands available at this time.
-          </p>
-        )}
+          )}
+        </div>
       </section>
 
       {showModal && selectedPdf && (
