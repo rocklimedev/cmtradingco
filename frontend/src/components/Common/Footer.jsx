@@ -35,13 +35,10 @@ const Footer = () => {
         {/* Column 3: Categories */}
         <div className="footer-categories">
           <ul>
-            <li>Sanitary</li>
-            <li>Tiles</li>
-            <li>Marble</li>
-            <li>Kota</li>
-            <li>Granite</li>
-            <li>Cement</li>
-            <li>Chemical</li>
+            <li>Surfaces</li>
+            <li>CP Fittings</li>
+            <li>Wellness</li>
+            <li>Adhesive</li>
           </ul>
         </div>
 

@@ -10,7 +10,6 @@ import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { IoMdMail } from "react-icons/io";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import slider from "../../assets/img/home_page_slider.png";
-import PhoneImage from "../../assets/img/contact_home_background.jpg"; // Replace with actual path
 import brands from "../../assets/data/brands"; // Import the JSON file
 
 const HomeWrapper = () => {
