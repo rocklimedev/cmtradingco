@@ -208,7 +208,7 @@ const HomeWrapper = () => {
       <section className="brands-we-offer">
         <h2 className="section-title" style={{ color: "white" }}>
           Brands We Offer
-          <span className="line" style={{ color: "white" }} />
+          <span className="line" style={{ backgroundColor: "white" }} />
         </h2>
         <div className="brands-grid">
           {brands.map((brand, index) => (
