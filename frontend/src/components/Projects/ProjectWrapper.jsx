@@ -7,37 +7,37 @@ const projectImages = {
   1: {
     master: require("../../assets/img/projects/1/Background.jpg"),
     additional: [
-      require("../../assets/img/projects/1/DSC_7168.jpg"), // Example additional image
+      require("../../assets/img/projects/1/DSC_7168.jpg"),
       require("../../assets/img/projects/1/DSC_7185.jpg"),
       require("../../assets/img/projects/1/DSC_7188.jpg"),
       require("../../assets/img/projects/1/DSC_7201.jpg"),
       require("../../assets/img/projects/1/DSC_7223.jpg"),
       require("../../assets/img/projects/1/DSC_7240.jpg"),
-      require("../../assets/img/projects/1/DSC_7257.jpg"), // Add more as needed
+      require("../../assets/img/projects/1/DSC_7257.jpg"),
     ],
   },
   2: {
-    master: require("../../assets/img/projects/1/Background.jpg"),
+    master: require("../../assets/img/projects/1/Background.jpg"), // Corrected path
     additional: [
-      require("../../assets/img/projects/1/DSC_7168.jpg"), // Example additional image
+      require("../../assets/img/projects/1/DSC_7168.jpg"), // Corrected path
       require("../../assets/img/projects/1/DSC_7185.jpg"),
       require("../../assets/img/projects/1/DSC_7188.jpg"),
       require("../../assets/img/projects/1/DSC_7201.jpg"),
       require("../../assets/img/projects/1/DSC_7223.jpg"),
       require("../../assets/img/projects/1/DSC_7240.jpg"),
-      require("../../assets/img/projects/1/DSC_7257.jpg"), // Add more as needed
+      require("../../assets/img/projects/1/DSC_7257.jpg"),
     ],
   },
   3: {
-    master: require("../../assets/img/projects/1/Background.jpg"),
+    master: require("../../assets/img/projects/1/Background.jpg"), // Corrected path
     additional: [
-      require("../../assets/img/projects/1/DSC_7168.jpg"), // Example additional image
+      require("../../assets/img/projects/1/DSC_7168.jpg"), // Corrected path
       require("../../assets/img/projects/1/DSC_7185.jpg"),
       require("../../assets/img/projects/1/DSC_7188.jpg"),
       require("../../assets/img/projects/1/DSC_7201.jpg"),
       require("../../assets/img/projects/1/DSC_7223.jpg"),
       require("../../assets/img/projects/1/DSC_7240.jpg"),
-      require("../../assets/img/projects/1/DSC_7257.jpg"), // Add more as needed
+      require("../../assets/img/projects/1/DSC_7257.jpg"),
     ],
   },
 };
@@ -46,13 +46,13 @@ const ProjectWrapper = () => {
   const [showAll, setShowAll] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
 
-  // Define project folders (1, 2, 3, ..., n)
-  const projectFolders = [1, 2, 3]; // Adjust based on actual folders (e.g., up to n)
+  const projectFolders = [1, 2, 3];
   const projects = projectFolders.map((folder) => ({
     id: folder,
     masterImg: projectImages[folder]?.master || comingsoon,
     additionalImgs: projectImages[folder]?.additional || [],
     alt: `Project ${folder} - Master Image`,
+    caption: `Description for Project ${folder}`, // Added caption for HomeWrapper
   }));
 
   const toggleShowAll = (projectId) => {

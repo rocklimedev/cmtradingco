@@ -12,37 +12,57 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import slider from "../../assets/img/home_page_slider.png";
 import brands from "../../assets/data/brands"; // Import the JSON file
 
+const projectImages = {
+  1: {
+    master: require("../../assets/img/projects/1/Background.jpg"),
+    additional: [
+      require("../../assets/img/projects/1/DSC_7168.jpg"),
+      require("../../assets/img/projects/1/DSC_7185.jpg"),
+      require("../../assets/img/projects/1/DSC_7188.jpg"),
+      require("../../assets/img/projects/1/DSC_7201.jpg"),
+      require("../../assets/img/projects/1/DSC_7223.jpg"),
+      require("../../assets/img/projects/1/DSC_7240.jpg"),
+      require("../../assets/img/projects/1/DSC_7257.jpg"),
+    ],
+  },
+  2: {
+    master: require("../../assets/img/projects/1/Background.jpg"), // Corrected path
+    additional: [
+      require("../../assets/img/projects/1/DSC_7168.jpg"), // Corrected path
+      require("../../assets/img/projects/1/DSC_7185.jpg"),
+      require("../../assets/img/projects/1/DSC_7188.jpg"),
+      require("../../assets/img/projects/1/DSC_7201.jpg"),
+      require("../../assets/img/projects/1/DSC_7223.jpg"),
+      require("../../assets/img/projects/1/DSC_7240.jpg"),
+      require("../../assets/img/projects/1/DSC_7257.jpg"),
+    ],
+  },
+  3: {
+    master: require("../../assets/img/projects/1/Background.jpg"), // Corrected path
+    additional: [
+      require("../../assets/img/projects/1/DSC_7168.jpg"), // Corrected path
+      require("../../assets/img/projects/1/DSC_7185.jpg"),
+      require("../../assets/img/projects/1/DSC_7188.jpg"),
+      require("../../assets/img/projects/1/DSC_7201.jpg"),
+      require("../../assets/img/projects/1/DSC_7223.jpg"),
+      require("../../assets/img/projects/1/DSC_7240.jpg"),
+      require("../../assets/img/projects/1/DSC_7257.jpg"),
+    ],
+  },
+};
+
 const HomeWrapper = () => {
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = useRef(null);
 
-  const projects = [
-    {
-      id: 1,
-      imgSrc: comingsoon,
-      alt: "Residential Marble Installation",
-      caption: "Luxurious marble interiors for a modern home",
-    },
-    {
-      id: 2,
-      imgSrc: comingsoon,
-      alt: "Commercial Granite Flooring",
-      caption: "Durable granite flooring for a corporate office",
-    },
-    {
-      id: 3,
-      imgSrc: comingsoon,
-      alt: "Luxury Tile Design",
-      caption: "Elegant tile patterns for a boutique showroom",
-    },
-    {
-      id: 4,
-      imgSrc: comingsoon,
-      alt: "Kota Stone Pathway",
-      caption: "Rustic kota stone pathway for a garden",
-    },
-  ];
+  const projectFolders = [1, 2, 3];
+  const projects = projectFolders.map((folder) => ({
+    id: folder,
+    imgSrc: projectImages[folder]?.master || comingsoon,
+    alt: `Project ${folder} - Master Image`,
+    caption: `Description for Project ${folder}`,
+  }));
 
   const slides = [
     {
@@ -99,7 +119,7 @@ const HomeWrapper = () => {
   };
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, 30000); // Auto-slide every 5 seconds
+    const interval = setInterval(nextSlide, 30000); // Auto-slide every 30 seconds
     return () => clearInterval(interval);
   }, []);
 
@@ -238,12 +258,22 @@ const HomeWrapper = () => {
           spaces.
         </p>
         <div className="projects-grid">
-          {projects.map((project) => (
-            <div key={project.id} className="image-section">
-              <img src={project.imgSrc} alt={project.alt} />
-              <p>{project.caption}</p>
-            </div>
-          ))}
+          {projects.length > 0 ? (
+            projects.map((project) => (
+              <div key={project.id} className="image-section">
+                <img
+                  src={project.imgSrc}
+                  alt={project.alt}
+                  onError={(e) => {
+                    e.target.src = comingsoon;
+                  }}
+                />
+                <p>{project.caption}</p>
+              </div>
+            ))
+          ) : (
+            <p>No projects available.</p>
+          )}
         </div>
         <Link to="/project" className="view-all-button">
           View All

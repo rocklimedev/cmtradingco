@@ -275,6 +275,8 @@
 
 /* Home About Section */
 .home-about-section {
+  font: var(--font-weight-bold) var(--font-size-2xl) / var(--line-height-tight)
+    var(--font-family);
   width: 100%;
   max-width: 1920px;
   min-height: 400px;
@@ -306,6 +308,8 @@
 
 /* Home Product Section */
 .home-product-section {
+  font: var(--font-weight-bold) var(--font-size-2xl) / var(--line-height-tight)
+    var(--font-family);
   width: 100%;
   max-width: 1400px;
   margin: 0 auto;
@@ -314,6 +318,8 @@
 }
 
 .section-title {
+  font: var(--font-weight-bold) var(--font-size-2xl) / var(--line-height-tight)
+    var(--font-family);
   font-size: 2.2rem;
   font-weight: 700;
   margin-bottom: 10px;
@@ -552,6 +558,8 @@
 
 /* The overlay text */
 .home-showroom-video .section-title {
+  font: var(--font-weight-bold) var(--font-size-2xl) / var(--line-height-tight)
+    var(--font-family);
   position: absolute;
   top: 50%;
   left: 50%;
@@ -573,6 +581,8 @@
   margin-right: auto;
 }
 .home-contact-section {
+  font: var(--font-weight-bold) var(--font-size-2xl) / var(--line-height-tight)
+    var(--font-family);
   width: 100%;
   padding: 40px 16px; /* Reduced padding for better mobile fit */
   background: #fff;
@@ -581,6 +591,8 @@
 }
 
 .section-title {
+  font: var(--font-weight-bold) var(--font-size-2xl) / var(--line-height-tight)
+    var(--font-family);
   font-size: 28px; /* Slightly smaller for better scaling */
   font-weight: 700;
   margin-bottom: 32px;
@@ -1758,6 +1770,8 @@
   text-align: center;
 }
 .about-page-section {
+  font: var(--font-weight-bold) var(--font-size-2xl) / var(--line-height-tight)
+    var(--font-family);
   max-width: 1337px;
   margin: 0 auto;
   padding: 4rem 1rem;
@@ -1767,6 +1781,8 @@
 }
 
 .about-page-box-section {
+  font: var(--font-weight-bold) var(--font-size-2xl) / var(--line-height-tight)
+    var(--font-family);
   background-color: #e6e6e6;
   border-radius: 12px;
   display: flex;
