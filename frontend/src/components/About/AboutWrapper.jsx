@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { FaCheckCircle } from "react-icons/fa";
 import about_title from "../../assets/img/about/about_title_page.jpg";
+import vision from "../../assets/img/about/vision.png";
+import mission from "../../assets/img/about/mission.png";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
 import allinone from "../../assets/img/about/why-us/all-in-one.png";
 import competitive from "../../assets/img/about/why-us/competitive-pricing.png";
@@ -52,7 +54,7 @@ const AboutWrapper = () => {
         <div className="about-page-box-section">
           <div className="about-page-box-image-container">
             <img
-              src={comingsoon}
+              src={vision}
               alt="Vision Image"
               className="about-page-box-image"
             />
@@ -74,7 +76,7 @@ const AboutWrapper = () => {
         <div className="about-page-box-section reverse">
           <div className="about-page-box-image-container">
             <img
-              src={comingsoon}
+              src={mission}
               alt="Mission Image"
               className="about-page-box-image"
             />
