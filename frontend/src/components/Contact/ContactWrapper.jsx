@@ -40,7 +40,6 @@ const ContactWrapper = () => {
       return;
     }
     setSubmitted(true);
-    // Simulate form submission (e.g., API call)
     setTimeout(() => {
       setFormData({
         firstName: "",
@@ -67,7 +66,7 @@ const ContactWrapper = () => {
           <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.5353752935225!2d77.08848157603951!3d28.67362748221231!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d0472b3b66a0d%3A0x67e896cfd98c1c43!2sChhabra%20Marble!5e0!3m2!1sen!2sin!4v1748326959416!5m2!1sen!2sin"
             width="100%"
-            height="450"
+            height="400"
             style={{ border: 0 }}
             allowFullScreen=""
             loading="lazy"
@@ -84,23 +83,20 @@ const ContactWrapper = () => {
               <div className="contact-icon">
                 <MdOutlinePhoneInTalk />
               </div>
-              <div
-                className="contact-content"
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
+              <a href="tel:+919999500699" className="contact-content">
                 +91 9999500699
-              </div>
+              </a>
             </div>
             <div className="contact-item">
               <div className="contact-icon">
                 <IoMdMail />
               </div>
-              <div
+              <a
+                href="mailto:info@chhabramarble.com"
                 className="contact-content"
-                style={{ textDecoration: "none", color: "inherit" }}
               >
                 info@chhabramarble.com
-              </div>
+              </a>
             </div>
             <div className="contact-item">
               <div className="contact-icon">
@@ -128,7 +124,7 @@ const ContactWrapper = () => {
                 type="text"
                 id="firstName"
                 className="form-content"
-                placeholder="Enter your first name"
+                placeholder="First Name"
                 value={formData.firstName}
                 onChange={handleChange}
                 aria-label="First Name"
@@ -143,7 +139,7 @@ const ContactWrapper = () => {
                 type="text"
                 id="lastName"
                 className="form-content"
-                placeholder="Enter your last name"
+                placeholder="Last Name"
                 value={formData.lastName}
                 onChange={handleChange}
                 aria-label="Last Name"
@@ -155,7 +151,7 @@ const ContactWrapper = () => {
                 type="email"
                 id="email"
                 className="form-content"
-                placeholder="Enter your email"
+                placeholder="Email"
                 value={formData.email}
                 onChange={handleChange}
                 aria-label="Email Address"
@@ -170,7 +166,7 @@ const ContactWrapper = () => {
                 type="tel"
                 id="phone"
                 className="form-content"
-                placeholder="Enter your phone number"
+                placeholder="Phone Number"
                 value={formData.phone}
                 onChange={handleChange}
                 aria-label="Phone Number"
@@ -181,7 +177,7 @@ const ContactWrapper = () => {
               <textarea
                 id="message"
                 className="form-content"
-                placeholder="Enter your message"
+                placeholder="Message"
                 value={formData.message}
                 onChange={handleChange}
                 aria-label="Message"
@@ -192,10 +188,10 @@ const ContactWrapper = () => {
             </div>
             <button
               type="submit"
-              className="contact-button"
+              className="contact-form-button"
               disabled={submitted}
             >
-              {submitted ? "Submitted!" : "Submit"}
+              {submitted ? "Submitted!" : "Send Message"}
             </button>
           </div>
         </form>
