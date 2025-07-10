@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaSearch, FaTimes } from "react-icons/fa";
-import { useSearchProductsQuery } from "../../api/productApi"; // Adjust path as needed
-import { useGetAllCategoriesQuery } from "../../api/categoryApi"; // Adjust path as needed
+import { FaSearch, FaTimes, FaBars } from "react-icons/fa";
+import { useSearchProductsQuery } from "../../api/productApi";
+import { useGetAllCategoriesQuery } from "../../api/categoryApi";
 
 const Navbar = () => {
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const navigate = useNavigate();
   const searchRef = useRef(null);
 
@@ -16,9 +17,11 @@ const Navbar = () => {
 
   const toggleSearchModal = () => {
     setIsSearchModalOpen(!isSearchModalOpen);
-    if (isSearchModalOpen) {
-      setSearchQuery("");
-    }
+    if (isSearchModalOpen) setSearchQuery("");
+  };
+
+  const toggleMobileMenu = () => {
+    setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
   const handleSearchChange = (e) => {
@@ -28,6 +31,7 @@ const Navbar = () => {
   const handleResultClick = (type, id, name) => {
     setIsSearchModalOpen(false);
     setSearchQuery("");
+    setIsMobileMenuOpen(false);
     if (type === "product") {
       navigate(`/store/product/${id}`);
     } else if (type === "category") {
@@ -56,21 +60,35 @@ const Navbar = () => {
   return (
     <div className="navbar-wrapper">
       <nav className="navbar-container">
-        <ul className="navbar-links-list">
+        <ul
+          className={`navbar-links-list ${
+            isMobileMenuOpen ? "mobile-active" : ""
+          }`}
+        >
           <li className="navbar-links">
-            <Link to="/">Home</Link>
+            <Link to="/" onClick={() => setIsMobileMenuOpen(false)}>
+              Home
+            </Link>
           </li>
           <li className="navbar-links">
-            <Link to="/about">About</Link>
+            <Link to="/about" onClick={() => setIsMobileMenuOpen(false)}>
+              About
+            </Link>
           </li>
           <li className="navbar-links">
-            <Link to="/product">Product</Link>
+            <Link to="/product" onClick={() => setIsMobileMenuOpen(false)}>
+              Product
+            </Link>
           </li>
           <li className="navbar-links">
-            <Link to="/project">Project</Link>
+            <Link to="/project" onClick={() => setIsMobileMenuOpen(false)}>
+              Project
+            </Link>
           </li>
           <li className="navbar-links">
-            <Link to="/contact">Contact</Link>
+            <Link to="/contact" onClick={() => setIsMobileMenuOpen(false)}>
+              Contact
+            </Link>
           </li>
         </ul>
         <div className="navbar-search-container">
@@ -78,6 +96,11 @@ const Navbar = () => {
             className="navbar-search"
             aria-label="Open search modal"
             onClick={toggleSearchModal}
+          />
+          <FaBars
+            className="navbar-menu-toggle"
+            aria-label="Toggle mobile menu"
+            onClick={toggleMobileMenu}
           />
         </div>
       </nav>

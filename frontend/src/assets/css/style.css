@@ -1118,7 +1118,6 @@
   }
 }
 
-/* Navbar */
 .navbar-wrapper {
   position: relative;
   width: 100%;
@@ -1130,25 +1129,37 @@
   justify-content: space-between;
   width: 100%;
   max-width: 1200px;
-  height: 70px; /* Increased height for better visibility */
+  height: 70px;
   margin: 0 auto;
   padding: 0 20px;
   background: var(--bg-primary, #fff);
   z-index: 100;
   box-sizing: border-box;
 }
+
+.navbar-logo {
+  font-size: 24px;
+  font-weight: bold;
+  color: var(--text-primary, #333);
+}
+
+.navbar-logo a {
+  text-decoration: none;
+  color: inherit;
+}
+
 .navbar-links-list {
   display: flex;
   align-items: center;
   list-style: none;
-  margin: 0;
+  margin: 205px;
   padding: 0;
-  gap: 20px;
+  gap: 5rem;
 }
 
 .navbar-links {
-  font: var(--font-weight-regular) var(--font-size-lg) / var(--line-height-base)
-    var(--font-family);
+  font: var(--font-weight-regular, 400) var(--font-size-lg, 16px) /
+    var(--line-height-base, 1.5) var(--font-family, sans-serif);
   color: var(--text-primary, #333);
   text-transform: uppercase;
   cursor: pointer;
@@ -1165,26 +1176,30 @@
 .navbar-links a:hover,
 .navbar-links:active,
 .navbar-links a:active {
-  color: var(
-    --primary-color,
-    #c90101
-  ); /* Ensure primary color is #c90101 as per your root */
+  color: var(--primary-color, #c90101);
 }
+
 .navbar-search-container {
   display: flex;
   align-items: center;
   gap: var(--spacing-sm, 10px);
 }
 
-.navbar-search {
+.navbar-search,
+.navbar-menu-toggle {
   font-size: var(--font-size-lg, 20px);
   color: var(--text-primary, #333);
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
-.navbar-search:hover {
-  color: var(--primary-color, #e63946);
+.navbar-search:hover,
+.navbar-menu-toggle:hover {
+  color: var(--primary-color, #c90101);
+}
+
+.navbar-menu-toggle {
+  display: none; /* Hidden by default on desktop */
 }
 
 /* Search Modal */
@@ -1226,11 +1241,11 @@
   width: 100%;
   padding: 10px;
   font-size: 16px;
-  border: none; /* Remove the border */
-  border-bottom: 1px solid #ccc; /* Optional: Add a bottom line for styling */
-  border-radius: 0; /* Remove border radius */
+  border: none;
+  border-bottom: 1px solid #ccc;
+  border-radius: 0;
   outline: none;
-  background: transparent; /* Ensure no background interference */
+  background: transparent;
 }
 
 .search-results {
@@ -1264,25 +1279,11 @@
     display: none; /* Hide links on mobile by default */
   }
 
-  .navbar-container {
-    height: 60px;
-    padding: 0 15px;
-  }
-
-  /* Mobile Menu Toggle (Add a hamburger icon) */
-  .navbar-menu-toggle {
-    display: block;
-    font-size: 24px;
-    cursor: pointer;
-    color: var(--text-primary, #333);
-  }
-
-  /* Show links in a dropdown or slide-in menu */
   .navbar-links-list.mobile-active {
     display: flex;
     flex-direction: column;
     position: absolute;
-    top: 60px;
+    top: 70px;
     left: 0;
     width: 100%;
     background: var(--bg-primary, #fff);
@@ -1293,24 +1294,46 @@
 
   .navbar-links {
     margin: 10px 0;
+    font-size: 18px;
+  }
+
+  .navbar-container {
+    height: 60px;
+    padding: 0 15px;
+  }
+
+  .navbar-menu-toggle {
+    display: block; /* Show hamburger icon on mobile */
   }
 
   .navbar-search-container {
     margin-left: auto;
   }
-}
 
-/* Add this to your global CSS or component to handle the toggle */
-.navbar-menu-toggle {
-  display: none; /* Hidden by default on desktop */
-}
-
-@media (max-width: 768px) {
-  .navbar-menu-toggle {
-    display: block;
+  .search-modal-content {
+    width: 95%;
+    max-width: 400px;
   }
 }
-/* Logo */
+
+@media (max-width: 480px) {
+  .navbar-logo {
+    font-size: 20px;
+  }
+
+  .navbar-search,
+  .navbar-menu-toggle {
+    font-size: 18px;
+  }
+
+  .search-modal-content {
+    padding: 15px;
+  }
+
+  .search-modal-input {
+    font-size: 14px;
+  }
+}
 .logo {
   display: block;
   width: 100%;
@@ -1319,43 +1342,55 @@
   margin: var(--spacing-xl) auto 0;
   object-fit: contain;
 }
+
 .footer-container {
   background-color: #c40000;
   color: #fff;
   padding: 3rem 1.5rem 2rem;
-  font-family: var(--font-family);
+  font-family: var(--font-family, sans-serif);
 }
 
 .footer-inner {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: flex-start;
-  max-width: 1300px;
+  max-width: 1200px;
   margin: 0 auto;
   flex-wrap: wrap;
-  gap: 2rem; /* Reduced gap for better spacing on smaller screens */
+  gap: 2rem;
 }
 
-/* Logo & Copyright */
 .footer-logo {
   flex: 1;
-  min-width: 160px; /* Slightly reduced for smaller screens */
+  min-width: 150px;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
 }
 
 .footer-logo img {
-  max-width: 140px; /* Slightly smaller logo for responsiveness */
+  max-width: 150px;
   height: auto;
 }
 
-.footer-logo p {
-  margin-top: 0.5rem;
-  font-size: 0.85rem;
+.footer-nav,
+.footer-categories,
+.footer-contact {
+  flex: 1;
+  min-width: 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-/* Nav & Categories */
+.footer-nav h4,
+.footer-categories h4,
+.footer-contact h4 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
 .footer-nav ul,
 .footer-categories ul {
   list-style: none;
@@ -1377,30 +1412,17 @@
   color: #f0f0f0;
 }
 
-/* Contact */
-.footer-contact {
-  flex: 1;
-  min-width: 160px; /* Adjusted for smaller screens */
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.footer-contact strong {
-  font-weight: 600;
-  font-size: 1rem;
-  margin-bottom: 0.5rem;
-}
-
 .footer-contact p {
   font-size: 0.85rem;
   line-height: 1.5;
+  text-align: center;
 }
 
 .footer-socials {
   display: flex;
   gap: 1rem;
   margin-top: 0.75rem;
+  justify-content: center;
 }
 
 .footer-socials a {
@@ -1422,32 +1444,38 @@
 /* Responsive Design */
 @media (max-width: 1024px) {
   .footer-inner {
-    gap: 1.5rem; /* Slightly reduced gap for medium screens */
+    gap: 1.5rem;
   }
 
   .footer-logo img {
-    max-width: 120px; /* Smaller logo for tablets */
+    max-width: 130px;
+  }
+
+  .footer-nav h4,
+  .footer-categories h4,
+  .footer-contact h4 {
+    font-size: 1rem;
   }
 
   .footer-nav ul,
   .footer-categories ul,
   .footer-contact p {
-    font-size: 0.85rem; /* Slightly smaller text */
+    font-size: 0.85rem;
   }
 
   .footer-socials a {
-    font-size: 1.1rem; /* Adjust social icons size */
+    font-size: 1.1rem;
   }
 }
 
 @media (max-width: 768px) {
   .footer-container {
-    padding: 2rem 1rem; /* Reduced padding for smaller screens */
+    padding: 2rem 1rem;
   }
 
   .footer-inner {
     flex-direction: column;
-    align-items: center; /* Center align for better mobile layout */
+    align-items: center;
     gap: 2rem;
   }
 
@@ -1455,50 +1483,51 @@
   .footer-nav,
   .footer-categories,
   .footer-contact {
-    align-items: center; /* Center align content */
-    text-align: center; /* Center text for better readability */
-    min-width: unset; /* Remove min-width for flexibility */
+    width: 100%;
+    text-align: center;
   }
 
   .footer-logo img {
-    max-width: 100px; /* Smaller logo for mobile */
+    max-width: 120px;
   }
 
   .footer-nav ul,
   .footer-categories ul {
-    gap: 0.75rem; /* Increased gap for better spacing */
-  }
-
-  .footer-contact p {
-    line-height: 1.6; /* Improved readability */
+    gap: 0.75rem;
   }
 
   .footer-socials {
-    justify-content: center; /* Center social icons */
+    justify-content: center;
   }
 }
 
 @media (max-width: 480px) {
   .footer-container {
-    padding: 1.5rem 0.75rem; /* Further reduced padding */
+    padding: 1.5rem 0.75rem;
   }
 
   .footer-logo img {
-    max-width: 90px; /* Even smaller logo for very small screens */
+    max-width: 100px;
+  }
+
+  .footer-nav h4,
+  .footer-categories h4,
+  .footer-contact h4 {
+    font-size: 0.9rem;
   }
 
   .footer-nav ul,
   .footer-categories ul,
   .footer-contact p {
-    font-size: 0.8rem; /* Smaller font for mobile */
+    font-size: 0.8rem;
   }
 
   .footer-socials a {
-    font-size: 1rem; /* Smaller social icons */
+    font-size: 1rem;
   }
 
   .footer-copyright {
-    font-size: 0.75rem; /* Smaller copyright text */
+    font-size: 0.75rem;
   }
 }
 /* Contact Page */
@@ -3304,7 +3333,7 @@
   /* Footer */
   .footer-inner {
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
     align-items: flex-start;
   }
 

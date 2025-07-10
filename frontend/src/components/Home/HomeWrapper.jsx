@@ -275,9 +275,6 @@ const HomeWrapper = () => {
             <p>No projects available.</p>
           )}
         </div>
-        <Link to="/project" className="view-all-button">
-          View All
-        </Link>
       </section>
       <section className="home-showroom-video">
         <h2 className="section-title">

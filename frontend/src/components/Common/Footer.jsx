@@ -16,6 +16,7 @@ const Footer = () => {
 
         {/* Column 2: Navigation */}
         <div className="footer-nav">
+          <h4>About Us</h4>
           <ul>
             <li>
               <Link to="/about">About</Link>
@@ -34,6 +35,7 @@ const Footer = () => {
 
         {/* Column 3: Categories */}
         <div className="footer-categories">
+          <h4>Categories</h4>
           <ul>
             <li>Surfaces</li>
             <li>CP Fittings</li>
@@ -44,7 +46,7 @@ const Footer = () => {
 
         {/* Column 4: Contact Info */}
         <div className="footer-contact">
-          <strong>Contact Information</strong>
+          <h4>Contact Information</h4>
           <p>
             487/65, National Market, Peeragarhi,
             <br />
@@ -78,9 +80,7 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <p className="footer-copyright" style={{ justifyContent: "center" }}>
-        © {year} All Rights Reserved.
-      </p>
+      <p className="footer-copyright">© {year} All Rights Reserved.</p>
     </footer>
   );
 };
