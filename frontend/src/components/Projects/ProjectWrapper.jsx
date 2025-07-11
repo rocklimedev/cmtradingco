@@ -17,15 +17,13 @@ const projectImages = {
     ],
   },
   2: {
-    master: require("../../assets/img/projects/1/Background.jpg"), // Corrected path
+    master: require("../../assets/img/projects/2/IMG_5720.JPG"), // Corrected path
     additional: [
-      require("../../assets/img/projects/1/DSC_7168.jpg"), // Corrected path
-      require("../../assets/img/projects/1/DSC_7185.jpg"),
-      require("../../assets/img/projects/1/DSC_7188.jpg"),
-      require("../../assets/img/projects/1/DSC_7201.jpg"),
-      require("../../assets/img/projects/1/DSC_7223.jpg"),
-      require("../../assets/img/projects/1/DSC_7240.jpg"),
-      require("../../assets/img/projects/1/DSC_7257.jpg"),
+      require("../../assets/img/projects/2/IMG_5736.JPG"),
+      require("../../assets/img/projects/2/IMG_5738.JPG"),
+      require("../../assets/img/projects/2/IMG_5744.JPG"),
+      require("../../assets/img/projects/2/IMG_5746.JPG"),
+      require("../../assets/img/projects/2/IMG_5770.JPG"),
     ],
   },
   3: {

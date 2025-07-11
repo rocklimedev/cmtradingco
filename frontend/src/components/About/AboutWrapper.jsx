@@ -51,6 +51,24 @@ const AboutWrapper = () => {
         on time and are in their best shape.
       </p>
       <section className="about-page-section">
+        <div className="about-page-box-section reverse">
+          <div className="about-page-box-image-container">
+            <img
+              src={mission}
+              alt="Mission Image"
+              className="about-page-box-image"
+            />
+          </div>
+          <div className="about-page-box-text">
+            <h3 className="about-page-title">Mission</h3>
+            <p className="about-page-description">
+              To deliver top-quality materials with exceptional service,
+              fostering lasting relationships with our customers through
+              competitive pricing, timely delivery, and a commitment to
+              excellence.
+            </p>
+          </div>
+        </div>
         <div className="about-page-box-section">
           <div className="about-page-box-image-container">
             <img
@@ -69,25 +87,6 @@ const AboutWrapper = () => {
               customers. We believe in transparency and trustworthy hence we
               strive to uphold the good will and reputation we have created over
               the years of hard work.
-            </p>
-          </div>
-        </div>
-
-        <div className="about-page-box-section reverse">
-          <div className="about-page-box-image-container">
-            <img
-              src={mission}
-              alt="Mission Image"
-              className="about-page-box-image"
-            />
-          </div>
-          <div className="about-page-box-text">
-            <h3 className="about-page-title">Mission</h3>
-            <p className="about-page-description">
-              To deliver top-quality materials with exceptional service,
-              fostering lasting relationships with our customers through
-              competitive pricing, timely delivery, and a commitment to
-              excellence.
             </p>
           </div>
         </div>

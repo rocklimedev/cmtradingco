@@ -140,11 +140,12 @@
 }
 
 .project-content {
-  flex: 1;
-  max-width: 600px;
-  font-size: var(--font-size-base);
+  max-width: 1281px;
+  margin: 0 auto var(--spacing-3xl);
+  font: var(--font-weight-regular) var(--font-size-lg) / var(--line-height-base)
+    var(--font-family);
   color: var(--text-secondary);
-  text-align: justify;
+  text-align: center;
 }
 
 /* Brands and Catalogues Section */
