@@ -74,127 +74,123 @@ const ContactWrapper = () => {
             title="Chhabra Marble Location"
             className="contact-map"
           ></iframe>
-          <div className="contact-infos">
-            <h3 className="contact-info-title">Contact Information</h3>
-            <p className="contact-info-subtitle">
-              Any questions or remarks? Just write us a message!
-            </p>
-            <div className="contact-item">
-              <div className="contact-icon">
-                <MdOutlinePhoneInTalk />
+          <form className="contact-form" onSubmit={handleSubmit}>
+            <div className="contact-form-container">
+              <div className="form-group">
+                <label htmlFor="firstName">First Name</label>
+                <input
+                  type="text"
+                  id="firstName"
+                  className="form-content"
+                  placeholder="First Name"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  aria-label="First Name"
+                />
+                {errors.firstName && (
+                  <span className="form-error">{errors.firstName}</span>
+                )}
               </div>
-              <a href="tel:+919999500699" className="contact-content">
-                +91 9999500699
-              </a>
-            </div>
-            <div className="contact-item">
-              <div className="contact-icon">
-                <IoMdMail />
+              <div className="form-group">
+                <label htmlFor="lastName">Last Name</label>
+                <input
+                  type="text"
+                  id="lastName"
+                  className="form-content"
+                  placeholder="Last Name"
+                  value={formData.lastName}
+                  onChange={handleChange}
+                  aria-label="Last Name"
+                />
               </div>
-              <a
-                href="mailto:info@chhabramarble.com"
-                className="contact-content"
+              <div className="form-group">
+                <label htmlFor="email">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  className="form-content"
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  aria-label="Email Address"
+                />
+                {errors.email && (
+                  <span className="form-error">{errors.email}</span>
+                )}
+              </div>
+              <div className="form-group">
+                <label htmlFor="phone">Phone Number</label>
+                <input
+                  type="tel"
+                  id="phone"
+                  className="form-content"
+                  placeholder="Phone Number"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  aria-label="Phone Number"
+                />
+              </div>
+              <div className="form-group form-group-full">
+                <label htmlFor="message">Message</label>
+                <textarea
+                  id="message"
+                  className="form-content"
+                  placeholder="Message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  aria-label="Message"
+                />
+                {errors.message && (
+                  <span className="form-error">{errors.message}</span>
+                )}
+              </div>
+              <button
+                type="submit"
+                className="contact-form-button"
+                disabled={submitted}
               >
-                info@chhabramarble.com
-              </a>
+                {submitted ? "Submitted!" : "Send Message"}
+              </button>
             </div>
-            <div className="contact-item">
-              <div className="contact-icon">
-                <FaMapMarkerAlt />
-              </div>
-              <div className="contact-content">
-                487/65, National Market, Peeragarhi, Delhi, 110087
-              </div>
+          </form>
+        </div>
+        <div className="contact-infos">
+          <h3 className="contact-info-title">Contact Information</h3>
+          <p className="contact-info-subtitle">
+            Any questions or remarks? Just write us a message!
+          </p>
+          <div className="contact-item">
+            <div className="contact-icon">
+              <MdOutlinePhoneInTalk />
             </div>
-            <a
-              href="https://maps.google.com/?q=487/65,+National+Market,+Peeragarhi,+Delhi,+110087"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <button className="contact-button">Find Us</button>
+            <a href="tel:+919999500699" className="contact-content">
+              +91 9999500699
             </a>
           </div>
-        </div>
-
-        <form className="contact-form" onSubmit={handleSubmit}>
-          <div className="contact-form-container">
-            <div className="form-group">
-              <label htmlFor="firstName">First Name</label>
-              <input
-                type="text"
-                id="firstName"
-                className="form-content"
-                placeholder="First Name"
-                value={formData.firstName}
-                onChange={handleChange}
-                aria-label="First Name"
-              />
-              {errors.firstName && (
-                <span className="form-error">{errors.firstName}</span>
-              )}
+          <div className="contact-item">
+            <div className="contact-icon">
+              <IoMdMail />
             </div>
-            <div className="form-group">
-              <label htmlFor="lastName">Last Name</label>
-              <input
-                type="text"
-                id="lastName"
-                className="form-content"
-                placeholder="Last Name"
-                value={formData.lastName}
-                onChange={handleChange}
-                aria-label="Last Name"
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                className="form-content"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-                aria-label="Email Address"
-              />
-              {errors.email && (
-                <span className="form-error">{errors.email}</span>
-              )}
-            </div>
-            <div className="form-group">
-              <label htmlFor="phone">Phone Number</label>
-              <input
-                type="tel"
-                id="phone"
-                className="form-content"
-                placeholder="Phone Number"
-                value={formData.phone}
-                onChange={handleChange}
-                aria-label="Phone Number"
-              />
-            </div>
-            <div className="form-group form-group-full">
-              <label htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                className="form-content"
-                placeholder="Message"
-                value={formData.message}
-                onChange={handleChange}
-                aria-label="Message"
-              />
-              {errors.message && (
-                <span className="form-error">{errors.message}</span>
-              )}
-            </div>
-            <button
-              type="submit"
-              className="contact-form-button"
-              disabled={submitted}
-            >
-              {submitted ? "Submitted!" : "Send Message"}
-            </button>
+            <a href="mailto:info@chhabramarble.com" className="contact-content">
+              info@chhabramarble.com
+            </a>
           </div>
-        </form>
+          <div className="contact-item">
+            <div className="contact-icon">
+              <FaMapMarkerAlt />
+            </div>
+            <div className="contact-content">
+              487/65, National Market, Peeragarhi, Delhi, 110087
+            </div>
+          </div>
+          <a
+            href="https://maps.google.com/?q=487/65,+National+Market,+Peeragarhi,+Delhi,+110087"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <button className="contact-button">Find Us</button>
+          </a>
+        </div>
       </div>
     </div>
   );
