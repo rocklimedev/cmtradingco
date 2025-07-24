@@ -1148,7 +1148,7 @@ height: 85vh;
   list-style: none;
   margin: 0;
   padding: 0;
-  gap: 5rem;
+    gap: 11rem;
 }
 
 .navbar-links {
@@ -1422,7 +1422,6 @@ height: 85vh;
 
 .footer-copyright {
   text-align: center;
-  margin-top: 2rem;
   font-size: 0.85rem;
 }
 
@@ -3264,8 +3263,8 @@ height: 85vh;
 
   /* About Page */
   .about-wrapper img {
-    height: 60vh;
-    min-height: 400px;
+        height: 2vh;
+        min-height: 79px;
   }
 
   .about-page-title {

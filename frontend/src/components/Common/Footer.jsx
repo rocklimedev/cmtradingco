@@ -45,7 +45,7 @@ const Footer = () => {
         </div>
 
         {/* Column 4: Contact Info */}
-        <div className="footer-contact">
+        <div className="footer-categories">
           <h4>Contact Information</h4>
           <p>
             487/65, National Market, Peeragarhi,
