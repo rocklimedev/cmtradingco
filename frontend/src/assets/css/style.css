@@ -403,7 +403,6 @@ height: 85vh;
     max-height: 300px;
   }
 }
-
 /* Brands We Offer Section */
 .brands-we-offer {
   width: 100%;
@@ -416,16 +415,29 @@ height: 85vh;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  position: relative; /* For positioning arrows */
 }
 
 .brands-grid {
   display: flex;
-  justify-content: center;
   gap: var(--spacing-lg);
   max-width: 1841px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  padding: var(--spacing-lg) 0;
+}
+
+/* Optional: Hide scrollbar in webkit */
+.brands-grid::-webkit-scrollbar {
+  display: none;
+}
+.brands-grid {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .box-section {
+  flex: 0 0 auto;
   width: 350px;
   max-width: 300px;
   height: 280px;
@@ -442,6 +454,35 @@ height: 85vh;
   height: auto;
   max-height: 92px;
   object-fit: contain;
+}
+
+/* Arrow Controls */
+.slider-controls {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  transform: translateY(-50%);
+  pointer-events: none; /* Allow clicks through if needed */
+}
+
+.arrow {
+  pointer-events: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+  color: white;
+  border: none;
+  padding: 0.8rem;
+  font-size: 1.5rem;
+  cursor: pointer;
+  z-index: 10;
+  border-radius: 50%;
+  transition: background 0.3s;
+}
+
+.arrow:hover {
+  background-color: rgba(255, 255, 255, 0.3);
 }
 
 /* Home Projects Section */
@@ -672,7 +713,7 @@ height: 85vh;
   max-width: 180px; /* Slightly smaller button */
   margin-top: 16px;
   align-self: flex-start;
-  background: #e63946;
+  background: #c40000;
   color: white;
   padding: 12px 20px; /* Slightly reduced padding */
   font-weight: 600;
@@ -1008,11 +1049,12 @@ height: 85vh;
 
 .project-gallery {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 20px; /* Replace --spacing-lg */
+  grid-template-columns: repeat(4, 1fr); /* Force exactly 4 per row */
+  gap: 20px;
   max-width: 1634px;
-  margin: 0 auto 40px; /* Replace --spacing-3xl */
+  margin: 0 auto 40px;
 }
+
 
 .project-image-container {
   position: relative;
@@ -1033,6 +1075,27 @@ height: 85vh;
 
 .project-image-container:hover .project-image {
   transform: scale(1.05);
+}
+.arrow-overlay {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background-color: rgba(196, 0, 0, 0.9); /* Chhabra red with slight opacity */
+  color: white;
+  font-size: 24px;
+  font-weight: bold;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.arrow-overlay:hover {
+  background-color: #a70101;
 }
 
 /* Lightbox Styling */
@@ -1109,6 +1172,23 @@ height: 85vh;
     width: 25px;
     height: 25px;
     font-size: 16px;
+  }
+}
+@media (max-width: 1200px) {
+  .project-gallery {
+    grid-template-columns: repeat(3, 1fr); /* Tablet landscape */
+  }
+}
+
+@media (max-width: 900px) {
+  .project-gallery {
+    grid-template-columns: repeat(2, 1fr); /* Tablet portrait / small screens */
+  }
+}
+
+@media (max-width: 600px) {
+  .project-gallery {
+    grid-template-columns: 1fr; /* Mobile */
   }
 }
 

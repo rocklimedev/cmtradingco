@@ -11,42 +11,43 @@ import { IoMdMail } from "react-icons/io";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import slider from "../../assets/img/home_page_slider.png";
 import brands from "../../assets/data/brands"; // Import the JSON file
+import BrandsWeOffer from "./BrandsWeOffer";
 
 const projectImages = {
   1: {
-    master: require("../../assets/img/projects/1/Background.jpg"),
+    master: require("../../assets/img/projects_data/1/Background.jpg"),
     additional: [
-      require("../../assets/img/projects/1/DSC_7168.jpg"),
-      require("../../assets/img/projects/1/DSC_7185.jpg"),
-      require("../../assets/img/projects/1/DSC_7188.jpg"),
-      require("../../assets/img/projects/1/DSC_7201.jpg"),
-      require("../../assets/img/projects/1/DSC_7223.jpg"),
-      require("../../assets/img/projects/1/DSC_7240.jpg"),
-      require("../../assets/img/projects/1/DSC_7257.jpg"),
+      require("../../assets/img/projects_data/1/DSC_7168.jpg"),
+      require("../../assets/img/projects_data/1/DSC_7185.jpg"),
+      require("../../assets/img/projects_data/1/DSC_7188.jpg"),
+      require("../../assets/img/projects_data/1/DSC_7201.jpg"),
+      require("../../assets/img/projects_data/1/DSC_7223.jpg"),
+      require("../../assets/img/projects_data/1/DSC_7240.jpg"),
+      require("../../assets/img/projects_data/1/DSC_7257.jpg"),
     ],
   },
   2: {
-    master: require("../../assets/img/projects/1/Background.jpg"), // Corrected path
+    master: require("../../assets/img/projects_data/1/Background.jpg"), // Corrected path
     additional: [
-      require("../../assets/img/projects/1/DSC_7168.jpg"), // Corrected path
-      require("../../assets/img/projects/1/DSC_7185.jpg"),
-      require("../../assets/img/projects/1/DSC_7188.jpg"),
-      require("../../assets/img/projects/1/DSC_7201.jpg"),
-      require("../../assets/img/projects/1/DSC_7223.jpg"),
-      require("../../assets/img/projects/1/DSC_7240.jpg"),
-      require("../../assets/img/projects/1/DSC_7257.jpg"),
+      require("../../assets/img/projects_data/1/DSC_7168.jpg"), // Corrected path
+      require("../../assets/img/projects_data/1/DSC_7185.jpg"),
+      require("../../assets/img/projects_data/1/DSC_7188.jpg"),
+      require("../../assets/img/projects_data/1/DSC_7201.jpg"),
+      require("../../assets/img/projects_data/1/DSC_7223.jpg"),
+      require("../../assets/img/projects_data/1/DSC_7240.jpg"),
+      require("../../assets/img/projects_data/1/DSC_7257.jpg"),
     ],
   },
   3: {
-    master: require("../../assets/img/projects/1/Background.jpg"), // Corrected path
+    master: require("../../assets/img/projects_data/1/Background.jpg"), // Corrected path
     additional: [
-      require("../../assets/img/projects/1/DSC_7168.jpg"), // Corrected path
-      require("../../assets/img/projects/1/DSC_7185.jpg"),
-      require("../../assets/img/projects/1/DSC_7188.jpg"),
-      require("../../assets/img/projects/1/DSC_7201.jpg"),
-      require("../../assets/img/projects/1/DSC_7223.jpg"),
-      require("../../assets/img/projects/1/DSC_7240.jpg"),
-      require("../../assets/img/projects/1/DSC_7257.jpg"),
+      require("../../assets/img/projects_data/1/DSC_7168.jpg"), // Corrected path
+      require("../../assets/img/projects_data/1/DSC_7185.jpg"),
+      require("../../assets/img/projects_data/1/DSC_7188.jpg"),
+      require("../../assets/img/projects_data/1/DSC_7201.jpg"),
+      require("../../assets/img/projects_data/1/DSC_7223.jpg"),
+      require("../../assets/img/projects_data/1/DSC_7240.jpg"),
+      require("../../assets/img/projects_data/1/DSC_7257.jpg"),
     ],
   },
 };
@@ -223,29 +224,7 @@ const HomeWrapper = () => {
           </div>
         </div>
       </section>
-
-      <section className="brands-we-offer">
-        <h2 className="section-title" style={{ color: "white" }}>
-          Brands We Offer
-          <span className="line" style={{ backgroundColor: "white" }} />
-        </h2>
-        <div className="brands-grid">
-          {brands.map((brand, index) => (
-            <div className="box-section" key={index}>
-              <div
-                onClick={() => navigate(brand.link, { state: { brand } })}
-                style={{ cursor: "pointer" }}
-              >
-                <img
-                  src={brand.logoSrc}
-                  alt={brand.name}
-                  className="company-logo"
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+      <BrandsWeOffer brands={brands} />
 
       <section className="home-projects-section">
         <h2 className="section-title">

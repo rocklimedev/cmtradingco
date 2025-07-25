@@ -2,55 +2,46 @@ import React, { useState } from "react";
 import project_title from "../../assets/img/projects/projects_title.png";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
 
-// Import images explicitly (adjust paths based on your folder structure)
-const projectImages = {
-  1: {
-    master: require("../../assets/img/projects/1/Background.jpg"),
-    additional: [
-      require("../../assets/img/projects/1/DSC_7168.jpg"),
-      require("../../assets/img/projects/1/DSC_7185.jpg"),
-      require("../../assets/img/projects/1/DSC_7188.jpg"),
-      require("../../assets/img/projects/1/DSC_7201.jpg"),
-      require("../../assets/img/projects/1/DSC_7223.jpg"),
-      require("../../assets/img/projects/1/DSC_7240.jpg"),
-      require("../../assets/img/projects/1/DSC_7257.jpg"),
-    ],
-  },
-  2: {
-    master: require("../../assets/img/projects/2/IMG_5720.JPG"), // Corrected path
-    additional: [
-      require("../../assets/img/projects/2/IMG_5736.JPG"),
-      require("../../assets/img/projects/2/IMG_5738.JPG"),
-      require("../../assets/img/projects/2/IMG_5744.JPG"),
-      require("../../assets/img/projects/2/IMG_5746.JPG"),
-      require("../../assets/img/projects/2/IMG_5770.JPG"),
-    ],
-  },
-  3: {
-    master: require("../../assets/img/projects/1/Background.jpg"), // Corrected path
-    additional: [
-      require("../../assets/img/projects/1/DSC_7168.jpg"), // Corrected path
-      require("../../assets/img/projects/1/DSC_7185.jpg"),
-      require("../../assets/img/projects/1/DSC_7188.jpg"),
-      require("../../assets/img/projects/1/DSC_7201.jpg"),
-      require("../../assets/img/projects/1/DSC_7223.jpg"),
-      require("../../assets/img/projects/1/DSC_7240.jpg"),
-      require("../../assets/img/projects/1/DSC_7257.jpg"),
-    ],
-  },
-};
+// Dynamically require all images in the projects folder and its subfolders
+const imagesContext = require.context(
+  "../../assets/img/projects_data/",
+  true,
+  /\.(jpe?g|png)$/i
+);
+
+// Group images by folder
+const projectImages = {};
+
+imagesContext.keys().forEach((key) => {
+  const filePath = key.replace("./", ""); // remove leading './'
+  const [folder, filename] = filePath.split("/");
+
+  if (!projectImages[folder]) {
+    projectImages[folder] = {
+      master: null,
+      additional: [],
+    };
+  }
+
+  const image = imagesContext(key);
+
+  if (/background/i.test(filename) || /img_5720/i.test(filename)) {
+    projectImages[folder].master = image;
+  } else {
+    projectImages[folder].additional.push(image);
+  }
+});
 
 const ProjectWrapper = () => {
   const [showAll, setShowAll] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
 
-  const projectFolders = [1, 2, 3];
-  const projects = projectFolders.map((folder) => ({
+  const projects = Object.entries(projectImages).map(([folder, images]) => ({
     id: folder,
-    masterImg: projectImages[folder]?.master || comingsoon,
-    additionalImgs: projectImages[folder]?.additional || [],
+    masterImg: images.master || comingsoon,
+    additionalImgs: images.additional || [],
     alt: `Project ${folder} - Master Image`,
-    caption: `Description for Project ${folder}`, // Added caption for HomeWrapper
+    caption: `Description for Project ${folder}`,
   }));
 
   const toggleShowAll = (projectId) => {
@@ -84,6 +75,7 @@ const ProjectWrapper = () => {
           to every project.
         </p>
       </div>
+
       <div className="project-gallery">
         {projects.map((project) => (
           <div key={project.id} className="project-image-container">
@@ -95,16 +87,17 @@ const ProjectWrapper = () => {
                 e.target.src = comingsoon;
               }}
             />
-            <button
-              className="view-all-button"
+            <div
+              className="arrow-overlay"
               onClick={() => toggleShowAll(project.id)}
               aria-label={`View all images for project ${project.id}`}
             >
-              View All
-            </button>
+              →
+            </div>
           </div>
         ))}
       </div>
+
       {showAll && currentProject && (
         <div className="all-projects-view" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>

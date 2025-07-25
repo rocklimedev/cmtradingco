@@ -22,6 +22,7 @@ import am4 from "../pdf/American Standard/EasySET-Brochure_LR.pdf";
 import am6 from "../pdf/American Standard/Signature-Collection-Brochure.pdf";
 import colston3 from "../pdf/Colston/wellness-catalogue-2024.pdf";
 import am5 from "../pdf/American Standard/G19183_City_Collection-Brochure_2018_Updated_Low-Res.pdf";
+import kantherm from "../img/brand_logos/kantherm-logo.png";
 const brands = [
   {
     name: "American Standard",
@@ -191,6 +192,15 @@ const brands = [
         url: colston3,
       },
     ],
+  },
+  {
+    name: "Kantherm",
+    link: "/product/brand/kanterm",
+    logoSrc: kantherm,
+    subtitle: "Luxury bathroom solutions",
+    content:
+      "Colston provides premium bathroom products, including ceramics, bathtubs, and wellness solutions, designed to enhance comfort and aesthetics. Their catalogues showcase innovative designs for modern bathrooms.",
+    pdfs: [],
   },
 ];
 
