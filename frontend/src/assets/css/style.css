@@ -3208,6 +3208,12 @@ height: 85vh;
     flex-wrap: wrap;
     gap: var(--spacing-md);
   }
+.brands-grid.scrollable {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: auto; /* override default smooth */
+  gap: 1rem; /* optional spacing */
+}
 
   .box-section {
     width: 280px;

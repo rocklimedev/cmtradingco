@@ -12,7 +12,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import slider from "../../assets/img/home_page_slider.png";
 import brands from "../../assets/data/brands"; // Import the JSON file
 import BrandsWeOffer from "./BrandsWeOffer";
-
+import loadProjectImages from "../utils/loadProjectImages";
 const projectImages = {
   1: {
     master: require("../../assets/img/projects_data/1/Background.jpg"),
@@ -56,14 +56,9 @@ const HomeWrapper = () => {
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
   const sliderRef = useRef(null);
+  const projects = loadProjectImages();
 
   const projectFolders = [1, 2, 3];
-  const projects = projectFolders.map((folder) => ({
-    id: folder,
-    imgSrc: projectImages[folder]?.master || comingsoon,
-    alt: `Project ${folder} - Master Image`,
-    caption: `Description for Project ${folder}`,
-  }));
 
   const slides = [
     {
@@ -239,7 +234,11 @@ const HomeWrapper = () => {
         <div className="projects-grid">
           {projects.length > 0 ? (
             projects.map((project) => (
-              <div key={project.id} className="image-section">
+              <div
+                key={project.id}
+                className="image-section"
+                style={{ position: "relative" }}
+              >
                 <img
                   src={project.imgSrc}
                   alt={project.alt}
@@ -247,7 +246,13 @@ const HomeWrapper = () => {
                     e.target.src = comingsoon;
                   }}
                 />
-                <p>{project.caption}</p>
+                <div
+                  className="arrow-overlay"
+                  onClick={() => navigate(`/projects/${project.id}`)}
+                  aria-label={`View project ${project.id}`}
+                >
+                  →
+                </div>
               </div>
             ))
           ) : (

@@ -97,56 +97,45 @@
 
 .products-section {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: var(--spacing-lg);
-  max-width: 1200px;
-  margin: 0 auto;
+  align-items: center;
+  gap: 2rem; /* adds spacing between image and text */
+  flex-wrap: wrap; /* allows stacking on smaller screens */
+  padding: 2rem 0;
 }
 
 .section-products {
-  flex: 1;
-  max-width: 350px;
-  position: relative;
+  flex: 1 1 45%;
+    max-width: 300px;
 }
 
 .section-products img {
   width: 100%;
-  max-height: 300px;
-  object-fit: cover;
-  border-radius: var(--border-radius);
-  box-shadow: var(--shadow-sm);
+  border-radius: 10px;
 }
 
 .section-details {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  padding: var(--spacing-sm);
-  background: var(--bg-accent);
-  color: var(--text-light);
-  text-align: center;
-  border-radius: 0 0 var(--border-radius) var(--border-radius);
+  background-color: #c8102e;
+  color: #fff;
+  padding: 1rem;
+  border-radius: 0 0 10px 10px;
 }
 
 .section-details span {
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-semibold);
-}
-
-.section-details p {
-  font-size: var(--font-size-sm);
-  margin-top: var(--spacing-xs);
+  display: block;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
 }
 
 .project-content {
-  max-width: 1281px;
-  margin: 0 auto var(--spacing-3xl);
-  font: var(--font-weight-regular) var(--font-size-lg) / var(--line-height-base)
-    var(--font-family);
-  color: var(--text-secondary);
-  text-align: center;
+  flex: 1 1 45%;
+  max-width: 600px;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: #333;
 }
+
 
 /* Brands and Catalogues Section */
 .brands-gallery {

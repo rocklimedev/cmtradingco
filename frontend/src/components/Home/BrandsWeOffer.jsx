@@ -7,13 +7,24 @@ export default function BrandsWeOffer({ brands }) {
   const scrollRef = useRef(null);
 
   const scroll = (direction) => {
+    const duration = 2000; // 2 seconds
     const scrollAmount = 300;
-    if (scrollRef.current) {
-      scrollRef.current.scrollBy({
-        left: direction === "left" ? -scrollAmount : scrollAmount,
-        behavior: "smooth",
-      });
-    }
+    const start = scrollRef.current.scrollLeft;
+    const end =
+      direction === "left" ? start - scrollAmount : start + scrollAmount;
+    const startTime = performance.now();
+
+    const animateScroll = (currentTime) => {
+      const elapsed = currentTime - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+      scrollRef.current.scrollLeft = start + (end - start) * progress;
+
+      if (progress < 1) {
+        requestAnimationFrame(animateScroll);
+      }
+    };
+
+    requestAnimationFrame(animateScroll);
   };
 
   return (
