@@ -80,7 +80,17 @@ const Footer = () => {
           </div>
         </div>
       </div>
-      <p className="footer-copyright">© {year} All Rights Reserved.</p>
+      <p className="footer-copyright">
+        © {year} All Rights Reserved. | Powered by{" "}
+        <a
+          href="https://www.rocklime.com/"
+          className="rocklime-link"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Rocklime
+        </a>
+      </p>
     </footer>
   );
 };
