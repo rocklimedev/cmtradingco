@@ -149,7 +149,9 @@ const HomeWrapper = () => {
       </div>
 
       <section className="home-about-section">
-        <h2 className="home-about-span">About</h2>
+        <h2 className="section-title">
+          About <span className="line" />
+        </h2>
         <p className="home-about-p">
           Chhabra Marble is built with the vision of providing a one-stop shop
           for all your tiles, granite, and marble needs. With over 30 years of
