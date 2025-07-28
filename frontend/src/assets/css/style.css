@@ -583,11 +583,36 @@ height: 85vh;
 .home-showroom-video {
   position: relative;
   width: 100%;
-  height: 100vh; /* Full viewport height */
+  height: 100vh;
   margin: 0 auto;
-  padding: 0; /* Remove padding so video can cover fully */
+  padding: 0;
   background: var(--bg-primary);
   overflow: hidden;
+}
+
+.home-showroom-video .section-title {
+  font: var(--font-weight-bold) var(--font-size-2xl) / var(--line-height-tight) var(--font-family);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  position: relative;
+  z-index: 2; /* This makes sure it's above the video */
+  color: black; /* Make sure it's readable over the video */
+  text-align: center;
+  padding-top: 40px; /* Optional: push it down from top */
+      top: -30px;
+    left: 893px;
+}
+
+.section-title .line {
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: #c40000;
+  margin: 8px auto 0;
+  z-index: 2;
+  position: relative;
+  
 }
 
 .home-showroom-video video {
@@ -598,39 +623,11 @@ height: 85vh;
   box-shadow: none;
   z-index: 1;
   position: absolute;
-  top: 0;
+top: 112px;
   left: 0;
 }
 
-/* On hover, slightly increase shadow */
-.home-showroom-video video:hover {
-  box-shadow: var(--shadow-md);
-}
 
-/* The overlay text */
-.home-showroom-video .section-title {
-  font: var(--font-weight-bold) var(--font-size-2xl) / var(--line-height-tight)
-    var(--font-family);
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-size: 2.5rem;
-  z-index: 2;
-  text-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-  pointer-events: none;
-}
-
-.home-showroom-video .line {
-  display: block;
-  height: 3px;
-  background: white;
-  margin-top: 10px;
-  width: 60px;
-  margin-left: auto;
-  margin-right: auto;
-}
 .home-contact-section {
   font: var(--font-weight-bold) var(--font-size-2xl) / var(--line-height-tight)
     var(--font-family);
@@ -1101,21 +1098,21 @@ height: 85vh;
   transform: scale(1.05);
 }
 .arrow-overlay {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
-  background-color: rgba(196, 0, 0, 0.9); /* Chhabra red with slight opacity */
-  color: white;
-  font-size: 24px;
-  font-weight: bold;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.3s ease;
+    position: absolute;
+    bottom: 24px;
+    right: 26px;
+    background-color: rgba(196, 0, 0, 0.9);
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.3s ease;
 }
 
 .arrow-overlay:hover {

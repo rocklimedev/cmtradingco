@@ -35,7 +35,9 @@ const AboutWrapper = () => {
         alt="About Page Banner"
         className="about-page-image"
       />
-      <h2 className="about-page-title">About</h2>
+      <h2 className="section-title" style={{ left: "881px", margin: "2rem" }}>
+        About <span className="line" />
+      </h2>
       <p className="about-content-p">
         Chhabra Marble is built with the vision of proving a one stop shop to
         its customers for all their tiles, granites and marble needs. Being in
@@ -92,7 +94,9 @@ const AboutWrapper = () => {
         </div>
       </section>
       <section className="about-why-us-section">
-        <h2 className="about-why-us-title">Why Us</h2>
+        <h2 className="section-title">
+          Why Us <span className="line" />
+        </h2>
         <div className="about-why-us-boxes">
           <div className="about-why-us-box">
             <img

@@ -5,7 +5,7 @@ import cp_fittings from "../../assets/img/home/CP FITTING.png";
 import surfaces from "../../assets/img/home/SIURFACE.png";
 import wellness from "../../assets/img/home/WELLNESS.png";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
-import video from "../../assets/img/video.m4v";
+
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { IoMdMail } from "react-icons/io";
 import { FaMapMarkerAlt } from "react-icons/fa";
@@ -13,6 +13,7 @@ import slider from "../../assets/img/home_page_slider.png";
 import brands from "../../assets/data/brands"; // Import the JSON file
 import BrandsWeOffer from "./BrandsWeOffer";
 import loadProjectImages from "../utils/loadProjectImages";
+const video = "https://static.cmtradingco.com/cm_video/video.m4v";
 const projectImages = {
   1: {
     master: require("../../assets/img/projects_data/1/Background.jpg"),
