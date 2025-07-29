@@ -92,79 +92,27 @@ const ContactWrapper = () => {
 
       {/* Form + Map Side by Side */}
       <div className="contact-details">
-        <form className="contact-form" onSubmit={handleSubmit}>
-          <div className="contact-form-container">
-            <div className="form-group">
-              <label htmlFor="firstName">First Name</label>
-              <input
-                type="text"
-                id="firstName"
-                className="form-content"
-                placeholder="First Name"
-                value={formData.firstName}
-                onChange={handleChange}
-              />
-              {errors.firstName && (
-                <span className="form-error">{errors.firstName}</span>
-              )}
-            </div>
-            <div className="form-group">
-              <label htmlFor="lastName">Last Name</label>
-              <input
-                type="text"
-                id="lastName"
-                className="form-content"
-                placeholder="Last Name"
-                value={formData.lastName}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                className="form-content"
-                placeholder="Email"
-                value={formData.email}
-                onChange={handleChange}
-              />
-              {errors.email && (
-                <span className="form-error">{errors.email}</span>
-              )}
-            </div>
-            <div className="form-group">
-              <label htmlFor="phone">Phone Number</label>
-              <input
-                type="tel"
-                id="phone"
-                className="form-content"
-                placeholder="Phone Number"
-                value={formData.phone}
-                onChange={handleChange}
-              />
-            </div>
-            <div className="form-group form-group-full">
-              <label htmlFor="message">Message</label>
-              <textarea
-                id="message"
-                className="form-content"
-                placeholder="Message"
-                value={formData.message}
-                onChange={handleChange}
-              />
-              {errors.message && (
-                <span className="form-error">{errors.message}</span>
-              )}
-            </div>
-            <button
-              type="submit"
-              className="contact-form-button"
-              disabled={submitted}
-            >
-              {submitted ? "Submitted!" : "Send Message"}
-            </button>
+        <form className="contact-form-content" onSubmit={handleSubmit}>
+          <div className="form-row">
+            <input
+              type="text"
+              name="firstName"
+              placeholder="First Name"
+              required
+            />
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+              required
+            />
           </div>
+          <div className="form-row">
+            <input type="email" name="email" placeholder="Email" required />
+            <input type="tel" name="phone" placeholder="Phone Number" />
+          </div>
+          <textarea name="message" placeholder="Your Message" required />
+          <button type="submit">SEND MESSAGE</button>
         </form>
 
         <iframe

@@ -3421,8 +3421,8 @@ padding: 1rem;
 
   /* About Page */
   .about-wrapper img {
-        height: 2vh;
-        min-height: 79px;
+        /* height: 2vh;
+        min-height: 79px; */
   }
 
   .about-page-title {
@@ -3766,8 +3766,8 @@ padding: 1rem;
 
   /* About Page */
   .about-wrapper img {
-    height: 50vh;
-    min-height: 300px;
+    /* height: 50vh;
+    min-height: 300px; */
   }
 
   .about-page-title {
