@@ -600,10 +600,16 @@ height: 85vh;
   color: black; /* Make sure it's readable over the video */
   text-align: center;
   padding-top: 40px; /* Optional: push it down from top */
-      top: -30px;
-    left: 893px;
+  top: -34px;
+    left: 862px;
+  
 }
-
+@media (max-width: 480px) {
+  .home-showroom-video .section-title {
+     top: -34px;
+    left: 133px;
+  }
+}
 .section-title .line {
   display: block;
   width: 50px;
