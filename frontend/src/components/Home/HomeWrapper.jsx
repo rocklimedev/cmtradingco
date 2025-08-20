@@ -5,7 +5,6 @@ import cp_fittings from "../../assets/img/home/CP FITTING.png";
 import surfaces from "../../assets/img/home/SIURFACE.png";
 import wellness from "../../assets/img/home/WELLNESS.png";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
-
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { IoMdMail } from "react-icons/io";
 import { FaMapMarkerAlt } from "react-icons/fa";
@@ -13,7 +12,10 @@ import slider from "../../assets/img/home_page_slider.png";
 import brands from "../../assets/data/brands"; // Import the JSON file
 import BrandsWeOffer from "./BrandsWeOffer";
 import loadProjectImages from "../utils/loadProjectImages";
-const video = "https://static.cmtradingco.com/cm_video/video.m4v";
+
+// Import the video to ensure proper resolution in the build
+import video from "../../assets/img/video.m4v";
+
 const projectImages = {
   1: {
     master: require("../../assets/img/projects_data/1/Background.jpg"),
@@ -28,9 +30,9 @@ const projectImages = {
     ],
   },
   2: {
-    master: require("../../assets/img/projects_data/1/Background.jpg"), // Corrected path
+    master: require("../../assets/img/projects_data/1/Background.jpg"),
     additional: [
-      require("../../assets/img/projects_data/1/DSC_7168.jpg"), // Corrected path
+      require("../../assets/img/projects_data/1/DSC_7168.jpg"),
       require("../../assets/img/projects_data/1/DSC_7185.jpg"),
       require("../../assets/img/projects_data/1/DSC_7188.jpg"),
       require("../../assets/img/projects_data/1/DSC_7201.jpg"),
@@ -40,9 +42,9 @@ const projectImages = {
     ],
   },
   3: {
-    master: require("../../assets/img/projects_data/1/Background.jpg"), // Corrected path
+    master: require("../../assets/img/projects_data/1/Background.jpg"),
     additional: [
-      require("../../assets/img/projects_data/1/DSC_7168.jpg"), // Corrected path
+      require("../../assets/img/projects_data/1/DSC_7168.jpg"),
       require("../../assets/img/projects_data/1/DSC_7185.jpg"),
       require("../../assets/img/projects_data/1/DSC_7188.jpg"),
       require("../../assets/img/projects_data/1/DSC_7201.jpg"),
@@ -59,8 +61,6 @@ const HomeWrapper = () => {
   const sliderRef = useRef(null);
   const projects = loadProjectImages();
 
-  const projectFolders = [1, 2, 3];
-
   const slides = [
     {
       content: (
@@ -68,11 +68,12 @@ const HomeWrapper = () => {
           <video
             src={video}
             poster={comingsoon}
-            controls
-            muted
             autoPlay
             loop
+            muted
             playsInline
+            // Remove controls attribute to hide playback controls
+            onError={(e) => console.error("Video failed to load:", e)}
           />
         </>
       ),
@@ -122,33 +123,17 @@ const HomeWrapper = () => {
 
   return (
     <>
-      <div className="main-slider" ref={sliderRef}>
-        <div
-          className="slider-wrapper"
-          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-        >
-          {slides.map((slide, index) => (
-            <div key={index} className="slide">
-              {slide.content}
-            </div>
-          ))}
-        </div>
-        <button
-          className="slider-nav prev"
-          onClick={prevSlide}
-          aria-label="Previous slide"
-        >
-          ←
-        </button>
-        <button
-          className="slider-nav next"
-          onClick={nextSlide}
-          aria-label="Next slide"
-        >
-          →
-        </button>
-      </div>
-
+      <video
+        src={video}
+        poster={comingsoon}
+        autoPlay
+        loop
+        muted
+        playsInline
+        // Remove controls attribute to hide playback controls
+        onError={(e) => console.error("Video failed to load:", e)}
+      />
+      {/* Removed the standalone <video> element to avoid duplication */}
       <section className="home-about-section">
         <h2 className="section-title">
           About <span className="line" />
@@ -170,7 +155,6 @@ const HomeWrapper = () => {
           Product
           <span className="section-underline" />
         </h2>
-
         <div className="product-grid">
           <div className="row double">
             <div className="product-card">
@@ -223,7 +207,6 @@ const HomeWrapper = () => {
         </div>
       </section>
       <BrandsWeOffer brands={brands} />
-
       <section className="home-projects-section">
         <h2 className="section-title">
           Our Projects
@@ -263,27 +246,37 @@ const HomeWrapper = () => {
           )}
         </div>
       </section>
-      <section className="home-showroom-video">
-        <h2 className="section-title">
-          Our Showroom
-          <span className="line" />
-        </h2>
-        <video
-          src={video}
-          poster={comingsoon}
-          controls
-          muted
-          autoPlay
-          loop
-          playsInline
-        />
-      </section>
+      <div className="main-slider" ref={sliderRef}>
+        <div
+          className="slider-wrapper"
+          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+        >
+          {slides.map((slide, index) => (
+            <div key={index} className="slide">
+              {slide.content}
+            </div>
+          ))}
+        </div>
+        <button
+          className="slider-nav prev"
+          onClick={prevSlide}
+          aria-label="Previous slide"
+        >
+          ←
+        </button>
+        <button
+          className="slider-nav next"
+          onClick={nextSlide}
+          aria-label="Next slide"
+        >
+          →
+        </button>
+      </div>
       <section className="home-contact-section">
         <h2 className="section-title">
           Contact
           <span className="line" />
         </h2>
-
         <div className="contact-wrapper">
           <div className="contact-box">
             <form className="contact-form-content" onSubmit={handleSubmit}>
@@ -312,7 +305,6 @@ const HomeWrapper = () => {
           <div className="contact-info">
             <h3>Contact Information</h3>
             <p>Any question or remarks? Just write us a message!</p>
-
             <div className="contact-item">
               <div className="contact-icon">
                 <MdOutlinePhoneInTalk />
@@ -321,7 +313,6 @@ const HomeWrapper = () => {
                 +91 9999500699
               </a>
             </div>
-
             <div className="contact-item">
               <div className="contact-icon">
                 <IoMdMail />
@@ -333,7 +324,6 @@ const HomeWrapper = () => {
                 info@chhabramarble.com
               </a>
             </div>
-
             <div className="contact-item">
               <div className="contact-icon">
                 <FaMapMarkerAlt />
@@ -342,7 +332,6 @@ const HomeWrapper = () => {
                 487/65, National Market, Peeragarhi, Delhi, 110087
               </div>
             </div>
-
             <a
               href="https://maps.google.com/?q=487/65,National+Market,Peeragarhi,Delhi,110087"
               target="_blank"

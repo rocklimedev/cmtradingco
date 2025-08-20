@@ -14,6 +14,7 @@ const ContactWrapper = () => {
   });
   const [errors, setErrors] = useState({});
   const [submitted, setSubmitted] = useState(false);
+  const [serverMessage, setServerMessage] = useState("");
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -32,24 +33,45 @@ const ContactWrapper = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
       return;
     }
-    setSubmitted(true);
-    setTimeout(() => {
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        message: "",
+
+    try {
+      const response = await fetch("http://localhost:4000/api/contact", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
       });
-      setSubmitted(false);
-    }, 2000);
+
+      const result = await response.json();
+      if (result.success) {
+        setSubmitted(true);
+        setServerMessage("Message sent successfully!");
+        setTimeout(() => {
+          setFormData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            phone: "",
+            message: "",
+          });
+          setSubmitted(false);
+          setServerMessage("");
+        }, 2000);
+      } else {
+        setServerMessage(result.message || "Failed to send message");
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      setServerMessage("Server error, please try again later");
+    }
   };
 
   return (
@@ -59,6 +81,13 @@ const ContactWrapper = () => {
         alt="Contact Page Banner"
         className="contact-page-image"
       />
+
+      {/* Display server message */}
+      {serverMessage && (
+        <div className={`message ${submitted ? "success" : "error"}`}>
+          {serverMessage}
+        </div>
+      )}
 
       {/* Contact Info Box Row */}
       <div className="contact-details" style={{ marginBottom: "60px" }}>
@@ -70,7 +99,6 @@ const ContactWrapper = () => {
             </div>
           </div>
         </div>
-
         <div className="contact-infos" style={{ flex: 1 }}>
           <div className="contact-item">
             <MdOutlinePhoneInTalk className="contact-icon" />
@@ -79,7 +107,6 @@ const ContactWrapper = () => {
             </a>
           </div>
         </div>
-
         <div className="contact-infos" style={{ flex: 1 }}>
           <div className="contact-item">
             <IoMdMail className="contact-icon" />
@@ -96,23 +123,52 @@ const ContactWrapper = () => {
           <div className="form-row">
             <input
               type="text"
-              name="firstName"
+              id="firstName"
               placeholder="First Name"
+              value={formData.firstName}
+              onChange={handleChange}
               required
             />
+            {errors.firstName && (
+              <span className="error">{errors.firstName}</span>
+            )}
             <input
               type="text"
-              name="lastName"
+              id="lastName"
               placeholder="Last Name"
-              required
+              value={formData.lastName}
+              onChange={handleChange}
             />
           </div>
           <div className="form-row">
-            <input type="email" name="email" placeholder="Email" required />
-            <input type="tel" name="phone" placeholder="Phone Number" />
+            <input
+              type="email"
+              id="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+            {errors.email && <span className="error">{errors.email}</span>}
+            <input
+              type="tel"
+              id="phone"
+              placeholder="Phone Number"
+              value={formData.phone}
+              onChange={handleChange}
+            />
           </div>
-          <textarea name="message" placeholder="Your Message" required />
-          <button type="submit">SEND MESSAGE</button>
+          <textarea
+            id="message"
+            placeholder="Your Message"
+            value={formData.message}
+            onChange={handleChange}
+            required
+          />
+          {errors.message && <span className="error">{errors.message}</span>}
+          <button type="submit" disabled={submitted}>
+            {submitted ? "SENDING..." : "SEND MESSAGE"}
+          </button>
         </form>
 
         <iframe

@@ -130,3 +130,23 @@
     height: 300px;
   }
 }
+.message {
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: 4px;
+  text-align: center;
+}
+.message.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+.message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+.error {
+  color: red;
+  font-size: 0.9em;
+  margin-top: 5px;
+  display: block;
+}
