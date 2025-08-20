@@ -1,9 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaSearch, FaTimes, FaBars } from "react-icons/fa";
-import { useSearchProductsQuery } from "../../api/productApi";
-import { useGetAllCategoriesQuery } from "../../api/categoryApi";
-
+import brands from "../../assets/data/brands";
 const Navbar = () => {
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -11,9 +9,18 @@ const Navbar = () => {
   const navigate = useNavigate();
   const searchRef = useRef(null);
 
-  const { data: categoriesData } = useGetAllCategoriesQuery();
-  const { data: searchResults, isLoading: searchLoading } =
-    useSearchProductsQuery({ query: searchQuery }, { skip: !searchQuery });
+  // Filter brands and catalogues based on search query
+  const filteredBrands = brands.filter((brand) =>
+    brand.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const filteredCatalogues = brands.flatMap((brand) =>
+    brand.pdfs
+      .filter((pdf) =>
+        pdf.title.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+      .map((pdf) => ({ ...pdf, brandName: brand.name, brandLink: brand.link }))
+  );
 
   const toggleSearchModal = () => {
     setIsSearchModalOpen(!isSearchModalOpen);
@@ -28,14 +35,15 @@ const Navbar = () => {
     setSearchQuery(e.target.value);
   };
 
-  const handleResultClick = (type, id, name) => {
+  const handleResultClick = (type, id, name, brandLink) => {
     setIsSearchModalOpen(false);
     setSearchQuery("");
     setIsMobileMenuOpen(false);
-    if (type === "product") {
-      navigate(`/store/product/${id}`);
-    } else if (type === "category") {
-      navigate(`/store/cat/${id}`, { state: { categoryName: name } });
+    if (type === "brand") {
+      navigate(brandLink, { state: { brandName: name } });
+    } else if (type === "catalogue") {
+      // Navigate to a catalogue-specific page or open the PDF
+      window.open(id, "_blank"); // Open PDF in new tab
     }
   };
 
@@ -51,11 +59,6 @@ const Navbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
-
-  const filteredCategories =
-    categoriesData?.categories?.filter((category) =>
-      category.name.toLowerCase().includes(searchQuery.toLowerCase())
-    ) || [];
 
   return (
     <div className="navbar-wrapper">
@@ -77,7 +80,7 @@ const Navbar = () => {
           </li>
           <li className="navbar-links">
             <Link to="/product" onClick={() => setIsMobileMenuOpen(false)}>
-              Product
+              Brands
             </Link>
           </li>
           <li className="navbar-links">
@@ -97,28 +100,21 @@ const Navbar = () => {
             aria-label="Open search modal"
             onClick={toggleSearchModal}
           />
-          <FaBars
-            className="navbar-menu-toggle"
-            aria-label="Toggle mobile menu"
-            onClick={toggleMobileMenu}
-          />
         </div>
+        <FaBars
+          className="navbar-menu-toggle"
+          aria-label="Toggle mobile menu"
+          onClick={toggleMobileMenu}
+        />
       </nav>
 
       {isSearchModalOpen && (
         <div className="search-modal">
           <div className="search-modal-content" ref={searchRef}>
-            <button
-              className="search-modal-close"
-              onClick={toggleSearchModal}
-              aria-label="Close search modal"
-            >
-              <FaTimes />
-            </button>
             <input
               type="text"
               className="search-modal-input"
-              placeholder="Search products or categories..."
+              placeholder="Search brands or catalogues..."
               aria-label="Search input"
               value={searchQuery}
               onChange={handleSearchChange}
@@ -126,51 +122,51 @@ const Navbar = () => {
             />
             {searchQuery && (
               <div className="search-results">
-                {searchLoading && <p className="search-loading">Loading...</p>}
-                {filteredCategories.length > 0 && (
+                {filteredBrands.length > 0 && (
                   <div className="search-section">
-                    <h4>Categories</h4>
-                    {filteredCategories.map((category) => (
+                    <h4>Brands</h4>
+                    {filteredBrands.map((brand) => (
                       <div
-                        key={category.categoryId}
+                        key={brand.name}
                         className="search-result-item"
                         onClick={() =>
                           handleResultClick(
-                            "category",
-                            category.categoryId,
-                            category.name
+                            "brand",
+                            brand.name,
+                            brand.name,
+                            brand.link
                           )
                         }
                       >
-                        {category.name}
+                        {brand.name}
                       </div>
                     ))}
                   </div>
                 )}
-                {searchResults?.length > 0 && (
+                {filteredCatalogues.length > 0 && (
                   <div className="search-section">
-                    <h4>Products</h4>
-                    {searchResults.map((product) => (
+                    <h4>Catalogues</h4>
+                    {filteredCatalogues.map((catalogue) => (
                       <div
-                        key={product.productId}
+                        key={catalogue.pdfId}
                         className="search-result-item"
                         onClick={() =>
                           handleResultClick(
-                            "product",
-                            product.productId,
-                            product.name
+                            "catalogue",
+                            catalogue.url,
+                            catalogue.title,
+                            catalogue.brandLink
                           )
                         }
                       >
-                        {product.name} - ₹{product.sellingPrice}
+                        {catalogue.title} - {catalogue.brandName}
                       </div>
                     ))}
                   </div>
                 )}
                 {searchQuery &&
-                  !searchLoading &&
-                  filteredCategories.length === 0 &&
-                  (!searchResults || searchResults.length === 0) && (
+                  filteredBrands.length === 0 &&
+                  filteredCatalogues.length === 0 && (
                     <p className="no-results">No results found</p>
                   )}
               </div>
