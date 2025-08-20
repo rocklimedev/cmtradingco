@@ -1,66 +1,17 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useNavigate } from "react-router-dom";
 import brands from "../../assets/data/brands"; // Adjust path as needed
+
 const BrandSlider = () => {
-  const navigate = useNavigate();
-  const [showModal, setShowModal] = useState(false);
-  const [selectedPdf, setSelectedPdf] = useState(null);
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
   const [activeBrandIndex, setActiveBrandIndex] = useState(0);
-  const modalRef = useRef(null);
   const sliderRef = useRef(null);
 
-  // Handle click outside modal to close
+  // Auto-slide every 5 seconds (optional)
   useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (modalRef.current && !modalRef.current.contains(event.target)) {
-        handleCloseModal();
-      }
-    };
-    if (showModal) {
-      document.addEventListener("mousedown", handleClickOutside);
-      document.body.style.overflow = "hidden";
-    }
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-      document.body.style.overflow = "";
-    };
-  }, [showModal]);
-
-  // Handle ESC key to close modal
-  useEffect(() => {
-    const handleEsc = (event) => {
-      if (event.key === "Escape") handleCloseModal();
-    };
-    if (showModal) document.addEventListener("keydown", handleEsc);
-    return () => document.removeEventListener("keydown", handleEsc);
-  }, [showModal]);
-
-  const handleViewPdf = (pdf) => {
-    setSelectedPdf(pdf);
-    setShowModal(true);
-    setPageNumber(1);
-    setNumPages(null);
-  };
-
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setSelectedPdf(null);
-    setNumPages(null);
-  };
-
-  const onDocumentLoadSuccess = ({ numPages }) => {
-    setNumPages(numPages);
-  };
-
-  const handlePreviousPage = () => {
-    if (pageNumber > 1) setPageNumber(pageNumber - 1);
-  };
-
-  const handleNextPage = () => {
-    if (pageNumber < numPages) setPageNumber(pageNumber + 1);
-  };
+    const interval = setInterval(() => {
+      setActiveBrandIndex((prev) => (prev + 1) % brands.length);
+    }, 5000); // Adjust timing as needed
+    return () => clearInterval(interval);
+  }, []);
 
   const handleNextBrand = () => {
     setActiveBrandIndex((prev) => (prev + 1) % brands.length);
@@ -73,6 +24,18 @@ const BrandSlider = () => {
   const handleBrandClick = (index) => {
     setActiveBrandIndex(index);
   };
+
+  // Calculate slide width and gap based on screen size
+  const getSlideOffset = () => {
+    const width = window.innerWidth;
+    if (width <= 480) {
+      return 100 + 16; // Slide width (100px) + gap (16px)
+    } else if (width <= 768) {
+      return 120 + 24; // Slide width (120px) + gap (24px)
+    }
+    return 160 + 32; // Slide width (160px) + gap (32px)
+  };
+
   return (
     <div className="brand-slider">
       <button
@@ -83,23 +46,32 @@ const BrandSlider = () => {
         ←
       </button>
       <div className="brand-slider-wrapper" ref={sliderRef}>
-        {brands.map((brand, index) => (
-          <div
-            key={brand.name}
-            className={`brand-slide ${
-              index === activeBrandIndex ? "active" : ""
-            }`}
-            onClick={() => handleBrandClick(index)}
-          >
-            <img
-              src={brand.logoSrc}
-              alt={`${brand.name} Logo`}
-              className="brand-logo"
-              loading="lazy"
-            />
-            <h3 className="brand-title">{brand.name}</h3>
-          </div>
-        ))}
+        <div
+          className="brand-slider-inner"
+          style={{
+            transform: `translateX(-${activeBrandIndex * getSlideOffset()}px)`,
+            transition: "transform 0.4s ease",
+          }}
+        >
+          {brands.map((brand, index) => (
+            <div
+              key={brand.name}
+              className={`brand-slide ${
+                index === activeBrandIndex ? "active" : ""
+              }`}
+              onClick={() => handleBrandClick(index)}
+              aria-current={index === activeBrandIndex ? "true" : "false"}
+            >
+              <img
+                src={brand.logoSrc}
+                alt={`${brand.name} Logo`}
+                className="brand-logo"
+                loading="lazy"
+              />
+              <h3 className="brand-title">{brand.name}</h3>
+            </div>
+          ))}
+        </div>
       </div>
       <button
         className="slider-nav next"

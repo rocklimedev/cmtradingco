@@ -496,8 +496,6 @@
   }
 }
 /* Existing styles remain unchanged */
-
-/* Brand Slider */
 .brand-slider {
   position: relative;
   max-width: 1400px;
@@ -510,10 +508,13 @@
 }
 
 .brand-slider-wrapper {
+  overflow: hidden; /* Hide overflow to create slider effect */
+  width: 100%;
+}
+
+.brand-slider-inner {
   display: flex;
-  justify-content: center;
-  gap: 2rem;
-  transition: transform 0.4s ease;
+  gap: 2rem; /* 32px gap between slides */
 }
 
 .brand-slide {
@@ -529,20 +530,21 @@
   padding: 1rem;
   background-color: #ffffff;
   transition: all 0.3s ease;
-  opacity: 0.5;
+  opacity: 0.7; /* Slightly higher base opacity */
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  flex: 0 0 auto; /* Prevent shrinking/stretching */
 }
 
 .brand-slide:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-  opacity: 0.9;
+  transform: translateY(-8px); /* More pronounced hover lift */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  opacity: 1; /* Full opacity on hover */
 }
 
 .brand-slide.active {
   opacity: 1;
-  transform: scale(1.08);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transform: scale(1.1); /* Slightly larger active state */
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.15);
 }
 
 .brand-logo {
@@ -576,11 +578,13 @@
   font-size: 1.25rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   z-index: 10;
-  transition: background 0.3s ease;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
 }
 
 .slider-nav:hover {
   background: #a80000;
+  transform: translateY(-50%) scale(1.1); /* Slight scale on hover */
 }
 
 .slider-nav:focus {
@@ -596,6 +600,62 @@
   right: 1rem;
 }
 
+/* Responsive Design */
+@media (max-width: 768px) {
+  .brand-slider {
+    padding: 1rem;
+  }
+
+  .brand-slide {
+    min-width: 120px;
+    max-width: 120px;
+    height: 160px;
+  }
+
+  .brand-logo {
+    max-width: 80px;
+  }
+
+  .brand-title {
+    font-size: 0.875rem;
+  }
+
+  .brand-slider-inner {
+    gap: 1.5rem; /* 24px gap */
+  }
+
+  .slider-nav {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .brand-slide {
+    min-width: 100px;
+    max-width: 100px;
+    height: 140px;
+  }
+
+  .brand-logo {
+    max-width: 60px;
+  }
+
+  .brand-title {
+    font-size: 0.75rem;
+  }
+
+  .brand-slider-inner {
+    gap: 1rem; /* 16px gap */
+  }
+
+  .slider-nav {
+    width: 32px;
+    height: 32px;
+    font-size: 0.875rem;
+  }
+}
 /* Brand Content Section */
 .brand-content-section {
   max-width: 1200px;

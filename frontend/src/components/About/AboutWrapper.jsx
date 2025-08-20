@@ -8,6 +8,7 @@ import allinone from "../../assets/img/about/why-us/all-in-one.png";
 import competitive from "../../assets/img/about/why-us/competitive-pricing.png";
 import ressupport from "../../assets/img/about/why-us/res-support.png";
 import widerange from "../../assets/img/about/why-us/wide-range.png";
+
 const AboutWrapper = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
@@ -35,7 +36,7 @@ const AboutWrapper = () => {
         alt="About Page Banner"
         className="about-page-image"
       />
-      <h2 className="section-title" style={{ left: "881px", margin: "2rem" }}>
+      <h2 className="section-title">
         About <span className="line" />
       </h2>
       <p className="about-content-p">
@@ -129,6 +130,7 @@ const AboutWrapper = () => {
         </div>
       </section>
 
+      {/* Commented out Journey section, kept as-is */}
       {/* <div className="journey">
         <h3 className="journey-title">Chhabra Marble Journey</h3>
         <div className="journey-slider">
