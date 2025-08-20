@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Document, Page, pdfjs } from "react-pdf";
-import { FaExternalLinkAlt, FaEye, FaDownload } from "react-icons/fa"; // Import Font Awesome icons
+import { FaExternalLinkAlt, FaEye, FaDownload } from "react-icons/fa";
 import brands from "../../assets/data/brands"; // Adjust path as needed
 import project_title from "../../assets/img/projects/projects_title.png";
 import product_1 from "../../assets/img/home/product_1.jpg";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
+import BrandSlider from "./BrandSlider"; // Import BrandSlider
 import "./wrapper.css";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
@@ -16,9 +17,8 @@ const ProductWrapper = () => {
   const [selectedPdf, setSelectedPdf] = useState(null);
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const [activeBrandIndex, setActiveBrandIndex] = useState(0);
+  const [activeBrandIndex, setActiveBrandIndex] = useState(0); // Shared state
   const modalRef = useRef(null);
-  const sliderRef = useRef(null);
 
   // Handle click outside modal to close
   useEffect(() => {
@@ -42,7 +42,7 @@ const ProductWrapper = () => {
     const handleEsc = (event) => {
       if (event.key === "Escape") handleCloseModal();
     };
-    if (showModal) document.addEventListener("keydown", handleEsc);
+    if (showModal) document.add都市EventListener("keydown", handleEsc);
     return () => document.removeEventListener("keydown", handleEsc);
   }, [showModal]);
 
@@ -69,18 +69,6 @@ const ProductWrapper = () => {
 
   const handleNextPage = () => {
     if (pageNumber < numPages) setPageNumber(pageNumber + 1);
-  };
-
-  const handleNextBrand = () => {
-    setActiveBrandIndex((prev) => (prev + 1) % brands.length);
-  };
-
-  const handlePrevBrand = () => {
-    setActiveBrandIndex((prev) => (prev - 1 + brands.length) % brands.length);
-  };
-
-  const handleBrandClick = (index) => {
-    setActiveBrandIndex(index);
   };
 
   return (
@@ -118,41 +106,12 @@ const ProductWrapper = () => {
       </section>
 
       <section className="brands-gallery" aria-label="Brands and Catalogues">
-        <div className="brand-slider">
-          <button
-            className="slider-nav prev"
-            onClick={handlePrevBrand}
-            aria-label="Previous brand"
-          >
-            ←
-          </button>
-          <div className="brand-slider-wrapper" ref={sliderRef}>
-            {brands.map((brand, index) => (
-              <div
-                key={brand.name}
-                className={`brand-slide ${
-                  index === activeBrandIndex ? "active" : ""
-                }`}
-                onClick={() => handleBrandClick(index)}
-              >
-                <img
-                  src={brand.logoSrc}
-                  alt={`${brand.name} Logo`}
-                  className="brand-logo"
-                  loading="lazy"
-                />
-                <h3 className="brand-title">{brand.name}</h3>
-              </div>
-            ))}
-          </div>
-          <button
-            className="slider-nav next"
-            onClick={handleNextBrand}
-            aria-label="Next brand"
-          >
-            →
-          </button>
-        </div>
+        {/* Replace the slider with BrandSlider component */}
+        <BrandSlider
+          activeBrandIndex={activeBrandIndex}
+          setActiveBrandIndex={setActiveBrandIndex}
+          brands={brands}
+        />
         <div className="brand-content-section">
           {brands[activeBrandIndex] && (
             <div className="brand-section">

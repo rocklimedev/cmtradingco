@@ -1,39 +1,52 @@
-import React, { useState, useEffect, useRef } from "react";
-import brands from "../../assets/data/brands"; // Adjust path as needed
+import React, { useEffect, useRef, useState } from "react";
 
-const BrandSlider = () => {
-  const [activeBrandIndex, setActiveBrandIndex] = useState(0);
+const BrandSlider = ({
+  activeBrandIndex = 0,
+  setActiveBrandIndex,
+  brands = [], // ✅ Default to empty array
+}) => {
   const sliderRef = useRef(null);
+  const [slideOffset, setSlideOffset] = useState(0);
 
-  // Auto-slide every 5 seconds (optional)
+  // Calculate slide width + gap based on screen size
+  const getSlideOffset = () => {
+    const width = window.innerWidth;
+    if (width <= 480) return 100 + 16;
+    if (width <= 768) return 120 + 24;
+    return 160 + 32;
+  };
+
+  // Update slide offset on mount + resize
   useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveBrandIndex((prev) => (prev + 1) % brands.length);
-    }, 5000); // Adjust timing as needed
-    return () => clearInterval(interval);
+    const updateSlideOffset = () => {
+      setSlideOffset(getSlideOffset());
+    };
+    updateSlideOffset();
+    window.addEventListener("resize", updateSlideOffset);
+    return () => window.removeEventListener("resize", updateSlideOffset);
   }, []);
 
+  // Auto-slide every 5 seconds
+  useEffect(() => {
+    if (!brands || brands.length === 0) return; // ✅ Guard
+    const interval = setInterval(() => {
+      setActiveBrandIndex((prev) => (prev + 1) % brands.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, [setActiveBrandIndex, brands]);
+
   const handleNextBrand = () => {
+    if (brands.length === 0) return;
     setActiveBrandIndex((prev) => (prev + 1) % brands.length);
   };
 
   const handlePrevBrand = () => {
+    if (brands.length === 0) return;
     setActiveBrandIndex((prev) => (prev - 1 + brands.length) % brands.length);
   };
 
   const handleBrandClick = (index) => {
     setActiveBrandIndex(index);
-  };
-
-  // Calculate slide width and gap based on screen size
-  const getSlideOffset = () => {
-    const width = window.innerWidth;
-    if (width <= 480) {
-      return 100 + 16; // Slide width (100px) + gap (16px)
-    } else if (width <= 768) {
-      return 120 + 24; // Slide width (120px) + gap (24px)
-    }
-    return 160 + 32; // Slide width (160px) + gap (32px)
   };
 
   return (
@@ -42,41 +55,49 @@ const BrandSlider = () => {
         className="slider-nav prev"
         onClick={handlePrevBrand}
         aria-label="Previous brand"
+        disabled={brands.length === 0} // ✅ Disable if no brands
       >
         ←
       </button>
+
       <div className="brand-slider-wrapper" ref={sliderRef}>
         <div
           className="brand-slider-inner"
           style={{
-            transform: `translateX(-${activeBrandIndex * getSlideOffset()}px)`,
+            transform: `translateX(-${activeBrandIndex * slideOffset}px)`,
             transition: "transform 0.4s ease",
           }}
         >
-          {brands.map((brand, index) => (
-            <div
-              key={brand.name}
-              className={`brand-slide ${
-                index === activeBrandIndex ? "active" : ""
-              }`}
-              onClick={() => handleBrandClick(index)}
-              aria-current={index === activeBrandIndex ? "true" : "false"}
-            >
-              <img
-                src={brand.logoSrc}
-                alt={`${brand.name} Logo`}
-                className="brand-logo"
-                loading="lazy"
-              />
-              <h3 className="brand-title">{brand.name}</h3>
-            </div>
-          ))}
+          {Array.isArray(brands) && brands.length > 0 ? (
+            brands.map((brand, index) => (
+              <div
+                key={brand.name || index}
+                className={`brand-slide ${
+                  index === activeBrandIndex ? "active" : ""
+                }`}
+                onClick={() => handleBrandClick(index)}
+                aria-current={index === activeBrandIndex ? "true" : "false"}
+              >
+                <img
+                  src={brand.logoSrc}
+                  alt={`${brand.name || "Brand"} Logo`}
+                  className="brand-logo"
+                  loading="lazy"
+                />
+                <h3 className="brand-title">{brand.name}</h3>
+              </div>
+            ))
+          ) : (
+            <p className="no-brands">No brands available</p> // ✅ Fallback
+          )}
         </div>
       </div>
+
       <button
         className="slider-nav next"
         onClick={handleNextBrand}
         aria-label="Next brand"
+        disabled={brands.length === 0}
       >
         →
       </button>
