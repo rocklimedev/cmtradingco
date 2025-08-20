@@ -152,7 +152,6 @@
   padding: var(--spacing-2xl, 2rem) var(--spacing-md, 1rem);
   margin: 0 auto;
 }
-
 /* Brand Slider */
 .brand-slider {
   position: relative;
@@ -165,14 +164,16 @@
   overflow: hidden;
 }
 
-.brand-slider-wrapper {
-  overflow: hidden;
-}
-
 .brand-slider-inner {
   display: flex;
   gap: var(--spacing-md, 1rem);
-  transition: transform 0.3s ease;
+  animation: scroll 30s linear infinite;
+  will-change: transform;
+}
+
+.brand-slider:hover .brand-slider-inner,
+.brand-slider:active .brand-slider-inner {
+  animation-play-state: paused;
 }
 
 .brand-slide {
@@ -199,12 +200,6 @@
   opacity: 1;
 }
 
-.brand-slide.active {
-  opacity: 1;
-  transform: scale(1.05);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
-}
-
 .brand-logo {
   max-width: 100px;
   height: auto;
@@ -219,42 +214,19 @@
   color: var(--text-primary, #333333);
 }
 
+/* Infinite scrolling animation */
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* Hide arrows since they are unused */
 .slider-nav {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: var(--primary-color, #c8102e);
-  color: var(--text-light, #ffffff);
-  border: none;
-  border-radius: 50%;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--font-size-md, 1.25rem);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  z-index: 10;
-  cursor: pointer;
-  transition: background 0.3s ease, transform 0.2s ease;
-}
-
-.slider-nav:hover {
-  background: var(--primary-hover, #a80000);
-  transform: translateY(-50%) scale(1.05);
-}
-
-.slider-nav:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px rgba(200, 16, 46, 0.4);
-}
-
-.prev {
-  left: var(--spacing-sm, 0.75rem);
-}
-
-.next {
-  right: var(--spacing-sm, 0.75rem);
+  display: none !important;
 }
 
 /* Brand Content Section */

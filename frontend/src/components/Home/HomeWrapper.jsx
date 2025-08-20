@@ -156,76 +156,46 @@ const HomeWrapper = () => {
           <span className="section-underline" />
         </h2>
         <div className="product-grid">
-          <div className="row double">
-            <div className="product-card">
-              <img src={cp_fittings} alt="Tile" />
-              <div className="product-info">
-                <h3>CP FITTINGS & SANITARY</h3>
-                <p>
-                  Stylish tiles for every surface, crafted for beauty and
-                  durability.
-                </p>
-              </div>
+          <div className="product-card">
+            <img src={cp_fittings} alt="CP Fittings" />
+            <div className="product-info">
+              <h3>CP FITTINGS & SANITARY</h3>
+              <p>Stylish and durable fittings for modern bathrooms.</p>
             </div>
           </div>
-          <div className="row double">
-            <div className="product-card">
-              <img src={wellness} alt="Granite" />
-              <div className="product-info">
-                <h3>TILES</h3>
-                <p>
-                  High-quality granite for timeless strength and elegant
-                  finishes
-                </p>
-              </div>
+          <div className="product-card">
+            <img src={wellness} alt="Tiles" />
+            <div className="product-info">
+              <h3>TILES</h3>
+              <p>High-quality tiles for timeless beauty and durability.</p>
             </div>
           </div>
-          <div className="row double">
-            <div className="product-card">
-              <img src={surfaces} alt="Sanitary" />
-              <div className="product-info">
-                <h3>STONES & GRANITES</h3>
-                <p>
-                  Premium sanitary ware that blends style, comfort, and
-                  durability
-                </p>
-              </div>
+          <div className="product-card">
+            <img src={surfaces} alt="Stones & Granites" />
+            <div className="product-info">
+              <h3>STONES & GRANITES</h3>
+              <p>Premium stones and granites for elegant finishes.</p>
             </div>
           </div>
-          <div className="row double">
-            <div className="product-card">
-              <img src={adhesive} alt="Granite" />
-              <div className="product-info">
-                <h3>CHEMICALS & ADHESIVE</h3>
-                <p>
-                  High-quality granite for timeless strength and elegant
-                  finishes
-                </p>
-              </div>
+          <div className="product-card">
+            <img src={adhesive} alt="Chemicals & Adhesive" />
+            <div className="product-info">
+              <h3>CHEMICALS & ADHESIVE</h3>
+              <p>Reliable adhesives for strong and lasting installations.</p>
             </div>
           </div>
-          <div className="row double">
-            <div className="product-card">
-              <img src={adhesive} alt="Granite" />
-              <div className="product-info">
-                <h3>ACCESSORIES & ADD ONS</h3>
-                <p>
-                  High-quality granite for timeless strength and elegant
-                  finishes
-                </p>
-              </div>
+          <div className="product-card">
+            <img src={adhesive} alt="Accessories & Add-ons" />
+            <div className="product-info">
+              <h3>ACCESSORIES & ADD ONS</h3>
+              <p>Enhance your projects with premium accessories.</p>
             </div>
           </div>
-          <div className="row double">
-            <div className="product-card">
-              <img src={wellness} alt="Granite" />
-              <div className="product-info">
-                <h3>PLUMBING</h3>
-                <p>
-                  High-quality granite for timeless strength and elegant
-                  finishes
-                </p>
-              </div>
+          <div className="product-card">
+            <img src={wellness} alt="Plumbing" />
+            <div className="product-info">
+              <h3>PLUMBING</h3>
+              <p>High-quality plumbing solutions for seamless functionality.</p>
             </div>
           </div>
         </div>
