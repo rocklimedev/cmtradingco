@@ -2253,8 +2253,8 @@ font-size: 21px;
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 26px;
+    grid-template-columns: repeat(auto-fit, minmax(333px, 1fr));
+    gap: 43px;
     max-width: 1412px;
   width: 100%;
   margin: 0 auto var(--spacing-2xl);
