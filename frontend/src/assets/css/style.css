@@ -1684,7 +1684,7 @@ width: 100%;
     flex-wrap: wrap;       /* allow wrapping to next line */
     justify-content: center;
     text-align: center;
-    gap: 1.5rem;           /* spacing between items */
+    /* gap: 1.5rem;            */
   }
 
   .footer-logo,

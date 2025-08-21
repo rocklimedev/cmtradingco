@@ -5,6 +5,7 @@ import Router from "./router/Router";
 import BrandSlider from "./components/Products/BrandSlider";
 import { useState } from "react";
 import brands from "./assets/data/brands";
+import { Link } from "react-router-dom";
 function App() {
   // Sample brands data (replace with API or DB later)
 
@@ -12,7 +13,10 @@ function App() {
 
   return (
     <div className="main-wrapper">
-      <img src={logo} alt="Company Logo" className="logo" />
+      <Link to="/">
+        <img src={logo} alt="Company Logo" className="logo" />
+      </Link>
+
       <Navbar />
       <Router />
 

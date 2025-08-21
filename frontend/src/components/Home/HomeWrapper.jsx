@@ -12,10 +12,9 @@ import slider from "../../assets/img/home_page_slider.png";
 import brands from "../../assets/data/brands"; // Import the JSON file
 import BrandsWeOffer from "./BrandsWeOffer";
 import loadProjectImages from "../utils/loadProjectImages";
-
-// Import the video to ensure proper resolution in the build
 import video from "../../assets/img/video.m4v";
 
+// Define projectImages (same as in the original code)
 const projectImages = {
   1: {
     master: require("../../assets/img/projects_data/1/Background.jpg"),
@@ -58,6 +57,8 @@ const projectImages = {
 const HomeWrapper = () => {
   const navigate = useNavigate();
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
   const sliderRef = useRef(null);
   const projects = loadProjectImages();
 
@@ -72,7 +73,6 @@ const HomeWrapper = () => {
             loop
             muted
             playsInline
-            // Remove controls attribute to hide playback controls
             onError={(e) => console.error("Video failed to load:", e)}
           />
         </>
@@ -121,6 +121,18 @@ const HomeWrapper = () => {
     return () => clearInterval(interval);
   }, []);
 
+  const openModal = (projectId) => {
+    setSelectedProject(projectId);
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+    setSelectedProject(null);
+  };
+
+  const currentProject = projects.find((p) => p.id === selectedProject);
+
   return (
     <>
       <video
@@ -130,10 +142,8 @@ const HomeWrapper = () => {
         loop
         muted
         playsInline
-        // Remove controls attribute to hide playback controls
         onError={(e) => console.error("Video failed to load:", e)}
       />
-      {/* Removed the standalone <video> element to avoid duplication */}
       <section className="home-about-section">
         <h2 className="section-title">
           About <span className="line" />
@@ -228,7 +238,7 @@ const HomeWrapper = () => {
                 />
                 <div
                   className="arrow-overlay"
-                  onClick={() => navigate(`/projects/${project.id}`)}
+                  onClick={() => openModal(project.id)}
                   aria-label={`View project ${project.id}`}
                 >
                   →
@@ -337,6 +347,43 @@ const HomeWrapper = () => {
           </div>
         </div>
       </section>
+      {showModal && currentProject && (
+        <div className="all-projects-view" onClick={closeModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h3>{currentProject.alt}</h3>
+            <div className="project-all-images">
+              <img
+                src={currentProject.imgSrc}
+                alt={`${currentProject.alt} - Master`}
+                className="project-image"
+                onError={(e) => {
+                  e.target.src = comingsoon;
+                }}
+              />
+              {projectImages[currentProject.id]?.additional.map(
+                (img, index) => (
+                  <img
+                    key={index}
+                    src={img}
+                    alt={`${currentProject.alt} - Additional ${index + 1}`}
+                    className="project-image"
+                    onError={(e) => {
+                      e.target.src = comingsoon;
+                    }}
+                  />
+                )
+              )}
+            </div>
+            <button
+              className="close-view-button"
+              onClick={closeModal}
+              aria-label="Close project modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </>
   );
 };
