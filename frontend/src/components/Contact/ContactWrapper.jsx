@@ -3,6 +3,7 @@ import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { IoMdMail } from "react-icons/io";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import contact from "../../assets/img/contact_title_section.jpg";
+import { useSubmitContactFormMutation } from "../../api/contactApi";
 
 const ContactWrapper = () => {
   const [formData, setFormData] = useState({
@@ -13,8 +14,11 @@ const ContactWrapper = () => {
     message: "",
   });
   const [errors, setErrors] = useState({});
-  const [submitted, setSubmitted] = useState(false);
   const [serverMessage, setServerMessage] = useState("");
+
+  // RTK Query mutation hook
+  const [submitContactForm, { isLoading, isSuccess, isError, error }] =
+    useSubmitContactFormMutation();
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -42,35 +46,20 @@ const ContactWrapper = () => {
     }
 
     try {
-      const response = await fetch("http://localhost:4000/api/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+      const result = await submitContactForm(formData).unwrap();
+      setServerMessage("Message sent successfully!");
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        message: "",
       });
-
-      const result = await response.json();
-      if (result.success) {
-        setSubmitted(true);
-        setServerMessage("Message sent successfully!");
-        setTimeout(() => {
-          setFormData({
-            firstName: "",
-            lastName: "",
-            email: "",
-            phone: "",
-            message: "",
-          });
-          setSubmitted(false);
-          setServerMessage("");
-        }, 2000);
-      } else {
-        setServerMessage(result.message || "Failed to send message");
-      }
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      setServerMessage("Server error, please try again later");
+    } catch (err) {
+      console.error("Error submitting form:", err);
+      setServerMessage(
+        err?.data?.message || "Server error, please try again later"
+      );
     }
   };
 
@@ -84,7 +73,11 @@ const ContactWrapper = () => {
 
       {/* Display server message */}
       {serverMessage && (
-        <div className={`message ${submitted ? "success" : "error"}`}>
+        <div
+          className={`message ${
+            isSuccess ? "success" : isError ? "error" : ""
+          }`}
+        >
           {serverMessage}
         </div>
       )}
@@ -166,8 +159,8 @@ const ContactWrapper = () => {
             required
           />
           {errors.message && <span className="error">{errors.message}</span>}
-          <button type="submit" disabled={submitted}>
-            {submitted ? "SENDING..." : "SEND MESSAGE"}
+          <button type="submit" disabled={isLoading}>
+            {isLoading ? "SENDING..." : "SEND MESSAGE"}
           </button>
         </form>
 
