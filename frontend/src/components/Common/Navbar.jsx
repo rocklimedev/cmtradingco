@@ -1,7 +1,9 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaSearch, FaTimes, FaBars } from "react-icons/fa";
+import { FaSearch, FaBars } from "react-icons/fa";
 import brands from "../../assets/data/brands";
+import logo from "../../assets/img/logo.png";
+
 const Navbar = () => {
   const [isSearchModalOpen, setIsSearchModalOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
@@ -42,8 +44,7 @@ const Navbar = () => {
     if (type === "brand") {
       navigate(brandLink, { state: { brandName: name } });
     } else if (type === "catalogue") {
-      // Navigate to a catalogue-specific page or open the PDF
-      window.open(id, "_blank"); // Open PDF in new tab
+      window.open(id, "_blank");
     }
   };
 
@@ -63,6 +64,9 @@ const Navbar = () => {
   return (
     <div className="navbar-wrapper">
       <nav className="navbar-container">
+        <Link to="/" className="navbar-logo">
+          <img src={logo} alt="Company Logo" className="logo" />
+        </Link>
         <ul
           className={`navbar-links-list ${
             isMobileMenuOpen ? "mobile-active" : ""
@@ -94,18 +98,18 @@ const Navbar = () => {
             </Link>
           </li>
         </ul>
-        <div className="navbar-search-container">
+        <div className="navbar-actions">
           <FaSearch
             className="navbar-search"
             aria-label="Open search modal"
             onClick={toggleSearchModal}
           />
+          <FaBars
+            className="navbar-menu-toggle"
+            aria-label="Toggle mobile menu"
+            onClick={toggleMobileMenu}
+          />
         </div>
-        <FaBars
-          className="navbar-menu-toggle"
-          aria-label="Toggle mobile menu"
-          onClick={toggleMobileMenu}
-        />
       </nav>
 
       {isSearchModalOpen && (

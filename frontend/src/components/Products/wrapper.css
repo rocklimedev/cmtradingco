@@ -151,69 +151,70 @@
   padding: var(--spacing-2xl, 2rem) var(--spacing-md, 1rem);
   margin: 0 auto;
 }
-/* Brand Slider */
+/* Outer container */
 .brand-slider {
-  position: relative;
-  max-width: 1400px;
-  margin: 0 auto var(--spacing-xl, 2rem);
-  padding: var(--spacing-md, 1rem);
-  background-color: var(--bg-secondary, #f9f9f9);
-  border-radius: var(--border-radius, 1rem);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
   overflow: hidden;
+  position: relative;
+  width: 100%;
+  background: #fff;
+  padding: 1rem 0;
 }
 
-.brand-slider-inner {
+/* Gradient corners */
+.brand-slider::before,
+.brand-slider::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  width: 200px;   /* wider fade */
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.brand-slider::before {
+  left: 0;
+  background: linear-gradient(to right, #fff 80%, rgba(255,255,255,0) 100%);
+}
+
+.brand-slider::after {
+  right: 0;
+  background: linear-gradient(to left, #fff 80%, rgba(255,255,255,0) 100%);
+}
+
+/* Scrolling track */
+.brand-slider-track {
   display: flex;
-  gap: var(--spacing-md, 1rem);
-  animation: scroll 30s linear infinite;
+  align-items: center;
+  gap: 4rem; /* space between logos */
+  animation: scroll var(--scroll-speed, 30s) linear infinite;
   will-change: transform;
 }
 
-.brand-slider:hover .brand-slider-inner,
-.brand-slider:active .brand-slider-inner {
-  animation-play-state: paused;
-}
-
-.brand-slide {
-  min-width: 160px;
-  max-width: 160px;
-  height: 200px;
+/* Logo container */
+.brand-logo-wrapper {
+  flex: 0 0 auto;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  cursor: pointer;
-  border-radius: var(--border-radius, 1rem);
-  padding: var(--spacing-sm, 0.75rem);
-  background-color: var(--bg-primary, #ffffff);
-  transition: all 0.3s ease;
-  opacity: 0.8;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  flex: 0 0 auto;
 }
 
-.brand-slide:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+/* Logos */
+.brand-logo {
+  max-height: 50px;
+  max-width: 140px;
+  object-fit: contain;
+  filter: grayscale(100%);
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+.brand-logo:hover {
+  filter: grayscale(0%);
   opacity: 1;
 }
 
-.brand-logo {
-  max-width: 100px;
-  height: auto;
-  object-fit: contain;
-  margin-bottom: var(--spacing-xs, 0.5rem);
-}
-
-.brand-title {
-  font-size: var(--font-size-base, 1rem);
-  font-weight: var(--font-weight-semibold, 600);
-  text-align: center;
-  color: var(--text-primary, #333333);
-}
-
-/* Infinite scrolling animation */
+/* Infinite scroll keyframes */
 @keyframes scroll {
   0% {
     transform: translateX(0);

@@ -9,12 +9,11 @@ import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { IoMdMail } from "react-icons/io";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import slider from "../../assets/img/home_page_slider.png";
-import brands from "../../assets/data/brands"; // Import the JSON file
+import brands from "../../assets/data/brands";
 import BrandsWeOffer from "./BrandsWeOffer";
 import loadProjectImages from "../utils/loadProjectImages";
 import video from "../../assets/img/video.m4v";
 
-// Define projectImages (same as in the original code)
 const projectImages = {
   1: {
     master: require("../../assets/img/projects_data/1/Background.jpg"),
@@ -73,6 +72,7 @@ const HomeWrapper = () => {
             loop
             muted
             playsInline
+            className="slider-background"
             onError={(e) => console.error("Video failed to load:", e)}
           />
         </>
@@ -95,7 +95,9 @@ const HomeWrapper = () => {
                 offer top-quality materials, competitive prices, and timely
                 delivery – built on lasting relationships and trust.
               </p>
-              <button>Connect With Us</button>
+              <button onClick={() => navigate("/contact")}>
+                Connect With Us
+              </button>
             </div>
           </div>
         </>
@@ -117,7 +119,7 @@ const HomeWrapper = () => {
   };
 
   useEffect(() => {
-    const interval = setInterval(nextSlide, 30000); // Auto-slide every 30 seconds
+    const interval = setInterval(nextSlide, 30000);
     return () => clearInterval(interval);
   }, []);
 
@@ -135,15 +137,33 @@ const HomeWrapper = () => {
 
   return (
     <>
-      <video
-        src={video}
-        poster={comingsoon}
-        autoPlay
-        loop
-        muted
-        playsInline
-        onError={(e) => console.error("Video failed to load:", e)}
-      />
+      <div className="main-slider" ref={sliderRef}>
+        <div
+          className="slider-wrapper"
+          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+        >
+          {slides.map((slide, index) => (
+            <div key={index} className="slide">
+              {slide.content}
+            </div>
+          ))}
+        </div>
+        <button
+          className="slider-nav prev"
+          onClick={prevSlide}
+          aria-label="Previous slide"
+        >
+          ←
+        </button>
+        <button
+          className="slider-nav next"
+          onClick={nextSlide}
+          aria-label="Next slide"
+        >
+          →
+        </button>
+      </div>
+
       <section className="home-about-section">
         <h2 className="section-title">
           About <span className="line" />
@@ -162,7 +182,7 @@ const HomeWrapper = () => {
       </section>
       <section className="home-product-section">
         <h2 className="section-title">
-          Product
+          Categories
           <span className="section-underline" />
         </h2>
         <div className="product-grid">
@@ -183,8 +203,8 @@ const HomeWrapper = () => {
           <div className="product-card">
             <img src={surfaces} alt="Stones & Granites" />
             <div className="product-info">
-              <h3>STONES & GRANITES</h3>
-              <p>Premium stones and granites for elegant finishes.</p>
+              <h3>STONES</h3>
+              <p>Premium stones for elegant finishes.</p>
             </div>
           </div>
           <div className="product-card">
@@ -211,7 +231,7 @@ const HomeWrapper = () => {
         </div>
       </section>
       <BrandsWeOffer brands={brands} />
-      <section className="home-projects-section">
+      {/* <section className="home-projects-section">
         <h2 className="section-title">
           Our Projects
           <span className="line" />
@@ -249,33 +269,17 @@ const HomeWrapper = () => {
             <p>No projects available.</p>
           )}
         </div>
-      </section>
-      <div className="main-slider" ref={sliderRef}>
-        <div
-          className="slider-wrapper"
-          style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-        >
-          {slides.map((slide, index) => (
-            <div key={index} className="slide">
-              {slide.content}
-            </div>
-          ))}
-        </div>
-        <button
-          className="slider-nav prev"
-          onClick={prevSlide}
-          aria-label="Previous slide"
-        >
-          ←
-        </button>
-        <button
-          className="slider-nav next"
-          onClick={nextSlide}
-          aria-label="Next slide"
-        >
-          →
-        </button>
-      </div>
+      </section> */}
+      {/* Note: This video section seems out of place; consider styling or removing */}
+      <video
+        src={video}
+        poster={comingsoon}
+        autoPlay
+        loop
+        muted
+        playsInline
+        onError={(e) => console.error("Video failed to load:", e)}
+      />
       <section className="home-contact-section">
         <h2 className="section-title">
           Contact

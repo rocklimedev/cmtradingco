@@ -5,31 +5,27 @@ const BrandSlider = ({ brands = [], speed = 30 }) => {
     return <p className="no-brands">No brands available</p>;
   }
 
-  // Duplicate brands for seamless looping
+  // Duplicate for infinite effect
   const doubledBrands = [...brands, ...brands];
 
   return (
     <div
       className="brand-slider"
       style={{
-        // Allow dynamic speed control
         ["--scroll-speed"]: `${speed}s`,
       }}
     >
-      <div className="brand-slider-wrapper">
-        <div className="brand-slider-inner">
-          {doubledBrands.map((brand, index) => (
-            <div key={index} className="brand-slide">
-              <img
-                src={brand.logoSrc}
-                alt={`${brand.name || "Brand"} Logo`}
-                className="brand-logo"
-                loading="lazy"
-              />
-              <h3 className="brand-title">{brand.name}</h3>
-            </div>
-          ))}
-        </div>
+      <div className="brand-slider-track">
+        {doubledBrands.map((brand, index) => (
+          <div key={index} className="brand-logo-wrapper">
+            <img
+              src={brand.logoSrc}
+              alt={`${brand.name || "Brand"} Logo`}
+              className="brand-logo"
+              loading="lazy"
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

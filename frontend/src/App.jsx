@@ -1,6 +1,5 @@
 import Footer from "./components/Common/Footer";
 import Navbar from "./components/Common/Navbar";
-import logo from "./assets/img/logo.png";
 import Router from "./router/Router";
 import BrandSlider from "./components/Products/BrandSlider";
 import { useState } from "react";
@@ -13,10 +12,6 @@ function App() {
 
   return (
     <div className="main-wrapper">
-      <Link to="/">
-        <img src={logo} alt="Company Logo" className="logo" />
-      </Link>
-
       <Navbar />
       <Router />
 

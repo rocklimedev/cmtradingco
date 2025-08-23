@@ -1,12 +1,13 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Document, Page, pdfjs } from "react-pdf";
-import { FaExternalLinkAlt, FaEye, FaDownload } from "react-icons/fa";
-import brands from "../../assets/data/brands"; // Adjust path as needed
+import brands from "../../assets/data/brands";
 import project_title from "../../assets/img/projects/projects_title.png";
-import product_1 from "../../assets/img/home/product_1.jpg";
+import cp_fittings from "../../assets/img/home/CP FITTING.png";
+import wellness from "../../assets/img/home/WELLNESS.png";
+import surfaces from "../../assets/img/home/SIURFACE.png";
+import adhesive from "../../assets/img/home/ADHESIVE.png";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
-import BrandSlider from "./BrandSlider"; // Import BrandSlider
 import "./wrapper.css";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
@@ -17,8 +18,32 @@ const ProductWrapper = () => {
   const [selectedPdf, setSelectedPdf] = useState(null);
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const [activeBrandIndex, setActiveBrandIndex] = useState(0); // Shared state
+  const [selectedCategory, setSelectedCategory] = useState(null);
   const modalRef = useRef(null);
+
+  // Category to brand mapping
+  const categoryBrands = {
+    "CP Fittings & Sanitary": ["Grohe", "American Standard", "Colston"],
+    Tiles: ["Shiv Ceramic SGT", "JTC", "Nexion"],
+    Stones: [],
+    "Chemicals & Adhesive": ["JK Tylo", "Walpast"],
+    "Accessories & Add-ons": ["Grohe", "American Standard"],
+    Plumbing: ["Kantherm"],
+  };
+
+  // Filter brands based on selected category
+  const filteredBrands = selectedCategory
+    ? brands.filter((brand) =>
+        categoryBrands[selectedCategory].includes(brand.name)
+      )
+    : brands;
+
+  // Flatten PDFs for the selected category’s brands
+  const categoryPdfs = selectedCategory
+    ? filteredBrands.flatMap((brand) =>
+        brand.pdfs.map((pdf) => ({ ...pdf, brandName: brand.name }))
+      )
+    : [];
 
   // Handle click outside modal to close
   useEffect(() => {
@@ -42,7 +67,7 @@ const ProductWrapper = () => {
     const handleEsc = (event) => {
       if (event.key === "Escape") handleCloseModal();
     };
-    if (showModal) document.add都市EventListener("keydown", handleEsc);
+    if (showModal) document.addEventListener("keydown", handleEsc);
     return () => document.removeEventListener("keydown", handleEsc);
   }, [showModal]);
 
@@ -71,6 +96,18 @@ const ProductWrapper = () => {
     if (pageNumber < numPages) setPageNumber(pageNumber + 1);
   };
 
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+  };
+
+  const handleViewAll = () => {
+    setSelectedCategory(null);
+  };
+
+  const handleCatalogueClick = (url) => {
+    window.open(url, "_blank", "noopener,noreferrer");
+  };
+
   return (
     <div className="product-page-wrapper">
       <img
@@ -81,104 +118,110 @@ const ProductWrapper = () => {
       />
       <section className="banner-overlay">
         <h2 className="project-title">Our Brands</h2>
-        <div className="products-section">
-          <div className="section-products">
-            <img src={product_1} alt="Premium Products" loading="lazy" />
-            <div className="section-details">
-              <span>Premium Products</span>
-              <p>
-                Explore our curated selection of top-tier brands offering
-                premium sanitary ware, tiles, cement, and more.
-              </p>
-            </div>
-          </div>
-          <div className="project-content">
-            <p>
-              Chhabra Marble is your one-stop shop for high-quality tiles,
-              granites, marbles, and sanitary ware. With over 30 years of
-              experience, we partner with leading brands to provide architects,
-              designers, and homeowners with the finest materials. Browse our
-              brand catalogues below to discover innovative and durable
-              solutions for your projects.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section className="brands-gallery" aria-label="Brands and Catalogues">
-        {/* Replace the slider with BrandSlider component */}
-        <BrandSlider
-          activeBrandIndex={activeBrandIndex}
-          setActiveBrandIndex={setActiveBrandIndex}
-          brands={brands}
-        />
-        <div className="brand-content-section">
-          {brands[activeBrandIndex] && (
-            <div className="brand-section">
-              <div className="brand-header">
-                <div className="brand-info">
-                  <p className="brand-subtitle">
-                    {brands[activeBrandIndex].subtitle}
-                  </p>
-                  <p className="brand-content">
-                    {brands[activeBrandIndex].content}
+        {selectedCategory && (
+          <button className="view-all-button" onClick={handleViewAll}>
+            Back to Categories
+          </button>
+        )}
+        {!selectedCategory ? (
+          <>
+            <div className="product-grid">
+              <div
+                className="product-card"
+                onClick={() => handleCategoryClick("CP Fittings & Sanitary")}
+              >
+                <img src={cp_fittings} alt="CP Fittings" />
+                <div className="product-info">
+                  <h3>CP FITTINGS & SANITARY</h3>
+                  <p>Stylish and durable fittings for modern bathrooms.</p>
+                </div>
+              </div>
+              <div
+                className="product-card"
+                onClick={() => handleCategoryClick("Tiles")}
+              >
+                <img src={wellness} alt="Tiles" />
+                <div className="product-info">
+                  <h3>TILES</h3>
+                  <p>High-quality tiles for timeless beauty and durability.</p>
+                </div>
+              </div>
+              <div
+                className="product-card"
+                onClick={() => handleCategoryClick("Stones")}
+              >
+                <img src={surfaces} alt="Stones & Granites" />
+                <div className="product-info">
+                  <h3>STONES</h3>
+                  <p>Premium stones for elegant finishes.</p>
+                </div>
+              </div>
+              <div
+                className="product-card"
+                onClick={() => handleCategoryClick("Chemicals & Adhesive")}
+              >
+                <img src={adhesive} alt="Chemicals & Adhesive" />
+                <div className="product-info">
+                  <h3>CHEMICALS & ADHESIVE</h3>
+                  <p>
+                    Reliable adhesives for strong and lasting installations.
                   </p>
                 </div>
               </div>
-              {brands[activeBrandIndex].pdfs.length > 0 ? (
-                <div className="catalogue-grid">
-                  {brands[activeBrandIndex].pdfs.map((pdf) => (
-                    <article key={pdf.pdfId} className="catalogue-card">
-                      <div className="catalogue-image-wrapper">
-                        <img
-                          src={pdf.thumbnailUrl || comingsoon}
-                          alt={`${pdf.title} Catalogue`}
-                          className="catalogue-image"
-                          loading="lazy"
-                        />
-                        <div className="catalogue-actions">
-                          <a
-                            href={pdf.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="catalogue-action-btn"
-                            aria-label={`Open ${pdf.title} catalogue in new tab`}
-                            title="Open in New Tab"
-                          >
-                            <FaExternalLinkAlt />
-                          </a>
-                          <button
-                            onClick={() => handleViewPdf(pdf)}
-                            className="catalogue-action-btn"
-                            aria-label={`View ${pdf.title} catalogue in modal`}
-                            title="View"
-                          >
-                            <FaEye />
-                          </button>
-                          <a
-                            href={pdf.url}
-                            download={pdf.title}
-                            className="catalogue-action-btn"
-                            aria-label={`Download ${pdf.title} catalogue`}
-                            title="Download"
-                          >
-                            <FaDownload />
-                          </a>
-                        </div>
-                      </div>
-                      <h4 className="catalogue-title">{pdf.title}</h4>
-                      <p className="catalogue-description">{pdf.description}</p>
-                    </article>
-                  ))}
+              <div
+                className="product-card"
+                onClick={() => handleCategoryClick("Accessories & Add-ons")}
+              >
+                <img src={adhesive} alt="Accessories & Add-ons" />
+                <div className="product-info">
+                  <h3>ACCESSORIES & ADD ONS</h3>
+                  <p>Enhance your projects with premium accessories.</p>
                 </div>
-              ) : (
-                <p className="no-catalogues" aria-live="polite">
-                  No catalogues available for {brands[activeBrandIndex].name}.
-                </p>
-              )}
+              </div>
+              <div
+                className="product-card"
+                onClick={() => handleCategoryClick("Plumbing")}
+              >
+                <img src={wellness} alt="Plumbing" />
+                <div className="product-info">
+                  <h3>PLUMBING</h3>
+                  <p>
+                    High-quality plumbing solutions for seamless functionality.
+                  </p>
+                </div>
+              </div>
             </div>
-          )}
-        </div>
+          </>
+        ) : (
+          <section className="brands-gallery" aria-label="Catalogues">
+            {categoryPdfs.length > 0 ? (
+              <div className="product-grid">
+                {categoryPdfs.map((pdf) => (
+                  <div
+                    key={pdf.pdfId}
+                    className="product-card"
+                    onClick={() => handleCatalogueClick(pdf.url)}
+                  >
+                    <img
+                      src={pdf.thumbnailUrl || comingsoon}
+                      alt={`${pdf.title} Catalogue`}
+                      className="catalogue-image"
+                      loading="lazy"
+                    />
+                    <div className="product-info">
+                      <h3>{pdf.title}</h3>
+                      <p>{pdf.description}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <p className="no-catalogues" aria-live="polite">
+                No catalogues available for {selectedCategory}.
+              </p>
+            )}
+          </section>
+        )}
       </section>
 
       {showModal && selectedPdf && (
