@@ -47,6 +47,11 @@ const masterRoutes = [
     element: <CategoryProducts />,
     name: "Category Products",
   },
+  {
+    path: "/product/brand/:brandName",
+    element: <ProductWrapper />,
+    name: "Products View",
+  },
 ];
 
 export default masterRoutes;
