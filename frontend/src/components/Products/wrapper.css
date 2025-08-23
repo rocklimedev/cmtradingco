@@ -162,14 +162,13 @@ width: 100%;
   background: #fff;
   padding: 1rem 0;
 }
-
 /* Gradient corners */
 .brand-slider::before,
 .brand-slider::after {
   content: "";
   position: absolute;
   top: 0;
-  width: 200px;   /* wider fade */
+  width: 200px;   /* wider area */
   height: 100%;
   z-index: 2;
   pointer-events: none;
@@ -177,13 +176,24 @@ width: 100%;
 
 .brand-slider::before {
   left: 0;
-  background: linear-gradient(to right, #fff 80%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(
+    to right,
+    rgba(255, 255, 255, 0.9) 0%,   /* almost white but not solid */
+    rgba(255, 255, 255, 0.6) 40%,  /* softer */
+    rgba(255, 255, 255, 0.0) 100%  /* transparent */
+  );
 }
 
 .brand-slider::after {
   right: 0;
-  background: linear-gradient(to left, #fff 80%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(
+    to left,
+    rgba(255, 255, 255, 0.9) 0%,
+    rgba(255, 255, 255, 0.6) 40%,
+    rgba(255, 255, 255, 0.0) 100%
+  );
 }
+
 
 /* Scrolling track */
 .brand-slider-track {

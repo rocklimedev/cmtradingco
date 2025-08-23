@@ -33,8 +33,8 @@ const masterRoutes = [
     element: <ProjectWrapper />,
   },
   {
-    path: "/product",
-    name: "Product",
+    path: "/brands",
+    name: "Brands",
     element: <ProductWrapper />,
   },
   {

@@ -83,7 +83,7 @@ const Navbar = () => {
             </Link>
           </li>
           <li className="navbar-links">
-            <Link to="/product" onClick={() => setIsMobileMenuOpen(false)}>
+            <Link to="/brands" onClick={() => setIsMobileMenuOpen(false)}>
               Brands
             </Link>
           </li>
