@@ -216,22 +216,6 @@ const BrandSlider = () => {
           </div>
         ))}
       </div>
-      <div className="slider-controls">
-        <button
-          className="arrow"
-          onClick={() => handleArrowClick("prev")}
-          aria-label="Previous brand"
-        >
-          ←
-        </button>
-        <button
-          className="arrow"
-          onClick={() => handleArrowClick("next")}
-          aria-label="Next brand"
-        >
-          →
-        </button>
-      </div>
     </div>
   );
 };
