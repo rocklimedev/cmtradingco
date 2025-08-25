@@ -13,7 +13,7 @@ import brands from "../../assets/data/brands";
 import BrandsWeOffer from "./BrandsWeOffer";
 import loadProjectImages from "../utils/loadProjectImages";
 import video from "../../assets/img/video.m4v";
-
+import { useSubmitContactFormMutation } from "../../api/contactApi";
 const projectImages = {
   1: {
     master: require("../../assets/img/projects_data/1/Background.jpg"),
@@ -60,6 +60,55 @@ const HomeWrapper = () => {
   const [selectedProject, setSelectedProject] = useState(null);
   const sliderRef = useRef(null);
   const projects = loadProjectImages();
+  const [submitContactForm, { isLoading, isSuccess, isError, error }] =
+    useSubmitContactFormMutation();
+  const [showSuccess, setShowSuccess] = useState(false);
+  const [showError, setShowError] = useState(false);
+
+  useEffect(() => {
+    if (isSuccess) {
+      setShowSuccess(true);
+      const timer = setTimeout(() => setShowSuccess(false), 2000); // 3s timeout
+      return () => clearTimeout(timer);
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (isError) {
+      setShowError(true);
+      const timer = setTimeout(() => setShowError(false), 2000); // 3s timeout
+      return () => clearTimeout(timer);
+    }
+  }, [isError]);
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await submitContactForm(formData).unwrap();
+      alert("✅ Message sent successfully!");
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        message: "",
+      });
+    } catch (err) {
+      console.error("❌ Failed to send:", err);
+      alert("Something went wrong. Please try again.");
+    }
+  };
 
   const slides = [
     {
@@ -104,11 +153,6 @@ const HomeWrapper = () => {
       ),
     },
   ];
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Form submitted");
-  };
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
@@ -293,22 +337,57 @@ const HomeWrapper = () => {
                   type="text"
                   name="firstName"
                   placeholder="First Name"
+                  value={formData.firstName}
+                  onChange={handleChange}
                   required
                 />
                 <input
                   type="text"
                   name="lastName"
                   placeholder="Last Name"
+                  value={formData.lastName}
+                  onChange={handleChange}
                   required
                 />
               </div>
               <div className="form-row">
-                <input type="email" name="email" placeholder="Email" required />
-                <input type="tel" name="phone" placeholder="Phone Number" />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  type="tel"
+                  name="phone"
+                  placeholder="Phone Number"
+                  value={formData.phone}
+                  onChange={handleChange}
+                />
               </div>
-              <textarea name="message" placeholder="Your Message" required />
-              <button type="submit">SEND MESSAGE</button>
+              <textarea
+                name="message"
+                placeholder="Your Message"
+                value={formData.message}
+                onChange={handleChange}
+                required
+              />
+              <button type="submit" disabled={isLoading}>
+                {isLoading ? "Sending..." : "SEND MESSAGE"}
+              </button>
             </form>
+
+            {/* Feedback messages */}
+            {showSuccess && (
+              <p className="success-msg">✅ Thank you! We’ll reply soon.</p>
+            )}
+            {showError && (
+              <p className="error-msg">
+                ❌ Error: {error?.data?.message || "Try again later."}
+              </p>
+            )}
           </div>
           <div className="contact-info">
             <h3>Contact Information</h3>
