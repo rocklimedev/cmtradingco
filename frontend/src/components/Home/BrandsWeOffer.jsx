@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import brands from "../../assets/data/brands"; // Adjust path as needed
-
+import { Link } from "react-router-dom";
 const BrandSlider = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
@@ -192,12 +192,14 @@ const BrandSlider = () => {
             className="box-section"
             onClick={() => brand.pdf && handleViewPdf(brand.pdf)} // Only trigger if brand has a PDF
           >
-            <img
-              src={brand.logoSrc}
-              alt={`${brand.name} Logo`}
-              className="company-logo"
-              loading="lazy"
-            />
+            <Link to={brand.link}>
+              <img
+                src={brand.logoSrc}
+                alt={`${brand.name} Logo`}
+                className="company-logo"
+                loading="lazy"
+              />
+            </Link>
           </div>
         ))}
         {/* Duplicate brands for seamless looping */}
@@ -207,12 +209,14 @@ const BrandSlider = () => {
             className="box-section"
             onClick={() => brand.pdf && handleViewPdf(brand.pdf)}
           >
-            <img
-              src={brand.logoSrc}
-              alt={`${brand.name} Logo`}
-              className="company-logo"
-              loading="lazy"
-            />
+            <Link to={brand.link}>
+              <img
+                src={brand.logoSrc}
+                alt={`${brand.name} Logo`}
+                className="company-logo"
+                loading="lazy"
+              />
+            </Link>
           </div>
         ))}
       </div>
