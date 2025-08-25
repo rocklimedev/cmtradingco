@@ -146,14 +146,27 @@
   padding: var(--spacing-2xl, 2rem) var(--spacing-md, 1rem);
   margin: 0 auto;
 }
+/* Section wrapper: keeps slider between above & below divs */
+.brand-slider-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 0;  /* space between sections */
+  width: 100%;
+}
+
 /* Outer container */
 .brand-slider {
   overflow: hidden;
   position: relative;
-  width: 100%;
+  width: 90%;          /* narrower than full width */
+  max-width: 1200px;   /* center aligned */
   background: #fff;
   padding: 1rem 0;
+  border-radius: 12px; /* optional: smooth look */
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
+
 /* Gradient corners */
 .brand-slider::before,
 .brand-slider::after {

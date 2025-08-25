@@ -106,7 +106,7 @@ const ProductWrapper = () => {
         loading="lazy"
       />
       <section className="banner-overlay">
-        <h2 className="project-title">Our Brands</h2>
+        <h2 className="project-title">Our Categories</h2>
         {selectedCategory && (
           <button className="back-to-button" onClick={handleViewAll}>
             Back to Categories
@@ -193,10 +193,6 @@ const ProductWrapper = () => {
                       className="catalogue-image"
                       loading="lazy"
                     />
-                    <div className="product-info">
-                      <h3>{brand.name}</h3>
-                      <p>{brand.subtitle}</p>
-                    </div>
                   </div>
                 ))}
               </div>

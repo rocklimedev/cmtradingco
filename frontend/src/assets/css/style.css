@@ -1623,26 +1623,31 @@ position: absolute;
 .footer-container {
   background-color: #c40000;
   color: #fff;
-  padding: 2rem 1rem; /* Reduced padding for compactness */
+  padding: 3rem 1rem; /* Increased padding for larger footer */
   font-family: var(--font-family, sans-serif);
 }
 
 .footer-inner {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: flex-start; /* Align content to the left */
   align-items: flex-start;
   margin: 0 auto;
-  padding: 0 1rem;
-  gap: 1.5rem; /* Reduced gap for tighter layout */
-  max-width: 1200px; /* Added max-width for better desktop alignment */
+  padding: 0 0.5rem; /* Reduced side margins */
+  gap: 2rem; /* Adjusted gap for better spacing */
+  max-width: 1400px; /* Increased max-width for larger footer */
 }
+
+.footer-logo {
+  flex: 0 0 auto; /* Prevent logo from shrinking */
+}
+
 .footer-logo img {
-  max-width: 200px; /* Increased logo size */
+  max-width: 250px; /* Increased logo size */
   height: auto;
-  margin: 0 auto; /* Center logo on all devices */
+  margin: 0; /* Remove centering margin */
 }
-.footer-logo,
+
 .footer-nav,
 .footer-categories,
 .footer-contact {
@@ -1650,17 +1655,17 @@ position: absolute;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
-  margin-bottom: 1rem; /* Reduced margin for compactness */
+  margin-bottom: 1.5rem; /* Slightly increased for spacing */
+  flex: 1 1 200px; /* Flexible width for other columns */
 }
-
 
 .footer-nav h4,
 .footer-categories h4,
 .footer-contact h4 {
-font-size: 1.5rem;
+  font-size: 1.6rem; /* Slightly larger headings */
   font-weight: 600;
-  margin-bottom: 0.5rem;
-  line-height: 1.4; /* Improved line spacing */
+  margin-bottom: 0.75rem;
+  line-height: 1.4;
 }
 
 .footer-nav ul,
@@ -1670,9 +1675,9 @@ font-size: 1.5rem;
   margin: 0;
   display: flex;
   flex-direction: column;
-  gap: 0.4rem; /* Reduced gap for tighter lists */
-  font-size: 0.85rem; /* Smaller font for compactness */
-  line-height: 1.5; /* Optimized line spacing */
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
 .footer-nav a {
@@ -1686,19 +1691,19 @@ font-size: 1.5rem;
 }
 
 .footer-contact p {
-  font-size: 0.85rem;
-  line-height: 1.4; /* Adjusted for better readability */
-  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
 }
 
 .footer-socials {
   display: flex;
-  gap: 0.75rem; /* Slightly smaller gap */
-  margin-top: 0.5rem;
+  gap: 1rem;
+  margin-top: 0.75rem;
 }
 
 .footer-socials a {
-  font-size: 1.1rem; /* Smaller icons for mobile */
+  font-size: 1.2rem;
   color: white;
   transition: color 0.3s ease;
 }
@@ -1708,125 +1713,117 @@ font-size: 1.5rem;
 }
 
 .footer-copyright-wrapper {
-  background-color: #fff; /* White background for copyright section */
-  padding: 0.75rem 1rem; /* Reduced padding for compactness */
+  background-color: #fff;
+  padding: 1rem 1rem;
   text-align: center;
 }
 
 .footer-copyright {
-  font-size: 0.85rem; /* Smaller font for copyright */
-  color: #000; /* Black text */
+  font-size: 0.9rem;
+  color: #000;
   margin: 0;
-  line-height: 1.4; /* Consistent line spacing */
+  line-height: 1.5;
 }
 
 .footer-copyright a {
-  color: #000; /* Black link text */
+  color: #000;
   text-decoration: none;
 }
 
 .footer-copyright a:hover {
-  text-decoration: underline; /* Subtle hover effect */
+  text-decoration: underline;
 }
-
-
 
 /* ----------------------------
    Responsive Design
 ---------------------------- */
 @media (max-width: 1024px) {
   .footer-inner {
-    gap: 1rem; /* Further reduced gap */
+    gap: 1.5rem;
+    padding: 0 0.5rem; /* Maintain reduced margins */
   }
 
   .footer-logo img {
-    max-width: 180px; /* Slightly smaller logo for tablets */
+    max-width: 220px; /* Slightly smaller logo for tablets */
   }
 
   .footer-nav h4,
   .footer-categories h4,
   .footer-contact h4 {
-    font-size: 0.95rem;
+    font-size: 1.4rem;
+  }
+
+  .footer-nav ul,
+  .footer-categories ul,
+  .footer-contact p {
+    font-size: 0.85rem;
+  }
+
+  .footer-socials a {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-inner {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items for mobile */
+    text-align: center;
+    gap: 1.5rem;
+  }
+
+  .footer-logo {
+    margin-bottom: 1.5rem;
+  }
+
+  .footer-logo img {
+    max-width: 200px; /* Adjusted for smaller screens */
+  }
+
+  .footer-nav,
+  .footer-categories,
+  .footer-contact {
+    align-items: center;
+    flex: 1 1 100%; /* Full width for each section */
+  }
+
+  .footer-socials {
+    justify-content: center;
+    margin-top: 0.75rem;
+  }
+
+  .footer-copyright-wrapper {
+    padding: 0.75rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-container {
+    padding: 2rem 0.5rem; /* Adjusted padding for smaller screens */
+  }
+
+  .footer-logo img {
+    max-width: 180px; /* Smaller logo for mobile */
+  }
+
+  .footer-nav h4,
+  .footer-categories h4,
+  .footer-contact h4 {
+    font-size: 1.2rem;
   }
 
   .footer-nav ul,
   .footer-categories ul,
   .footer-contact p {
     font-size: 0.8rem;
-    line-height: 1.4;
   }
 
   .footer-socials a {
     font-size: 1rem;
   }
-}
-
-@media (max-width: 768px) {
-  .footer-inner {
-    flex-direction: row; /* Keep items in a row */
-    flex-wrap: wrap; /* Allow wrapping to next line */
-    justify-content: center;
-    text-align: center;
-  }
-
-  .footer-logo,
-  .footer-nav,
-  .footer-categories,
-  .footer-contact {
-    flex: 1 1 150px; /* Flexible width for wrapping */
-    margin-bottom: 1rem;
-    align-items: center;
-    text-align: center;
-  }
-
-  .footer-logo img {
-    max-width: 160px; /* Adjusted for smaller screens */
-    margin-bottom: 0.5rem;
-  }
-
-  .footer-socials {
-    justify-content: center;
-    margin-top: 0.5rem;
-  }
-
-  .footer-contact {
-    flex: 1 1 100%; /* Force contact info full width */
-    order: 5; /* Push it below nav + categories */
-  }
-
-  .footer-copyright-wrapper {
-    padding: 0.5rem 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .footer-container {
-    padding: 1.5rem 0.75rem; /* Further reduced padding */
-  }
-
-  .footer-logo img {
-    max-width: 140px; /* Smaller logo for mobile */
-  }
-
-  .footer-nav h4,
-  .footer-categories h4,
-  .footer-contact h4 {
-    font-size: 0.9rem;
-  }
-
-  .footer-nav ul,
-  .footer-categories ul,
-  .footer-contact p {
-    font-size: 0.75rem; /* Smaller font for small screens */
-    line-height: 1.3; /* Tighter line spacing */
-  }
-
-  .footer-socials a {
-    font-size: 0.9rem; /* Smaller social icons */
-  }
 
   .footer-copyright {
-    font-size: 0.7rem; /* Smallest font for copyright */
+    font-size: 0.75rem;
   }
 }
 /* Contact Page */

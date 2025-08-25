@@ -1,46 +1,57 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;600;700&display=swap");
+
+/* Using root variables from your global theme */
 .notfound-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  align-items: center;
   height: 100vh;
-  background-color: #f8f9fa;
+  background: var(--bg-secondary);
   text-align: center;
-  padding: 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding: var(--spacing-lg);
 }
 
 .notfound-heading {
-  font-size: 6rem;
-  font-weight: bold;
-  color: #2c3e50;
-  margin-bottom: 0.2em;
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--primary-color);
+  letter-spacing: 2px;
+  margin-bottom: var(--spacing-md);
+  font-family: "Neuropol", sans-serif;
 }
 
 .notfound-subheading {
-  font-size: 2rem;
-  color: #6c757d;
-  margin-bottom: 0.5em;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-sm);
 }
 
 .notfound-message {
-  font-size: 1.1rem;
-  color: #7b8a8b;
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-lg);
   max-width: 500px;
-  margin-bottom: 1.5em;
+  line-height: var(--line-height-base);
 }
 
 .notfound-link {
   display: inline-block;
-  padding: 12px 24px;
-  font-size: 1rem;
-  color: #fff;
-  background-color: #007bff;
-  border-radius: 5px;
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-light);
+  background: var(--primary-color);
+  border-radius: var(--border-radius-md);
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  transition: background var(--transition-base), transform var(--transition-base);
+  box-shadow: var(--shadow-sm);
 }
 
 .notfound-link:hover {
-  background-color: #0056b3;
+  background: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }

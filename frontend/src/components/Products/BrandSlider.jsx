@@ -9,25 +9,27 @@ const BrandSlider = ({ brands = [], speed = 30 }) => {
   const doubledBrands = [...brands, ...brands];
 
   return (
-    <div
-      className="brand-slider"
-      style={{
-        ["--scroll-speed"]: `${speed}s`,
-      }}
-    >
-      <div className="brand-slider-track">
-        {doubledBrands.map((brand, index) => (
-          <div key={index} className="brand-logo-wrapper">
-            <img
-              src={brand.logoSrc}
-              alt={`${brand.name || "Brand"} Logo`}
-              className="brand-logo"
-              loading="lazy"
-            />
-          </div>
-        ))}
+    <section className="brand-slider-section">
+      <div
+        className="brand-slider"
+        style={{
+          ["--scroll-speed"]: `${speed}s`,
+        }}
+      >
+        <div className="brand-slider-track">
+          {doubledBrands.map((brand, index) => (
+            <div key={index} className="brand-logo-wrapper">
+              <img
+                src={brand.logoSrc}
+                alt={`${brand.name || "Brand"} Logo`}
+                className="brand-logo"
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </section>
   );
 };
 
