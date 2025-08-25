@@ -6,6 +6,7 @@ import ProjectWrapper from "../components/Projects/ProjectWrapper";
 import ProductWrapper from "../components/Products/ProductWrapper";
 import CategoryProducts from "../components/Products/CategoriesProducts";
 import ProductDetails from "../components/Products/ProductDetails";
+
 const masterRoutes = [
   {
     path: "/",
@@ -38,19 +39,14 @@ const masterRoutes = [
     element: <ProductWrapper />,
   },
   {
-    path: "/product/brand/:brandName",
-    name: "Product",
-    element: <ProductDetails />,
-  },
-  {
     path: "/store/cat/:categoryId",
-    element: <CategoryProducts />,
     name: "Category Products",
+    element: <CategoryProducts />,
   },
   {
     path: "/product/brand/:brandName",
-    element: <ProductWrapper />,
-    name: "Products View",
+    name: "Brand Catalogues",
+    element: <ProductDetails />,
   },
 ];
 

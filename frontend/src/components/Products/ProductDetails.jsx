@@ -1,251 +1,85 @@
-import React, { useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { Document, Page, pdfjs } from "react-pdf";
-import {
-  EyeOutlined,
-  DownloadOutlined,
-  LinkOutlined,
-  LoadingOutlined,
-} from "@ant-design/icons";
-import project_title from "../../assets/img/projects/projects_title.png";
+import React from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import brands from "../../assets/data/brands";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
-import product_1 from "../../assets/img/home/product_1.jpg";
 import "./wrapper.css";
 
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.min.js`;
+const CatalogueGallery = ({ pdfs, handleCatalogueClick }) => {
+  return (
+    <section className="brands-gallery" aria-label="Catalogues">
+      {pdfs && pdfs.length > 0 ? (
+        <div className="product-grid">
+          {pdfs.map((pdf) => (
+            <div
+              key={pdf.pdfId}
+              className="product-card"
+              onClick={() => handleCatalogueClick(pdf.url)}
+            >
+              <img
+                src={pdf.thumbnailUrl || comingsoon}
+                alt={`${pdf.title} Catalogue`}
+                className="catalogue-image"
+                loading="lazy"
+              />
+              <div className="product-info">
+                <h3>{pdf.title}</h3>
+                <p>{pdf.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p className="no-catalogues" aria-live="polite">
+          No catalogues available for this brand.
+        </p>
+      )}
+    </section>
+  );
+};
 
 const ProductDetails = () => {
+  const { brandName } = useParams();
   const navigate = useNavigate();
-  const location = useLocation();
-  const { brand } = location.state || {};
-  const [showModal, setShowModal] = useState(false);
-  const [selectedPdf, setSelectedPdf] = useState(null);
-  const [numPages, setNumPages] = useState(null);
-  const [pageNumber, setPageNumber] = useState(1);
-  const [thumbnailErrors, setThumbnailErrors] = useState({});
+  const brand = brands.find((b) => b.link === `/product/brand/${brandName}`);
 
-  const handleCategoryClick = (categoryId, categoryName) => {
-    navigate(`/store/cat/${categoryId}`, { state: { categoryName } });
+  // Debug: Log brandName and brand
+  console.log("Brand Name from URL:", brandName);
+  console.log("Found Brand:", brand);
+  console.log("Brand PDFs:", brand?.pdfs);
+
+  const handleCatalogueClick = (url) => {
+    console.log("Opening PDF:", url);
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
-  const handleViewPdf = (pdf) => {
-    setSelectedPdf(pdf);
-    setShowModal(true);
-    setPageNumber(1);
+  const handleBack = () => {
+    navigate("/brands");
   };
 
-  const handleCloseModal = () => {
-    setShowModal(false);
-    setSelectedPdf(null);
-    setNumPages(null);
-  };
-
-  const onDocumentLoadSuccess = ({ numPages }) => {
-    setNumPages(numPages);
-  };
-
-  const handlePreviousPage = () => {
-    if (pageNumber > 1) {
-      setPageNumber(pageNumber - 1);
-    }
-  };
-
-  const handleNextPage = () => {
-    if (pageNumber < numPages) {
-      setPageNumber(pageNumber + 1);
-    }
-  };
-
-  const handleDownloadPdf = async (pdf) => {
-    try {
-      const response = await fetch(pdf.url);
-      if (!response.ok) {
-        throw new Error(`Failed to fetch PDF: ${response.statusText}`);
-      }
-      const blob = await response.blob();
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement("a");
-      link.href = url;
-      link.download = `${pdf.title}.pdf`;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      window.URL.revokeObjectURL(url);
-    } catch (error) {
-      console.error("Download error:", error);
-      alert("Failed to download PDF. Please try again or check the PDF URL.");
-    }
-  };
-
-  const handleThumbnailError = (pdfId) => {
-    setThumbnailErrors((prev) => ({ ...prev, [pdfId]: true }));
-  };
+  if (!brand) {
+    console.log("Brand not found for:", brandName);
+    return (
+      <div>
+        Brand not found.{" "}
+        <button onClick={() => navigate("/brands")}>Back to Brands</button>
+      </div>
+    );
+  }
 
   return (
-    <main className="projects-wrapper">
-      <div className="banner-container">
-        <img
-          src={project_title}
-          alt="Projects Page Banner"
-          className="projects-page-image"
+    <div className="product-page-wrapper">
+      <section className="banner-overlay">
+        <h2 className="project-title">{brand.name} Catalogues</h2>
+        <button className="back-to-button" onClick={handleBack}>
+          Back to Categories
+        </button>
+
+        <CatalogueGallery
+          pdfs={brand.pdfs}
+          handleCatalogueClick={handleCatalogueClick}
         />
-        <section className="banner-overlay">
-          <h2 className="project-title">{brand ? brand.name : "Product"}</h2>
-          <div className="products-section">
-            <div className="section-products">
-              <img src={product_1} alt="Sanitary Product" />
-              <div className="section-details">
-                <span>{brand ? brand.name.toUpperCase() : "SANITARY"}</span>
-                <p>
-                  {brand
-                    ? brand.subtitle
-                    : "Premium sanitary ware blending style, comfort, and durability"}
-                </p>
-              </div>
-            </div>
-            <div className="project-content">
-              <p>
-                {brand
-                  ? brand.content
-                  : "Chhabra Marble is built with the vision of proving a one stop shop to its customers for all their tiles, granites and marble needs. Being in the business for more than 30 years, we have enough experience to be able to work with interior designers and architects and provide them with the best quality raw materials that turn the valuable ideas into reality. As far as the stocks are concerned we house the latest variety of marbles, tiles, kota stone, granite etc. We also deal in sanitary ware. We render our services with the desire to establish lifelong relationships with our valuable customers hence we take utmost care to provide them with best pricing when compared to other competitors. We also ensure best packaging and delivery so that our products reach well on time and are in their best shape."}
-              </p>
-            </div>
-          </div>
-        </section>
-      </div>
-
-      <section className="catalogue-gallery" aria-label="Brand Catalogues">
-        {brand ? (
-          <>
-            <h3>{brand.name} Catalogues</h3>
-            {brand.pdfs.length > 0 ? (
-              <div className="catalogue-grid">
-                {brand.pdfs.map((pdf) => (
-                  <article key={pdf.pdfId} className="catalogue-card">
-                    <div className="catalogue-image-wrapper">
-                      {thumbnailErrors[pdf.pdfId] ? (
-                        <img
-                          src={comingsoon}
-                          alt={pdf.title}
-                          className="catalogue-image"
-                        />
-                      ) : (
-                        <Document
-                          file={pdf.url}
-                          onLoadError={() => handleThumbnailError(pdf.pdfId)}
-                          loading={
-                            <LoadingOutlined className="thumbnail-loading" />
-                          }
-                        >
-                          <Page
-                            pageNumber={1}
-                            width={250}
-                            className="catalogue-image"
-                          />
-                        </Document>
-                      )}
-                      <div className="catalogue-actions">
-                        <button
-                          onClick={() => handleViewPdf(pdf)}
-                          className="catalogue-action-btn"
-                          aria-label={`View ${pdf.title} catalogue`}
-                          title="View Catalogue"
-                        >
-                          <EyeOutlined />
-                        </button>
-                        <a
-                          href={pdf.url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="catalogue-action-btn"
-                          aria-label={`Open ${pdf.title} catalogue in new tab`}
-                          title="Open in New Tab"
-                        >
-                          <LinkOutlined />
-                        </a>
-                        <button
-                          onClick={() => handleDownloadPdf(pdf)}
-                          className="catalogue-action-btn"
-                          aria-label={`Download ${pdf.title} catalogue`}
-                          title="Download Catalogue"
-                        >
-                          <DownloadOutlined />
-                        </button>
-                      </div>
-                    </div>
-                    <h4 className="catalogue-title">{pdf.title}</h4>
-                    <p className="catalogue-description">{pdf.description}</p>
-                  </article>
-                ))}
-              </div>
-            ) : (
-              <p className="no-catalogues" aria-live="polite">
-                No catalogues available for {brand.name}.
-              </p>
-            )}
-          </>
-        ) : (
-          <p className="no-brand" aria-live="assertive">
-            No brand selected. Please select a brand from the homepage.
-          </p>
-        )}
       </section>
-
-      {showModal && selectedPdf && (
-        <div
-          className="pdf-modal"
-          role="dialog"
-          aria-labelledby="pdf-modal-title"
-        >
-          <div className="pdf-modal-content">
-            <div className="pdf-modal-header">
-              <h3 id="pdf-modal-title">{selectedPdf.title}</h3>
-              <button
-                onClick={handleCloseModal}
-                className="close-button"
-                aria-label="Close PDF viewer"
-              >
-                ×
-              </button>
-            </div>
-            <div className="pdf-modal-body">
-              <Document
-                file={selectedPdf.url}
-                onLoadSuccess={onDocumentLoadSuccess}
-                onLoadError={(error) => {
-                  console.error("PDF modal load error:", error);
-                  alert("Failed to load PDF. Please try again.");
-                }}
-                className="pdf-document"
-                loading={<p>Loading PDF...</p>}
-                error={<p>Error loading PDF. Please try again.</p>}
-              >
-                <Page pageNumber={pageNumber} />
-              </Document>
-              <div className="pdf-controls">
-                <button
-                  onClick={handlePreviousPage}
-                  disabled={pageNumber <= 1}
-                  aria-label="Previous page"
-                >
-                  Previous
-                </button>
-                <p>
-                  Page {pageNumber} of {numPages || "..."}
-                </p>
-                <button
-                  onClick={handleNextPage}
-                  disabled={pageNumber >= numPages}
-                  aria-label="Next page"
-                >
-                  Next
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
-    </main>
+    </div>
   );
 };
 

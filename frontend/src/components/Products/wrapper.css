@@ -65,15 +65,7 @@
   padding-bottom: var(--spacing-3xl, 3rem);
 }
 
-.product-page-image {
-width: 100%;
-    max-width: 1920px;
-    height: auto;
-    max-height: 400px;
-    object-fit: cover;
-    display: block;
-    margin-bottom: 40px
-}
+
 
 /* Banner Overlay */
 .banner-overlay {
@@ -475,9 +467,7 @@ width: 100%;
 
 /* iPad (max-width: 1024px) */
 @media (max-width: 1024px) {
-  .product-page-image {
-    max-height: 350px;
-  }
+
 
   .banner-overlay {
     padding: var(--spacing-xl, 1.5rem) var(--spacing-md, 1rem);
@@ -546,9 +536,7 @@ width: 100%;
 
 /* Mobile (max-width: 480px) */
 @media (max-width: 480px) {
-  .product-page-image {
-    max-height: 300px;
-  }
+
 
   .banner-overlay {
     padding: var(--spacing-lg, 1rem) var(--spacing-sm, 0.75rem);
