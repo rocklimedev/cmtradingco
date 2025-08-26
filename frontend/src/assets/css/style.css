@@ -1166,7 +1166,6 @@ top: 112px;
 .projects-wrapper {
   width: 100%;
   margin: 0 auto;
-  padding-bottom: 80px;
   background: var(--bg-primary);
   display: flex;
   flex-direction: column;

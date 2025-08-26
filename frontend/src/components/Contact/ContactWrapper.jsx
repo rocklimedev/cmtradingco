@@ -47,7 +47,7 @@ const ContactWrapper = () => {
 
     try {
       const result = await submitContactForm(formData).unwrap();
-      setServerMessage("Message sent successfully!");
+      alert("✅ Message sent successfully!");
       setFormData({
         firstName: "",
         lastName: "",
@@ -57,9 +57,7 @@ const ContactWrapper = () => {
       });
     } catch (err) {
       console.error("Error submitting form:", err);
-      setServerMessage(
-        err?.data?.message || "Server error, please try again later"
-      );
+      alert("Something went wrong. Please try again.");
     }
   };
 
