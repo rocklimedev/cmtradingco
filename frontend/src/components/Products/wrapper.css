@@ -156,15 +156,19 @@
 }
 
 /* Outer container */
+/* Outer container */
 .brand-slider {
   overflow: hidden;
   position: relative;
-  width: 90%;          /* narrower than full width */
-  max-width: 1200px;   /* center aligned */
+  width: 100%;            /* take full screen width */
+  max-width: 100%;        /* no hard cap */
   background: #fff;
   padding: 1rem 0;
-  border-radius: 12px; /* optional: smooth look */
+  border-radius: 0;       /* remove rounding if you want flush edges */
+  margin: 0 20px;         /* small gap from screen edges */
+  border-radius: 12px;    /* keep smooth corners inside gap */
 }
+
 
 /* Gradient corners */
 .brand-slider::before,

@@ -1855,19 +1855,23 @@ position: absolute;
   flex-wrap: wrap;
   gap: 40px;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: stretch; /* makes map match form height */
   margin-bottom: 40px;
-  padding: 0 40px; /* Adds horizontal space */
+  padding: 0 40px;
 }
+
 
 .contact-map {
   flex: 1;
-  border-radius: 8px;
+  width: 100%;
+  height: 100%;
+  min-height: 400px;
+  border: none; /* removes the window look */
+  border-radius: 12px; /* smooth professional edges */
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1); /* subtle elevation */
   overflow: hidden;
-  height: 400px;
-  min-width: 300px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
+
 
 .contact-form {
   flex: 1;
@@ -2030,9 +2034,14 @@ padding: 35px 30px;
 @media (max-width: 768px) {
   .contact-details {
     flex-direction: column;
+    gap: 20px;
   }
 
-  .contact-map,
+  .contact-map {
+    min-height: 300px;
+    width: 100%;
+  }
+
   .contact-form {
     flex: 1 1 100%;
   }

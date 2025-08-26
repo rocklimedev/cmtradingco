@@ -4,7 +4,7 @@ import { IoMdMail } from "react-icons/io";
 import { FaMapMarkerAlt } from "react-icons/fa";
 import contact from "../../assets/img/contact_title_section.jpg";
 import { useSubmitContactFormMutation } from "../../api/contactApi";
-
+import "./contact.css";
 const ContactWrapper = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -110,54 +110,72 @@ const ContactWrapper = () => {
 
       {/* Form + Map Side by Side */}
       <div className="contact-details">
-        <form className="contact-form-content" onSubmit={handleSubmit}>
-          <div className="form-row">
+        <form className="contact-form-box" onSubmit={handleSubmit}>
+          <div className="contact-form-row">
             <input
               type="text"
               id="firstName"
+              className="contact-input"
               placeholder="First Name"
               value={formData.firstName}
               onChange={handleChange}
               required
             />
             {errors.firstName && (
-              <span className="error">{errors.firstName}</span>
+              <span className="contact-error">{errors.firstName}</span>
             )}
+
             <input
               type="text"
               id="lastName"
+              className="contact-input"
               placeholder="Last Name"
               value={formData.lastName}
               onChange={handleChange}
             />
           </div>
-          <div className="form-row">
+
+          <div className="contact-form-row">
             <input
               type="email"
               id="email"
+              className="contact-input"
               placeholder="Email"
               value={formData.email}
               onChange={handleChange}
               required
             />
-            {errors.email && <span className="error">{errors.email}</span>}
+            {errors.email && (
+              <span className="contact-error">{errors.email}</span>
+            )}
+
             <input
               type="tel"
               id="phone"
+              className="contact-input"
               placeholder="Phone Number"
               value={formData.phone}
               onChange={handleChange}
             />
           </div>
+
           <textarea
             id="message"
+            className="contact-textarea"
             placeholder="Your Message"
             value={formData.message}
             onChange={handleChange}
             required
           />
-          {errors.message && <span className="error">{errors.message}</span>}
-          <button type="submit" disabled={isLoading}>
+          {errors.message && (
+            <span className="contact-error">{errors.message}</span>
+          )}
+
+          <button
+            type="submit"
+            className="contact-submit-btn"
+            disabled={isLoading}
+          >
             {isLoading ? "SENDING..." : "SEND MESSAGE"}
           </button>
         </form>
