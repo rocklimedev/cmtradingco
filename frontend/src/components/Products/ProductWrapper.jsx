@@ -8,7 +8,7 @@ import surfaces from "../../assets/img/home/SIURFACE.png";
 import adhesive from "../../assets/img/home/ADHESIVE.png";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
 import "./wrapper.css";
-
+import { IoMdArrowRoundBack } from "react-icons/io";
 const CatalogueGallery = ({ pdfs, handleCatalogueClick }) => {
   return (
     <section className="brands-gallery" aria-label="Catalogues">
@@ -109,7 +109,7 @@ const ProductWrapper = () => {
         <h2 className="project-title">Our Categories</h2>
         {selectedCategory && (
           <button className="back-to-button" onClick={handleViewAll}>
-            Back to Categories
+            <IoMdArrowRoundBack /> Back
           </button>
         )}
         {!selectedCategory ? (

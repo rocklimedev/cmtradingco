@@ -3,7 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import brands from "../../assets/data/brands";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
 import "./wrapper.css";
-
+import project_title from "../../assets/img/projects/projects_title.png";
+import { IoMdArrowRoundBack } from "react-icons/io";
 const CatalogueGallery = ({ pdfs, handleCatalogueClick }) => {
   return (
     <section className="brands-gallery" aria-label="Catalogues">
@@ -68,10 +69,16 @@ const ProductDetails = () => {
 
   return (
     <div className="product-page-wrapper">
+      <img
+        src={project_title}
+        alt="Products Banner"
+        className="product-page-image"
+        loading="lazy"
+      />
       <section className="banner-overlay">
         <h2 className="project-title">{brand.name} Catalogues</h2>
         <button className="back-to-button" onClick={handleBack}>
-          Back to Categories
+          <IoMdArrowRoundBack /> Back
         </button>
 
         <CatalogueGallery

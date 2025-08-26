@@ -791,7 +791,7 @@ top: 112px;
 .home-contact-section {
   font: var(--font-weight-bold) var(--font-size-2xl) / var(--line-height-tight) var(--font-family);
   width: 100%;
-  padding: 40px 16px;
+/* padding: 40px 16px; */
   background: #fff;
   text-align: center;
   box-sizing: border-box;
@@ -1830,7 +1830,7 @@ position: absolute;
 .contact-wrapped {
   background-color: #fff;
   font-family: "Lato", sans-serif;
-  padding-bottom: 80px;
+  /* padding-bottom: 80px; */
 }
 
 .contact-page-image {
@@ -2175,7 +2175,7 @@ padding: 35px 30px;
 }
 
 .about-why-us-section {
-  padding: 4rem 1rem;
+  /* padding: 4rem 1rem; */
   max-width: 1200px;
   margin: 0 auto;
   text-align: center;
