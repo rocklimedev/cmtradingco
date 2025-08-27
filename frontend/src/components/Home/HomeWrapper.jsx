@@ -420,7 +420,7 @@ const HomeWrapper = () => {
               </div>
             </div>
             <a
-              href="https://maps.google.com/?q=487/65,National+Market,Peeragarhi,Delhi,110087"
+              href="https://maps.app.goo.gl/wrcNUWzpJB6oB7yL9"
               target="_blank"
               rel="noopener noreferrer"
               className="contact-info-button"

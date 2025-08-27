@@ -3,7 +3,7 @@
 /* Root Variables */
 :root {
   /* Colors */
-  --primary-color: #c90101;
+  --primary-color: #524d4d;
   --primary-hover: #a70101;
   --text-primary: #0a0a0a;
   --text-secondary: #616161;
@@ -11,7 +11,7 @@
   --text-muted: #878282;
   --bg-primary: #ffffff;
   --bg-secondary: #f7f7f7;
-  --bg-accent: rgba(201, 1, 1, 0.8);
+  --bg-accent: #524d4d;
   --border-color: #e0e0e0;
 
   /* Typography */

@@ -20,16 +20,14 @@ const BrandSlider = ({ brands = [], speed = 30 }) => {
         <div className="brand-slider-track">
           {doubledBrands.map((brand, index) => (
             <div key={index} className="brand-logo-wrapper">
-              <Link to={brand.link}>
-                {" "}
-                {/* Wrap img with Link and use brand.link */}
-                <img
-                  src={brand.logoSrc}
-                  alt={`${brand.name || "Brand"} Logo`}
-                  className="brand-logo"
-                  loading="lazy"
-                />
-              </Link>
+              {" "}
+              {/* Wrap img with Link and use brand.link */}
+              <img
+                src={brand.logoSrc}
+                alt={`${brand.name || "Brand"} Logo`}
+                className="brand-logo"
+                loading="lazy"
+              />
             </div>
           ))}
         </div>
