@@ -69,7 +69,7 @@
 
 /* Banner Overlay */
 .banner-overlay {
-  padding: var(--spacing-2xl, 2rem) var(--spacing-md, 1rem);
+  /* padding: var(--spacing-2xl, 2rem) var(--spacing-md, 1rem); */
   background: var(--bg-primary, #ffffff);
   text-align: center;
   width: 100%;

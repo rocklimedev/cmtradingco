@@ -4,6 +4,8 @@ import adhesive from "../../assets/img/home/ADHESIVE.png";
 import cp_fittings from "../../assets/img/home/CP FITTING.png";
 import surfaces from "../../assets/img/home/SIURFACE.png";
 import wellness from "../../assets/img/home/WELLNESS.png";
+import plumbing from "../../assets/img/home/plumbing.jpg";
+import accessories from "../../assets/img/home/ACCESORIES.png";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { IoMdMail } from "react-icons/io";
@@ -259,14 +261,14 @@ const HomeWrapper = () => {
             </div>
           </div>
           <div className="product-card">
-            <img src={adhesive} alt="Accessories & Add-ons" />
+            <img src={accessories} alt="Accessories & Add-ons" />
             <div className="product-info">
               <h3>ACCESSORIES & ADD ONS</h3>
               <p>Enhance your projects with premium accessories.</p>
             </div>
           </div>
           <div className="product-card">
-            <img src={wellness} alt="Plumbing" />
+            <img src={plumbing} alt="Plumbing" />
             <div className="product-info">
               <h3>PLUMBING</h3>
               <p>High-quality plumbing solutions for seamless functionality.</p>

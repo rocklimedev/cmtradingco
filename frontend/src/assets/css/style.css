@@ -1387,20 +1387,21 @@ position: absolute;
 
 .navbar-container {
   display: flex;
-  align-items: center;  /* already there */
+  align-items: center;
   justify-content: space-between;
-    height: 89px;        /* fixed height ensures same row alignment */
+  height: 89px; /* Fixed height ensures same row alignment */
 }
-
-
 
 /* Logo */
 .navbar-logo {
   display: flex;
   align-items: center;
+  margin: 10px; /* Equal margin on all sides (top, right, bottom, left) */
+  margin-left: 20px; /* Slightly larger left margin for gap from screen edge */
 }
+
 .logo {
-  max-height: 50px;     /* keep logo inside row */
+  max-height: 50px; /* Keep logo inside row */
   height: auto;
   display: block;
 }
@@ -1445,9 +1446,8 @@ position: absolute;
   justify-content: center;
   gap: 15px;
   margin-right: 10px;
-  height: 100%;   /* 🔑 ensures it aligns with the logo’s height */
+  height: 100%; /* Ensures it aligns with the logo’s height */
 }
-
 
 /* Search Icon */
 .navbar-search {
@@ -1571,15 +1571,26 @@ position: absolute;
     font-size: 18px;
   }
 
+  .navbar-logo {
+    margin: 8px; /* Equal margin on mobile */
+    margin-left: 15px; /* Slightly smaller left gap for mobile */
+  }
+
   .logo {
     max-width: 120px; /* Smaller logo on mobile */
-    margin-left: 10px; /* Slightly smaller margin */
+    max-height: 45px; /* Adjusted height for mobile */
   }
 }
 
 @media (max-width: 480px) {
+  .navbar-logo {
+    margin: 6px; /* Smaller equal margin for very small screens */
+    margin-left: 12px; /* Slightly smaller left gap */
+  }
+
   .logo {
     max-width: 100px; /* Even smaller logo for very small screens */
+    max-height: 40px; /* Adjusted height */
   }
 
   .navbar-search,
@@ -1600,24 +1611,29 @@ position: absolute;
     font-size: 14px;
   }
 }
+
 @media (min-width: 481px) and (max-width: 768px) {
+  .navbar-logo {
+    margin: 8px; /* Consistent margin */
+    margin-left: 15px; /* Slightly smaller left gap */
+  }
+
   .logo {
-    max-height: 45px; /* prevents tall logo from pushing icons up */
+    max-height: 45px; /* Prevents tall logo from pushing icons up */
   }
 
   .navbar-actions {
-    height: 70px; /* lock to navbar height */
+    height: 70px; /* Lock to navbar height */
     display: flex;
     align-items: center;
   }
 
   .navbar-search,
   .navbar-menu-toggle {
-    line-height: 1;  /* keeps them vertically centered */
+    line-height: 1; /* Keeps them vertically centered */
     font-size: 20px;
   }
 }
-
 .footer-container {
   background-color: #524d4d;
   color: #fff;
@@ -1632,8 +1648,8 @@ position: absolute;
   align-items: flex-start; /* Changed to flex-start for better vertical alignment control */
   margin: 0 auto;
   padding: 0 0.5rem;
-  gap: 1.5rem; /* Reduced gap slightly for smaller screens */
-  max-width: 1400px;
+    gap: 11.5rem;
+    /* max-width: 1266px; */
 }
 
 .footer-logo {
@@ -1641,6 +1657,7 @@ position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
+  margin: 15px; /* Equal margin on all sides (top, right, bottom, left) */
 }
 
 .footer-logo img {
@@ -1744,6 +1761,10 @@ position: absolute;
     padding: 0 0.75rem; /* Slightly increased padding for balance */
   }
 
+  .footer-logo {
+    margin: 12px; /* Slightly smaller equal margin for tablet screens */
+  }
+
   .footer-logo img {
     max-width: 180px;
   }
@@ -1774,6 +1795,7 @@ position: absolute;
   }
 
   .footer-logo {
+    margin: 10px; /* Smaller equal margin for mobile */
     margin-bottom: 1rem;
   }
 
@@ -1802,6 +1824,11 @@ position: absolute;
 @media (max-width: 480px) {
   .footer-container {
     padding: 1.5rem 0.75rem; /* Consistent padding for very small screens */
+  }
+
+  .footer-logo {
+    margin: 8px; /* Even smaller equal margin for very small screens */
+    margin-bottom: 0.75rem;
   }
 
   .footer-logo img {

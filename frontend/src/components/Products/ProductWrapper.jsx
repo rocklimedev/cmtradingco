@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import brands from "../../assets/data/brands";
 import project_title from "../../assets/img/projects/projects_title.png";
-import cp_fittings from "../../assets/img/home/CP FITTING.png";
-import wellness from "../../assets/img/home/WELLNESS.png";
-import surfaces from "../../assets/img/home/SIURFACE.png";
 import adhesive from "../../assets/img/home/ADHESIVE.png";
+import cp_fittings from "../../assets/img/home/CP FITTING.png";
+import surfaces from "../../assets/img/home/SIURFACE.png";
+import wellness from "../../assets/img/home/WELLNESS.png";
+import plumbing from "../../assets/img/home/plumbing.jpg";
+import accessories from "../../assets/img/home/ACCESORIES.png";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
 import "./wrapper.css";
 import { IoMdArrowRoundBack } from "react-icons/io";
@@ -158,7 +160,7 @@ const ProductWrapper = () => {
               className="product-card"
               onClick={() => handleCategoryClick("Accessories & Add-ons")}
             >
-              <img src={adhesive} alt="Accessories & Add-ons" />
+              <img src={accessories} alt="Accessories & Add-ons" />
               <div className="product-info">
                 <h3>ACCESSORIES & ADD ONS</h3>
                 <p>Enhance your projects with premium accessories.</p>
@@ -168,7 +170,7 @@ const ProductWrapper = () => {
               className="product-card"
               onClick={() => handleCategoryClick("Plumbing")}
             >
-              <img src={wellness} alt="Plumbing" />
+              <img src={plumbing} alt="Plumbing" />
               <div className="product-info">
                 <h3>PLUMBING</h3>
                 <p>
