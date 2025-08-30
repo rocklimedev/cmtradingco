@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { MdOutlinePhoneInTalk } from "react-icons/md";
 import { IoMdMail } from "react-icons/io";
 import { FaMapMarkerAlt } from "react-icons/fa";
-import contact from "../../assets/img/contact_title_section.jpg";
+import contact from "../../assets/img/website banner.png";
 import { useSubmitContactFormMutation } from "../../api/contactApi";
 import "./contact.css";
 import { Link } from "react-router-dom";

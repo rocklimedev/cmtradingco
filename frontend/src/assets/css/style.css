@@ -2054,7 +2054,6 @@ padding: 35px 30px;
 .contact-item {
   display: flex;
   align-items: center;
-      justify-content: center;
   gap: 10px;
   color: #444;
     font-size: 18px;

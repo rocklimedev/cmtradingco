@@ -270,7 +270,7 @@ const HomeWrapper = () => {
               <h3>
                 <Link to="/brands">PLUMBING</Link>
               </h3>
-              <p>High-quality plumbing solutions for seamless functionality.</p>
+              <p>High-quality plumbing for seamless functionality.</p>
             </div>
           </div>
         </div>
