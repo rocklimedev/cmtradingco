@@ -5,7 +5,7 @@
 :root {
   /* Colors */
   --primary-color: #524d4d;
-  --primary-hover: #a70101;
+  --primary-hover: #e31e24;
   --primary-color-light: rgba(201, 1, 1, 0.2);
   --text-primary: #0a0a0a;
   --text-secondary: #616161;
@@ -23,7 +23,7 @@
   --border-light: #ffffff;
   --border-gray: #8d8d8d;
   --line-gray: #c4c4c4;
-  --error-color: #d32f2f;
+  --error-color: #e31e24;
 
   /* Typography */
   --font-family: "Lato";
@@ -118,7 +118,7 @@ body {
   display: block;
   width: 60px;
   height: 4px;
-  background: #a70101;
+  background: #e31e24;
   margin: var(--spacing-sm) auto 0;
 }
 
@@ -177,7 +177,7 @@ body {
 .slider-content {
   max-width: 520px;
   padding: 40px;
-  background: var(--bg-accent, #bb1e1e); /* Fallback to red */
+  background: var(--bg-accent, #e31e24); /* Fallback to red */
   color: #ffffff;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
   display: flex;
@@ -212,7 +212,7 @@ body {
 
 .slider-content button:hover {
   background: #f2f2f2;
-  color: #a11515;
+  color: #e31e24;
 }
 
 .slider-nav {
@@ -425,7 +425,7 @@ body {
   display: block;
   width: 60px;
   height: 4px;
-  background: #a70101;
+  background: #e31e24;
   margin: 12px auto 40px;
   border-radius: 2px;
 }
@@ -484,7 +484,7 @@ body {
   letter-spacing: 1px;
 }
 .product-info:hover{
-  background: #a70101;
+  background: #e31e24;
 }
 .product-info p {
   margin: 8px 0 0;
@@ -781,7 +781,7 @@ body {
   display: block;
   width: 50px;
   height: 3px;
-  background-color: #a70101;
+  background-color: #e31e24;
   margin: 8px auto 0;
   z-index: 2;
   position: relative;
@@ -820,7 +820,7 @@ top: 112px;
   display: block;
   width: 50px;
   height: 3px;
-  background-color: #a70101;
+  background-color: #e31e24;
   margin: 8px auto 0;
 }
 
@@ -895,7 +895,7 @@ top: 112px;
   max-width: 180px;
   margin-top: 16px;
   align-self: flex-start;
-  background: #d62839;
+  background: #e31e24;
   color: white;
   padding: 12px 20px;
   font-weight: 600;
@@ -908,7 +908,7 @@ top: 112px;
 }
 
 .contact-form-content button:hover {
-  background: #d62839;
+  background: #e31e24;
 }
 
 /* Contact Info */
@@ -948,7 +948,7 @@ top: 112px;
 }
 
 .contact-info-button {
-  background: #d62839;
+  background: #e31e24;
   color: white;
   padding: 8px 16px;
   font-weight: 600;
@@ -963,7 +963,7 @@ top: 112px;
 }
 
 .contact-info-button:hover {
-  background: #d62839;
+  background: #e31e24;
 }
 
 /* Responsive Design */
@@ -1195,7 +1195,7 @@ top: 112px;
   display: block;
   width: 50px;
   height: 3px;
-  background-color: #a70101;
+  background-color: #e31e24;
   margin: 8px auto 0;
 }
 
@@ -1300,7 +1300,7 @@ position: absolute;
 }
 
 .arrow-overlay:hover {
-  background-color: #a70101;
+  background-color: #e31e24;
 }
 
 /* Lightbox Styling */
@@ -1347,7 +1347,7 @@ position: absolute;
 }
 
 .lightbox-close:hover {
-  background: #a70101; /* Replace --primary-hover */
+  background: #e31e24; /* Replace --primary-hover */
 }
 
 /* Responsive Adjustments */
@@ -1982,7 +1982,7 @@ position: absolute;
 }
 
 .form-error {
-  color: #d32f2f;
+  color: #e31e24;
   font-size: 12px;
   margin-top: 5px;
   display: block;
@@ -2004,7 +2004,7 @@ position: absolute;
 
 .contact-form-button:hover,
 .contact-form-button:focus {
-  background-color: #a70101;
+  background-color: #e31e24;
   outline: 2px solid #524d4d;
   outline-offset: 2px;
 }
@@ -2086,7 +2086,7 @@ font-size: 20px;
 }
 
 .contact-button:hover {
-  background-color: #a70101;
+  background-color: #e31e24;
 }
 
 /* Responsive */
@@ -2175,7 +2175,7 @@ font-size: 20px;
   display: block;
   width: 50px;
   height: 3px;
-  background-color: #a70101;
+  background-color: #e31e24;
   margin: 8px auto 0;
 }
 
@@ -4200,7 +4200,7 @@ font-size: 20px;
 }
 
 .view-all-button:hover {
-  background-color: #a70101;
+  background-color: #e31e24;
 }
 
 .all-projects-view {

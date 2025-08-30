@@ -97,19 +97,19 @@ const Navbar = () => {
               Contact
             </Link>
           </li>
+          <li className="navbar-links">
+            <FaSearch
+              className="navbar-search"
+              aria-label="Open search modal"
+              onClick={toggleSearchModal}
+            />
+            <FaBars
+              className="navbar-menu-toggle"
+              aria-label="Toggle mobile menu"
+              onClick={toggleMobileMenu}
+            />
+          </li>
         </ul>
-        <div className="navbar-actions">
-          <FaSearch
-            className="navbar-search"
-            aria-label="Open search modal"
-            onClick={toggleSearchModal}
-          />
-          <FaBars
-            className="navbar-menu-toggle"
-            aria-label="Toggle mobile menu"
-            onClick={toggleMobileMenu}
-          />
-        </div>
       </nav>
 
       {isSearchModalOpen && (

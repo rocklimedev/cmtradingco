@@ -4,7 +4,7 @@
 :root {
   /* Colors */
   --primary-color: #524d4d;
-  --primary-hover: #a70101;
+  --primary-hover: #e31e24;
   --text-primary: #0a0a0a;
   --text-secondary: #616161;
   --text-light: #ffffff;
@@ -105,7 +105,7 @@
 }
 
 .section-details {
-  background-color: var(--primary-color, #c8102e);
+  background-color: var(--primary-color, #e31e24);
   color: var(--text-light, #ffffff);
   padding: var(--spacing-md, 1rem);
   border-radius: 0 0 10px 10px;
@@ -340,7 +340,7 @@
 }
 
 .catalogue-action-btn:hover {
-  background: var(--primary-color, #c8102e);
+  background: var(--primary-color, #e31e24);
   color: var(--text-light, #ffffff);
 }
 
@@ -419,7 +419,7 @@
 
 .close-button:hover,
 .close-button:focus {
-  color: var(--primary-color, #c8102e);
+  color: var(--primary-color, #e31e24);
   outline: none;
 }
 
@@ -443,7 +443,7 @@
 
 .pdf-controls button {
   padding: var(--spacing-xs, 0.5rem) var(--spacing-md, 1rem);
-  background: var(--primary-color, #c8102e);
+  background: var(--primary-color, #e31e24);
   color: var(--text-light, #ffffff);
   border: none;
   border-radius: var(--border-radius, 0.5rem);
@@ -453,7 +453,7 @@
 }
 
 .pdf-controls button:hover {
-  background: var(--primary-hover, #a80000);
+  background: var(--primary-hover, #e31e24);
 }
 
 .pdf-controls button:focus {
