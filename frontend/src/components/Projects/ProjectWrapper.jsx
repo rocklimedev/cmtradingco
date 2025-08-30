@@ -64,7 +64,9 @@ const ProjectWrapper = () => {
         className="projects-page-image"
       />
       <div className="banner-overlay">
-        <h2 className="project-title">Our Projects</h2>
+        <h2 className="section-title">
+          Our Projects <span className="line" />
+        </h2>
         <p className="project-content">
           At Chhabra Marble, we take pride in transforming spaces with our
           premium marble, granite, tiles, and sanitary ware. With over 30 years

@@ -108,7 +108,9 @@ const ProductWrapper = () => {
         loading="lazy"
       />
       <section className="banner-overlay">
-        <h2 className="project-title">Our Categories</h2>
+        <h2 className="section-title">
+          Our Categories <span className="line" />
+        </h2>
         {selectedCategory && (
           <button className="back-to-button" onClick={handleViewAll}>
             <IoMdArrowRoundBack /> Back

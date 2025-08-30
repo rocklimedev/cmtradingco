@@ -118,7 +118,7 @@ body {
   display: block;
   width: 60px;
   height: 4px;
-  background: var(--primary-color);
+  background: #a70101;
   margin: var(--spacing-sm) auto 0;
 }
 
@@ -425,7 +425,7 @@ body {
   display: block;
   width: 60px;
   height: 4px;
-  background: #524d4d;
+  background: #a70101;
   margin: 12px auto 40px;
   border-radius: 2px;
 }
@@ -483,11 +483,22 @@ body {
   text-transform: uppercase;
   letter-spacing: 1px;
 }
-
+.product-info:hover{
+  background: #a70101;
+}
 .product-info p {
   margin: 8px 0 0;
   font-size: 0.95rem;
   line-height: 1.4;
+}
+.product-info h3 a {
+  text-decoration: none;
+  color: inherit; /* so it takes the white color from .product-info */
+}
+
+.product-info h3 a:hover {
+  text-decoration: none; /* keeps it off on hover too */
+  color: inherit;        /* optional: keeps color unchanged */
 }
 
 @media (max-width: 768px) {
@@ -770,7 +781,7 @@ body {
   display: block;
   width: 50px;
   height: 3px;
-  background-color: #524d4d;
+  background-color: #a70101;
   margin: 8px auto 0;
   z-index: 2;
   position: relative;
@@ -809,7 +820,7 @@ top: 112px;
   display: block;
   width: 50px;
   height: 3px;
-  background-color: #524d4d;
+  background-color: #a70101;
   margin: 8px auto 0;
 }
 
@@ -1172,6 +1183,21 @@ top: 112px;
   align-items: center;
   text-align: center; /* Default padding if variables are unavailable */
 }
+.section-title {
+  font: var(--font-weight-bold) var(--font-size-2xl) / var(--line-height-tight) var(--font-family);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  position: relative;
+}
+
+.section-title .line {
+  display: block;
+  width: 50px;
+  height: 3px;
+  background-color: #a70101;
+  margin: 8px auto 0;
+}
 
 .projects-page-image {
   width: 100%;
@@ -1211,14 +1237,7 @@ top: 112px;
   position: relative;
 }
 
-.project-title::after {
-  content: "";
-  display: block;
-  width: 60px;
-  height: 2px;
-  background-color: #524d4d;
-  margin: 10px auto 0;
-}
+
 
 .project-content {
   font-size: 16px; /* Replace --font-size-lg */
@@ -1637,19 +1656,19 @@ position: absolute;
 .footer-container {
   background-color: #524d4d;
   color: #fff;
-  padding: 1.5rem 1rem; /* Slightly increased base padding for better spacing */
+  padding: 1.5rem 1rem;
   font-family: var(--font-family, sans-serif);
 }
 
 .footer-inner {
   display: flex;
-  flex-wrap: wrap;
+  flex-wrap: nowrap; /* Prevent wrapping on larger screens */
   justify-content: space-between;
-  align-items: flex-start; /* Changed to flex-start for better vertical alignment control */
+  align-items: flex-start;
   margin: 0 auto;
   padding: 0 0.5rem;
-    gap: 11.5rem;
-    /* max-width: 1266px; */
+  gap: 2rem; /* Reduced gap for tighter spacing */
+  max-width: 1266px; /* Uncommented max-width for consistency */
 }
 
 .footer-logo {
@@ -1657,7 +1676,7 @@ position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 15px; /* Equal margin on all sides (top, right, bottom, left) */
+  margin: 15px;
 }
 
 .footer-logo img {
@@ -1668,13 +1687,12 @@ position: absolute;
 .footer-nav,
 .footer-categories,
 .footer-contact {
-  margin-left: 0; /* Removed margin-left to prevent misalignment */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   text-align: left;
   margin-bottom: 1.5rem;
-  flex: 1 1 200px;
+  flex: 1 1 200px; /* Allow flex items to grow/shrink but maintain minimum width */
 }
 
 .footer-nav h4,
@@ -1716,7 +1734,7 @@ position: absolute;
 
 .footer-socials {
   display: flex;
-  gap: 0.75rem; /* Slightly reduced gap for better mobile spacing */
+  gap: 0.75rem;
   margin-top: 0.75rem;
 }
 
@@ -1732,7 +1750,7 @@ position: absolute;
 
 .footer-copyright-wrapper {
   background-color: #fff;
-  padding: 0.75rem 1rem; /* Slightly reduced padding for consistency */
+  padding: 0.75rem 1rem;
   text-align: center;
 }
 
@@ -1757,12 +1775,12 @@ position: absolute;
 ---------------------------- */
 @media (max-width: 1024px) {
   .footer-inner {
-    gap: 1.25rem; /* Slightly reduced gap for better spacing */
-    padding: 0 0.75rem; /* Slightly increased padding for balance */
+    gap: 1.5rem; /* Slightly reduced gap for tablet screens */
+    padding: 0 0.75rem;
   }
 
   .footer-logo {
-    margin: 12px; /* Slightly smaller equal margin for tablet screens */
+    margin: 12px;
   }
 
   .footer-logo img {
@@ -1788,14 +1806,15 @@ position: absolute;
 
 @media (max-width: 768px) {
   .footer-inner {
-    flex-direction: column;
+    flex-direction: column; /* Stack in one column for mobile */
+    flex-wrap: wrap; /* Allow wrapping for single-column layout */
     align-items: center;
     text-align: center;
-    gap: 1rem; /* Further reduced gap for mobile */
+    gap: 1rem;
   }
 
   .footer-logo {
-    margin: 10px; /* Smaller equal margin for mobile */
+    margin: 10px;
     margin-bottom: 1rem;
   }
 
@@ -1808,12 +1827,12 @@ position: absolute;
   .footer-contact {
     align-items: center;
     flex: 1 1 100%;
-    margin-bottom: 1rem; /* Reduced margin for tighter stacking */
+    margin-bottom: 1rem;
   }
 
   .footer-socials {
     justify-content: center;
-    gap: 0.5rem; /* Reduced gap for social icons */
+    gap: 0.5rem;
   }
 
   .footer-copyright-wrapper {
@@ -1823,16 +1842,16 @@ position: absolute;
 
 @media (max-width: 480px) {
   .footer-container {
-    padding: 1.5rem 0.75rem; /* Consistent padding for very small screens */
+    padding: 1.5rem 0.75rem;
   }
 
   .footer-logo {
-    margin: 8px; /* Even smaller equal margin for very small screens */
+    margin: 8px;
     margin-bottom: 0.75rem;
   }
 
   .footer-logo img {
-    max-width: 120px; /* Further reduced logo size for small screens */
+    max-width: 120px;
   }
 
   .footer-nav h4,
@@ -1848,11 +1867,11 @@ position: absolute;
   }
 
   .footer-socials a {
-    font-size: 0.9rem; /* Slightly smaller icons for very small screens */
+    font-size: 0.9rem;
   }
 
   .footer-copyright {
-    font-size: 0.7rem; /* Slightly smaller font for copyright */
+    font-size: 0.7rem;
   }
 }
 /* Contact Page */
@@ -2134,14 +2153,22 @@ font-size: 20px;
     margin-right: calc(-1 * var(--container-padding, 0));
   }
 }
+.section-title {
+  font: var(--font-weight-bold) var(--font-size-2xl) / var(--line-height-tight) var(--font-family);
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 32px;
+  position: relative;
+}
+
 .section-title .line {
   display: block;
   width: 50px;
   height: 3px;
-  background-color: #524d4d; /* Consistent with contact section */
+  background-color: #a70101;
   margin: 8px auto 0;
-  border-radius: 2px;
 }
+
 
 .about-content-p {
   max-width: 1281px;

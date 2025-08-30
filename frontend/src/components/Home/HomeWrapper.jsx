@@ -222,42 +222,54 @@ const HomeWrapper = () => {
           <div className="product-card">
             <img src={cp_fittings} alt="CP Fittings" />
             <div className="product-info">
-              <h3>CP FITTINGS & SANITARY</h3>
+              <h3>
+                <Link to="/brands">CP FITTINGS & SANITARY</Link>
+              </h3>
               <p>Stylish and durable fittings for modern bathrooms.</p>
             </div>
           </div>
           <div className="product-card">
             <img src={wellness} alt="Tiles" />
             <div className="product-info">
-              <h3>TILES</h3>
+              <h3>
+                <Link to="/brands">TILES</Link>
+              </h3>
               <p>High-quality tiles for timeless beauty and durability.</p>
             </div>
           </div>
           <div className="product-card">
             <img src={surfaces} alt="Stones & Granites" />
             <div className="product-info">
-              <h3>STONES</h3>
+              <h3>
+                <Link to="/brands">STONES</Link>
+              </h3>
               <p>Premium stones for elegant finishes.</p>
             </div>
           </div>
           <div className="product-card">
             <img src={adhesive} alt="Chemicals & Adhesive" />
             <div className="product-info">
-              <h3>CHEMICALS & ADHESIVE</h3>
+              <h3>
+                <Link to="/brands">CHEMICALS & ADHESIVE</Link>
+              </h3>
               <p>Reliable adhesives for strong and lasting installations.</p>
             </div>
           </div>
           <div className="product-card">
             <img src={accessories} alt="Accessories & Add-ons" />
             <div className="product-info">
-              <h3>ACCESSORIES & ADD ONS</h3>
+              <h3>
+                <Link to="/brands">ACCESSORIES & ADD ONS</Link>
+              </h3>
               <p>Enhance your projects with premium accessories.</p>
             </div>
           </div>
           <div className="product-card">
             <img src={plumbing} alt="Plumbing" />
             <div className="product-info">
-              <h3>PLUMBING</h3>
+              <h3>
+                <Link to="/brands">PLUMBING</Link>
+              </h3>
               <p>High-quality plumbing solutions for seamless functionality.</p>
             </div>
           </div>
