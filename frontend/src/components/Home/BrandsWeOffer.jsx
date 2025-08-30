@@ -2,13 +2,15 @@ import React, { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import brands from "../../assets/data/brands"; // Adjust path as needed
 import { Link } from "react-router-dom";
+import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
+
 const BrandSlider = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const [selectedPdf, setSelectedPdf] = useState(null);
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const [isPaused, setIsPaused] = useState(false); // Track pause state
+  const [isPaused, setIsPaused] = useState(false);
   const sliderRef = useRef(null);
   const modalRef = useRef(null);
   const animationRef = useRef(null);
@@ -21,7 +23,7 @@ const BrandSlider = () => {
     const slider = sliderRef.current;
     if (!slider) return;
 
-    const scrollSpeed = 1; // Pixels per frame
+    const scrollSpeed = 1;
     let lastTime = 0;
 
     const scroll = (time) => {
@@ -33,13 +35,12 @@ const BrandSlider = () => {
       if (!lastTime) lastTime = time;
       const deltaTime = time - lastTime;
 
-      // Adjust scroll speed based on frame time (60 FPS ~ 16.67ms)
       if (deltaTime > 16.67) {
         slider.scrollLeft += scrollSpeed;
         lastTime = time;
 
-        // Loop back to start when reaching the end
-        if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) {
+        // Ensure seamless looping
+        if (slider.scrollLeft >= slider.scrollWidth / 2) {
           slider.scrollLeft = 0;
         }
       }
@@ -53,45 +54,38 @@ const BrandSlider = () => {
   }, [isPaused]);
 
   // Pause on hover
-  const handleMouseEnter = () => {
-    setIsPaused(true);
-  };
-
-  // Resume scrolling and stop dragging on mouse leave
+  const handleMouseEnter = () => setIsPaused(true);
   const handleMouseLeave = () => {
-    isDragging.current = false; // Stop any active drag
-    setIsPaused(false); // Resume scrolling
+    isDragging.current = false;
+    setIsPaused(false);
   };
 
-  // Touch and drag support
+  // Touch drag
   const handleTouchStart = (e) => {
     isDragging.current = true;
     setIsPaused(true);
     startX.current = e.touches[0].pageX - sliderRef.current.offsetLeft;
     scrollLeft.current = sliderRef.current.scrollLeft;
   };
-
   const handleTouchMove = (e) => {
     if (!isDragging.current) return;
-    e.preventDefault(); // Prevent default scrolling
+    e.preventDefault();
     const x = e.touches[0].pageX - sliderRef.current.offsetLeft;
-    const walk = (x - startX.current) * 2; // Adjust drag sensitivity
+    const walk = (x - startX.current) * 2;
     sliderRef.current.scrollLeft = scrollLeft.current - walk;
   };
-
   const handleTouchEnd = () => {
     isDragging.current = false;
-    setIsPaused(false); // Resume scrolling after drag
+    setIsPaused(false);
   };
 
-  // Mouse drag support
+  // Mouse drag
   const handleMouseDown = (e) => {
     isDragging.current = true;
     setIsPaused(true);
     startX.current = e.pageX - sliderRef.current.offsetLeft;
     scrollLeft.current = sliderRef.current.scrollLeft;
   };
-
   const handleMouseMove = (e) => {
     if (!isDragging.current) return;
     e.preventDefault();
@@ -99,13 +93,12 @@ const BrandSlider = () => {
     const walk = (x - startX.current) * 2;
     sliderRef.current.scrollLeft = scrollLeft.current - walk;
   };
-
   const handleMouseUp = () => {
     isDragging.current = false;
     setIsPaused(false);
   };
 
-  // Handle click outside modal to close
+  // Modal handlers
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (modalRef.current && !modalRef.current.contains(event.target)) {
@@ -122,7 +115,6 @@ const BrandSlider = () => {
     };
   }, [showModal]);
 
-  // Handle ESC key to close modal
   useEffect(() => {
     const handleEsc = (event) => {
       if (event.key === "Escape") handleCloseModal();
@@ -144,41 +136,43 @@ const BrandSlider = () => {
     setNumPages(null);
   };
 
-  const onDocumentLoadSuccess = ({ numPages }) => {
-    setNumPages(numPages);
-  };
-
-  const handlePreviousPage = () => {
-    if (pageNumber > 1) setPageNumber(pageNumber - 1);
-  };
-
-  const handleNextPage = () => {
-    if (pageNumber < numPages) setPageNumber(pageNumber + 1);
-  };
+  const onDocumentLoadSuccess = ({ numPages }) => setNumPages(numPages);
 
   const handleArrowClick = (direction) => {
     const slider = sliderRef.current;
-    const scrollAmount = 350; // Width of one slide
+    if (!slider) return;
+
+    // Calculate scroll amount based on the width of a single brand item
+    const brandWidth = 350; // Matches .box-section width
+    const scrollAmount = brandWidth * 1; // Scroll by one brand item
+
     if (direction === "prev") {
       slider.scrollLeft -= scrollAmount;
-      if (slider.scrollLeft <= 0) {
-        slider.scrollLeft = slider.scrollWidth - slider.clientWidth;
+      if (slider.scrollLeft < 0) {
+        slider.scrollLeft = slider.scrollWidth / 2; // Loop to the end of the first set
       }
     } else {
       slider.scrollLeft += scrollAmount;
-      if (slider.scrollLeft >= slider.scrollWidth - slider.clientWidth) {
-        slider.scrollLeft = 0;
+      if (slider.scrollLeft >= slider.scrollWidth / 2) {
+        slider.scrollLeft = 0; // Loop to the start
       }
     }
+
+    // Force smooth scrolling
+    slider.scrollTo({
+      left: slider.scrollLeft,
+      behavior: "smooth",
+    });
   };
 
   return (
     <div className="brands-we-offer">
+      {/* Slider Content */}
       <div
         className="brands-grid"
         ref={sliderRef}
         onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave} // Consolidated handler
+        onMouseLeave={handleMouseLeave}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
@@ -186,11 +180,11 @@ const BrandSlider = () => {
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
       >
-        {brands.map((brand, index) => (
+        {brands.map((brand) => (
           <div
             key={brand.name}
             className="box-section"
-            onClick={() => brand.pdf && handleViewPdf(brand.pdf)} // Only trigger if brand has a PDF
+            onClick={() => brand.pdf && handleViewPdf(brand.pdf)}
           >
             <Link to={brand.link}>
               <img
@@ -202,8 +196,8 @@ const BrandSlider = () => {
             </Link>
           </div>
         ))}
-        {/* Duplicate brands for seamless looping */}
-        {brands.map((brand, index) => (
+        {/* Duplicate brands */}
+        {brands.map((brand) => (
           <div
             key={`duplicate-${brand.name}`}
             className="box-section"
@@ -219,6 +213,16 @@ const BrandSlider = () => {
             </Link>
           </div>
         ))}
+      </div>
+
+      {/* Arrow Controls */}
+      <div className="slider-controls">
+        <button className="arrow prev" onClick={() => handleArrowClick("prev")}>
+          <FaChevronLeft />
+        </button>
+        <button className="arrow next" onClick={() => handleArrowClick("next")}>
+          <FaChevronRight />
+        </button>
       </div>
     </div>
   );
