@@ -5,6 +5,7 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import contact from "../../assets/img/contact_title_section.jpg";
 import { useSubmitContactFormMutation } from "../../api/contactApi";
 import "./contact.css";
+import { Link } from "react-router-dom";
 const ContactWrapper = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -86,7 +87,13 @@ const ContactWrapper = () => {
           <div className="contact-item">
             <FaMapMarkerAlt className="contact-icon" />
             <div className="contact-content">
-              487/65, National Market, Peeragarhi, Delhi, 110087
+              <a
+                href="https://maps.app.goo.gl/8vJjpvXxsUvFKvHXA"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                487/65, National Market, Peeragarhi, Delhi, 110087
+              </a>{" "}
             </div>
           </div>
         </div>
