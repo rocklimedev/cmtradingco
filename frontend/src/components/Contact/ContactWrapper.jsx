@@ -6,6 +6,8 @@ import contact from "../../assets/img/website banner.png";
 import { useSubmitContactFormMutation } from "../../api/contactApi";
 import "./contact.css";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2"; // Import SweetAlert2
+
 const ContactWrapper = () => {
   const [formData, setFormData] = useState({
     firstName: "",
@@ -48,7 +50,14 @@ const ContactWrapper = () => {
 
     try {
       const result = await submitContactForm(formData).unwrap();
-      alert("✅ Message sent successfully!");
+      // Use SweetAlert2 for success message
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Message sent successfully!",
+        timer: 3000,
+        showConfirmButton: false,
+      });
       setFormData({
         firstName: "",
         lastName: "",
@@ -58,7 +67,14 @@ const ContactWrapper = () => {
       });
     } catch (err) {
       console.error("Error submitting form:", err);
-      alert("Something went wrong. Please try again.");
+      // Use SweetAlert2 for error message
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong. Please try again.",
+        timer: 3000,
+        showConfirmButton: false,
+      });
     }
   };
 
@@ -93,7 +109,7 @@ const ContactWrapper = () => {
                 rel="noopener noreferrer"
               >
                 487/65, National Market, Peeragarhi, Delhi, 110087
-              </a>{" "}
+              </a>
             </div>
           </div>
         </div>

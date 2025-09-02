@@ -16,6 +16,8 @@ import BrandsWeOffer from "./BrandsWeOffer";
 import loadProjectImages from "../utils/loadProjectImages";
 import video from "../../assets/img/video.m4v";
 import { useSubmitContactFormMutation } from "../../api/contactApi";
+import Swal from "sweetalert2"; // Import SweetAlert2
+
 const projectImages = {
   1: {
     master: require("../../assets/img/projects_data/1/Background.jpg"),
@@ -54,21 +56,6 @@ const HomeWrapper = () => {
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
 
-  useEffect(() => {
-    if (isSuccess) {
-      setShowSuccess(true);
-      const timer = setTimeout(() => setShowSuccess(false), 2000); // 3s timeout
-      return () => clearTimeout(timer);
-    }
-  }, [isSuccess]);
-
-  useEffect(() => {
-    if (isError) {
-      setShowError(true);
-      const timer = setTimeout(() => setShowError(false), 2000); // 3s timeout
-      return () => clearTimeout(timer);
-    }
-  }, [isError]);
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -76,6 +63,22 @@ const HomeWrapper = () => {
     phone: "",
     message: "",
   });
+
+  useEffect(() => {
+    if (isSuccess) {
+      setShowSuccess(true);
+      const timer = setTimeout(() => setShowSuccess(false), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [isSuccess]);
+
+  useEffect(() => {
+    if (isError) {
+      setShowError(true);
+      const timer = setTimeout(() => setShowError(false), 2000);
+      return () => clearTimeout(timer);
+    }
+  }, [isError]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -85,7 +88,14 @@ const HomeWrapper = () => {
     e.preventDefault();
     try {
       await submitContactForm(formData).unwrap();
-      alert("✅ Message sent successfully!");
+      // Use SweetAlert2 for success message
+      Swal.fire({
+        icon: "success",
+        title: "Success!",
+        text: "Message sent successfully!",
+        timer: 3000,
+        showConfirmButton: false,
+      });
       setFormData({
         firstName: "",
         lastName: "",
@@ -95,7 +105,14 @@ const HomeWrapper = () => {
       });
     } catch (err) {
       console.error("❌ Failed to send:", err);
-      alert("Something went wrong. Please try again.");
+      // Use SweetAlert2 for error message
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong. Please try again.",
+        timer: 3000,
+        showConfirmButton: false,
+      });
     }
   };
 
@@ -276,6 +293,7 @@ const HomeWrapper = () => {
         </div>
       </section>
       <BrandsWeOffer brands={brands} />
+      {/* Uncomment if you want to re-enable the projects section */}
       {/* <section className="home-projects-section">
         <h2 className="section-title">
           Our Projects
@@ -315,7 +333,6 @@ const HomeWrapper = () => {
           )}
         </div>
       </section> */}
-      {/* Note: This video section seems out of place; consider styling or removing */}
       <video
         src={video}
         poster={comingsoon}
