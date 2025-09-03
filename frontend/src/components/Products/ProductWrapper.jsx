@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import brands from "../../assets/data/brands";
-import project_title from "../../assets/img/projects/projects_title.png";
+import project_title from "../../assets/img/brands_banner.jpg";
 import adhesive from "../../assets/img/home/ADHESIVE.png";
 import cp_fittings from "../../assets/img/home/CP FITTING.png";
 import surfaces from "../../assets/img/home/SIURFACE.png";

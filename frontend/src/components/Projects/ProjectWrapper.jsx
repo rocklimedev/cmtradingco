@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import project_title from "../../assets/img/projects/projects_title.png";
+import project_title from "../../assets/img/projects_banner.png";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
 
 // Dynamically require all images in the projects folder and its subfolders
