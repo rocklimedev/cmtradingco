@@ -18,12 +18,16 @@ const brands = [
       {
         pdfId: "pdf-american-1",
         title: "Acacia E Brochure",
+        thumbnailUrl:
+          "https://static.cmtradingco.com/catalogues/American Standard/Acacia-E-Brochure.png",
         description: "Product brochure for American Standard Acacia E series",
         url: "https://static.cmtradingco.com/brand_catalogues/American Standard/Acacia-E-Brochure.pdf",
       },
       {
         pdfId: "pdf-american-2",
         title: "Acacia SupaSleek Brochure",
+        thumbnailUrl:
+          "https://static.cmtradingco.com/catalogues/American Standard/Acacia-SupaSleek-Brochure.png",
         description:
           "Product brochure for American Standard Acacia SupaSleek series",
         url: "https://static.cmtradingco.com/brand_catalogues/American Standard/Acacia-SupaSleek-Brochure.pdf",
@@ -31,6 +35,8 @@ const brands = [
       {
         pdfId: "pdf-american-3",
         title: "Product Catalogue 2020",
+        thumbnailUrl:
+          "https://static.cmtradingco.com/catalogues/American Standard/AS-Product-Catalogue-2020.png",
         description:
           "Comprehensive product catalogue for American Standard 2020",
         url: "https://static.cmtradingco.com/brand_catalogues/American Standard/AS-Product-Catalogue-2020.pdf",
@@ -38,18 +44,24 @@ const brands = [
       {
         pdfId: "pdf-american-4",
         title: "EasySET Brochure",
+        thumbnailUrl:
+          "https://static.cmtradingco.com/catalogues/American Standard/EasySET-Brochure_LR.png",
         description: "Brochure for American Standard EasySET products",
         url: "https://static.cmtradingco.com/brand_catalogues/American Standard/EasySET-Brochure_LR.pdf",
       },
       {
         pdfId: "pdf-american-5",
         title: "City Collection Brochure 2018",
+        thumbnailUrl:
+          "https://static.cmtradingco.com/catalogues/American Standard/G19183_City_Collection-Brochure_2018_Updated_Low-Res.png",
         description: "Brochure for American Standard City Collection 2018",
         url: "https://static.cmtradingco.com/brand_catalogues/American Standard/G19183_City_Collection-Brochure_2018_Updated_Low-Res.pdf",
       },
       {
         pdfId: "pdf-american-6",
         title: "Signature Collection Brochure",
+        thumbnailUrl:
+          "https://static.cmtradingco.com/catalogues/American Standard/Signature-Collection-Brochure.png",
         description: "Brochure for American Standard Signature Collection",
         url: "https://static.cmtradingco.com/brand_catalogues/American Standard/Signature-Collection-Brochure.pdf",
       },
@@ -66,12 +78,16 @@ const brands = [
       {
         pdfId: "pdf-grohe-1",
         title: "Eurocube Joy Brochure",
+        thumbnailUrl:
+          "https://static.cmtradingco.com/catalogues/Grohe/GROHE_Eurocube_Joy_en_CY.png",
         description: "Product brochure for Grohe Eurocube Joy series",
         url: "https://static.cmtradingco.com/brand_catalogues/Grohe/GROHE_Eurocube_Joy_en_CY.pdf",
       },
       {
         pdfId: "pdf-grohe-2",
         title: "Eurostyle Brochure",
+        thumbnailUrl:
+          "https://static.cmtradingco.com/catalogues/Grohe/GROHE_Eurostyle_en_IN.png",
         description: "Product brochure for Grohe Eurostyle series",
         url: "https://static.cmtradingco.com/brand_catalogues/Grohe/GROHE_Eurostyle_en_IN.pdf",
       },
@@ -79,23 +95,31 @@ const brands = [
         pdfId: "pdf-grohe-3",
         title: "Flushplates Brochure",
         description: "Brochure for Grohe Flushplates",
+        thumbnailUrl:
+          "https://static.cmtradingco.com/catalogues/Grohe/GROHE_Flushplates-Brochure_en_MASTER.png",
         url: "https://static.cmtradingco.com/brand_catalogues/Grohe/GROHE_Flushplates-Brochure_en_MASTER.pdf",
       },
       {
         pdfId: "pdf-grohe-4",
         title: "Kitchen Brochure",
         description: "Brochure for Grohe Kitchen products",
+        thumbnailUrl:
+          "https://static.cmtradingco.com/catalogues/Grohe/GROHE_Kitchen-Brochure_en_SG.png",
         url: "https://static.cmtradingco.com/brand_catalogues/Grohe/GROHE_Kitchen-Brochure_en_SG.pdf",
       },
       {
         pdfId: "pdf-grohe-5",
         title: "Magazine 4",
         description: "Grohe Magazine issue 4",
+        thumbnailUrl:
+          "https://static.cmtradingco.com/catalogues/Grohe/GROHE_Magazine_4_EN.png",
         url: "https://static.cmtradingco.com/brand_catalogues/Grohe/GROHE_Magazine_4_EN.pdf",
       },
       {
         pdfId: "pdf-grohe-6",
         title: "Rapido Smartbox Brochure",
+        thumbnailUrl:
+          "https://static.cmtradingco.com/catalogues/Grohe/GROHE_Rapido_Smartbox.png",
         description: "Brochure for Grohe Rapido Smartbox",
         url: "https://static.cmtradingco.com/brand_catalogues/Grohe/GROHE_Rapido_Smartbox.pdf",
       },
@@ -103,6 +127,8 @@ const brands = [
         pdfId: "pdf-grohe-7",
         title: "SmartControl Flyer",
         description: "Flyer for Grohe SmartControl products",
+        thumbnailUrl:
+          "https://static.cmtradingco.com/catalogues/Grohe/SmartControlFlyer_EN.png",
         url: "https://static.cmtradingco.com/brand_catalogues/Grohe/SmartControlFlyer_EN.pdf",
       },
     ],
@@ -129,6 +155,8 @@ const brands = [
         title: "JK Tylo 606 TDS",
         description: "Technical Data Sheet for JK Tylo 606, March 2024",
         url: "https://static.cmtradingco.com/brand_catalogues/JK/JKTylo-606-TDS-Mar2024-UPLOAD.pdf",
+        thumbnailUrl:
+          "https://static.cmtradingco.com/catalogues/JK/JKTylo-606-TDS-Mar2024-UPLOAD.png",
       },
     ],
   },
@@ -145,6 +173,8 @@ const brands = [
         title: "Nexion General Catalogue",
         description: "General product catalogue for Nexion",
         url: "https://static.cmtradingco.com/brand_catalogues/Nexion/NEXION-General-catalogue-1.pdf",
+        thumbnailUrl:
+          "https://static.cmtradingco.com/catalogues/Nexion/NEXION-General-catalogue-1.png",
       },
     ],
   },
@@ -161,18 +191,24 @@ const brands = [
         title: "Ceramics 2023",
         description: "Product catalogue for Colston ceramics 2023",
         url: "https://static.cmtradingco.com/brand_catalogues/Colston/ceramics-2023.pdf",
+        thumbnailUrl:
+          "https://static.cmtradingco.com/catalogues/Colston/ceramics-2023.png",
       },
       {
         pdfId: "pdf-colston-2",
         title: "Exclusive Bathrooms 2024",
         description: "Catalogue for Colston exclusive bathrooms 2024",
         url: "https://static.cmtradingco.com/brand_catalogues/Colston/exclusive-bathrooms-2024.pdf",
+        thumbnailUrl:
+          "https://static.cmtradingco.com/catalogues/Colston/exclusive-bathrooms-2024.png",
       },
       {
         pdfId: "pdf-colston-3",
         title: "Wellness Catalogue 2024",
         description: "Wellness product catalogue for Colston 2024",
         url: "https://static.cmtradingco.com/brand_catalogues/Colston/wellness-catalogue-2024.pdf",
+        thumbnailUrl:
+          "https://static.cmtradingco.com/catalogues/Colston/wellness-catalogue-2024.png",
       },
     ],
   },

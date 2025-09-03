@@ -171,35 +171,42 @@ const BrandSlider = () => {
   const onDocumentLoadSuccess = ({ numPages }) => setNumPages(numPages);
 
   // Arrow click — use scrollBy to get smooth behaviour and then fix the loop
+  // add near your other refs
+  const resumeTimerRef = useRef(null);
+
+  // replace your handleArrowClick with this:
   const handleArrowClick = (direction) => {
     const slider = sliderRef.current;
     if (!slider) return;
 
-    // Calculate scroll amount based on the width of a single brand item
-    const brandWidth = 350; // Keep in sync with .box-section width
-    const scrollAmount = brandWidth;
+    // pause auto scroll while we animate a nudge
+    setIsPaused(true);
+    if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
 
-    // Use scrollBy so we get smooth animation immediately
-    if (direction === "prev") {
-      slider.scrollBy({ left: -scrollAmount, behavior: "smooth" });
-    } else {
-      slider.scrollBy({ left: scrollAmount, behavior: "smooth" });
-    }
+    const half = slider.scrollWidth / 2;
 
-    // After the smooth scroll completes, ensure the loop is seamless.
-    // We use a small timeout to run after the animation finishes.
-    // (You can tune timeout to match your scroll behavior / CSS.)
-    setTimeout(() => {
-      const half = slider.scrollWidth / 2;
-      if (slider.scrollLeft >= half) {
-        // move back by exactly one duplicated set width
-        slider.scrollLeft = slider.scrollLeft - half;
-      }
-      if (slider.scrollLeft < 0) {
-        slider.scrollLeft = slider.scrollLeft + half;
-      }
-    }, 450);
+    // a small nudge (feel free to tweak)
+    // use 35% of viewport of the slider or cap to 220px
+    const step = Math.round(Math.min(slider.clientWidth * 0.35, 220));
+
+    const current = slider.scrollLeft;
+    const target = direction === "prev" ? current - step : current + step;
+
+    // wrap into [0, half) so the loop stays seamless without timeouts
+    const normalized = ((target % half) + half) % half;
+
+    slider.scrollTo({ left: normalized, behavior: "smooth" });
+
+    // resume auto after animation
+    resumeTimerRef.current = setTimeout(() => setIsPaused(false), 350);
   };
+
+  // cleanup on unmount
+  useEffect(() => {
+    return () => {
+      if (resumeTimerRef.current) clearTimeout(resumeTimerRef.current);
+    };
+  }, []);
 
   return (
     <div className="brands-we-offer">
