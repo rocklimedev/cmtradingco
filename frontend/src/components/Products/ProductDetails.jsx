@@ -3,7 +3,7 @@ import { useParams, useNavigate } from "react-router-dom";
 import brands from "../../assets/data/brands";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
 import "./wrapper.css";
-import project_title from "../../assets/img/projects/projects_title.png";
+import project_title from "../../assets/img/brands_banner.jpg";
 import { IoMdArrowRoundBack } from "react-icons/io";
 const CatalogueGallery = ({ pdfs, handleCatalogueClick }) => {
   return (
