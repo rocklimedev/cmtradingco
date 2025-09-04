@@ -2,46 +2,43 @@ import React, { useState } from "react";
 import project_title from "../../assets/img/projects_banner.png";
 import comingsoon from "../../assets/img/projects/home-image-coming-soon.jpg";
 
-// Dynamically require all images in the projects folder and its subfolders
-const imagesContext = require.context(
-  "../../assets/img/projects_data/",
-  true,
-  /\.(jpe?g|png)$/i
-);
-
-// Group images by folder
-const projectImages = {};
-
-imagesContext.keys().forEach((key) => {
-  const filePath = key.replace("./", ""); // remove leading './'
-  const [folder, filename] = filePath.split("/");
-
-  if (!projectImages[folder]) {
-    projectImages[folder] = {
-      master: null,
-      additional: [],
-    };
-  }
-
-  const image = imagesContext(key);
-
-  if (/background/i.test(filename) || /img_5720/i.test(filename)) {
-    projectImages[folder].master = image;
-  } else {
-    projectImages[folder].additional.push(image);
-  }
-});
+const projectImages = {
+  1: {
+    master: "https://static.cmtradingco.com/project_images/1/Background.jpg",
+    additional: [
+      "https://static.cmtradingco.com/project_images/1/DSC_7168.jpg",
+      "https://static.cmtradingco.com/project_images/1/DSC_7185.jpg",
+      "https://static.cmtradingco.com/project_images/1/DSC_7188.jpg",
+      "https://static.cmtradingco.com/project_images/1/DSC_7201.jpg",
+      "https://static.cmtradingco.com/project_images/1/DSC_7223.jpg",
+      "https://static.cmtradingco.com/project_images/1/DSC_7240.jpg",
+      "https://static.cmtradingco.com/project_images/1/DSC_7257.jpg",
+    ],
+  },
+  2: {
+    master: "https://static.cmtradingco.com/project_images/2/IMG_5720.JPG",
+    additional: [
+      "https://static.cmtradingco.com/project_images/2/IMG_5736.JPG",
+      "https://static.cmtradingco.com/project_images/2/IMG_5738.JPG",
+      "https://static.cmtradingco.com/project_images/2/IMG_5744.JPG",
+      "https://static.cmtradingco.com/project_images/2/IMG_5746.JPG",
+      "https://static.cmtradingco.com/project_images/2/IMG_5747.JPG",
+      "https://static.cmtradingco.com/project_images/2/IMG_5770.JPG",
+    ],
+  },
+};
 
 const ProjectWrapper = () => {
   const [showAll, setShowAll] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
 
-  const projects = Object.entries(projectImages).map(([folder, images]) => ({
-    id: folder,
-    masterImg: images.master || comingsoon,
-    additionalImgs: images.additional || [],
-    alt: `Project ${folder} - Master Image`,
-    caption: `Description for Project ${folder}`,
+  // Convert object into array for easy map
+  const projects = Object.entries(projectImages).map(([id, imgs]) => ({
+    id,
+    masterImg: imgs.master || comingsoon,
+    additionalImgs: imgs.additional || [],
+    alt: `Project ${id} - Master Image`,
+    caption: `Description for Project ${id}`,
   }));
 
   const toggleShowAll = (projectId) => {
@@ -63,6 +60,7 @@ const ProjectWrapper = () => {
         alt="Projects Page Banner"
         className="projects-page-image"
       />
+
       <div className="banner-overlay">
         <h2 className="section-title">
           Our Projects <span className="line" />
@@ -103,7 +101,7 @@ const ProjectWrapper = () => {
       {showAll && currentProject && (
         <div className="all-projects-view" onClick={closeModal}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-            <h3>{currentProject.alt}</h3>
+            <h3>{currentProject.caption}</h3>
             <div className="project-all-images">
               <img
                 src={currentProject.masterImg}

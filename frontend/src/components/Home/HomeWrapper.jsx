@@ -13,33 +13,33 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import slider from "../../assets/img/home_page_slider.png";
 import brands from "../../assets/data/brands";
 import BrandsWeOffer from "./BrandsWeOffer";
-import loadProjectImages from "../utils/loadProjectImages";
-import video from "../../assets/img/video.m4v";
+// import loadProjectImages from "../utils/loadProjectImages";
+// import video from "https://static.cmtrading.com/cm_video/video.m4v";
 import { useSubmitContactFormMutation } from "../../api/contactApi";
 import Swal from "sweetalert2"; // Import SweetAlert2
-
+const video = "https://static.cmtradingco.com/cm_video/video.m4v";
 const projectImages = {
   1: {
-    master: require("../../assets/img/projects_data/1/Background.jpg"),
+    master: "https://static.cmtradingco.com/project_images/1/Background.jpg",
     additional: [
-      require("../../assets/img/projects_data/1/DSC_7168.jpg"),
-      require("../../assets/img/projects_data/1/DSC_7185.jpg"),
-      require("../../assets/img/projects_data/1/DSC_7188.jpg"),
-      require("../../assets/img/projects_data/1/DSC_7201.jpg"),
-      require("../../assets/img/projects_data/1/DSC_7223.jpg"),
-      require("../../assets/img/projects_data/1/DSC_7240.jpg"),
-      require("../../assets/img/projects_data/1/DSC_7257.jpg"),
+      "https://static.cmtradingco.com/project_images/1/DSC_7168.jpg",
+      "https://static.cmtradingco.com/project_images/1/DSC_7185.jpg",
+      "https://static.cmtradingco.com/project_images/1/DSC_7188.jpg",
+      "https://static.cmtradingco.com/project_images/1/DSC_7201.jpg",
+      "https://static.cmtradingco.com/project_images/1/DSC_7223.jpg",
+      "https://static.cmtradingco.com/project_images/1/DSC_7240.jpg",
+      "https://static.cmtradingco.com/project_images/1/DSC_7257.jpg",
     ],
   },
   2: {
-    master: require("../../assets/img/projects_data/2/IMG_5720.JPG"),
+    master: "https://static.cmtradingco.com/project_images/2/IMG_5720.JPG",
     additional: [
-      require("../../assets/img/projects_data/2/IMG_5736.JPG"),
-      require("../../assets/img/projects_data/2/IMG_5738.JPG"),
-      require("../../assets/img/projects_data/2/IMG_5744.JPG"),
-      require("../../assets/img/projects_data/2/IMG_5746.JPG"),
-      require("../../assets/img/projects_data/2/IMG_5747.JPG"),
-      require("../../assets/img/projects_data/2/IMG_5770.JPG"),
+      "https://static.cmtradingco.com/project_images/2/IMG_5736.JPG",
+      "https://static.cmtradingco.com/project_images/2/IMG_5738.JPG",
+      "https://static.cmtradingco.com/project_images/2/IMG_5744.JPG",
+      "https://static.cmtradingco.com/project_images/2/IMG_5746.JPG",
+      "https://static.cmtradingco.com/project_images/2/IMG_5747.JPG",
+      "https://static.cmtradingco.com/project_images/2/IMG_5770.JPG",
     ],
   },
 };
@@ -50,9 +50,17 @@ const HomeWrapper = () => {
   const [showModal, setShowModal] = useState(false);
   const [selectedProject, setSelectedProject] = useState(null);
   const sliderRef = useRef(null);
-  const projects = loadProjectImages();
+
+  // 🔄 Transform projectImages into array for easier mapping
+  const projects = Object.entries(projectImages).map(([id, imgs]) => ({
+    id,
+    imgSrc: imgs.master || comingsoon,
+    alt: `Project ${id} - Master Image`,
+  }));
+
   const [submitContactForm, { isLoading, isSuccess, isError, error }] =
     useSubmitContactFormMutation();
+
   const [showSuccess, setShowSuccess] = useState(false);
   const [showError, setShowError] = useState(false);
 
@@ -88,7 +96,6 @@ const HomeWrapper = () => {
     e.preventDefault();
     try {
       await submitContactForm(formData).unwrap();
-      // Use SweetAlert2 for success message
       Swal.fire({
         icon: "success",
         title: "Success!",
@@ -105,7 +112,6 @@ const HomeWrapper = () => {
       });
     } catch (err) {
       console.error("❌ Failed to send:", err);
-      // Use SweetAlert2 for error message
       Swal.fire({
         icon: "error",
         title: "Oops...",
@@ -119,18 +125,16 @@ const HomeWrapper = () => {
   const slides = [
     {
       content: (
-        <>
-          <video
-            src={video}
-            poster={comingsoon}
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="slider-background"
-            onError={(e) => console.error("Video failed to load:", e)}
-          />
-        </>
+        <video
+          src={video}
+          poster={comingsoon}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="slider-background"
+          onError={(e) => console.error("Video failed to load:", e)}
+        />
       ),
     },
     {
@@ -293,11 +297,9 @@ const HomeWrapper = () => {
         </div>
       </section>
       <BrandsWeOffer brands={brands} />
-      {/* Uncomment if you want to re-enable the projects section */}
       {/* <section className="home-projects-section">
         <h2 className="section-title">
-          Our Projects
-          <span className="line" />
+          Our Projects <span className="line" />
         </h2>
         <p className="section-description">
           Trusted by architects, builders, and designers for delivering
@@ -475,11 +477,7 @@ const HomeWrapper = () => {
                 )
               )}
             </div>
-            <button
-              className="close-view-button"
-              onClick={closeModal}
-              aria-label="Close project modal"
-            >
+            <button className="close-view-button" onClick={closeModal}>
               Close
             </button>
           </div>
