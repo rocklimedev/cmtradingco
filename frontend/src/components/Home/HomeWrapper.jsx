@@ -13,8 +13,6 @@ import { FaMapMarkerAlt } from "react-icons/fa";
 import slider from "../../assets/img/home_page_slider.png";
 import brands from "../../assets/data/brands";
 import BrandsWeOffer from "./BrandsWeOffer";
-// import loadProjectImages from "../utils/loadProjectImages";
-// import video from "https://static.cmtrading.com/cm_video/video.m4v";
 import { useSubmitContactFormMutation } from "../../api/contactApi";
 import Swal from "sweetalert2"; // Import SweetAlert2
 const video = "https://static.cmtradingco.com/cm_video/video.m4v";

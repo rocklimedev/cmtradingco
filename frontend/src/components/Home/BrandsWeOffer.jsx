@@ -4,16 +4,6 @@ import brands from "../../assets/data/brands"; // Adjust path as needed
 import { Link } from "react-router-dom";
 import { FaChevronRight, FaChevronLeft } from "react-icons/fa";
 
-// ----------------------
-// BrandSlider (fixed)
-// ----------------------
-// Key fixes and improvements included in this file:
-// 1. Removed `pointer-events: none` on the arrows container (that prevented clicks).
-// 2. Added global mouseup / touchend listeners so drag state ends correctly even when pointer leaves the slider.
-// 3. Use `scrollBy` with smooth behavior for arrow clicks and correct looping logic after animation.
-// 4. Added `type="button"` to prevent accidental form submits.
-// 5. Small accessibility improvements (aria-labels).
-
 const BrandSlider = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
