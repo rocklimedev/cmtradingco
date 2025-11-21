@@ -15,7 +15,7 @@ import brands from "../../assets/data/brands";
 import BrandsWeOffer from "./BrandsWeOffer";
 import { useSubmitContactFormMutation } from "../../api/contactApi";
 import Swal from "sweetalert2"; // Import SweetAlert2
-const video = "https://static.cmtradingco.com/cm_video/video.m4v";
+const video = "https://static.cmtradingco.com/cm_video/video.mp4";
 const projectImages = {
   1: {
     master: "https://static.cmtradingco.com/project_images/1/Background.jpg",
