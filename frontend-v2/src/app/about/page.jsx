@@ -1,25 +1,12 @@
-// app/about/page.jsx  (or pages/about.jsx if using Pages Router)
+// app/about/page.jsx
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Award, Eye, Handshake } from "lucide-react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { heroImages, showcaseImages, categories } from "@/assets/data/siteData";
 
-function ScrollReveal({ children, className = "", delay = 0 }) {
-  const [ref, isVisible] = useScrollReveal();
-  return (
-    <div
-      ref={ref}
-      className={`scroll-reveal ${isVisible ? "visible" : ""} ${
-        delay ? `scroll-reveal-delay-${delay}` : ""
-      } ${className}`}
-    >
-      {children}
-    </div>
-  );
-}
+import ScrollReveal from "@/components/ScrollReveal"; // ← imported
+import { heroImages, showcaseImages, categories } from "@/assets/data/siteData";
 
 export default function AboutPage() {
   return (
@@ -96,6 +83,7 @@ export default function AboutPage() {
               </h2>
             </div>
           </ScrollReveal>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               {
@@ -156,6 +144,7 @@ export default function AboutPage() {
                 What We Offer
               </h2>
             </ScrollReveal>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
               {categories.slice(0, 8).map((cat, i) => (
                 <ScrollReveal key={cat.id} delay={Math.min(i + 1, 6)}>

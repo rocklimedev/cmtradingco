@@ -4,24 +4,8 @@
 import { useRef, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
-
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import ScrollReveal from "@/components/ScrollReveal";
 import { categories, heroImages, PHONE_RAW } from "@/assets/data/siteData";
-
-// ScrollReveal wrapper
-function ScrollReveal({ children, className = "", delay = 0 }) {
-  const [ref, isVisible] = useScrollReveal();
-  return (
-    <div
-      ref={ref}
-      className={`scroll-reveal ${isVisible ? "visible" : ""} ${
-        delay ? `scroll-reveal-delay-${delay}` : ""
-      } ${className}`}
-    >
-      {children}
-    </div>
-  );
-}
 
 // Subcategory Card
 function SubcategoryCard({ sub, delay }) {

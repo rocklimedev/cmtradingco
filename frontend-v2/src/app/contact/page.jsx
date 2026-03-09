@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Phone, Mail, MapPin, Clock } from "lucide-react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import ScrollReveal from "@/components/ScrollReveal";
 import {
   PHONE_NUMBER,
   PHONE_RAW,
@@ -13,19 +13,6 @@ import {
   heroImages,
 } from "@/assets/data/siteData";
 import { useSubmitContactFormMutation } from "@/api/contactApi";
-function ScrollReveal({ children, className = "", delay = 0 }) {
-  const [ref, isVisible] = useScrollReveal();
-  return (
-    <div
-      ref={ref}
-      className={`scroll-reveal ${isVisible ? "visible" : ""} ${
-        delay ? `scroll-reveal-delay-${delay}` : ""
-      } ${className}`}
-    >
-      {children}
-    </div>
-  );
-}
 
 export default function ContactPage() {
   const [form, setForm] = useState({

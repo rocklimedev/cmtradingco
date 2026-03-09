@@ -3,7 +3,8 @@ import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import Providers from "./Providers";
-
+import FloatingCTA from "@/components/FloatingCTA";
+import ScrollToTop from "@/components/ScrollToTop";
 const lato = Lato({
   subsets: ["latin"], // required for Google fonts
   weight: ["100", "300", "400", "700", "900"], // choose what you need
@@ -50,11 +51,15 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${lato.variable} antialiased`}>
-        <Providers>
-          <Header />
-          {children}
-          <Footer />
-        </Providers>
+        <ScrollToTop />
+        <div className="font-lato min-h-screen flex flex-col">
+          <Providers>
+            <Header />
+            {children}
+            <Footer />
+            <FloatingCTA />
+          </Providers>
+        </div>
       </body>
     </html>
   );

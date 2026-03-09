@@ -3,22 +3,8 @@
 
 import Image from "next/image";
 import { Download } from "lucide-react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import ScrollReveal from "@/components/ScrollReveal";
 import { catalogues, heroImages } from "@/assets/data/siteData";
-
-function ScrollReveal({ children, className = "", delay = 0 }) {
-  const [ref, isVisible] = useScrollReveal();
-  return (
-    <div
-      ref={ref}
-      className={`scroll-reveal ${isVisible ? "visible" : ""} ${
-        delay ? `scroll-reveal-delay-${delay}` : ""
-      } ${className}`}
-    >
-      {children}
-    </div>
-  );
-}
 
 export default function CataloguePage() {
   return (
