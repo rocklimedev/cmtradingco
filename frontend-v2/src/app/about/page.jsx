@@ -28,7 +28,7 @@ export default function AboutPage() {
             className="text-4xl sm:text-5xl lg:text-6xl font-light text-white leading-tight"
             data-testid="about-hero-title"
           >
-            About Chhabra Marble
+            About
           </h1>
         </div>
       </section>

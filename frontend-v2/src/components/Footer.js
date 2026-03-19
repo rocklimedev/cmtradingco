@@ -127,7 +127,9 @@ export default function Footer() {
           </p>
           <p className="text-xs text-brand-muted font-light flex items-center gap-2">
             Powered by{" "}
-            <span className="font-normal text-brand-charcoal">Rocklime</span>
+            <span className="font-normal" style={{ color: "#ed7c2f" }}>
+              Rocklime
+            </span>
           </p>
         </div>
       </div>
