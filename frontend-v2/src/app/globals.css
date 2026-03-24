@@ -115,3 +115,10 @@ html {
         border-bottom-color: inherit;
     }
 }
+.input {
+  @apply w-full px-3 py-2 border border-input rounded-md bg-background text-sm;
+}
+
+.btn-primary {
+  @apply w-full py-2 bg-foreground text-background rounded-md text-sm font-medium;
+}

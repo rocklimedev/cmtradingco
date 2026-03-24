@@ -285,13 +285,14 @@ export default function ContactPage() {
           >
             <iframe
               title="Chhabra Marble Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.5!2d77.1046!3d28.6711!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d03dfb03dbd4b%3A0x7e6d5a2e1d0e2b0a!2sPeeragarhi%2C%20Delhi!5e0!3m2!1sen!2sin!4v1000000000000"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.535531737785!2d77.0910565!3d28.673622800000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d0472b3b66a0d%3A0x67e896cfd98c1c43!2sChhabra%20Marble!5e0!3m2!1sen!2sin!4v1774325671365!5m2!1sen!2sin" 
               width="100%"
               height="100%"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
             />
+      
           </div>
         </ScrollReveal>
       </section>

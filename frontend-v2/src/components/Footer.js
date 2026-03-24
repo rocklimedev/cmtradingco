@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { Instagram, Facebook, Youtube, MapPin } from "lucide-react";
+import { Instagram, Facebook, Youtube, MapPin, Linkedin } from "lucide-react";
 import {
   LOGO_RED,
   navLinks,
@@ -12,7 +12,7 @@ import {
   socialLinks,
 } from "@/assets/data/siteData";
 
-const iconMap = { Instagram, Facebook, Youtube, MapPin };
+const iconMap = { Instagram, Facebook, Youtube, MapPin, Linkedin };
 
 export default function Footer() {
   const router = useRouter();
@@ -40,6 +40,9 @@ export default function Footer() {
             <div className="flex gap-4 mt-4">
               {socialLinks.map((social) => {
                 const Icon = iconMap[social.icon];
+
+                if (!Icon) return null; // prevent crash
+
                 return (
                   <a
                     key={social.name}

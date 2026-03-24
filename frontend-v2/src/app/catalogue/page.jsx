@@ -30,7 +30,7 @@ export default function CataloguePage() {
               className="text-4xl sm:text-5xl font-light text-white"
               data-testid="catalogue-title"
             >
-              Product Catalogues
+              Catalogues
             </h1>
             <p className="text-base text-white/70 font-light mt-4 max-w-xl">
               Download detailed product catalogues from our partner brands.

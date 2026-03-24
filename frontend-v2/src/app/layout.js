@@ -5,61 +5,33 @@ import Footer from "@/components/Footer";
 import Providers from "./Providers";
 import FloatingCTA from "@/components/FloatingCTA";
 import ScrollToTop from "@/components/ScrollToTop";
+import LayoutWrapper from "./LayoutWrapper";
 const lato = Lato({
-  subsets: ["latin"], // required for Google fonts
-  weight: ["100", "300", "400", "700", "900"], // choose what you need
+  subsets: ["latin"],
+  weight: ["100", "300", "400", "700", "900"],
   display: "swap",
   variable: "--font-lato",
 });
 
 export const metadata = {
-  metadataBase: new URL("https://yourdomain.com"), // 🔁 replace with real domain
+  metadataBase: new URL("https://yourdomain.com"),
   title: {
     default: "Chhabra Marble - Premium Tiles & Sanitaryware in Delhi",
     template: "%s | Chhabra Marble",
   },
   description:
     "Chhabra Marble offers premium tiles, CP fittings, sanitaryware, stones, granites, and plumbing solutions in Delhi.",
-  keywords: [
-    "Tiles in Delhi",
-    "Sanitaryware Delhi",
-    "Granite Supplier Delhi",
-    "Marble Dealer Delhi",
-    "Chhabra Marble",
-  ],
-  openGraph: {
-    title: "Chhabra Marble - Premium Tiles & Sanitaryware",
-    description:
-      "Explore premium tiles, stones, granites & sanitaryware at Chhabra Marble, Delhi.",
-    url: "https://yourdomain.com",
-    siteName: "Chhabra Marble",
-    locale: "en_IN",
-    type: "website",
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Chhabra Marble",
-    description: "Premium Tiles, Stones & Sanitaryware Supplier in Delhi.",
-  },
-  robots: {
-    index: true,
-    follow: true,
-  },
 };
 
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${lato.variable} antialiased`}>
-        <ScrollToTop />
-        <div className="font-lato min-h-screen flex flex-col">
-          <Providers>
-            <Header />
-            {children}
-            <Footer />
-            <FloatingCTA />
-          </Providers>
-        </div>
+        <Providers>
+          <ScrollToTop />
+
+          <LayoutWrapper>{children}</LayoutWrapper>
+        </Providers>
       </body>
     </html>
   );
