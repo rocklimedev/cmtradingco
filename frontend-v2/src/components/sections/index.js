@@ -1,0 +1,10 @@
+export { default as HeroSection } from "./HeroSection";
+export { default as ParallaxIntro } from "./ParallaxIntro";
+export { default as CategoriesSection } from "./CategoriesSection";
+export { default as FeaturedSlider } from "./FeaturedSlider";
+export { default as ParallaxShowcase } from "./ParallaxShowcase";
+export { default as WhyChooseSection } from "./WhyChooseSection";
+export { default as QuoteSection } from "./QuoteSection";
+export { default as PromoBanner } from "./PromoBanner";
+export { default as ContactFormSection } from "./ContactFormSection";
+export { default as PartnersSlider } from "./PartnersSlider";
