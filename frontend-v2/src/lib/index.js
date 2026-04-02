@@ -409,42 +409,42 @@ export const catalogues = [
     brand: "Grohe Bau",
     image:
       "https://images.unsplash.com/photo-1567102109796-90071d28cb38?w=600&q=80",
-    downloadUrl: "../../assets/catalogues/grohe-bau.pdf",
+    downloadUrl: "http://static.cmtradingco.com/catalogues/grohe-bau.pdf",
   },
   {
     id: "cat-grohe-premium",
     brand: "Grohe Premium",
     image:
       "https://images.unsplash.com/photo-1567102109796-90071d28cb38?w=600&q=80",
-    downloadUrl: "../../assets/catalogues/grohe-premium.pdf",
+    downloadUrl: "http://static.cmtradingco.com/catalogues/grohe-premium.pdf",
   },
   {
     id: "cat-american-standard",
     brand: "American Standard",
     image:
       "https://images.unsplash.com/photo-1595515770294-38a01e2ac4dd?w=600&q=80",
-    downloadUrl: "../../assets/catalogues/american-standard.pdf",
+    downloadUrl: "http://static.cmtradingco.com/catalogues/american-standard.pdf",
   },
   {
     id: "cat-colston-project",
     brand: "Colston Project",
     image:
       "https://images.unsplash.com/photo-1718073869252-3b78770dc972?w=600&q=80",
-    downloadUrl: "../../assets/catalogues/colston-project.pdf",
+    downloadUrl: "http://static.cmtradingco.com/catalogues/colston-project.pdf",
   },
   {
     id: "cat-colston-water-innovation",
     brand: "Colston Water Innovation",
     image:
       "https://images.unsplash.com/photo-1718073869252-3b78770dc972?w=600&q=80",
-    downloadUrl: "../../assets/catalogues/colston-water-innovation.pdf",
+    downloadUrl: "http://static.cmtradingco.com/catalogues/colston-water-innovation.pdf",
   },
   {
     id: "cat-colston-wellness",
     brand: "Colston Wellness",
     image:
       "https://images.unsplash.com/photo-1718073869252-3b78770dc972?w=600&q=80",
-    downloadUrl: "../../assets/catalogues/colston-wellness.pdf",
+    downloadUrl: "http://static.cmtradingco.com/catalogues/colston-wellness.pdf",
   },
 ];
 
