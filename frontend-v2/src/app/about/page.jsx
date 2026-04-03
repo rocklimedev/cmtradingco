@@ -6,23 +6,29 @@ import Link from "next/link";
 import { ArrowRight, Award, Eye, Handshake } from "lucide-react";
 
 import ScrollReveal from "@/components/ScrollReveal"; // ← imported
-import { heroImages, showcaseImages, categories } from "@/lib";
+import { showcaseImages, categories, videoBanners } from "@/lib";
 
 export default function AboutPage() {
   return (
     <div data-testid="about-page">
       {/* Full-screen hero banner */}
       <section className="relative h-screen overflow-hidden">
-        <div className="absolute inset-0 hero-bg">
-          <Image
-            src={heroImages.about}
-            alt="About Chhabra Marble"
+        {/* Video Background */}
+        <div className="absolute inset-0">
+          <video
+            src={videoBanners.homeVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
             className="w-full h-full object-cover"
-            fill
-            priority
           />
         </div>
+
+        {/* Overlay */}
         <div className="absolute inset-0 bg-black/30" />
+
+        {/* Content */}
         <div className="relative z-10 flex items-end h-full max-w-[1300px] mx-auto px-6 md:px-12 pb-16 md:pb-24">
           <h1
             className="text-4xl sm:text-5xl lg:text-6xl font-light text-white leading-tight"
@@ -32,7 +38,6 @@ export default function AboutPage() {
           </h1>
         </div>
       </section>
-
       {/* Brand Story - Parallax */}
       <section className="relative">
         <div className="grid grid-cols-1 lg:grid-cols-2">

@@ -1,28 +1,27 @@
 "use client";
 
 import Link from "next/link";
-import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
-import { showcaseImages } from "@/lib";
+import { videoBanners } from "@/lib";
 
 export default function PromoBanner() {
   return (
-    <section
-      data-testid="promo-section"
-      className="relative py-32 md:py-40 overflow-hidden"
-    >
+    <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] py-32 md:py-40 overflow-hidden">
+      {/* Video Background */}
       <div className="absolute inset-0">
-        <Image
-          src={showcaseImages.promo}
-          alt="Premium materials"
-          fill
-          style={{ objectFit: "cover" }}
-          sizes="100vw"
-          priority
+        <video
+          src={videoBanners.homeVideo}
+          autoPlay
+          loop
+          muted
+          playsInline
+          className="w-full h-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-black/50" />
       </div>
+
+      {/* Content */}
       <div className="relative z-10 max-w-[1300px] mx-auto px-6 md:px-12 text-center">
         <ScrollReveal>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-white leading-tight mb-8">

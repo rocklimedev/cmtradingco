@@ -1,8 +1,8 @@
+import CustomerReviews from "@/components/CustomerReviews";
 import {
   HeroSection,
   ParallaxIntro,
   CategoriesSection,
-  FeaturedSlider,
   ParallaxShowcase,
   WhyChooseSection,
   QuoteSection,
@@ -17,13 +17,13 @@ export default function HomePage() {
       <HeroSection />
       <ParallaxIntro />
       <CategoriesSection />
-      <FeaturedSlider />
       <ParallaxShowcase />
       <WhyChooseSection />
       <QuoteSection />
       <PromoBanner />
       <ContactFormSection />
       <PartnersSlider />
+      <CustomerReviews/>
     </div>
   );
 }

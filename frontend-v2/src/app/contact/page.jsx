@@ -12,7 +12,7 @@ import {
   BUSINESS_HOURS,
   heroImages,
 } from "@/lib";
-import { useSubmitContactFormMutation } from "@/api/contactApi";
+import { useCreateQueryMutation } from "@/api/queriesApi";   // ✅ Using queriesApi
 
 export default function ContactPage() {
   const [form, setForm] = useState({
@@ -24,13 +24,30 @@ export default function ContactPage() {
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const [submitContactForm, { isLoading }] = useSubmitContactFormMutation();
+  const [createQuery, { isLoading }] = useCreateQueryMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const fullName = `${form.firstName} ${form.lastName}`.trim();
+
+    if (!fullName || !form.email || !form.message) {
+      alert("Please fill in all required fields (Name, Email, and Message)");
+      return;
+    }
+
     try {
-      await submitContactForm(form).unwrap();
+      await createQuery({
+        branch: "chhabra_marble",           // ✅ Required for Chhabra Marble
+        name: fullName,
+        email: form.email,
+        subject: "General Inquiry from Contact Form",   // Default subject
+        message: form.message,
+      }).unwrap();
+
       setSubmitted(true);
+
+      // Reset form
       setForm({
         firstName: "",
         lastName: "",
@@ -40,6 +57,8 @@ export default function ContactPage() {
       });
     } catch (err) {
       console.error("Contact form error:", err);
+      const errorMsg = err?.data?.message || "Failed to send your message. Please try again.";
+      alert(errorMsg);
     }
   };
 
@@ -50,7 +69,7 @@ export default function ContactPage() {
         <div className="absolute inset-0">
           <Image
             src={heroImages.contact}
-            alt="Contact Us"
+            alt="Contact Chhabra Marble"
             className="w-full h-full object-cover"
             fill
             priority
@@ -214,25 +233,29 @@ export default function ContactPage() {
                   <p className="text-xs font-normal tracking-[0.2em] uppercase text-brand-red mb-4">
                     Send A Message
                   </p>
-                  <input
-                    type="text"
-                    placeholder="First Name"
-                    required
-                    value={form.firstName}
-                    onChange={(e) =>
-                      setForm({ ...form, firstName: e.target.value })
-                    }
-                    className="w-full px-0 py-4 bg-transparent border-0 border-b border-brand-border text-brand-charcoal placeholder:text-brand-muted font-light focus:outline-none focus:border-brand-red transition-colors"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Last Name"
-                    value={form.lastName}
-                    onChange={(e) =>
-                      setForm({ ...form, lastName: e.target.value })
-                    }
-                    className="w-full px-0 py-4 bg-transparent border-0 border-b border-brand-border text-brand-charcoal placeholder:text-brand-muted font-light focus:outline-none focus:border-brand-red transition-colors"
-                  />
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <input
+                      type="text"
+                      placeholder="First Name"
+                      required
+                      value={form.firstName}
+                      onChange={(e) =>
+                        setForm({ ...form, firstName: e.target.value })
+                      }
+                      className="w-full px-0 py-4 bg-transparent border-0 border-b border-brand-border text-brand-charcoal placeholder:text-brand-muted font-light focus:outline-none focus:border-brand-red transition-colors"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Last Name"
+                      value={form.lastName}
+                      onChange={(e) =>
+                        setForm({ ...form, lastName: e.target.value })
+                      }
+                      className="w-full px-0 py-4 bg-transparent border-0 border-b border-brand-border text-brand-charcoal placeholder:text-brand-muted font-light focus:outline-none focus:border-brand-red transition-colors"
+                    />
+                  </div>
+
                   <input
                     type="tel"
                     placeholder="Phone"
@@ -242,6 +265,7 @@ export default function ContactPage() {
                     }
                     className="w-full px-0 py-4 bg-transparent border-0 border-b border-brand-border text-brand-charcoal placeholder:text-brand-muted font-light focus:outline-none focus:border-brand-red transition-colors"
                   />
+
                   <input
                     type="email"
                     placeholder="Email"
@@ -252,6 +276,7 @@ export default function ContactPage() {
                     }
                     className="w-full px-0 py-4 bg-transparent border-0 border-b border-brand-border text-brand-charcoal placeholder:text-brand-muted font-light focus:outline-none focus:border-brand-red transition-colors"
                   />
+
                   <textarea
                     placeholder="Message"
                     required
@@ -262,6 +287,7 @@ export default function ContactPage() {
                     }
                     className="w-full px-0 py-4 bg-transparent border-0 border-b border-brand-border text-brand-charcoal placeholder:text-brand-muted font-light focus:outline-none focus:border-brand-red transition-colors resize-none"
                   />
+
                   <button
                     type="submit"
                     disabled={isLoading}

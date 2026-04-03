@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
-import { useSubmitContactFormMutation } from "@/api/contactApi";
+import { useCreateQueryMutation } from "@/api/queriesApi";   // ✅ Changed to useCreateQueryMutation
+
 export default function ContactFormSection() {
   const [form, setForm] = useState({
     firstName: "",
@@ -12,13 +13,33 @@ export default function ContactFormSection() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
-  const [submitContactForm, { isLoading }] = useSubmitContactFormMutation();
+
+  // ✅ Using createQuery from queriesApi (which supports branch)
+  const [createQuery, { isLoading }] = useCreateQueryMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const fullName = `${form.firstName} ${form.lastName}`.trim();
+
+    if (!fullName || !form.email || !form.message) {
+      alert("Please fill in all required fields: Name, Email, and Message");
+      return;
+    }
+
     try {
-      await submitContactForm(form).unwrap();
+      await createQuery({
+        branch: "chhabra_marble",                    // ✅ Required for this branch
+        name: fullName,
+        email: form.email,
+        subject: "General Inquiry from Contact Form", // Default subject
+        message: form.message,
+        // phone is optional - you can add it to the message if needed
+      }).unwrap();
+
       setSubmitted(true);
+
+      // Reset form
       setForm({
         firstName: "",
         lastName: "",
@@ -28,7 +49,9 @@ export default function ContactFormSection() {
       });
     } catch (err) {
       console.error("Contact form submission failed:", err);
-      // Optionally: display error to user
+      const errorMsg =
+        err?.data?.message || "Failed to send message. Please try again.";
+      alert(errorMsg);
     }
   };
 
@@ -41,7 +64,7 @@ export default function ContactFormSection() {
               Get In Touch
             </p>
             <h2 className="text-3xl md:text-4xl font-normal text-brand-charcoal">
-              Contact Us
+              Contact Us 
             </h2>
           </div>
         </ScrollReveal>

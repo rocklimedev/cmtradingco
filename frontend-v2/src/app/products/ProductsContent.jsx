@@ -5,7 +5,7 @@ import { useRef, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
-import { categories, heroImages, PHONE_RAW } from "@/lib";
+import { categories, heroImages, PHONE_RAW , videoBanners} from "@/lib";
 
 // Subcategory Card
 function SubcategoryCard({ sub, delay }) {
@@ -113,14 +113,30 @@ export default function ProductsContent() {
       {/* Hero Banner */}
       <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
         <div className="absolute inset-0">
-          <img
-            src={activeCategory ? activeCategory.banner : heroImages.products}
-            alt={activeCategory ? activeCategory.name : "Products"}
-            className="w-full h-full object-cover"
-            loading="eager"
-          />
+          {activeCategory?.banner ? (
+            // Show category-specific image if available
+            <img
+              src={activeCategory.banner}
+              alt={activeCategory.name}
+              className="w-full h-full object-cover"
+              loading="eager"
+            />
+          ) : (
+            // Otherwise show video
+            <video
+              src={videoBanners.productsVideo}
+              autoPlay
+              loop
+              muted
+              playsInline
+              poster={heroImages.products}
+              className="w-full h-full object-cover"
+            />
+          )}
+
           <div className="absolute inset-0 bg-black/30" />
         </div>
+
         <div className="relative z-10 flex items-end h-full max-w-[1300px] mx-auto px-6 md:px-12 pb-16 md:pb-24">
           <div>
             <p className="text-xs font-normal tracking-[0.2em] uppercase text-white/70 mb-4">
@@ -135,11 +151,10 @@ export default function ProductsContent() {
           </div>
         </div>
       </section>
-
       {/* Category Tabs (sticky) */}
-      <section className="border-b border-brand-border bg-white sticky top-0 z-30">
-        <div className="max-w-[1300px] mx-auto px-6 md:px-12">
-          <div className="flex gap-0 overflow-x-auto scrollbar-hide">
+      <section className="bg-white sticky top-0 z-30 mt-6 md:mt-8">
+        <div className="max-w-[1300px] mx-auto px-6 md:px-12 h-16 flex items-center justify-center">
+          <div className="flex gap-0 overflow-x-auto scrollbar-hide items-center">
             <button
               onClick={() => router.push("/products")}
               data-testid="cat-tab-all"

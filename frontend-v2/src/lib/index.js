@@ -2,9 +2,8 @@ export const LOGO_RED = "/assets/logos/red_logo.png";
 export const LOGO_WHITE = "/assets/logos/white_logo.png";
 export const API_URL =
   process.env.NODE_ENV === "production"
-    ? "https://api.cmtradingco.com/api"
-    : "http://localhost:4000/api";
-// export const API_URL = "http://localhost:4000/api";
+    ? "https://api.rippotaiarchitecture.com/api"
+    : "http://localhost:5000/api";
 
 export const WHATSAPP_NUMBER = "919911080605";
 export const PHONE_NUMBER = "+91 99110 80605";
@@ -407,44 +406,43 @@ export const catalogues = [
   {
     id: "cat-grohe",
     brand: "Grohe Bau",
-    image:
-      "https://images.unsplash.com/photo-1567102109796-90071d28cb38?w=600&q=80",
+    image: "https://static.cmtradingco.com/catalogues/bau_catalogues.png",
     downloadUrl: "http://static.cmtradingco.com/catalogues/grohe-bau.pdf",
   },
   {
     id: "cat-grohe-premium",
     brand: "Grohe Premium",
     image:
-      "https://images.unsplash.com/photo-1567102109796-90071d28cb38?w=600&q=80",
+      "https://static.cmtradingco.com/catalogues/grohe_premium_catalogues.png",
     downloadUrl: "http://static.cmtradingco.com/catalogues/grohe-premium.pdf",
   },
   {
     id: "cat-american-standard",
     brand: "American Standard",
-    image:
-      "https://images.unsplash.com/photo-1595515770294-38a01e2ac4dd?w=600&q=80",
-    downloadUrl: "http://static.cmtradingco.com/catalogues/american-standard.pdf",
+    image: "https://static.cmtradingco.com/catalogues/american_standard.png",
+    downloadUrl:
+      "http://static.cmtradingco.com/catalogues/american-standard.pdf",
   },
   {
     id: "cat-colston-project",
     brand: "Colston Project",
-    image:
-      "https://images.unsplash.com/photo-1718073869252-3b78770dc972?w=600&q=80",
+    image: "https://static.cmtradingco.com/catalogues/colston_project.png",
     downloadUrl: "http://static.cmtradingco.com/catalogues/colston-project.pdf",
   },
   {
     id: "cat-colston-water-innovation",
     brand: "Colston Water Innovation",
     image:
-      "https://images.unsplash.com/photo-1718073869252-3b78770dc972?w=600&q=80",
-    downloadUrl: "http://static.cmtradingco.com/catalogues/colston-water-innovation.pdf",
+      "https://static.cmtradingco.com/catalogues/colston_water_innovations.png",
+    downloadUrl:
+      "http://static.cmtradingco.com/catalogues/colston-water-innovation.pdf",
   },
   {
     id: "cat-colston-wellness",
     brand: "Colston Wellness",
-    image:
-      "https://images.unsplash.com/photo-1718073869252-3b78770dc972?w=600&q=80",
-    downloadUrl: "http://static.cmtradingco.com/catalogues/colston-wellness.pdf",
+    image: "https://static.cmtradingco.com/catalogues/colston_wellness.png",
+    downloadUrl:
+      "http://static.cmtradingco.com/catalogues/colston-wellness.pdf",
   },
 ];
 
@@ -501,4 +499,50 @@ export const showcaseImages = {
     "https://images.unsplash.com/photo-1706629503571-c165023a7792?w=1920&q=80",
   aboutOffer:
     "https://images.unsplash.com/photo-1745301558339-44eb3217d5da?w=1920&q=80",
+};
+
+export const reviews = [
+  {
+    name: "Edward Alexander",
+    rating: 4.9,
+    date: "29 Aug, 2017",
+    image: "https://i.pravatar.cc/100?img=3",
+    text: "Overall pleasurable experience. Pay a little first and pay during development as milestones are achieved.",
+  },
+  {
+    name: "Diana Johnston",
+    rating: 4.9,
+    date: "29 Aug, 2017",
+    image: "https://i.pravatar.cc/100?img=1",
+    text: "Seamless and easy process. Highly recommended team.",
+  },
+  {
+    name: "Lauren Contreras",
+    rating: 4.9,
+    date: "29 Aug, 2017",
+    image: "https://i.pravatar.cc/100?img=2",
+    text: "Great support and communication throughout the project.",
+  },
+  {
+    name: "Chris Evans",
+    rating: 4.8,
+    date: "30 Aug, 2017",
+    image: "https://i.pravatar.cc/100?img=4",
+    text: "Very professional and timely delivery.",
+  },
+  {
+    name: "Sophia Turner",
+    rating: 4.7,
+    date: "1 Sep, 2017",
+    image: "https://i.pravatar.cc/100?img=5",
+    text: "Loved working with them. Smooth experience.",
+  },
+];
+
+export const videoBanners = {
+  aboutVideo: "https://static.cmtradingco.com/cm_video/about_video.mp4",
+  cataloguesVideo:
+    "https://static.cmtradingco.com/cm_video/catalogues_video.mp4",
+  homeVideo: "https://static.cmtradingco.com/cm_video/home_video.mp4",
+  productsVideo: "https://static.cmtradingco.com/cm_video/products_video.mp4",
 };

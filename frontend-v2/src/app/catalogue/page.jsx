@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Download } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
-import { catalogues, heroImages } from "@/lib";
+import { catalogues, videoBanners } from "@/lib";
 
 export default function CataloguePage() {
   // 🔽 Force download function (works for cross-origin PDFs)
@@ -30,17 +30,20 @@ export default function CataloguePage() {
     <div data-testid="catalogue-page">
       {/* Hero Banner */}
       <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
+        {/* Video Background */}
         <div className="absolute inset-0">
-          <Image
-            src={heroImages.catalogue}
-            alt="Catalogues"
+          <video
+            src={videoBanners.cataloguesVideo}
+            autoPlay
+            loop
+            muted
+            playsInline
             className="w-full h-full object-cover"
-            fill
-            priority
           />
           <div className="absolute inset-0 bg-black/30" />
         </div>
 
+        {/* Content */}
         <div className="relative z-10 flex items-end h-full max-w-[1300px] mx-auto px-6 md:px-12 pb-16 md:pb-24">
           <div>
             <p className="text-xs tracking-[0.2em] uppercase text-white/70 mb-4">
@@ -55,7 +58,6 @@ export default function CataloguePage() {
           </div>
         </div>
       </section>
-
       {/* Catalogue Grid */}
       <section className="py-24 md:py-32">
         <div className="max-w-[1300px] mx-auto px-6 md:px-12">

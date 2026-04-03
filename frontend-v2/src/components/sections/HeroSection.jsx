@@ -3,6 +3,7 @@
 import useEmblaCarousel from "embla-carousel-react";
 import { useEffect } from "react";
 import { bannerImages } from "@/lib";
+
 export default function HeroSection() {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
 
