@@ -31,7 +31,7 @@ export default function AboutPage() {
         {/* Content */}
         <div className="relative z-10 flex items-end h-full max-w-[1300px] mx-auto px-6 md:px-12 pb-16 md:pb-24">
           <h1
-            className="text-4xl sm:text-5xl lg:text-6xl font-light text-white leading-tight"
+            className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-light text-white leading-tight"
             data-testid="about-hero-title"
           >
             About

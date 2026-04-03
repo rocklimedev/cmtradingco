@@ -5,7 +5,7 @@ import { useRef, useCallback } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
-import { categories, heroImages, PHONE_RAW , videoBanners} from "@/lib";
+import { categories, heroImages, PHONE_RAW, videoBanners } from "@/lib";
 
 // Subcategory Card
 function SubcategoryCard({ sub, delay }) {
@@ -111,7 +111,7 @@ export default function ProductsContent() {
   return (
     <div data-testid="products-page">
       {/* Hero Banner */}
-      <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
+      <section className="relative h-screen overflow-hidden">
         <div className="absolute inset-0">
           {activeCategory?.banner ? (
             // Show category-specific image if available
@@ -143,7 +143,7 @@ export default function ProductsContent() {
               {activeCategory ? "Category" : "Discover"}
             </p>
             <h1
-              className="text-4xl sm:text-5xl font-light text-white"
+              className="text-5xl sm:text-6xl lg:text-7xl font-light text-white"
               data-testid="products-title"
             >
               {activeCategory ? activeCategory.name : "Our Products"}

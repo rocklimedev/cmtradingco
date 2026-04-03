@@ -29,7 +29,7 @@ export default function CataloguePage() {
   return (
     <div data-testid="catalogue-page">
       {/* Hero Banner */}
-      <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
+      <section className="relative h-[100dvh] overflow-hidden">
         {/* Video Background */}
         <div className="absolute inset-0">
           <video
@@ -44,15 +44,17 @@ export default function CataloguePage() {
         </div>
 
         {/* Content */}
-        <div className="relative z-10 flex items-end h-full max-w-[1300px] mx-auto px-6 md:px-12 pb-16 md:pb-24">
+        <div className="relative z-10 flex items-end h-full max-w-[1300px] mx-auto px-6 md:px-12 pb-20 md:pb-28">
           <div>
             <p className="text-xs tracking-[0.2em] uppercase text-white/70 mb-4">
               Downloads
             </p>
-            <h1 className="text-4xl sm:text-5xl font-light text-white">
+
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-light text-white">
               Catalogues
             </h1>
-            <p className="text-base text-white/70 mt-4 max-w-xl">
+
+            <p className="text-lg text-white/70 mt-4 max-w-xl">
               Download detailed product catalogues from our partner brands.
             </p>
           </div>

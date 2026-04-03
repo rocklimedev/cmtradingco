@@ -7,7 +7,7 @@ import { videoBanners } from "@/lib";
 
 export default function PromoBanner() {
   return (
-    <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] py-32 md:py-40 overflow-hidden">
+    <section className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] min-h-[90vh] overflow-hidden">
       {/* Video Background */}
       <div className="absolute inset-0">
         <video
@@ -22,13 +22,8 @@ export default function PromoBanner() {
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-[1300px] mx-auto px-6 md:px-12 text-center">
+      <div className="absolute inset-0 z-10 flex items-center justify-center text-center px-6 md:px-12">
         <ScrollReveal>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl font-light text-white leading-tight mb-8">
-            Design Better Spaces
-            <br />
-            With Better Materials
-          </h2>
           <Link
             href="/products"
             data-testid="promo-cta"
