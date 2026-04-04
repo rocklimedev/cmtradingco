@@ -17,13 +17,11 @@ export default function HomePage() {
       <HeroSection />
       <ParallaxIntro />
       <CategoriesSection />
-      <ParallaxShowcase />
+      <PromoBanner />
       <WhyChooseSection />
       <QuoteSection />
-      <PromoBanner />
       <ContactFormSection />
       <PartnersSlider />
-      <CustomerReviews/>
     </div>
   );
 }

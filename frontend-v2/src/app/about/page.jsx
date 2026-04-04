@@ -1,12 +1,11 @@
 // app/about/page.jsx
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Award, Eye, Handshake } from "lucide-react";
-
+import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal"; // ← imported
-import { showcaseImages, categories, videoBanners } from "@/lib";
+import { showcaseImages, categories, videoBanners, heroImages } from "@/lib";
 
 export default function AboutPage() {
   return (
@@ -15,13 +14,12 @@ export default function AboutPage() {
       <section className="relative h-screen overflow-hidden">
         {/* Video Background */}
         <div className="absolute inset-0">
-          <video
-            src={videoBanners.homeVideo}
-            autoPlay
-            loop
-            muted
-            playsInline
+          <Image
+            src={heroImages.about} // use an image instead of video
+            alt="Contact Chhabra Marble"
             className="w-full h-full object-cover"
+            fill
+            priority
           />
         </div>
 
@@ -34,7 +32,10 @@ export default function AboutPage() {
             className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-light text-white leading-tight"
             data-testid="about-hero-title"
           >
-            About
+            About{" "}
+            <span className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl">
+              us
+            </span>
           </h1>
         </div>
       </section>
@@ -131,14 +132,6 @@ export default function AboutPage() {
 
       {/* What We Offer - Banner + Categories */}
       <section className="relative">
-        <div className="h-[40vh] md:h-[50vh] overflow-hidden">
-          <Image
-            src={showcaseImages.aboutOffer}
-            alt="What we offer"
-            className="w-full h-full object-cover"
-            fill
-          />
-        </div>
         <div className="py-24 md:py-32">
           <div className="max-w-[1300px] mx-auto px-6 md:px-12">
             <ScrollReveal>

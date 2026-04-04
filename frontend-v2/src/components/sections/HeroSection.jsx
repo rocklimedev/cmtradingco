@@ -1,50 +1,132 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { bannerImages } from "@/lib";
 
 export default function HeroSection() {
-  const [index, setIndex] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setIndex((prev) => (prev + 1) % bannerImages.length);
-    }, 8000);
-
-    return () => clearInterval(interval);
+  const nextSlide = useCallback(() => {
+    setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
   }, []);
 
-  return (
-    <section className="relative h-[100dvh] overflow-hidden">
-      {bannerImages.map((img, i) => {
-        const isActive = i === index;
+  // Change slide every 12 seconds
+  useEffect(() => {
+    const interval = setInterval(nextSlide, 12000);
+    return () => clearInterval(interval);
+  }, [nextSlide]);
 
+  return (
+    <section
+      style={{
+        position: "relative",
+        width: "100%",
+        height: "100vh",
+        overflow: "hidden",
+        backgroundColor: "#0a0a0a",
+      }}
+    >
+      {bannerImages.map((src, idx) => {
+        const isActive = idx === currentIndex;
         return (
           <div
-            key={i}
-            className={`absolute inset-0 transition-opacity duration-[2500ms] ease-in-out ${
-              isActive ? "opacity-100 z-20" : "opacity-0 z-10"
-            }`}
+            key={idx}
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              width: "100%",
+              height: "100%",
+              opacity: isActive ? 1 : 0,
+              zIndex: isActive ? 20 : 10,
+              transition: "opacity 3s ease-in-out", // fade duration
+            }}
           >
             {/* Image with continuous zoom */}
-            <img
-              src={img}
-              alt={`Banner ${i}`}
-              className={`
-                w-full h-full object-cover
-                transition-transform duration-[10000ms] ease-linear
-                ${isActive ? "scale-110" : "scale-105"}
-              `}
+            <div
+              style={{
+                width: "100%",
+                height: "100%",
+                backgroundImage: `url(${src})`,
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                transform: "scale(1)",
+                animation: isActive ? "zoomEffect 12s linear forwards" : "none",
+              }}
             />
 
             {/* Gradient overlay */}
-            <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/30 to-black/70" />
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                background:
+                  "linear-gradient(to bottom, rgba(0,0,0,0.4), rgba(0,0,0,0.3), rgba(0,0,0,0.7))",
+                zIndex: 1,
+              }}
+            />
 
             {/* Film grain */}
-            <div className="absolute inset-0 opacity-[0.05] bg-[url('/noise.png')]" />
+            <div
+              style={{
+                position: "absolute",
+                top: 0,
+                left: 0,
+                width: "100%",
+                height: "100%",
+                backgroundImage: "url('/noise.png')",
+                opacity: 0.05,
+                zIndex: 2,
+              }}
+            />
           </div>
         );
       })}
+
+      {/* Slide indicators */}
+      <div
+        style={{
+          position: "absolute",
+          bottom: "40px",
+          left: "50%",
+          transform: "translateX(-50%)",
+          zIndex: 30,
+          display: "flex",
+          gap: "12px",
+        }}
+      >
+        {bannerImages.map((_, idx) => (
+          <button
+            key={idx}
+            onClick={() => setCurrentIndex(idx)}
+            style={{
+              width: idx === currentIndex ? "32px" : "8px",
+              height: "2px",
+              backgroundColor:
+                idx === currentIndex ? "#d9af61" : "rgba(255, 255, 255, 0.4)",
+              border: "none",
+              cursor: "pointer",
+              padding: 0,
+              transition: "all 0.4s ease",
+            }}
+            aria-label={`Go to slide ${idx + 1}`}
+          />
+        ))}
+      </div>
+
+      <style jsx>{`
+        @keyframes zoomEffect {
+          0% {
+            transform: scale(1);
+          }
+          100% {
+            transform: scale(1.1);
+          }
+        }
+      `}</style>
     </section>
   );
 }

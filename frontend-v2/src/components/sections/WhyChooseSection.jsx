@@ -18,9 +18,6 @@ export default function WhyChooseSection() {
       <div className="max-w-[1300px] mx-auto px-6 md:px-12">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <p className="text-xs font-normal tracking-[0.2em] uppercase text-brand-red mb-4">
-              Trust
-            </p>
             <h2 className="text-3xl md:text-4xl font-normal text-brand-charcoal">
               Why Choose Chhabra Marble
             </h2>

@@ -5,12 +5,13 @@ export const API_URL =
     ? "https://api.rippotaiarchitecture.com/api"
     : "http://localhost:5000/api";
 
-export const WHATSAPP_NUMBER = "919911080605";
-export const PHONE_NUMBER = "+91 99110 80605";
-export const PHONE_RAW = "919911080605";
+export const WHATSAPP_NUMBER = "919999401858";
+export const PHONE_NUMBER = "+919911480980";
+export const PHONE_RAW = "919911480980";
 export const EMAIL = "info@chhabramarble.com";
 export const ADDRESS = " 487/65, National Market, Peera Garhi, Delhi, 110087";
-export const BUSINESS_HOURS = "Mon - Sat: 10:00 AM - 8:00 PM | Sun: Closed";
+export const BUSINESS_HOURS =
+  "Thursday-Tuesday : 10 AM - 8PM | Wednesday Closed";
 
 export const socialLinks = [
   {
@@ -59,38 +60,31 @@ export const categories = [
     subcategories: [
       {
         name: "Indoor Tiles",
-        image:
-          "https://images.unsplash.com/photo-1706629503571-c165023a7792?w=800&q=80",
+        image: "./assets/products/indoor-tiles.webp",
       },
       {
         name: "Outdoor Tiles",
-        image:
-          "https://images.unsplash.com/photo-1718073869252-3b78770dc972?w=800&q=80",
+        image: "./assets/products/outdoor-tiles.jpeg",
       },
       {
         name: "Bathroom Tiles",
-        image:
-          "https://images.unsplash.com/photo-1714648775477-a15cc5aed21f?w=800&q=80",
+        image: "./assets/products/bathroom-tiles.jpeg",
       },
       {
         name: "Kitchen Tiles",
-        image:
-          "https://images.unsplash.com/photo-1765556556784-7656ee0a1bd8?w=800&q=80",
+        image: "./assets/products/kitchen-tiles.jpeg",
       },
       {
         name: "Floor Tiles",
-        image:
-          "https://images.unsplash.com/photo-1706629503586-2731f65587ae?w=800&q=80",
+        image: "./assets/products/floor-tiles.webp",
       },
       {
         name: "Mosaic",
-        image:
-          "https://images.unsplash.com/photo-1656646523907-97b094c7e63a?w=800&q=80",
+        image: "./assets/products/mosaic-tiles.jpeg",
       },
       {
         name: "Facade Tiles",
-        image:
-          "https://images.unsplash.com/photo-1518892974594-4adbf359419c?w=800&q=80",
+        image: "./assets/products/facade-tiles.jpeg",
       },
       {
         name: "Luxury Tiles",
@@ -109,28 +103,28 @@ export const categories = [
     subcategories: [
       {
         name: "Wall-Hung Basins",
-        image:
-          "https://images.unsplash.com/photo-1595515770294-38a01e2ac4dd?w=800&q=80",
+        image: "./assets/products/wall-hung-basins.jpeg",
       },
       {
         name: "Counter-Top Basins",
-        image:
-          "https://images.unsplash.com/photo-1687951276836-06efbfda608b?w=800&q=80",
+        image: "./assets/products/counter-top-basins.jpeg",
       },
       {
         name: "Pedestal Basins",
-        image:
-          "https://images.unsplash.com/photo-1701251786408-d0320ecaad8d?w=800&q=80",
+        image: "./assets/products/pedestal-basins.jpeg",
       },
       {
         name: "Under-Counter Basins",
-        image:
-          "https://images.unsplash.com/photo-1687951276836-06efbfda608b?w=800&q=80",
+        image: "./assets/products/under-counter-basins.jpeg",
       },
       {
         name: "Designer Basins",
         image:
           "https://images.unsplash.com/photo-1595515770294-38a01e2ac4dd?w=800&q=80",
+      },
+      {
+        name: "Semi Counter Basins",
+        image: "./assets/products/semi-counter-basin.jpeg",
       },
     ],
   },
@@ -144,28 +138,23 @@ export const categories = [
     subcategories: [
       {
         name: "Rain Showers",
-        image:
-          "https://images.unsplash.com/photo-1766371900913-1f9fee835af7?w=800&q=80",
+        image: "./assets/products/rain-showers.jpeg",
       },
       {
         name: "Basin Mixers",
-        image:
-          "https://images.unsplash.com/photo-1567102109796-90071d28cb38?w=800&q=80",
+        image: "./assets/products/basin-mixers.jpeg",
       },
       {
         name: "Kitchen Faucets",
-        image:
-          "https://images.unsplash.com/photo-1585412727339-54e4bae3bbf9?w=800&q=80",
+        image: "./assets/products/kitchen-faucets.jpeg",
       },
       {
         name: "Shower Panels",
-        image:
-          "https://images.unsplash.com/photo-1766371900913-1f9fee835af7?w=800&q=80",
+        image: "./assets/products/shower-panels.jpeg",
       },
       {
         name: "Diverters",
-        image:
-          "https://images.unsplash.com/photo-1567102109796-90071d28cb38?w=800&q=80",
+        image: "./assets/products/diverters.jpeg",
       },
     ],
   },
@@ -444,6 +433,12 @@ export const catalogues = [
     downloadUrl:
       "http://static.cmtradingco.com/catalogues/colston-wellness.pdf",
   },
+  {
+    id: "cat-nexion-master",
+    brand: "Nexion",
+    image: "https://static.cmtradingco.com/catalogues/nexion-master.png",
+    downloadUrl: "https://static.cmtradingco.com/catalogues/nexion-master.pdf",
+  },
 ];
 
 export const whyChooseUs = [
@@ -476,7 +471,7 @@ export const whyChooseUs = [
 export const heroImages = {
   home: "https://images.unsplash.com/photo-1701251786408-d0320ecaad8d?w=1920&q=80",
   about:
-    "https://images.unsplash.com/photo-1518892974594-4adbf359419c?w=1920&q=80",
+    "/assets/banner/about-us.jpeg",
   products:
     "https://images.unsplash.com/photo-1714648775477-a15cc5aed21f?w=1920&q=80",
   catalogue:
@@ -491,8 +486,7 @@ export const bannerImages = [
   "../../assets/banner/banner_4.jpeg",
 ];
 export const showcaseImages = {
-  parallax1:
-    "https://images.unsplash.com/photo-1706629503586-2731f65587ae?w=1920&q=80",
+  parallax1: "/assets/what-offers.jpeg",
   parallax2:
     "https://images.unsplash.com/photo-1728486885790-1454260d9246?w=1920&q=80",
   promo:
@@ -540,7 +534,7 @@ export const reviews = [
 ];
 
 export const videoBanners = {
-  aboutVideo: "https://static.cmtradingco.com/cm_video/about_video.mp4",
+  aboutVideo: "/assets/about-us.jpeg",
   cataloguesVideo:
     "https://static.cmtradingco.com/cm_video/catalogues_video.mp4",
   homeVideo: "https://static.cmtradingco.com/cm_video/home_video.mp4",

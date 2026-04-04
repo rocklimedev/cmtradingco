@@ -10,6 +10,7 @@ export default function CategoriesPage() {
       name: "Tiles & Stone",
       subcategories: [
         {
+          id: "indoor-tiles",
           name: "Indoor Tiles",
           image:
             "https://images.unsplash.com/photo-1706629503571-c165023a7792?w=400&q=80",
@@ -32,7 +33,11 @@ export default function CategoriesPage() {
 
   const resetForm = () => setForm({ name: "", image: "" });
 
+  /* ---------------- CATEGORY ---------------- */
+
   const handleSaveCategory = () => {
+    if (!form.name) return;
+
     if (editingCat) {
       setCategories((prev) =>
         prev.map((c) =>
@@ -40,14 +45,14 @@ export default function CategoriesPage() {
         )
       );
     } else {
+      const id = form.name.toLowerCase().replace(/\s+/g, "-");
+
       setCategories((prev) => [
         ...prev,
-        {
-          id: form.name.toLowerCase().replace(/\s+/g, "-"),
-          name: form.name,
-          subcategories: [],
-        },
+        { id, name: form.name, subcategories: [] },
       ]);
+
+      setActive(id); // auto switch
     }
 
     setShowCatModal(false);
@@ -55,7 +60,20 @@ export default function CategoriesPage() {
     resetForm();
   };
 
+  const deleteCategory = (id) => {
+    const filtered = categories.filter((c) => c.id !== id);
+    setCategories(filtered);
+
+    if (active === id && filtered.length) {
+      setActive(filtered[0].id);
+    }
+  };
+
+  /* ---------------- SUBCATEGORY ---------------- */
+
   const handleSaveSub = () => {
+    if (!form.name || !form.image) return;
+
     setCategories((prev) =>
       prev.map((c) => {
         if (c.id !== active) return c;
@@ -64,14 +82,20 @@ export default function CategoriesPage() {
           return {
             ...c,
             subcategories: c.subcategories.map((s) =>
-              s.name === editingSub.name ? form : s
+              s.id === editingSub.id ? { ...s, ...form } : s
             ),
           };
         }
 
         return {
           ...c,
-          subcategories: [...c.subcategories, form],
+          subcategories: [
+            ...c.subcategories,
+            {
+              id: form.name.toLowerCase().replace(/\s+/g, "-"),
+              ...form,
+            },
+          ],
         };
       })
     );
@@ -81,6 +105,21 @@ export default function CategoriesPage() {
     resetForm();
   };
 
+  const deleteSub = (id) => {
+    setCategories((prev) =>
+      prev.map((c) =>
+        c.id === active
+          ? {
+              ...c,
+              subcategories: c.subcategories.filter((s) => s.id !== id),
+            }
+          : c
+      )
+    );
+  };
+
+  /* ---------------- UI ---------------- */
+
   return (
     <div className="min-h-screen bg-background text-foreground px-6 py-10 font-lato">
       <div className="max-w-7xl mx-auto space-y-10">
@@ -88,9 +127,7 @@ export default function CategoriesPage() {
         {/* HEADER */}
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-3xl font-semibold tracking-tight">
-              Categories
-            </h1>
+            <h1 className="text-3xl font-semibold">Categories</h1>
             <p className="text-sm text-brand-muted">
               Manage categories and subcategories
             </p>
@@ -103,7 +140,7 @@ export default function CategoriesPage() {
                 resetForm();
                 setShowCatModal(true);
               }}
-              className="px-4 py-2 text-sm bg-brand-red text-white rounded-md hover:opacity-90"
+              className="px-4 py-2 bg-brand-red text-white rounded-md text-sm"
             >
               + Category
             </button>
@@ -114,7 +151,7 @@ export default function CategoriesPage() {
                 resetForm();
                 setShowSubModal(true);
               }}
-              className="px-4 py-2 text-sm border border-border rounded-md hover:bg-accent"
+              className="px-4 py-2 border border-border rounded-md text-sm"
             >
               + Subcategory
             </button>
@@ -124,52 +161,69 @@ export default function CategoriesPage() {
         {/* TABS */}
         <div className="flex gap-2 flex-wrap border-b border-border pb-3">
           {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setActive(cat.id)}
-              onDoubleClick={() => {
-                setEditingCat(cat);
-                setForm({ name: cat.name });
-                setShowCatModal(true);
-              }}
-              className={`px-4 py-2 text-sm rounded-md transition ${
-                active === cat.id
-                  ? "bg-brand-red text-white shadow-sm"
-                  : "text-muted-foreground hover:bg-accent"
-              }`}
-            >
-              {cat.name}
-            </button>
+            <div key={cat.id} className="relative group">
+              <button
+                onClick={() => setActive(cat.id)}
+                onDoubleClick={() => {
+                  setEditingCat(cat);
+                  setForm({ name: cat.name });
+                  setShowCatModal(true);
+                }}
+                className={`px-4 py-2 text-sm rounded-md ${
+                  active === cat.id
+                    ? "bg-brand-red text-white"
+                    : "hover:bg-accent"
+                }`}
+              >
+                {cat.name}
+              </button>
+
+              {/* DELETE */}
+              <button
+                onClick={() => deleteCategory(cat.id)}
+                className="absolute -top-2 -right-2 text-xs bg-black text-white px-1 rounded hidden group-hover:block"
+              >
+                ✕
+              </button>
+            </div>
           ))}
         </div>
 
         {/* SUBCATEGORY GRID */}
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-          {current.subcategories.map((sub) => (
+          {current?.subcategories.map((sub) => (
             <div
-              key={sub.name}
+              key={sub.id}
               onDoubleClick={() => {
                 setEditingSub(sub);
                 setForm(sub);
                 setShowSubModal(true);
               }}
-              className="group bg-card border border-border rounded-xl overflow-hidden cursor-pointer hover:shadow-lg transition"
+              className="group relative bg-card border border-border rounded-xl overflow-hidden cursor-pointer hover:shadow-lg"
             >
-              <div className="relative h-36 overflow-hidden">
+              <div className="relative h-36">
                 <Image
                   src={sub.image}
                   alt={sub.name}
                   fill
-                  className="object-cover group-hover:scale-105 transition duration-500"
+                  className="object-cover group-hover:scale-105 transition"
                 />
               </div>
 
               <div className="p-4">
                 <p className="text-sm font-semibold">{sub.name}</p>
-                <p className="text-xs text-brand-muted">
-                  Double click to edit
-                </p>
               </div>
+
+              {/* DELETE */}
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  deleteSub(sub.id);
+                }}
+                className="absolute top-1 right-1 text-xs bg-black/60 text-white px-2 py-0.5 rounded"
+              >
+                ✕
+              </button>
             </div>
           ))}
         </div>
@@ -186,7 +240,6 @@ export default function CategoriesPage() {
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
           />
-
           <Button onClick={handleSaveCategory}>
             Save Category
           </Button>
@@ -225,7 +278,7 @@ function Input(props) {
   return (
     <input
       {...props}
-      className="w-full px-3 py-2 rounded-md border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+      className="w-full px-3 py-2 rounded-md border border-border bg-background text-sm"
     />
   );
 }
@@ -235,7 +288,7 @@ function Button({ children, ...props }) {
   return (
     <button
       {...props}
-      className="w-full mt-3 px-4 py-2 bg-brand-red text-white rounded-md text-sm hover:opacity-90"
+      className="w-full mt-3 px-4 py-2 bg-brand-red text-white rounded-md text-sm"
     >
       {children}
     </button>
@@ -245,18 +298,12 @@ function Button({ children, ...props }) {
 /* MODAL */
 function Modal({ title, children, onClose }) {
   return (
-    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-card border border-border rounded-xl p-6 w-full max-w-md space-y-5 animate-fade-in-up">
-        <div className="flex justify-between items-center">
+    <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
+      <div className="bg-card border border-border rounded-xl p-6 w-full max-w-md space-y-5">
+        <div className="flex justify-between">
           <h2 className="text-lg font-semibold">{title}</h2>
-          <button
-            onClick={onClose}
-            className="text-brand-muted hover:text-foreground"
-          >
-            ✕
-          </button>
+          <button onClick={onClose}>✕</button>
         </div>
-
         {children}
       </div>
     </div>

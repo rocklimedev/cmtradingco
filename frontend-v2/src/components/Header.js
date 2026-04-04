@@ -13,9 +13,11 @@ export default function Header() {
 
   // Close mobile menu on route change
   useEffect(() => {
-    setMobileOpen(false);
+    const id = requestAnimationFrame(() => {
+      setMobileOpen(false);
+    });
+    return () => cancelAnimationFrame(id);
   }, [pathname]);
-
   // Track scroll to change header background
   useEffect(() => {
     const handleScroll = () => {
