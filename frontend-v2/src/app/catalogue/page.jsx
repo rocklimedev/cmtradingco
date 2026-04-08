@@ -46,10 +46,6 @@ export default function CataloguePage() {
         {/* Content */}
         <div className="relative z-10 flex items-end h-full max-w-[1300px] mx-auto px-6 md:px-12 pb-20 md:pb-28">
           <div>
-            <p className="text-xs tracking-[0.2em] uppercase text-white/70 mb-4">
-              Downloads
-            </p>
-
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-light text-white">
               Catalogues
             </h1>
