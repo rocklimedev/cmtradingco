@@ -128,12 +128,12 @@ export default function Footer() {
             &copy; {new Date().getFullYear()} Chhabra Marble Trading Co. All
             rights reserved.
           </p>
-          <p className="text-xs text-brand-muted font-light flex items-center gap-2">
-            Powered by{" "}
-            <span className="font-normal" style={{ color: "#ed7c2f" }}>
-              Rocklime
-            </span>
-          </p>
+        <p className="text-sm md:text-base text-brand-muted font-light flex items-center gap-2">
+  Powered by{" "}
+  <span className="font-semibold text-[#ed7c2f] text-base md:text-lg">
+    Rocklime
+  </span>
+</p>
         </div>
       </div>
     </footer>
