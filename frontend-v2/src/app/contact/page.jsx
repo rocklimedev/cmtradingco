@@ -65,31 +65,29 @@ export default function ContactPage() {
   return (
     <div data-testid="contact-page">
       {/* Hero Banner */}
-      <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
-        <div className="absolute inset-0">
-          <Image
-            src={heroImages.contact}
-            alt="Contact Chhabra Marble"
-            className="w-full h-full object-cover"
-            fill
-            priority
-          />
-          <div className="absolute inset-0 bg-black/30" />
-        </div>
-        <div className="relative z-10 flex items-end h-full max-w-[1300px] mx-auto px-6 md:px-12 pb-16 md:pb-24">
-          <div>
-            <p className="text-xs font-normal tracking-[0.2em] uppercase text-white/70 mb-4">
-              Reach Out
-            </p>
-            <h1
-              className="text-4xl sm:text-5xl font-light text-white"
-              data-testid="contact-page-title"
-            >
-              Contact Us
-            </h1>
-          </div>
-        </div>
-      </section>
+ <section className="relative h-screen overflow-hidden">
+  <div className="absolute inset-0">
+    <Image
+      src={heroImages.contact}
+      alt="Contact Chhabra Marble"
+      className="w-full h-full object-cover"
+      fill
+      priority
+    />
+    <div className="absolute inset-0 bg-black/30" />
+  </div>
+
+  <div className="relative z-10 flex items-end h-full max-w-[1300px] mx-auto px-6 md:px-12 pb-16 md:pb-24">
+    <div>
+      <h1
+        className="text-4xl sm:text-5xl font-light text-white"
+        data-testid="contact-page-title"
+      >
+        Contact Us
+      </h1>
+    </div>
+  </div>
+</section>
 
       {/* Contact Details + Form */}
       <section className="py-24 md:py-32">
