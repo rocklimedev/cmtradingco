@@ -26,16 +26,16 @@ export default function PartnersSlider() {
         <div className="overflow-hidden">
           <div className="partners-row-right flex">
             {doubled.map((partner, i) => (
-              <div
-                key={`r2-${i}`}
-                className="flex-shrink-0 w-48 h-24 flex items-center justify-center p-6 mx-3"
-              >
-                <img
-                  src={partner.logo}
-                  alt={partner.name}
-                  className="max-h-24 w-auto object-contain brand-logo-hover"
-                />
-              </div>
+            <div
+  key={`r2-${i}`}
+  className="flex-shrink-0 w-64 h-32 flex items-center justify-center p-4 mx-4"
+>
+  <img
+    src={partner.logo}
+    alt={partner.name}
+    className="max-h-32 w-auto object-contain brand-logo-hover"
+  />
+</div>
             ))}
           </div>
         </div>
