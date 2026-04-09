@@ -1,6 +1,6 @@
 // services/contactApi.js
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { API_URL } from "../lib/config";
+import { API_URL } from "../lib";
 export const contactApi = createApi({
   reducerPath: "contactApi",
   baseQuery: fetchBaseQuery({ baseUrl: `${API_URL}/contact` }), // adjust base URL as per backend route
