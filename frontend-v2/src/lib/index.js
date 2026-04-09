@@ -395,49 +395,49 @@ export const catalogues = [
   {
     id: "cat-grohe",
     brand: "Grohe Bau",
-    image: "https://static.cmtradingco.com/catalogues/bau_catalogues.png",
-    downloadUrl: "http://static.cmtradingco.com/catalogues/grohe-bau.pdf",
+    image: "https://media.cmtradingco.com/catalogues/bau_catalogues.png",
+    downloadUrl: "https://media.cmtradingco.com/catalogues/grohe-bau.pdf",
   },
   {
     id: "cat-grohe-premium",
     brand: "Grohe Premium",
     image:
-      "https://static.cmtradingco.com/catalogues/grohe_premium_catalogues.png",
-    downloadUrl: "http://static.cmtradingco.com/catalogues/grohe-premium.pdf",
+      "https://media.cmtradingco.com/catalogues/grohe_premium_catalogues.png",
+    downloadUrl: "https://media.cmtradingco.com/catalogues/grohe-premium.pdf",
   },
   {
     id: "cat-american-standard",
     brand: "American Standard",
-    image: "https://static.cmtradingco.com/catalogues/american_standard.png",
+    image: "https://media.cmtradingco.com/catalogues/american_standard.png",
     downloadUrl:
-      "http://static.cmtradingco.com/catalogues/american-standard.pdf",
+      "https://media.cmtradingco.com/catalogues/american-standard.pdf",
   },
   {
     id: "cat-colston-project",
     brand: "Colston Project",
-    image: "https://static.cmtradingco.com/catalogues/colston_project.png",
-    downloadUrl: "http://static.cmtradingco.com/catalogues/colston-project.pdf",
+    image: "https://media.cmtradingco.com/catalogues/colston_project.png",
+    downloadUrl: "https://media.cmtradingco.com/catalogues/colston-project.pdf",
   },
   {
     id: "cat-colston-water-innovation",
     brand: "Colston Water Innovation",
     image:
-      "https://static.cmtradingco.com/catalogues/colston_water_innovations.png",
+      "https://media.cmtradingco.com/catalogues/colston_water_innovations.png",
     downloadUrl:
-      "http://static.cmtradingco.com/catalogues/colston-water-innovation.pdf",
+      "https://media.cmtradingco.com/catalogues/colston-water-innovation.pdf",
   },
   {
     id: "cat-colston-wellness",
     brand: "Colston Wellness",
-    image: "https://static.cmtradingco.com/catalogues/colston_wellness.png",
+    image: "https://media.cmtradingco.com/catalogues/colston_wellness.png",
     downloadUrl:
-      "http://static.cmtradingco.com/catalogues/colston-wellness.pdf",
+      "https://media.cmtradingco.com/catalogues/colston-wellness.pdf",
   },
   {
     id: "cat-nexion-master",
     brand: "Nexion",
-    image: "https://static.cmtradingco.com/catalogues/nexion-master.png",
-    downloadUrl: "https://static.cmtradingco.com/catalogues/nexion-master.pdf",
+    image: "https://media.cmtradingco.com/catalogues/nexion-master.png",
+    downloadUrl: "https://media.cmtradingco.com/catalogues/nexion-master.pdf",
   },
 ];
 
@@ -470,8 +470,7 @@ export const whyChooseUs = [
 
 export const heroImages = {
   home: "https://images.unsplash.com/photo-1701251786408-d0320ecaad8d?w=1920&q=80",
-  about:
-    "/assets/banner/about-us.jpeg",
+  about: "/assets/banner/about-us.jpeg",
   products:
     "https://images.unsplash.com/photo-1714648775477-a15cc5aed21f?w=1920&q=80",
   catalogue:
@@ -536,7 +535,7 @@ export const reviews = [
 export const videoBanners = {
   aboutVideo: "/assets/about-us.jpeg",
   cataloguesVideo:
-    "https://static.cmtradingco.com/cm_video/catalogues_video.mp4",
-  homeVideo: "https://static.cmtradingco.com/cm_video/home_video.mp4",
-  productsVideo: "https://static.cmtradingco.com/cm_video/products_video.mp4",
+    "https://media.cmtradingco.com/cm_video/catalogues_video.mp4",
+  homeVideo: "https://media.cmtradingco.com/cm_video/home_video.mp4",
+  productsVideo: "https://media.cmtradingco.com/cm_video/products_video.mp4",
 };
