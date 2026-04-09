@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
-import { featuredProducts } from "@/assets/data/siteData";
+import { featuredProducts } from "@/lib";
 
 import {
   Carousel,

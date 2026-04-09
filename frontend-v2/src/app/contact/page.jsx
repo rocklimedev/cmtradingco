@@ -11,8 +11,8 @@ import {
   ADDRESS,
   BUSINESS_HOURS,
   heroImages,
-} from "@/assets/data/siteData";
-import { useSubmitContactFormMutation } from "@/api/contactApi";
+} from "@/lib";
+import { useCreateQueryMutation } from "@/api/queriesApi"; // ✅ Using queriesApi
 
 export default function ContactPage() {
   const [form, setForm] = useState({
@@ -24,13 +24,30 @@ export default function ContactPage() {
   });
   const [submitted, setSubmitted] = useState(false);
 
-  const [submitContactForm, { isLoading }] = useSubmitContactFormMutation();
+  const [createQuery, { isLoading }] = useCreateQueryMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const fullName = `${form.firstName} ${form.lastName}`.trim();
+
+    if (!fullName || !form.email || !form.message) {
+      alert("Please fill in all required fields (Name, Email, and Message)");
+      return;
+    }
+
     try {
-      await submitContactForm(form).unwrap();
+      await createQuery({
+        branch: "chhabra_marble", // ✅ Required for Chhabra Marble
+        name: fullName,
+        email: form.email,
+        subject: "General Inquiry from Contact Form", // Default subject
+        message: form.message,
+      }).unwrap();
+
       setSubmitted(true);
+
+      // Reset form
       setForm({
         firstName: "",
         lastName: "",
@@ -40,28 +57,29 @@ export default function ContactPage() {
       });
     } catch (err) {
       console.error("Contact form error:", err);
+      const errorMsg =
+        err?.data?.message || "Failed to send your message. Please try again.";
+      alert(errorMsg);
     }
   };
 
   return (
     <div data-testid="contact-page">
       {/* Hero Banner */}
-      <section className="relative h-[60vh] md:h-[70vh] overflow-hidden">
+      <section className="relative h-screen overflow-hidden">
         <div className="absolute inset-0">
           <Image
             src={heroImages.contact}
-            alt="Contact Us"
+            alt="Contact Chhabra Marble"
             className="w-full h-full object-cover"
             fill
             priority
           />
           <div className="absolute inset-0 bg-black/30" />
         </div>
+
         <div className="relative z-10 flex items-end h-full max-w-[1300px] mx-auto px-6 md:px-12 pb-16 md:pb-24">
           <div>
-            <p className="text-xs font-normal tracking-[0.2em] uppercase text-white/70 mb-4">
-              Reach Out
-            </p>
             <h1
               className="text-4xl sm:text-5xl font-light text-white"
               data-testid="contact-page-title"
@@ -214,25 +232,29 @@ export default function ContactPage() {
                   <p className="text-xs font-normal tracking-[0.2em] uppercase text-brand-red mb-4">
                     Send A Message
                   </p>
-                  <input
-                    type="text"
-                    placeholder="First Name"
-                    required
-                    value={form.firstName}
-                    onChange={(e) =>
-                      setForm({ ...form, firstName: e.target.value })
-                    }
-                    className="w-full px-0 py-4 bg-transparent border-0 border-b border-brand-border text-brand-charcoal placeholder:text-brand-muted font-light focus:outline-none focus:border-brand-red transition-colors"
-                  />
-                  <input
-                    type="text"
-                    placeholder="Last Name"
-                    value={form.lastName}
-                    onChange={(e) =>
-                      setForm({ ...form, lastName: e.target.value })
-                    }
-                    className="w-full px-0 py-4 bg-transparent border-0 border-b border-brand-border text-brand-charcoal placeholder:text-brand-muted font-light focus:outline-none focus:border-brand-red transition-colors"
-                  />
+
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <input
+                      type="text"
+                      placeholder="First Name"
+                      required
+                      value={form.firstName}
+                      onChange={(e) =>
+                        setForm({ ...form, firstName: e.target.value })
+                      }
+                      className="w-full px-0 py-4 bg-transparent border-0 border-b border-brand-border text-brand-charcoal placeholder:text-brand-muted font-light focus:outline-none focus:border-brand-red transition-colors"
+                    />
+                    <input
+                      type="text"
+                      placeholder="Last Name"
+                      value={form.lastName}
+                      onChange={(e) =>
+                        setForm({ ...form, lastName: e.target.value })
+                      }
+                      className="w-full px-0 py-4 bg-transparent border-0 border-b border-brand-border text-brand-charcoal placeholder:text-brand-muted font-light focus:outline-none focus:border-brand-red transition-colors"
+                    />
+                  </div>
+
                   <input
                     type="tel"
                     placeholder="Phone"
@@ -285,14 +307,13 @@ export default function ContactPage() {
           >
             <iframe
               title="Chhabra Marble Location"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.535531737785!2d77.0910565!3d28.673622800000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d0472b3b66a0d%3A0x67e896cfd98c1c43!2sChhabra%20Marble!5e0!3m2!1sen!2sin!4v1774325671365!5m2!1sen!2sin" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.535531737785!2d77.0910565!3d28.673622800000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d0472b3b66a0d%3A0x67e896cfd98c1c43!2sChhabra%20Marble!5e0!3m2!1sen!2sin!4v1775120929919!5m2!1sen!2sin"
               width="100%"
               height="100%"
               style={{ border: 0 }}
               allowFullScreen
               loading="lazy"
             />
-      
           </div>
         </ScrollReveal>
       </section>

@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { ArrowRight } from "lucide-react";
+import { LOGO_WHITE, LOGO_RED, navLinks } from "@/lib";
 
 export default function LoginPage() {
   const [form, setForm] = useState({
@@ -31,7 +33,6 @@ export default function LoginPage() {
       });
 
       const data = await res.json();
-
       if (!res.ok) throw new Error(data.error);
 
       localStorage.setItem("token", data.token);
@@ -44,64 +45,98 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-background px-6 font-[Lato]">
-      
-      {/* Card */}
-      <div className="w-full max-w-md bg-card border border-border rounded-lg p-8 space-y-6 shadow-sm">
-        
-        {/* Heading */}
-        <div className="space-y-2 text-center">
-          <h1 className="text-2xl font-semibold tracking-tight text-foreground">
-            Admin Login
-          </h1>
-          <p className="text-sm text-muted-foreground/90">
-            Enter your credentials to access dashboard
-          </p>
+    <div className="min-h-screen grid lg:grid-cols-2 font-lato">
+      {/* 🔴 LEFT BRAND PANEL */}
+      <div className="hidden lg:flex flex-col justify-between bg-brand-red text-white p-12 relative overflow-hidden">
+        <div className="text-2xl font-semibold">
+          <img
+            src={LOGO_WHITE}
+            alt="Chhabra Marble"
+            className="h-12 w-auto object-contain"
+          />
         </div>
 
-        {/* Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          
-          {/* Email */}
-          <div className="space-y-1.5">
-            <label className="text-sm font-medium text-foreground">
-              Email
-            </label>
-            <input
-              type="email"
-              name="email"
-              required
-              value={form.email}
-              onChange={handleChange}
-              className="w-full px-3 py-2 rounded-md border border-input bg-background text-sm outline-none focus:ring-2 focus:ring-ring"
-            />
+        {/* subtle glow */}
+        <div className="absolute bottom-[-100px] right-[-100px] w-[300px] h-[300px] bg-white/20 blur-3xl rounded-full" />
+      </div>
+
+      {/* 🧊 RIGHT FORM */}
+      <div className="flex items-center justify-center bg-background px-6">
+        <div className="w-full max-w-md">
+          <div className="bg-card border border-border rounded-2xl shadow-xl p-8 space-y-6">
+            {/* HEADER */}
+            <div className="space-y-1">
+              <h2 className="text-2xl font-semibold">Welcome back</h2>
+              <p className="text-sm text-brand-muted">
+                Login to your admin dashboard
+              </p>
+            </div>
+
+            {/* FORM */}
+            <form onSubmit={handleSubmit} className="space-y-5">
+              {/* EMAIL */}
+              <div className="relative">
+                <input
+                  type="email"
+                  name="email"
+                  required
+                  value={form.email}
+                  onChange={handleChange}
+                  placeholder=" "
+                  className="peer w-full px-3 pt-5 pb-2 rounded-md border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                />
+                <label
+                  className="absolute left-3 top-2 text-xs text-brand-muted transition-all 
+                  peer-placeholder-shown:top-3.5 
+                  peer-placeholder-shown:text-sm 
+                  peer-focus:top-2 
+                  peer-focus:text-xs"
+                >
+                  Email
+                </label>
+              </div>
+
+              {/* PASSWORD */}
+              <div className="relative">
+                <input
+                  type="password"
+                  name="password"
+                  required
+                  value={form.password}
+                  onChange={handleChange}
+                  placeholder=" "
+                  className="peer w-full px-3 pt-5 pb-2 rounded-md border border-border bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring"
+                />
+                <label
+                  className="absolute left-3 top-2 text-xs text-brand-muted transition-all 
+                  peer-placeholder-shown:top-3.5 
+                  peer-placeholder-shown:text-sm 
+                  peer-focus:top-2 
+                  peer-focus:text-xs"
+                >
+                  Password
+                </label>
+              </div>
+
+              {/* BUTTON */}
+              <button
+                type="submit"
+                disabled={loading}
+                className="group w-full flex items-center justify-center gap-2 py-3 rounded-md text-sm font-medium bg-brand-red text-white shadow-md hover:shadow-lg transition-all disabled:opacity-60"
+              >
+                {loading ? "Signing in..." : "Login"}
+                {!loading && (
+                  <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                )}
+              </button>
+            </form>
           </div>
 
-          {/* Password */}
-          <div className="space-y-1.5">
-            <label className="text-sm font-medium text-foreground">
-              Password
-            </label>
-            <input
-              type="password"
-              name="password"
-              required
-              value={form.password}
-              onChange={handleChange}
-              className="w-full px-3 py-2 rounded-md border border-input bg-background text-sm outline-none focus:ring-2 focus:ring-ring"
-            />
-          </div>
-
-          {/* Submit */}
-          <button
-            type="submit"
-            disabled={loading}
-            className="w-full py-2 rounded-md text-sm font-medium bg-foreground text-background hover:opacity-90 transition-all duration-200 disabled:opacity-60"
-          >
-            {loading ? "Signing in..." : "Login"}
-          </button>
-        </form>
-
+          {/* FOOTER */}
+          <p className="text-center text-xs text-brand-muted mt-6">
+            Protected system • Authorized access only
+          </p>
+        </div>
       </div>
     </div>
   );

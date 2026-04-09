@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
-import { LOGO_WHITE, LOGO_RED, navLinks } from "@/assets/data/siteData";
+import { LOGO_WHITE, LOGO_RED, navLinks } from "@/lib";
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -13,9 +13,11 @@ export default function Header() {
 
   // Close mobile menu on route change
   useEffect(() => {
-    setMobileOpen(false);
+    const id = requestAnimationFrame(() => {
+      setMobileOpen(false);
+    });
+    return () => cancelAnimationFrame(id);
   }, [pathname]);
-
   // Track scroll to change header background
   useEffect(() => {
     const handleScroll = () => {

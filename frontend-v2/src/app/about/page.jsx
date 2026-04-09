@@ -1,38 +1,44 @@
 // app/about/page.jsx
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Award, Eye, Handshake } from "lucide-react";
-
+import Image from "next/image";
 import ScrollReveal from "@/components/ScrollReveal"; // ← imported
-import { heroImages, showcaseImages, categories } from "@/assets/data/siteData";
+import { showcaseImages, categories, videoBanners, heroImages } from "@/lib";
 
 export default function AboutPage() {
   return (
     <div data-testid="about-page">
       {/* Full-screen hero banner */}
       <section className="relative h-screen overflow-hidden">
-        <div className="absolute inset-0 hero-bg">
+        {/* Video Background */}
+        <div className="absolute inset-0">
           <Image
-            src={heroImages.about}
-            alt="About Chhabra Marble"
+            src={heroImages.about} // use an image instead of video
+            alt="Contact Chhabra Marble"
             className="w-full h-full object-cover"
             fill
             priority
           />
         </div>
+
+        {/* Overlay */}
         <div className="absolute inset-0 bg-black/30" />
+
+        {/* Content */}
         <div className="relative z-10 flex items-end h-full max-w-[1300px] mx-auto px-6 md:px-12 pb-16 md:pb-24">
           <h1
-            className="text-4xl sm:text-5xl lg:text-6xl font-light text-white leading-tight"
+            className="text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-light text-white leading-tight"
             data-testid="about-hero-title"
           >
-            About
+            About{" "}
+            <span className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl">
+              us
+            </span>
           </h1>
         </div>
       </section>
-
       {/* Brand Story - Parallax */}
       <section className="relative">
         <div className="grid grid-cols-1 lg:grid-cols-2">
@@ -126,14 +132,6 @@ export default function AboutPage() {
 
       {/* What We Offer - Banner + Categories */}
       <section className="relative">
-        <div className="h-[40vh] md:h-[50vh] overflow-hidden">
-          <Image
-            src={showcaseImages.aboutOffer}
-            alt="What we offer"
-            className="w-full h-full object-cover"
-            fill
-          />
-        </div>
         <div className="py-24 md:py-32">
           <div className="max-w-[1300px] mx-auto px-6 md:px-12">
             <ScrollReveal>

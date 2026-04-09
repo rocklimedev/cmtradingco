@@ -5,19 +5,31 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import FloatingCTA from "@/components/FloatingCTA";
 
-export default function LayoutWrapper({ children }) {
+/**
+ * LayoutWrapper handles page layouts:
+ * - Admin pages: no Header/Footer/CTA
+ * - 404 or custom no-header pages: no Header/Footer/CTA
+ * - Normal pages: includes Header, Footer, FloatingCTA
+ *
+ * Props:
+ *  - children: React node
+ *  - noHeaderFooter (optional): boolean to force minimal layout
+ */
+export default function LayoutWrapper({ children, noHeaderFooter = false }) {
   const pathname = usePathname();
 
-  const isAdmin = pathname.startsWith("/dashboard");
+  // Define admin paths
+  const adminPaths = ["/dashboard", "/login"];
+  const isAdmin = adminPaths.some((path) => pathname?.startsWith(path));
 
-  if (isAdmin) {
+  // Minimal layout if admin or explicitly requested
+  if (isAdmin || noHeaderFooter) {
     return (
-      <div className="font-lato min-h-screen flex flex-col">
-        {children}
-      </div>
+      <div className="font-lato min-h-screen flex flex-col">{children}</div>
     );
   }
 
+  // Normal layout with Header, Footer, FloatingCTA
   return (
     <div className="font-lato min-h-screen flex flex-col">
       <Header />

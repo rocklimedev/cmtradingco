@@ -3,7 +3,7 @@
 import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
 import Image from "next/image";
-import { categories } from "@/assets/data/siteData";
+import { categories } from "@/lib";
 
 export default function CategoriesSection() {
   return (

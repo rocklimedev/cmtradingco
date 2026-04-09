@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import ScrollReveal from "@/components/ScrollReveal";
 import Image from "next/image";
-import { showcaseImages } from "@/assets/data/siteData";
+import { showcaseImages } from "@/lib";
 
 export default function ParallaxIntro() {
   return (
@@ -25,9 +25,6 @@ export default function ParallaxIntro() {
             <p className="text-xs font-normal tracking-[0.2em] uppercase text-brand-red mb-4">
               What We Offer
             </p>
-            <h2 className="text-3xl md:text-4xl font-normal text-brand-charcoal leading-tight mb-8">
-              What Chhabra Marble Offers
-            </h2>
             <p className="text-base text-brand-body font-light leading-relaxed mb-6">
               At Chhabra Marble, we curate the finest building materials from
               trusted global partners. From premium tiles and natural stone to

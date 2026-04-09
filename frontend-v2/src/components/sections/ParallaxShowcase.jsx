@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import { ArrowRight } from "lucide-react";
 import ScrollReveal from "@/components/ScrollReveal";
-import { showcaseImages } from "@/assets/data/siteData";
+import { showcaseImages } from "@/lib";
 
 export default function ParallaxShowcase() {
   const router = useRouter();

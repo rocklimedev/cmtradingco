@@ -1,5 +1,5 @@
 import { MessageCircle, Phone } from "lucide-react";
-import { PHONE_RAW } from "@/assets/data/siteData";
+import { PHONE_RAW } from "@/lib";
 
 export default function FloatingCTA() {
   return (

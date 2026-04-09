@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import ScrollReveal from "@/components/ScrollReveal";
-import { useSubmitContactFormMutation } from "@/api/contactApi";
+import { useCreateQueryMutation } from "@/api/queriesApi"; // ✅ Changed to useCreateQueryMutation
+
 export default function ContactFormSection() {
   const [form, setForm] = useState({
     firstName: "",
@@ -12,13 +13,33 @@ export default function ContactFormSection() {
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
-  const [submitContactForm, { isLoading }] = useSubmitContactFormMutation();
+
+  // ✅ Using createQuery from queriesApi (which supports branch)
+  const [createQuery, { isLoading }] = useCreateQueryMutation();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const fullName = `${form.firstName} ${form.lastName}`.trim();
+
+    if (!fullName || !form.email || !form.message) {
+      alert("Please fill in all required fields: Name, Email, and Message");
+      return;
+    }
+
     try {
-      await submitContactForm(form).unwrap();
+      await createQuery({
+        branch: "chhabra_marble", // ✅ Required for this branch
+        name: fullName,
+        email: form.email,
+        subject: "General Inquiry from Contact Form", // Default subject
+        message: form.message,
+        // phone is optional - you can add it to the message if needed
+      }).unwrap();
+
       setSubmitted(true);
+
+      // Reset form
       setForm({
         firstName: "",
         lastName: "",
@@ -28,7 +49,9 @@ export default function ContactFormSection() {
       });
     } catch (err) {
       console.error("Contact form submission failed:", err);
-      // Optionally: display error to user
+      const errorMsg =
+        err?.data?.message || "Failed to send message. Please try again.";
+      alert(errorMsg);
     }
   };
 
@@ -128,7 +151,7 @@ export default function ContactFormSection() {
             <div className="h-full min-h-[400px]">
               <iframe
                 title="Chhabra Marble Location"
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.535531737785!2d77.0910565!3d28.673622800000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d0472b3b66a0d%3A0x67e896cfd98c1c43!2sChhabra%20Marble!5e0!3m2!1sen!2sin!4v1774325671365!5m2!1sen!2sin"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3500.535531737785!2d77.0910565!3d28.673622800000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d0472b3b66a0d%3A0x67e896cfd98c1c43!2sChhabra%20Marble!5e0!3m2!1sen!2sin!4v1775120929919!5m2!1sen!2sin"
                 width="100%"
                 height="100%"
                 style={{ border: 0, minHeight: "400px" }}

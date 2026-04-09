@@ -1,7 +1,7 @@
 "use client";
 
 import ScrollReveal from "@/components/ScrollReveal";
-import { partners } from "@/assets/data/siteData";
+import { partners } from "@/lib";
 
 export default function PartnersSlider() {
   // Duplicate the partners array for continuous scrolling effect
@@ -15,9 +15,6 @@ export default function PartnersSlider() {
       <div className="max-w-[1300px] mx-auto px-6 md:px-12 mb-16">
         <ScrollReveal>
           <div className="text-center">
-            <p className="text-xs font-normal tracking-[0.2em] uppercase text-brand-red mb-4">
-              Partners
-            </p>
             <h2 className="text-3xl md:text-4xl font-normal text-brand-charcoal">
               Our Partners
             </h2>
@@ -31,12 +28,12 @@ export default function PartnersSlider() {
             {doubled.map((partner, i) => (
               <div
                 key={`r2-${i}`}
-                className="flex-shrink-0 w-48 h-24 flex items-center justify-center p-6 mx-3"
+                className="flex-shrink-0 w-64 h-32 flex items-center justify-center p-4 mx-4"
               >
                 <img
                   src={partner.logo}
                   alt={partner.name}
-                  className="max-h-14 w-auto object-contain brand-logo-hover"
+                  className="max-h-32 w-auto object-contain brand-logo-hover"
                 />
               </div>
             ))}

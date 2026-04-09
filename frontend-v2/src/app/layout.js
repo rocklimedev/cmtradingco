@@ -1,9 +1,6 @@
 import { Lato } from "next/font/google";
 import "./globals.css";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import Providers from "./Providers";
-import FloatingCTA from "@/components/FloatingCTA";
 import ScrollToTop from "@/components/ScrollToTop";
 import LayoutWrapper from "./LayoutWrapper";
 const lato = Lato({
@@ -14,15 +11,17 @@ const lato = Lato({
 });
 
 export const metadata = {
-  metadataBase: new URL("https://yourdomain.com"),
+  metadataBase: new URL("https://cmtradingco.com"),
   title: {
     default: "Chhabra Marble - Premium Tiles & Sanitaryware in Delhi",
     template: "%s | Chhabra Marble",
   },
   description:
     "Chhabra Marble offers premium tiles, CP fittings, sanitaryware, stones, granites, and plumbing solutions in Delhi.",
+  icons: {
+    icon: "/icon.png", // standard favicon
+  },
 };
-
 export default function RootLayout({ children }) {
   return (
     <html lang="en">

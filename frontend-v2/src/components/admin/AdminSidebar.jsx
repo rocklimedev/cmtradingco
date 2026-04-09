@@ -2,47 +2,98 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+  LayoutDashboard,
+  Layers,
+  FolderTree,
+  MessageSquare,
+  Users,
+} from "lucide-react";
 
 const menu = [
-  { name: "Dashboard", href: "/dashboard" },
-  { name: "Products", href: "/dashboard/products" },
-  { name: "Categories", href: "/dashboard/categories" },
-  { name: "Orders", href: "/dashboard/orders" },
-  { name: "Customers", href: "/dashboard/customers" },
-  { name: "Settings", href: "/dashboard/settings" },
+  {
+    name: "Dashboard",
+    href: "/dashboard",
+    icon: LayoutDashboard,
+  },
+  {
+    name: "Brands & Catalogues",
+    href: "/dashboard/brands-catalogues",
+    icon: Layers,
+  },
+  {
+    name: "Categories",
+    href: "/dashboard/categories",
+    icon: FolderTree,
+  },
+  {
+    name: "Queries",
+    href: "/dashboard/queries",
+    icon: MessageSquare,
+  },
+  {
+    name: "Users",
+    href: "/dashboard/users",
+    icon: Users,
+  },
 ];
 
 export default function AdminSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-64 min-h-screen bg-card border-r border-border font-[Lato]">
-      
-      {/* Header */}
-      <div className="p-6 text-xl font-semibold tracking-tight text-foreground border-b border-border">
-        Admin Panel
+    <div className="h-full flex flex-col font-lato">
+      {/* HEADER */}
+      <div className="h-16 flex items-center px-6 border-b border-border">
+        <div className="flex items-center gap-2">
+          <div className="h-8 w-8 rounded-md bg-brand-red text-white flex items-center justify-center text-sm font-semibold">
+            A
+          </div>
+          <span className="text-sm font-semibold tracking-tight">
+            Admin Panel
+          </span>
+        </div>
       </div>
 
-      {/* Navigation */}
-      <nav className="p-4 space-y-1">
+      {/* NAV */}
+      <nav className="flex-1 p-4 space-y-1">
+        <p className="px-3 text-xs text-brand-muted uppercase tracking-wide mb-2">
+          Management
+        </p>
+
         {menu.map((item) => {
           const active = pathname.startsWith(item.href);
+          const Icon = item.icon;
 
           return (
             <Link
               key={item.name}
               href={item.href}
-              className={`block px-4 py-2.5 rounded-md text-sm font-medium transition-all duration-200 ${
+              className={`group flex items-center gap-3 px-3 py-2.5 rounded-md text-sm transition ${
                 active
-                  ? "bg-foreground text-background"
-                  : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
+                  ? "bg-brand-red text-white shadow-sm"
+                  : "text-muted-foreground hover:bg-accent hover:text-foreground"
               }`}
             >
-              {item.name}
+              {/* ICON */}
+              <Icon
+                size={16}
+                className={`${
+                  active
+                    ? "text-white"
+                    : "text-muted-foreground group-hover:text-foreground"
+                }`}
+              />
+
+              {/* TEXT */}
+              <span className="flex-1">{item.name}</span>
+
+              {/* ACTIVE DOT */}
+              {active && <span className="h-1.5 w-1.5 rounded-full bg-white" />}
             </Link>
           );
         })}
       </nav>
-    </aside>
+    </div>
   );
 }
