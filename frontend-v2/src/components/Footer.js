@@ -130,9 +130,19 @@ export default function Footer() {
           </p>
           <p className="text-sm md:text-base text-brand-muted font-light flex items-center gap-2">
             Powered by{" "}
-            <span className="font-semibold text-[#ed7c2f] text-base md:text-lg">
+            <a
+              href="https://www.rocklime.com/"
+              className="rocklime-link ms-1"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Visit Rocklime website"
+              style={{
+                fontSize: "14px", // ⬆️ match or slightly bigger
+                fontWeight: 400, // ⬆️ makes "Rocklime" stand out
+              }}
+            >
               Rocklime
-            </span>
+            </a>
           </p>
         </div>
       </div>

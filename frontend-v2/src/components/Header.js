@@ -13,15 +13,14 @@ export default function Header() {
 
   // Close mobile menu on route change
   useEffect(() => {
-    const id = requestAnimationFrame(() => {
-      setMobileOpen(false);
-    });
+    const id = requestAnimationFrame(() => setMobileOpen(false));
     return () => cancelAnimationFrame(id);
   }, [pathname]);
-  // Track scroll to change header background
+
+  // Track scroll
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 50); // threshold
+      setScrolled(window.scrollY > 50);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -31,83 +30,123 @@ export default function Header() {
     <>
       <header
         data-testid="main-header"
-        className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-          scrolled ? "bg-white shadow-md" : "bg-transparent"
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
+          scrolled
+            ? "bg-white/75 backdrop-blur-2xl backdrop-saturate-200 shadow-[0_10px_40px_rgba(0,0,0,0.15)] border-b border-white/40"
+            : "bg-transparent"
         }`}
       >
-        <div className="max-w-[1300px] mx-auto px-6 md:px-12">
-          <div className="flex items-center justify-between h-20">
-            <Link href="/" data-testid="header-logo" className="flex-shrink-0">
-              <img
-                src={scrolled ? LOGO_RED : LOGO_WHITE}
-                alt="Chhabra Marble"
-                className="h-12 w-auto object-contain"
-              />
-            </Link>
+        <div className="relative">
+          {/* Enhanced Glass Gradient Overlay - Only when scrolled */}
+          {scrolled && (
+            <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/50 to-white/30 pointer-events-none" />
+          )}
 
-            <nav
-              className="hidden md:flex items-center gap-10"
-              data-testid="desktop-nav"
+          <div className="max-w-[1300px] mx-auto px-6 md:px-12 relative">
+            <div
+              className={`flex items-center justify-between transition-all duration-300 ${
+                scrolled ? "h-16" : "h-20"
+              }`}
             >
-              {navLinks.map((link) => (
-                <Link
-                  key={link.path}
-                  href={link.path}
-                  data-testid={`nav-link-${link.name.toLowerCase()}`}
-                  className={`text-sm font-normal tracking-wide uppercase transition-colors duration-300 ${
-                    pathname === link.path
-                      ? "text-brand-red"
-                      : scrolled
-                        ? "text-black/90 hover:text-brand-red"
-                        : "text-white/90 hover:text-brand-red"
+              {/* Logo */}
+              <Link
+                href="/"
+                data-testid="header-logo"
+                className="flex-shrink-0"
+              >
+                <img
+                  src={scrolled ? LOGO_RED : LOGO_WHITE}
+                  alt="Chhabra Marble"
+                  className={`object-contain transition-all duration-300 ${
+                    scrolled ? "h-10" : "h-12"
                   }`}
-                >
-                  {link.name}
-                </Link>
-              ))}
-            </nav>
+                />
+              </Link>
 
-            <button
-              data-testid="mobile-menu-toggle"
-              className="md:hidden p-2"
-              onClick={() => setMobileOpen(!mobileOpen)}
-            >
-              {mobileOpen ? (
-                <X
-                  className={`${scrolled ? "text-black" : "text-white"}`}
-                  size={24}
-                />
-              ) : (
-                <Menu
-                  className={`${scrolled ? "text-black" : "text-white"}`}
-                  size={24}
-                />
-              )}
-            </button>
+              {/* Desktop Nav */}
+              <nav
+                className="hidden md:flex items-center gap-10"
+                data-testid="desktop-nav"
+              >
+                {navLinks.map((link) => (
+                  <Link
+                    key={link.path}
+                    href={link.path}
+                    data-testid={`nav-link-${link.name.toLowerCase()}`}
+                    className={`text-sm font-medium tracking-[0.5px] uppercase transition-all duration-300 relative group ${
+                      pathname === link.path
+                        ? "text-brand-red"
+                        : scrolled
+                          ? "text-black/90 hover:text-brand-red"
+                          : "text-white hover:text-white"
+                    }`}
+                  >
+                    {link.name}
+                    {/* Active underline */}
+                    <span
+                      className={`absolute -bottom-1 left-0 h-[1.5px] bg-brand-red transition-all duration-300 ${
+                        pathname === link.path
+                          ? "w-full"
+                          : "w-0 group-hover:w-full"
+                      }`}
+                    />
+                  </Link>
+                ))}
+              </nav>
+
+              {/* Mobile Toggle */}
+              <button
+                data-testid="mobile-menu-toggle"
+                className="md:hidden p-2 -mr-2"
+                onClick={() => setMobileOpen(!mobileOpen)}
+              >
+                {mobileOpen ? (
+                  <X
+                    className={`transition-colors duration-300 ${
+                      scrolled ? "text-black" : "text-white"
+                    }`}
+                    size={26}
+                  />
+                ) : (
+                  <Menu
+                    className={`transition-colors duration-300 ${
+                      scrolled ? "text-black" : "text-white"
+                    }`}
+                    size={26}
+                  />
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </header>
 
+      {/* Mobile Menu */}
       {mobileOpen && (
         <div
           data-testid="mobile-menu"
-          className={`fixed inset-0 z-40 pt-20 ${
-            scrolled ? "bg-white/95" : "bg-brand-charcoal/95"
+          className={`fixed inset-0 z-40 pt-20 transition-all duration-300 ${
+            scrolled
+              ? "bg-white/85 backdrop-blur-3xl border-t border-white/50"
+              : "bg-black/70 backdrop-blur-2xl"
           }`}
         >
-          <nav className="flex flex-col items-center gap-8 pt-12">
-            {navLinks.map((link) => (
+          <div className="absolute inset-0 bg-gradient-to-b from-white/10 to-transparent pointer-events-none" />
+
+          <nav className="flex flex-col items-center gap-10 pt-16 animate-[fadeIn_0.4s_ease]">
+            {navLinks.map((link, index) => (
               <Link
                 key={link.path}
                 href={link.path}
                 data-testid={`mobile-nav-link-${link.name.toLowerCase()}`}
-                className={`text-lg font-normal tracking-wide uppercase transition-colors duration-300 ${
+                className={`text-xl font-medium tracking-widest uppercase transition-all duration-300 hover:scale-105 ${
                   pathname === link.path
                     ? "text-brand-red"
                     : scrolled
-                      ? "text-black/80 hover:text-brand-red"
-                      : "text-white/80 hover:text-brand-red"
+                      ? "text-black/90 hover:text-brand-red"
+                      : "text-white/90 hover:text-white"
                 }`}
+                style={{ animationDelay: `${index * 50}ms` }}
                 onClick={() => setMobileOpen(false)}
               >
                 {link.name}

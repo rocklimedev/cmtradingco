@@ -22,22 +22,20 @@ export default function ParallaxIntro() {
         </div>
         <div className="flex flex-col justify-center py-16 lg:py-32 px-6 md:px-16 lg:px-20">
           <ScrollReveal>
-            <p className="text-xs font-normal tracking-[0.2em] uppercase text-brand-red mb-4">
-              What We Offer
-            </p>
-            <p className="text-base text-brand-body font-light leading-relaxed mb-6">
+            <p className="text-[19px] text-brand-body font-light leading-relaxed mb-6">
               At Chhabra Marble, we curate the finest building materials from
               trusted global partners. From premium tiles and natural stone to
               sanitaryware and architectural fittings.
             </p>
-            <p className="text-base text-brand-body font-light leading-relaxed mb-10">
+
+            <p className="text-[19px] text-brand-body font-light leading-relaxed mb-10">
               Our showroom offers expert consultation and a hands-on experience
               to help you design spaces that stand the test of time.
             </p>
             <Link
               href="/products"
               data-testid="intro-cta"
-              className="inline-flex items-center gap-2 text-sm font-normal text-brand-red hover:text-red-700 tracking-wide uppercase transition-colors"
+              className="inline-flex items-center gap-2 text-[15px] font-normal text-brand-red hover:text-red-700 tracking-wide uppercase transition-colors"
             >
               Explore Products <ArrowRight size={16} />
             </Link>

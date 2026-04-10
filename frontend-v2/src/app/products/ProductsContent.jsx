@@ -59,9 +59,6 @@ function CategorySection({ category, sectionRef, showHeading = true }) {
         {showHeading && (
           <ScrollReveal>
             <div className="mb-12 md:mb-16">
-              <p className="text-xs font-normal tracking-[0.2em] uppercase text-brand-red mb-3">
-                Category
-              </p>
               <h2 className="text-2xl md:text-3xl font-normal text-brand-charcoal">
                 {category.name}
               </h2>
@@ -111,10 +108,11 @@ export default function ProductsContent() {
   return (
     <div data-testid="products-page">
       {/* Hero Banner */}
+      {/* Hero Banner */}
       <section className="relative h-screen overflow-hidden">
         <div className="absolute inset-0">
-          {activeCategory?.banner ? (
-            // Show category-specific image if available
+          {activeCategory && activeCategory.banner ? (
+            // Show category-specific banner image
             <img
               src={activeCategory.banner}
               alt={activeCategory.name}
@@ -122,7 +120,7 @@ export default function ProductsContent() {
               loading="eager"
             />
           ) : (
-            // Otherwise show video
+            // Default: Show video for "All Products" / initial load
             <video
               src={videoBanners.productsVideo}
               autoPlay
@@ -140,7 +138,7 @@ export default function ProductsContent() {
         <div className="relative z-10 flex items-end h-full max-w-[1300px] mx-auto px-6 md:px-12 pb-16 md:pb-24">
           <div>
             <p className="text-xs font-normal tracking-[0.2em] uppercase text-white/70 mb-4">
-              {activeCategory ? "Category" : "Discover"}
+              {activeCategory ? "Category" : ""}
             </p>
             <h1
               className="text-5xl sm:text-6xl lg:text-7xl font-light text-white"

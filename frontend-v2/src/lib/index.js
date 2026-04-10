@@ -53,8 +53,7 @@ export const categories = [
   {
     id: "tiles-stone",
     name: "Tiles & Stone",
-    image:
-      "https://images.unsplash.com/photo-1706629503571-c165023a7792?w=800&q=80",
+    image: "/assets/products/tiles-stone.jpeg",
     banner:
       "https://images.unsplash.com/photo-1706629503571-c165023a7792?w=1920&q=80",
     subcategories: [
@@ -96,8 +95,7 @@ export const categories = [
   {
     id: "basins",
     name: "Basins",
-    image:
-      "https://images.unsplash.com/photo-1595515770294-38a01e2ac4dd?w=800&q=80",
+    image: "/assets/products/basins.jpeg",
     banner:
       "https://images.unsplash.com/photo-1595515770294-38a01e2ac4dd?w=1920&q=80",
     subcategories: [
@@ -131,8 +129,7 @@ export const categories = [
   {
     id: "showers-faucets",
     name: "Showers & Faucets",
-    image:
-      "https://images.unsplash.com/photo-1567102109796-90071d28cb38?w=800&q=80",
+    image: "/assets/products/showers-faucet.jpeg",
     banner:
       "https://images.unsplash.com/photo-1567102109796-90071d28cb38?w=1920&q=80",
     subcategories: [

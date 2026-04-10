@@ -53,9 +53,6 @@ export default function AboutPage() {
           </div>
           <div className="flex flex-col justify-center py-16 lg:py-32 px-6 md:px-16 lg:px-20">
             <ScrollReveal>
-              <p className="text-xs font-normal tracking-[0.2em] uppercase text-brand-red mb-4">
-                Heritage
-              </p>
               <h2 className="text-3xl md:text-4xl font-normal text-brand-charcoal leading-tight mb-8">
                 A Legacy of Quality
               </h2>
@@ -81,9 +78,6 @@ export default function AboutPage() {
         <div className="max-w-[1300px] mx-auto px-6 md:px-12">
           <ScrollReveal>
             <div className="text-center mb-16">
-              <p className="text-xs font-normal tracking-[0.2em] uppercase text-brand-red mb-4">
-                Expertise
-              </p>
               <h2 className="text-3xl md:text-4xl font-normal text-brand-charcoal">
                 Experience & Credibility
               </h2>
@@ -135,9 +129,6 @@ export default function AboutPage() {
         <div className="py-24 md:py-32">
           <div className="max-w-[1300px] mx-auto px-6 md:px-12">
             <ScrollReveal>
-              <p className="text-xs font-normal tracking-[0.2em] uppercase text-brand-red mb-4">
-                Services
-              </p>
               <h2 className="text-3xl md:text-4xl font-normal text-brand-charcoal mb-16">
                 What We Offer
               </h2>

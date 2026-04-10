@@ -60,12 +60,9 @@ export default function ContactFormSection() {
       <div className="max-w-[1300px] mx-auto px-6 md:px-12">
         <ScrollReveal>
           <div className="text-center mb-16">
-            <p className="text-xs font-normal tracking-[0.2em] uppercase text-brand-red mb-4">
+            <p className="text-[15px] font-normal tracking-[0.2em] uppercase text-brand-red mb-4">
               Get In Touch
             </p>
-            <h2 className="text-3xl md:text-4xl font-normal text-brand-charcoal">
-              Contact Us
-            </h2>
           </div>
         </ScrollReveal>
 

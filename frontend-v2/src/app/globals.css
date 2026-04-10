@@ -18,7 +18,18 @@ code {
 html {
     scroll-behavior: smooth;
 }
+.rocklime-link {
+  font-family: "Neuropol", sans-serif;
+  letter-spacing: 2px;
+  font-size: 13px;
+  text-decoration: none;
+  color: #ed7c2f;
+  transition: all 0.3s ease;
+}
 
+.rocklime-link:hover {
+  color: #c6a15b; /* gold hover */
+}
 @layer base {
     :root {
         --background: 0 0% 100%;

@@ -10,9 +10,6 @@ export default function CategoriesSection() {
     <section data-testid="categories-section" className="py-24 md:py-32">
       <div className="max-w-[1300px] mx-auto px-6 md:px-12">
         <ScrollReveal>
-          <p className="text-xs font-normal tracking-[0.2em] uppercase text-brand-red mb-4">
-            Our Range
-          </p>
           <h2 className="text-3xl md:text-4xl font-normal text-brand-charcoal mb-16">
             Explore Categories
           </h2>
