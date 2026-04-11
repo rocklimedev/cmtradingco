@@ -6,8 +6,8 @@ export const API_URL =
     : "http://localhost:5000/api";
 
 export const WHATSAPP_NUMBER = "919999401858";
-export const PHONE_NUMBER = "+919911480980";
-export const PHONE_RAW = "919911480980";
+export const PHONE_NUMBER = "+919999401858";
+export const PHONE_RAW = "919999401858";
 export const EMAIL = "info@chhabramarble.com";
 export const ADDRESS = " 487/65, National Market, Peera Garhi, Delhi, 110087";
 export const BUSINESS_HOURS =
