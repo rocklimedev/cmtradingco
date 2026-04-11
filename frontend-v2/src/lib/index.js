@@ -533,6 +533,6 @@ export const videoBanners = {
   aboutVideo: "/assets/about-us.jpeg",
   cataloguesVideo:
     "https://media.cmtradingco.com/cm_video/catalogues_video.mp4",
-  homeVideo: "https://media.cmtradingco.com/cm_video/home_video.mp4",
+  homeVideo: "https://media.cmtradingco.com/cm_video/banner_video.mp4",
   productsVideo: "https://media.cmtradingco.com/cm_video/products_video.mp4",
 };
