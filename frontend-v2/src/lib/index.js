@@ -57,39 +57,35 @@ export const categories = [
     banner:
       "https://images.unsplash.com/photo-1706629503571-c165023a7792?w=1920&q=80",
     subcategories: [
-      {
-        name: "Indoor Tiles",
-        image: "./assets/products/indoor-tiles.webp",
-      },
-      {
-        name: "Outdoor Tiles",
-        image: "./assets/products/outdoor-tiles.jpeg",
-      },
-      {
-        name: "Bathroom Tiles",
-        image: "./assets/products/bathroom-tiles.jpeg",
-      },
-      {
-        name: "Kitchen Tiles",
-        image: "./assets/products/kitchen-tiles.jpeg",
-      },
-      {
-        name: "Floor Tiles",
-        image: "./assets/products/floor-tiles.webp",
-      },
-      {
+            {
         name: "Mosaic",
         image: "./assets/products/mosaic-tiles.jpeg",
       },
-      {
+          {
         name: "Facade Tiles",
         image: "./assets/products/facade-tiles.jpeg",
       },
       {
-        name: "Luxury Tiles",
-        image:
-          "https://images.unsplash.com/photo-1745301558339-44eb3217d5da?w=800&q=80",
+        name: "Handmade Tiles", 
+   image: "./assets/products/indoor-tiles.webp",
       },
+   {
+    name: "Custom - Designer Tiles",         image: "./assets/products/outdoor-tiles.jpeg",
+   },
+   {
+    name: "Subway",  image: "./assets/products/bathroom-tiles.jpeg",
+   }, 
+   {
+    name: "CNC - Wall Tiles",        image: "./assets/products/kitchen-tiles.jpeg",
+   },
+   {
+    name: "Kitkat", image:  "./assets/products/floor-tiles.webp",
+   },
+   {
+    name: "Morrocan", image:
+          "https://images.unsplash.com/photo-1745301558339-44eb3217d5da?w=800&q=80",
+   },
+      
     ],
   },
   {
