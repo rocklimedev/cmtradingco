@@ -23,9 +23,9 @@ export const queriesApi = createApi({
      */
     createQuery: builder.mutation({
       query: ({ branch, name, email, subject, message }) => ({
-        url: `/queries/`,                    // Keep as per your current route
+        url: `/queries/`, // Keep as per your current route
         method: "POST",
-        body: { name, email, subject, message, branch },   // ✅ Send branch in body
+        body: { name, email, subject, message, branch }, // ✅ Send branch in body
       }),
       invalidatesTags: [{ type: "Queries", id: "LIST" }],
     }),
@@ -88,7 +88,7 @@ export const queriesApi = createApi({
       query: ({ branch, id, text }) => ({
         url: `/queries/${branch}/${id}/notes`,
         method: "POST",
-        body: { text, branch },   // ✅ Also send branch in body for consistency
+        body: { text, branch }, // ✅ Also send branch in body for consistency
       }),
       invalidatesTags: (result, error, { id }) => [
         { type: "Queries", id },
