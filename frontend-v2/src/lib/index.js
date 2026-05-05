@@ -412,23 +412,38 @@ export const catalogues = [
   {
     id: "cat-colston-project",
     brand: "Colston Project",
-    image: "https://media.cmtradingco.com/catalogues/colston_project.png",
-    downloadUrl: "https://media.cmtradingco.com/catalogues/colston-project.pdf",
+    image: "https://media.cmtradingco.com/catalogues/colston-project-1.png",
+    downloadUrl:
+      "https://media.cmtradingco.com/catalogues/colston-project-1.pdf",
+  },
+  {
+    id: "cat-colston-freestanding",
+    brand: "Colston Freestanding",
+    image: "https://media.cmtradingco.com/catalogues/colston-freestanding.png",
+    downloadUrl:
+      "https://media.cmtradingco.com/catalogues/colston-freestanding.pdf",
   },
   {
     id: "cat-colston-water-innovation",
     brand: "Colston Water Innovation",
     image:
-      "https://media.cmtradingco.com/catalogues/colston_water_innovations.png",
+      "https://media.cmtradingco.com/catalogues/colston-water-innovations-1.png",
     downloadUrl:
-      "https://media.cmtradingco.com/catalogues/colston-water-innovation.pdf",
+      "https://media.cmtradingco.com/catalogues/colston-water-innovations.pdf",
   },
   {
     id: "cat-colston-wellness",
     brand: "Colston Wellness",
-    image: "https://media.cmtradingco.com/catalogues/colston_wellness.png",
+    image: "https://media.cmtradingco.com/catalogues/colston-wellness.png",
     downloadUrl:
-      "https://media.cmtradingco.com/catalogues/colston-wellness.pdf",
+      "https://media.cmtradingco.com/catalogues/colston-wellness-1.pdf",
+  },
+  {
+    id: "cat-colston-wellness-pricelist",
+    brand: "Colston Wellness Price List",
+    image: "https://media.cmtradingco.com/catalogues/colston-price-list.png",
+    downloadUrl:
+      "https://media.cmtradingco.com/catalogues/colston-wellness-pricelist.pdf",
   },
   {
     id: "cat-nexion-master",
