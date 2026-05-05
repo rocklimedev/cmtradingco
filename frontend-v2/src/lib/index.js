@@ -439,13 +439,6 @@ export const catalogues = [
       "https://media.cmtradingco.com/catalogues/colston-wellness-1.pdf",
   },
   {
-    id: "cat-colston-wellness-pricelist",
-    brand: "Colston Wellness Price List",
-    image: "https://media.cmtradingco.com/catalogues/colston-price-list.png",
-    downloadUrl:
-      "https://media.cmtradingco.com/catalogues/colston-wellness-pricelist.pdf",
-  },
-  {
     id: "cat-nexion-master",
     brand: "Nexion",
     image: "https://media.cmtradingco.com/catalogues/nexion-master.png",
