@@ -19,7 +19,6 @@ export default function HomePage() {
       <CategoriesSection />
       <PromoBanner />
       <WhyChooseSection />
-      <QuoteSection />
       <ContactFormSection />
       <PartnersSlider />
     </div>

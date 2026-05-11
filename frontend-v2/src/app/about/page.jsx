@@ -11,7 +11,7 @@ export default function AboutPage() {
   return (
     <div data-testid="about-page">
       {/* Full-screen hero banner */}
-      <section className="relative h-screen overflow-hidden">
+      <section className="relative h-[80vh] overflow-hidden">
         {/* Video Background */}
         <div className="absolute inset-0">
           <Image

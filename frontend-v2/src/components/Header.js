@@ -11,13 +11,11 @@ export default function Header() {
   const [scrolled, setScrolled] = useState(false);
   const pathname = usePathname();
 
-  // Close mobile menu on route change
   useEffect(() => {
     const id = requestAnimationFrame(() => setMobileOpen(false));
     return () => cancelAnimationFrame(id);
   }, [pathname]);
 
-  // Track scroll
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
@@ -32,12 +30,11 @@ export default function Header() {
         data-testid="main-header"
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-out ${
           scrolled
-            ? "bg-white/75 backdrop-blur-2xl backdrop-saturate-200 shadow-[0_10px_40px_rgba(0,0,0,0.15)] border-b border-white/40"
+            ? "bg-white/75 backdrop-blur-2xl backdrop-saturate-200 shadow-[0_10px_40px_rgba(0,0,0,0.15)]"
             : "bg-transparent"
         }`}
       >
         <div className="relative">
-          {/* Enhanced Glass Gradient Overlay - Only when scrolled */}
           {scrolled && (
             <div className="absolute inset-0 bg-gradient-to-b from-white/70 via-white/50 to-white/30 pointer-events-none" />
           )}
@@ -82,7 +79,6 @@ export default function Header() {
                     }`}
                   >
                     {link.name}
-                    {/* Active underline */}
                     <span
                       className={`absolute -bottom-1 left-0 h-[1.5px] bg-brand-red transition-all duration-300 ${
                         pathname === link.path
@@ -127,7 +123,7 @@ export default function Header() {
           data-testid="mobile-menu"
           className={`fixed inset-0 z-40 pt-20 transition-all duration-300 ${
             scrolled
-              ? "bg-white/85 backdrop-blur-3xl border-t border-white/50"
+              ? "bg-white/85 backdrop-blur-3xl"
               : "bg-black/70 backdrop-blur-2xl"
           }`}
         >

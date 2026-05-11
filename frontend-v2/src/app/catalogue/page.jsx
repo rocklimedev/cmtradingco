@@ -41,7 +41,7 @@ export default function CataloguePage() {
   return (
     <div data-testid="catalogue-page">
       {/* 🔥 Hero Banner */}
-      <section className="relative h-[100dvh] overflow-hidden">
+      <section className="relative h-[80vh] overflow-hidden">
         {/* Video Background */}
         <div className="absolute inset-0">
           <video

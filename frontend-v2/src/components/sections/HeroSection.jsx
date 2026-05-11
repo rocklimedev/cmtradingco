@@ -10,7 +10,6 @@ export default function HeroSection() {
     setCurrentIndex((prev) => (prev + 1) % bannerImages.length);
   }, []);
 
-  // Change slide every 12 seconds
   useEffect(() => {
     const interval = setInterval(nextSlide, 12000);
     return () => clearInterval(interval);
@@ -21,13 +20,14 @@ export default function HeroSection() {
       style={{
         position: "relative",
         width: "100%",
-        height: "100vh",
+        height: "80vh",
         overflow: "hidden",
         backgroundColor: "#0a0a0a",
       }}
     >
       {bannerImages.map((src, idx) => {
         const isActive = idx === currentIndex;
+
         return (
           <div
             key={idx}
@@ -39,10 +39,10 @@ export default function HeroSection() {
               height: "100%",
               opacity: isActive ? 1 : 0,
               zIndex: isActive ? 20 : 10,
-              transition: "opacity 3s ease-in-out", // fade duration
+              transition: "opacity 3s ease-in-out",
             }}
           >
-            {/* Image with continuous zoom */}
+            {/* Image */}
             <div
               style={{
                 width: "100%",
@@ -50,7 +50,6 @@ export default function HeroSection() {
                 backgroundImage: `url(${src})`,
                 backgroundSize: "cover",
                 backgroundPosition: "center",
-                transform: "scale(1)",
                 animation: isActive ? "zoomEffect 12s linear forwards" : "none",
               }}
             />
@@ -86,35 +85,31 @@ export default function HeroSection() {
         );
       })}
 
-      {/* Slide indicators */}
+      {/* CENTER TEXT */}
       <div
         style={{
           position: "absolute",
-          bottom: "40px",
+          top: "50%",
           left: "50%",
-          transform: "translateX(-50%)",
-          zIndex: 30,
-          display: "flex",
-          gap: "12px",
+          transform: "translate(-50%, -50%)",
+          zIndex: 25,
+          textAlign: "center",
+          width: "100%",
+          padding: "0 20px",
+          color: "#ffffff",
+          fontFamily: "'Lato', sans-serif",
+          fontWeight: 300,
+          letterSpacing: "0.5px",
         }}
       >
-        {bannerImages.map((_, idx) => (
-          <button
-            key={idx}
-            onClick={() => setCurrentIndex(idx)}
-            style={{
-              width: idx === currentIndex ? "32px" : "8px",
-              height: "2px",
-              backgroundColor:
-                idx === currentIndex ? "#d9af61" : "rgba(255, 255, 255, 0.4)",
-              border: "none",
-              cursor: "pointer",
-              padding: 0,
-              transition: "all 0.4s ease",
-            }}
-            aria-label={`Go to slide ${idx + 1}`}
-          />
-        ))}
+        <h1
+          style={{
+            fontSize: "clamp(24px, 3vw, 48px)",
+            margin: 0,
+          }}
+        >
+          Great spaces start with great materials.
+        </h1>
       </div>
 
       <style jsx>{`
@@ -129,4 +124,4 @@ export default function HeroSection() {
       `}</style>
     </section>
   );
-}  
+}
